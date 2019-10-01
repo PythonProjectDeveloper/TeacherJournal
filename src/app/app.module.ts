@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import {MatCardModule, MatButtonModule, MatIconModule} from '@angular/material';
+
 import { AppComponent } from './root/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExportComponent } from './components/export/export.component';
@@ -11,6 +13,10 @@ import { SubjectFormComponent } from './components/subjects/subject-form/subject
 import { SubjectPageComponent } from './components/subjects/subject-page/subject-page.component';
 import { SubjectsTableComponent } from './components/subjects/subjects-table/subjects-table.component';
 import { PanelComponent } from './components/panel/panel.component';
+import { HeaderComponent } from './components/header/header.component';
+import { StatisticPageComponent } from './components/statistics/statistic-page/statistic-page.component';
+import { StatisticStudentComponent } from './components/statistics/statistic-student/statistic-student.component';
+import { StatisticSubjectComponent } from './components/statistics/statistic-subject/statistic-subject.component';
 
 @NgModule({
   declarations: [
@@ -22,11 +28,18 @@ import { PanelComponent } from './components/panel/panel.component';
     SubjectFormComponent,
     SubjectPageComponent,
     SubjectsTableComponent,
-    PanelComponent
+    PanelComponent,
+    HeaderComponent,
+    StatisticPageComponent,
+    StatisticStudentComponent,
+    StatisticSubjectComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,49 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .header {
+    &__logo-wrapper {
+      display: flex;
+      margin-right: 10px;
+      color: orange;
+    }
+
+    &__logo {
+      font-size: 80px;
+    }
+
+    &__menu {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    &__menu-item {
+      border-radius: 0;
+      color: #6f6f6f;
+    }
+
+    &__menu-item__active {
+      color: #2700ffc7;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .header__logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .header__title {
+    text-align: center;
+  }
+
+  .header__menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
