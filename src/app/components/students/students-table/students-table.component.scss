@@ -1,0 +1,15 @@
+@mixin cell-style {
+  padding: 10px;
+}
+
+.table {
+  width: 100%;
+
+  &__header-cell {
+    @include cell-style;
+  }
+
+  &__simple-cell {
+    @include cell-style;
+  }
+}

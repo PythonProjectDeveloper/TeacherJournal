@@ -3,12 +3,9 @@
   flex-direction: column;
 }
 
-.form__title {
-  text-align: center;
-}
-
 textarea.form__field {
   height: 100px;
+  resize: none !important;
 }
 
 mat-card-content.form__field-container {

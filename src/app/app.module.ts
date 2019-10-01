@@ -1,7 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import {MatCardModule, MatButtonModule, MatIconModule, MatInputModule} from '@angular/material';
+import {
+  MatCardModule,
+  MatButtonModule,
+  MatIconModule,
+  MatInputModule,
+  MatSelectModule,
+  MatSortModule,
+  MatTableModule
+} from '@angular/material';
 
 import { AppComponent } from './root/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +25,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { StatisticPageComponent } from './components/statistics/statistic-page/statistic-page.component';
 import { StatisticStudentComponent } from './components/statistics/statistic-student/statistic-student.component';
 import { StatisticSubjectComponent } from './components/statistics/statistic-subject/statistic-subject.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +49,11 @@ import { StatisticSubjectComponent } from './components/statistics/statistic-sub
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    MatTableModule,
+    MatSortModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

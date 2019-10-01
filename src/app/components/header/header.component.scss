@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-bottom: 10px;
 
   .header {
     &__logo-wrapper {
@@ -23,10 +24,10 @@
     &__menu-item {
       border-radius: 0;
       color: #6f6f6f;
-    }
 
-    &__menu-item__active {
-      color: #2700ffc7;
+      &__active {
+        color: #2700ffc7;
+      }
     }
   }
 }

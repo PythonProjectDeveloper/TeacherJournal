@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { teachers, students } from 'src/app/common/constants/constants-person';
+import { subjects } from 'src/app/common/constants/constants-subject';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'TeacherJournal';
+  teachers = teachers;
+  students = students;
+  subjects = subjects;
 }
