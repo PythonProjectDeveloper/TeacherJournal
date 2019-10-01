@@ -1,0 +1,41 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__title {
+  text-align: center;
+}
+
+textarea.form__field {
+  height: 100px;
+}
+
+mat-card-content.form__field-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-card-actions.form__actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+button.form__action-button {
+  width: 100px;
+}
+
+@media screen and (max-width: 200px) {
+  .mat-card-actions.form__actions {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+  }
+
+  button.form__action-button {
+    width: 100%;
+    margin: 0 !important;
+  }
+}
