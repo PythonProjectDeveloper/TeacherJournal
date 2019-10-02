@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Teacher } from 'src/app/common/entities/person';
-import { Subject } from 'src/app/common/entities/subject';
+import { Component, OnInit } from '@angular/core';
+import { subjects } from 'src/app/common/constants/constants-subject';
+import { teachers } from 'src/app/common/constants/constants-person';
 
 @Component({
   selector: 'app-subject-page',
@@ -8,8 +8,8 @@ import { Subject } from 'src/app/common/entities/subject';
   styleUrls: ['./subject-page.component.scss']
 })
 export class SubjectPageComponent implements OnInit {
-  @Input() subjects: Subject[];
-  @Input() teachers: Teacher[];
+  subjects = subjects;
+  teachers = teachers;
 
   constructor() { }
 

@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Teacher } from 'src/app/common/entities/person';
+import { Component, OnInit } from '@angular/core';
 import { Subject } from 'src/app/common/entities/subject';
+import { teachers } from 'src/app/common/constants/constants-person';
 
 @Component({
   selector: 'app-subject-form',
@@ -8,7 +8,7 @@ import { Subject } from 'src/app/common/entities/subject';
   styleUrls: ['./subject-form.component.scss']
 })
 export class SubjectFormComponent implements Subject, OnInit {
-  @Input() teachers: Teacher[];
+  teachers = teachers;
 
   id: string;
   name: string;

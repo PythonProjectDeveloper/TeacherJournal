@@ -9,7 +9,4 @@ import { subjects } from 'src/app/common/constants/constants-subject';
 })
 export class AppComponent {
   title = 'TeacherJournal';
-  teachers = teachers;
-  students = students;
-  subjects = subjects;
 }

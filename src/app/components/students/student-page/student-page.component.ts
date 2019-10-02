@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Student } from 'src/app/common/entities/person';
+import { Component, OnInit } from '@angular/core';
+import { students } from 'src/app/common/constants/constants-person';
 
 @Component({
   selector: 'app-student-page',
@@ -7,7 +7,7 @@ import { Student } from 'src/app/common/entities/person';
   styleUrls: ['./student-page.component.scss']
 })
 export class StudentPageComponent implements OnInit {
-  @Input() students: Student[];
+  students = students;
 
 
   constructor() { }

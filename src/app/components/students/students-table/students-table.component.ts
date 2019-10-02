@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
-import { Student } from 'src/app/common/entities/person';
+import { students } from 'src/app/common/constants/constants-person';
 
 @Component({
   selector: 'app-students-table',
@@ -8,7 +8,7 @@ import { Student } from 'src/app/common/entities/person';
   styleUrls: ['./students-table.component.scss']
 })
 export class StudentsTableComponent implements OnInit {
-  @Input() students: Student[];
+  students = students;
 
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'address', 'description'];
   dataSource = new MatTableDataSource([]);

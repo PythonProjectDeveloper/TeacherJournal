@@ -15,7 +15,7 @@ export class SubjectTableComponent implements OnInit {
   dataSource = new MatTableDataSource([]);
   baseColumns = ['firstName', 'lastName', 'averageMark'];
   workDaysColumns: string[];
-  isTableChanged = false;
+  isTableDataChanged = false;
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 

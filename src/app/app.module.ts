@@ -11,7 +11,9 @@ import {
   MatSortModule,
   MatTableModule,
   MatTooltipModule,
-  MatRippleModule
+  MatRippleModule,
+  MatSidenavModule,
+  MatTabsModule
 } from '@angular/material';
 
 import { AppComponent } from './root/app.component';
@@ -59,7 +61,9 @@ import { SubjectTableComponent } from './components/subjects/subject-table/subje
     MatSortModule,
     SharedModule,
     MatTooltipModule,
-    MatRippleModule
+    MatRippleModule,
+    MatSidenavModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
