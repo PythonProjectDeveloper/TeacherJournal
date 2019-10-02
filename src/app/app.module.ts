@@ -22,13 +22,13 @@ import { StudentPageComponent } from './components/students/student-page/student
 import { StudentsTableComponent } from './components/students/students-table/students-table.component';
 import { SubjectFormComponent } from './components/subjects/subject-form/subject-form.component';
 import { SubjectPageComponent } from './components/subjects/subject-page/subject-page.component';
-import { PanelComponent } from './components/panel/panel.component';
 import { HeaderComponent } from './components/header/header.component';
 import { StatisticPageComponent } from './components/statistics/statistic-page/statistic-page.component';
 import { StatisticStudentComponent } from './components/statistics/statistic-student/statistic-student.component';
 import { StatisticSubjectComponent } from './components/statistics/statistic-subject/statistic-subject.component';
 import { SharedModule } from './shared/shared.module';
 import { SubjectListComponent } from './components/subjects/subject-list/subject-list.component';
+import { SubjectTableComponent } from './components/subjects/subject-table/subject-table.component';
 
 @NgModule({
   declarations: [
@@ -39,12 +39,12 @@ import { SubjectListComponent } from './components/subjects/subject-list/subject
     StudentsTableComponent,
     SubjectFormComponent,
     SubjectPageComponent,
-    PanelComponent,
     HeaderComponent,
     StatisticPageComponent,
     StatisticStudentComponent,
     StatisticSubjectComponent,
-    SubjectListComponent
+    SubjectListComponent,
+    SubjectTableComponent
   ],
   imports: [
     BrowserModule,

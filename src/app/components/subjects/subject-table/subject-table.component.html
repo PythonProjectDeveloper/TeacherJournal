@@ -1,0 +1,30 @@
+<h2 class="title">Mathematics</h2>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table">
+  <ng-container matColumnDef="firstName">
+    <th class="table__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+    <td class="table__simple-cell" mat-cell *matCellDef="let element"> {{ element.firstName }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastName">
+    <th class="table__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+    <td class="table__simple-cell" mat-cell *matCellDef="let element"> {{ element.lastName }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="averageMark">
+    <th class="table__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> Average Mark </th>
+    <td class="table__simple-cell" mat-cell *matCellDef="let element"> {{ element.averageMark | number:'1.1-1' }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="{{disCol}}" *ngFor="let disCol of workDaysColumns">
+    <th class="table__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> {{ disCol }} </th>
+    <td class="table__simple-cell" mat-cell *matCellDef="let element"> {{ element[disCol] }} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<button class="add-button" mat-mini-fab color="primary">
+  <mat-icon>add</mat-icon>
+</button>
+<button mat-stroked-button color="primary" *ngIf="isTableChanged">save</button>
