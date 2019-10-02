@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import {
   MatCardModule,
@@ -8,7 +9,9 @@ import {
   MatInputModule,
   MatSelectModule,
   MatSortModule,
-  MatTableModule
+  MatTableModule,
+  MatTooltipModule,
+  MatRippleModule
 } from '@angular/material';
 
 import { AppComponent } from './root/app.component';
@@ -19,13 +22,13 @@ import { StudentPageComponent } from './components/students/student-page/student
 import { StudentsTableComponent } from './components/students/students-table/students-table.component';
 import { SubjectFormComponent } from './components/subjects/subject-form/subject-form.component';
 import { SubjectPageComponent } from './components/subjects/subject-page/subject-page.component';
-import { SubjectsTableComponent } from './components/subjects/subjects-table/subjects-table.component';
 import { PanelComponent } from './components/panel/panel.component';
 import { HeaderComponent } from './components/header/header.component';
 import { StatisticPageComponent } from './components/statistics/statistic-page/statistic-page.component';
 import { StatisticStudentComponent } from './components/statistics/statistic-student/statistic-student.component';
 import { StatisticSubjectComponent } from './components/statistics/statistic-subject/statistic-subject.component';
 import { SharedModule } from './shared/shared.module';
+import { SubjectListComponent } from './components/subjects/subject-list/subject-list.component';
 
 @NgModule({
   declarations: [
@@ -36,16 +39,17 @@ import { SharedModule } from './shared/shared.module';
     StudentsTableComponent,
     SubjectFormComponent,
     SubjectPageComponent,
-    SubjectsTableComponent,
     PanelComponent,
     HeaderComponent,
     StatisticPageComponent,
     StatisticStudentComponent,
-    StatisticSubjectComponent
+    StatisticSubjectComponent,
+    SubjectListComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,
@@ -53,7 +57,9 @@ import { SharedModule } from './shared/shared.module';
     MatSelectModule,
     MatTableModule,
     MatSortModule,
-    SharedModule
+    SharedModule,
+    MatTooltipModule,
+    MatRippleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

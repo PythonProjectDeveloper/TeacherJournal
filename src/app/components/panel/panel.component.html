@@ -1,1 +1,33 @@
-<p>panel works!</p>
+<h2 class="title">Students</h2>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table">
+  <ng-container matColumnDef="id">
+    <th class="table__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+    <td class="table__simple-cell" mat-cell *matCellDef="let element"> {{element.id | slice:0:4}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="firstName">
+    <th class="table__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+    <td class="table__simple-cell" mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastName">
+    <th class="table__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+    <td class="table__simple-cell" mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="address">
+    <th class="table__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+    <td class="table__simple-cell" mat-cell *matCellDef="let element"> {{element.address}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th class="table__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+    <td class="table__simple-cell" mat-cell *matCellDef="let element"> {{element.description| slice:0:250}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<app-button  matTooltip="Add student"></app-button>

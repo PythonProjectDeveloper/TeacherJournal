@@ -1,0 +1,13 @@
+<h2 class="title">Subjects</h2>
+
+<div class="subject-container">
+  <mat-card *ngFor="let subject of subjects"
+    class="subject-container__card example-ripple-container mat-elevation-z4"
+    matRipple
+    [matRippleCentered]="true"
+  >
+    <mat-card-title class="subject-container__card-title">{{ subject.name | titlecase }}</mat-card-title>
+  </mat-card>
+</div>
+
+<app-button  matTooltip="Add subject"></app-button>

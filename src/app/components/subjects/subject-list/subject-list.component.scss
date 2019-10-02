@@ -1,0 +1,22 @@
+:host {
+
+  .subject-container {
+    display: flex;
+    flex-wrap: wrap;
+
+    &__card {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100px;
+      height: 100px;
+      margin: 5px;
+      cursor: pointer;
+      user-select: none;
+    }
+  
+    &__card-title {
+      color: rgba(0, 0, 0, 0.404);
+    }
+  }
+}
