@@ -11,22 +11,26 @@ import * as _ from 'lodash';
   styleUrls: ['./subject-table.component.scss']
 })
 export class SubjectTableComponent implements OnInit {
-  displayedColumns: string[];
   dataSource = new MatTableDataSource([]);
   baseColumns = ['firstName', 'lastName', 'averageMark'];
   workDaysColumns: string[];
+  displayedColumns: string[];
   isTableDataChanged = false;
+  journal = journals[0];
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor() { }
 
   ngOnInit() {
-    const journal = journals[0];
-    this.workDaysColumns = getWorkDays(journal);
-    this.dataSource.data = getJournalTableForm(students, journal);
+    this.workDaysColumns = getWorkDays(this.journal);
+    this.dataSource.data = getJournalTableForm(students, this.journal);
     this.displayedColumns = _.concat(this.baseColumns, this.workDaysColumns);
     this.dataSource.sort = this.sort;
+  }
+
+  onAddColumn() {
+
   }
 
 }

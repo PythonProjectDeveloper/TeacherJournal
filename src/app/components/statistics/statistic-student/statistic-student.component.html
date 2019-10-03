@@ -1,1 +1,14 @@
-<p>statistic-student works!</p>
+<app-page-not-found *ngIf="!student; else statisticBlock"
+  title="Select a student"
+  imageUrl="assets/images/not-found.png"
+>
+</app-page-not-found>
+
+
+<ng-template #statisticBlock>
+  <h2 class="title"> 
+    {{ student.firstName }}
+    {{ student.lastName }}
+  </h2>
+</ng-template>
+

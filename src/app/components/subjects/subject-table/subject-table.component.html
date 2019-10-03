@@ -18,15 +18,19 @@
     </ng-container>
 
     <ng-container matColumnDef="{{disCol}}" *ngFor="let disCol of workDaysColumns">
-      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> {{ disCol }} </th>
-      <td class="table-wrapper__simple-cell" mat-cell *matCellDef="let element"> {{ element[disCol] }} </td>
+      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header>
+        <input class="table-wrapper__header-cell-input" type="text" [value]="disCol">
+      </th>
+      <td class="table-wrapper__simple-cell" mat-cell *matCellDef="let element">
+        <input class="table-wrapper__simple-cell-input" type="text" [value]="element[disCol]">
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <button class="add-button" mat-mini-fab color="primary">
+  <button class="add-button" mat-mini-fab color="primary" (click)="onAddColumn()">
     <mat-icon>add</mat-icon>
   </button>
 </div>

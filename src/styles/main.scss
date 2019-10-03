@@ -2,15 +2,7 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-app-button {
-  position: fixed;
-  bottom: 50px;
-  left: 50%;
-  margin-left: auto;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-}
-
 .title {
   text-align: center;
+  color: grey;
 }

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTabChangeEvent } from '@angular/material';
+import { MatTabChangeEvent, MatButtonToggleChange } from '@angular/material';
+import { students } from 'src/app/common/constants/constants-person';
+import { subjects } from 'src/app/common/constants/constants-subject';
+import { Subject } from 'src/app/common/entities/subject';
+import { Student } from 'src/app/common/entities/person';
 
-enum Page {
+enum List {
   Students = 'Students',
   Subjects = 'Subjects'
 }
@@ -12,16 +16,24 @@ enum Page {
   styleUrls: ['./statistic-page.component.scss']
 })
 export class StatisticPageComponent implements OnInit {
-  currentPage = 'Students';
-  page = Page;
+  currentList = 'Students';
+  currentObject: Student | Subject | null = null;
+  list = List;
+  students = students;
+  subjects = subjects;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  setCurrentPage(event: MatTabChangeEvent) {
-    this.currentPage = event.tab.textLabel;
+  setCurrentList(event: MatTabChangeEvent) {
+    this.currentList = event.tab.textLabel;
+    this.currentObject = null;
+  }
+
+  setCurrentObjectId(event: MatButtonToggleChange) {
+    this.currentObject = event.value;
   }
 
 }
