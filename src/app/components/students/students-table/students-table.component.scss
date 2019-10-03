@@ -1,0 +1,18 @@
+.table-wrapper {
+    width: 100%;
+
+  &__table {
+    width: 780px;
+    overflow: auto;
+  }
+
+  &__header-cell, &__simple-cell {
+    padding: 10px;
+  }
+
+  &__simple-cell[data-column-name="id"],
+  &__header-cell[data-column-name="id"] {
+    max-width: 22px;
+    overflow: hidden;
+  }
+}

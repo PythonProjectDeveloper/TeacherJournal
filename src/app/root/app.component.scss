@@ -1,0 +1,13 @@
+.container {
+  padding: 5px;
+  margin: auto;
+  width: 790px;
+}
+
+@media screen and (max-width: 780px) {
+  .container {
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
