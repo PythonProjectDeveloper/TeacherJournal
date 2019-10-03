@@ -32,6 +32,7 @@ import { StatisticSubjectComponent } from './components/statistics/statistic-sub
 import { SharedModule } from './shared/shared.module';
 import { SubjectListComponent } from './components/subjects/subject-list/subject-list.component';
 import { SubjectTableComponent } from './components/subjects/subject-table/subject-table.component';
+import { AppRoutingModule } from './routings/root-routing.module';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { SubjectTableComponent } from './components/subjects/subject-table/subje
     MatRippleModule,
     MatSidenavModule,
     MatTabsModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

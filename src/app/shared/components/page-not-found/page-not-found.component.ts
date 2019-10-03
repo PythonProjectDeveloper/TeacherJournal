@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./page-not-found.component.scss']
 })
 export class PageNotFoundComponent {
-  @Input() imageUrl: string;
-  @Input() title: string;
-  @Input() description: string;
+  @Input() imageUrl: string = 'assets/images/not-found.png';
+  @Input() title: string = 'Page not found';
+  @Input() description: string = 'Maybe you entered the URL incorrectly. Try again or give it up)';
 }

@@ -3,8 +3,39 @@
   <h1 class="header__title">Teacher journal</h1>
 </div>
 <mat-card class="header__menu">
-  <button class="header__menu-item header__menu-item__active" mat-stroked-button>Students</button>
-  <button class="header__menu-item" mat-stroked-button>Subjects</button>
-  <button class="header__menu-item" mat-stroked-button>Statistics</button>
-  <button class="header__menu-item" mat-stroked-button>Export</button>
+  <button
+    class="header__menu-item"
+    mat-stroked-button routerLink="/"
+    routerLinkActive="header__menu-item__active"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    Students
+  </button>
+
+  <button
+    class="header__menu-item"
+    mat-stroked-button routerLink="/subjects"
+    routerLinkActive="header__menu-item__active"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    Subjects
+  </button>
+
+  <button
+    class="header__menu-item"
+    mat-stroked-button routerLink="/statistics"
+    routerLinkActive="header__menu-item__active"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    Statistics
+  </button>
+
+  <button
+    class="header__menu-item"
+    mat-stroked-button routerLink="/export"
+    routerLinkActive="header__menu-item__active"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    Export
+  </button>
 </mat-card>
