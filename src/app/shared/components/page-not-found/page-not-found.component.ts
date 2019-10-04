@@ -7,6 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class PageNotFoundComponent {
   @Input() imageUrl: string = 'assets/images/not-found.png';
-  @Input() title: string = 'Page not found';
+  @Input() titleText: string = 'Page not found';
   @Input() description: string = 'Maybe you entered the URL incorrectly. Try again or give it up)';
 }

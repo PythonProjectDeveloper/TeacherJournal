@@ -34,6 +34,7 @@ import { SubjectListComponent } from './components/subjects/subject-list/subject
 import { SubjectTableComponent } from './components/subjects/subject-table/subject-table.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ExitAboutGuard } from './common/guards/exit-about.guard';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { ExitAboutGuard } from './common/guards/exit-about.guard';
     MatSidenavModule,
     MatTabsModule,
     MatButtonToggleModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule
   ],
   providers: [ExitAboutGuard],
   bootstrap: [AppComponent]

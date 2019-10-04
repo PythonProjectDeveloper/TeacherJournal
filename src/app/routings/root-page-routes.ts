@@ -10,9 +10,9 @@ import { subjectPageRoutes } from './subject-page-routes';
 
 
 export const rootPageRoutes: Routes = [
-  { path: '', component: StudentPageComponent, children: studentPageRoutes },
-  { path: 'subjects', component: SubjectPageComponent, children: subjectPageRoutes },
-  { path: 'statistics', component: StatisticPageComponent },
-  { path: 'export', component: ExportComponent },
+  { path: '', component: StudentPageComponent, children: studentPageRoutes, data: { breadcrumb: "Students" } },
+  { path: 'subjects', component: SubjectPageComponent, children: subjectPageRoutes, data: { breadcrumb: "Subjects" }  },
+  { path: 'statistics', component: StatisticPageComponent, data: { breadcrumb: "Statistics" }  },
+  { path: 'export', component: ExportComponent, data: { breadcrumb: "Export" }  },
   { path: '**', component: PageNotFoundComponent },
 ];
