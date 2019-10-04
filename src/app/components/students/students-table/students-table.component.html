@@ -27,9 +27,28 @@
       <td class="table-wrapper__simple-cell" mat-cell *matCellDef="let element"> {{element.description| slice:0:250}} </td>
     </ng-container>
   
+    <ng-container matColumnDef="controls">
+      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef></th>
+      <td class="table-wrapper__simple-cell" mat-cell  *matCellDef="let element">
+        <div class="table-wrapper__controls-wrapper">
+          <button class="table-wrapper__control-edit-button" mat-icon-button>
+            <mat-icon>edit</mat-icon>
+          </button>
+  
+          <button class="table-wrapper__control-delete-button" mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
 
-<app-button  matTooltip="Add student"></app-button>
+<app-button 
+  matTooltip="Add student"
+  routerLink="/student/add"
+>
+</app-button>
