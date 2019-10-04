@@ -33,6 +33,7 @@ import { SharedModule } from './shared/shared.module';
 import { SubjectListComponent } from './components/subjects/subject-list/subject-list.component';
 import { SubjectTableComponent } from './components/subjects/subject-table/subject-table.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ExitAboutGuard } from './common/guards/exit-about.guard';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,7 @@ import { AppRoutingModule } from './app-routing.module';
     MatButtonToggleModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ExitAboutGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

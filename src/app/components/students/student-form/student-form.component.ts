@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Student } from 'src/app/common/entities/person';
 import { StudentService } from 'src/app/common/services/student.service';
 import { ActivatedRoute } from '@angular/router';
+import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-student-form',
   templateUrl: './student-form.component.html',
   styleUrls: ['./student-form.component.scss']
 })
-export class StudentFormComponent implements Student, OnInit {
+export class StudentFormComponent implements Student, ComponentCanDeactivate, OnInit {
   id: string;
   firstName: string;
   lastName: string;
@@ -27,6 +29,10 @@ export class StudentFormComponent implements Student, OnInit {
       this.address = student.id;
       this.description = student.id;
     });
+  }
+
+  canDeactivate() : boolean | Observable<boolean>{
+    return true;
   }
 
 }

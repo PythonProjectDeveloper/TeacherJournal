@@ -18,7 +18,7 @@
     </ng-container>
 
     <ng-container matColumnDef="{{disCol}}" *ngFor="let disCol of workDaysColumns">
-      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header>
+      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef>
         <input class="table-wrapper__header-cell-input" type="text" [value]="disCol">
       </th>
       <td class="table-wrapper__simple-cell" mat-cell *matCellDef="let element">

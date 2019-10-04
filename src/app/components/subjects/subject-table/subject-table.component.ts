@@ -4,13 +4,15 @@ import { getJournalTableForm, getWorkDays } from 'src/app/common/helpers/calcula
 import { journals } from 'src/app/common/constants/constants-journal';
 import { students } from 'src/app/common/constants/constants-person';
 import * as _ from 'lodash';
+import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-subject-table',
   templateUrl: './subject-table.component.html',
   styleUrls: ['./subject-table.component.scss']
 })
-export class SubjectTableComponent implements OnInit {
+export class SubjectTableComponent implements ComponentCanDeactivate, OnInit {
   dataSource = new MatTableDataSource([]);
   baseColumns = ['firstName', 'lastName', 'averageMark'];
   workDaysColumns: string[];
@@ -31,6 +33,10 @@ export class SubjectTableComponent implements OnInit {
 
   onAddColumn() {
 
+  }
+
+  canDeactivate() : boolean | Observable<boolean>{
+    return true;
   }
 
 }
