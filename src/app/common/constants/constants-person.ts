@@ -1,6 +1,6 @@
-import { Student, Teacher } from '../entities/person';
+import { IStudent, ITeacher } from '../entities/person';
 
-export const students: Student[] = [
+export const students: IStudent[] = [
   {   
     "id": "5d92dde4eb2e470b17ba8994",
     "firstName": "Lora",
@@ -73,7 +73,7 @@ export const students: Student[] = [
   }
 ]
 
-export const teachers: Teacher[] = [
+export const teachers: ITeacher[] = [
   {
     "id": "5d92dfd2e4f9cacee865ea68",
     "firstName": "Ivy",

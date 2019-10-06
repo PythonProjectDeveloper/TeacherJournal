@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Subject } from 'src/app/common/entities/subject';
+import { ISubject } from 'src/app/common/entities/subject';
 
 @Component({
   selector: 'app-statistic-subject',
@@ -7,7 +7,7 @@ import { Subject } from 'src/app/common/entities/subject';
   styleUrls: ['./statistic-subject.component.scss']
 })
 export class StatisticSubjectComponent implements OnInit {
-  @Input() subject: Subject;
+  @Input() subject: ISubject;
 
   constructor() { }
 

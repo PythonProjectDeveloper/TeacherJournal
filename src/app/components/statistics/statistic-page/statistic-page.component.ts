@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent, MatButtonToggleChange } from '@angular/material';
 import { students } from 'src/app/common/constants/constants-person';
 import { subjects } from 'src/app/common/constants/constants-subject';
-import { Subject } from 'src/app/common/entities/subject';
-import { Student } from 'src/app/common/entities/person';
+import { ISubject } from 'src/app/common/entities/subject';
+import { IStudent } from 'src/app/common/entities/person';
 
 enum List {
   Students = 'Students',
@@ -17,7 +17,7 @@ enum List {
 })
 export class StatisticPageComponent implements OnInit {
   currentList = 'Students';
-  currentObject: Student | Subject | null = null;
+  currentObject: IStudent | ISubject | null = null;
   list = List;
   students = students;
   subjects = subjects;

@@ -1,6 +1,6 @@
-import { Journal } from '../entities/journal';
+import { IJournal } from '../entities/journal';
 
-export const journals: Journal[] = [
+export const journals: IJournal[] = [
   {
     subjectId: "5d92e08d2168f62bce92241e",
     days: [

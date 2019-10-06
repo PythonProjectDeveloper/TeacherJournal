@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { students } from '../constants/constants-person';
-import { Student } from '../entities/person';
+import { IStudent } from '../entities/person';
 import uuid4 from 'uuid4';
 import { BehaviorSubject } from 'rxjs';
 
@@ -10,13 +10,13 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class StudentService {
   private students = students;
-  private dataChanged: BehaviorSubject<Student[]>;
+  private dataChanged: BehaviorSubject<IStudent[]>;
 
   constructor() {
-    this.dataChanged = new BehaviorSubject<Student[]>(this.students);
+    this.dataChanged = new BehaviorSubject<IStudent[]>(this.students);
   }
 
-  public create(student: Student) {
+  public create(student: IStudent) {
     student.id = uuid4();
     this.students = [student, ...this.students];
     this.dataChanged.next(this.students);
@@ -24,31 +24,31 @@ export class StudentService {
     return student.id;
   }
 
-  public update(student: Student) {
+  public update(student: IStudent) {
     const index = _.findIndex(this.students, { 'id': student.id});
     this.students.splice(index, 1, student);
   }
 
-  public delete(student: Student) {
+  public delete(student: IStudent) {
     this.students = _.filter(
       this.students,
-      (currentStudent: Student) => currentStudent.id !== student.id
+      (currentStudent: IStudent) => currentStudent.id !== student.id
     );
 
     this.dataChanged.next(this.students);
   }
 
-  public getStudents(): BehaviorSubject<Student[]> {
+  public getStudents(): BehaviorSubject<IStudent[]> {
     return this.dataChanged;
   }
 
-  public getStudent(id: string): Student {
+  public getStudent(id: string): IStudent {
     const student =  _.find(this.students, { 'id': id });
 
     return student || this.getNewStudent();
   }
 
-  private getNewStudent(): Student {
+  private getNewStudent(): IStudent {
     return {
       id: '',
       firstName: '',

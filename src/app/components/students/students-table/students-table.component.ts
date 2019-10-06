@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { StudentService } from 'src/app/common/services/student.service';
-import { Student } from 'src/app/common/entities/person';
+import { IStudent } from 'src/app/common/entities/person';
 import { Router } from '@angular/router';
 
 @Component({
@@ -26,11 +26,11 @@ export class StudentsTableComponent implements OnInit {
       });
   }
 
-  onDelete(student: Student) {
+  onDelete(student: IStudent) {
     this.studentService.delete(student);
   }
 
-  onEdit(student: Student) {
+  onEdit(student: IStudent) {
     this.router.navigate(['student/edit', student.id]);
   }
 

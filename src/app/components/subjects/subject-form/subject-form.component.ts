@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'src/app/common/entities/subject';
+import { ISubject } from 'src/app/common/entities/subject';
 import { teachers } from 'src/app/common/constants/constants-person';
 import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
 import { Observable } from 'rxjs';
@@ -11,9 +11,9 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './subject-form.component.html',
   styleUrls: ['./subject-form.component.scss']
 })
-export class SubjectFormComponent implements Subject, ComponentCanDeactivate, OnInit {
+export class SubjectFormComponent implements ISubject, ComponentCanDeactivate, OnInit {
   teachers = teachers;
-  subject: Subject;
+  subject: ISubject;
 
   id: string;
   name: string;
@@ -44,7 +44,7 @@ export class SubjectFormComponent implements Subject, ComponentCanDeactivate, On
   onSave() {
     if (!this.name || !this.teacherId) return;
 
-    const subject: Subject = {
+    const subject: ISubject = {
       id: this.id,
       name: this.name,
       teacherId: this.teacherId,

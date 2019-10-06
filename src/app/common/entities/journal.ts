@@ -1,14 +1,14 @@
-export interface Journal {
+export interface IJournal {
   subjectId: string;
-  days: Day[];
+  days: IDay[];
 }
 
-export interface Day {
+export interface IDay {
   name: string | null;
-  marks: Mark[];
+  marks: IMark[];
 }
 
-export interface Mark {
+export interface IMark {
   studentId: string;
   value: number | null;
 }

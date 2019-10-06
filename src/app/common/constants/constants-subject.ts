@@ -1,6 +1,6 @@
-import { Subject } from '../entities/subject';
+import { ISubject } from '../entities/subject';
 
-export const subjects: Subject[] = [
+export const subjects: ISubject[] = [
   {
     "id": "5d92e08d2168f62bce92241e",
     "name": "physics",

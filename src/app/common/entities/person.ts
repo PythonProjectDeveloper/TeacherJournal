@@ -1,4 +1,4 @@
-export interface Person {
+export interface IPerson {
   id: string;
   firstName: string;
   lastName: string;
@@ -6,8 +6,8 @@ export interface Person {
   description: string;
 }
 
-export interface Student extends Person {
+export interface IStudent extends IPerson {
 }
 
-export interface Teacher extends Person {
+export interface ITeacher extends IPerson {
 }

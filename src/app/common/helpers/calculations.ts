@@ -1,22 +1,22 @@
-import { Mark, Journal, Day } from '../entities/journal';
+import { IMark, IJournal, IDay } from '../entities/journal';
 import * as _ from 'lodash';
-import { Student } from '../entities/person';
-import { DaysMark } from '../entities/form';
+import { IStudent } from '../entities/person';
+import { IDaysMark } from '../entities/form';
 
-function getAverageMark(marks: DaysMark): number {
+function getAverageMark(marks: IDaysMark): number {
   marks = _.filter(marks, (mark: number) => mark !== null);
   return _.reduce(marks, (sum: number, mark: number) => sum + mark, 0) / marks.length;
 }
 
-function getDaysMarks(journal: Journal, studentIdx: number): DaysMark {
-  return _.reduce(journal.days, (daysMark: DaysMark, day: Day) => ({
+function getDaysMarks(journal: IJournal, studentIdx: number): IDaysMark {
+  return _.reduce(journal.days, (daysMark: IDaysMark, day: IDay) => ({
     ...daysMark,
     [day.name]: day.marks[studentIdx].value
   }), {});
 }
 
-export function getJournalTableForm(students: Student[], journal: Journal) {
-  return _.map(students, (student: Student, studentIdx: number) => {
+export function getJournalTableForm(students: IStudent[], journal: IJournal) {
+  return _.map(students, (student: IStudent, studentIdx: number) => {
     const studentDaysMarks = getDaysMarks(journal, studentIdx);
     const averageMark = getAverageMark(studentDaysMarks);
 
@@ -29,6 +29,6 @@ export function getJournalTableForm(students: Student[], journal: Journal) {
   });
 }
 
-export function getWorkDays(journal: Journal): string[] {
+export function getWorkDays(journal: IJournal): string[] {
   return _.map(journal.days, 'name');
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Student } from 'src/app/common/entities/person';
+import { IStudent } from 'src/app/common/entities/person';
 import { StudentService } from 'src/app/common/services/student.service';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
@@ -10,8 +10,8 @@ import { Observable } from "rxjs";
   templateUrl: './student-form.component.html',
   styleUrls: ['./student-form.component.scss']
 })
-export class StudentFormComponent implements Student, ComponentCanDeactivate, OnInit {
-  student: Student;
+export class StudentFormComponent implements IStudent, ComponentCanDeactivate, OnInit {
+  student: IStudent;
 
   id: string;
   firstName: string;
@@ -42,7 +42,7 @@ export class StudentFormComponent implements Student, ComponentCanDeactivate, On
   onSave() {
     if (!this.firstName || !this.lastName) return;
 
-    const student: Student = {
+    const student: IStudent = {
       id: this.id,
       firstName: this.firstName,
       lastName: this.lastName,
@@ -57,7 +57,6 @@ export class StudentFormComponent implements Student, ComponentCanDeactivate, On
   }
 
   checkChange(): boolean {
-    console.log(this.student.firstName ,this.firstName)
     return this.student.firstName === this.firstName
         && this.student.lastName === this.lastName
         && this.student.address === this.address
