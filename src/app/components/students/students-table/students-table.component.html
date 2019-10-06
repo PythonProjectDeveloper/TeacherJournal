@@ -31,11 +31,11 @@
       <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef></th>
       <td class="table-wrapper__simple-cell" mat-cell  *matCellDef="let element">
         <div class="table-wrapper__controls-wrapper">
-          <button class="table-wrapper__control-edit-button" mat-icon-button>
+          <button class="table-wrapper__control-edit-button" mat-icon-button (click)="onEdit(element)">
             <mat-icon>edit</mat-icon>
           </button>
   
-          <button class="table-wrapper__control-delete-button" mat-icon-button>
+          <button class="table-wrapper__control-delete-button" mat-icon-button (click)="onDelete(element)">
             <mat-icon>delete</mat-icon>
           </button>
         </div>

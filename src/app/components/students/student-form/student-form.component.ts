@@ -11,6 +11,8 @@ import { Observable } from "rxjs";
   styleUrls: ['./student-form.component.scss']
 })
 export class StudentFormComponent implements Student, ComponentCanDeactivate, OnInit {
+  student: Student;
+
   id: string;
   firstName: string;
   lastName: string;
@@ -21,18 +23,39 @@ export class StudentFormComponent implements Student, ComponentCanDeactivate, On
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      let student = this.studentService.getStudent(params.id);
+      const student = this.studentService.getStudent(params.id)
 
       this.id = student.id;
-      this.firstName = student.id;
-      this.lastName = student.id;
-      this.address = student.id;
-      this.description = student.id;
+      this.firstName = student.firstName;
+      this.lastName = student.lastName;
+      this.address = student.address;
+      this.description = student.description;
+
+      this.student = student;
     });
   }
 
-  canDeactivate() : boolean | Observable<boolean>{
+  canDeactivate(): boolean | Observable<boolean> {
     return true;
+  }
+
+  onSave() {
+    if (!this.firstName || !this.lastName) return;
+
+    const student: Student = {
+      id: this.id,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      address: this.address,
+      description: this.description
+    };
+
+    if (student.id) this.studentService.update(student);
+    else this.id = this.studentService.create(student);
+  }
+
+  checkChange() {
+    // if (this.firstName )
   }
 
 }
