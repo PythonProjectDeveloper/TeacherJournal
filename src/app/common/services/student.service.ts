@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class StudentService {
   private students = students;
-  public dataChanged: BehaviorSubject<Student[]>;
+  private dataChanged: BehaviorSubject<Student[]>;
 
   constructor() {
     this.dataChanged = new BehaviorSubject<Student[]>(this.students);

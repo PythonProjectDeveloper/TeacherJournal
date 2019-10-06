@@ -31,7 +31,15 @@
     </mat-card-content>
     
     <mat-card-actions class="form__actions">
-      <button type="submit" class="form__action-button" mat-stroked-button color="primary">Save</button>
+      <button
+        type="submit"
+        class="form__action-button"
+        mat-stroked-button color="primary"
+        (click)="onSave()"
+      >
+        Save
+      </button>
+
       <button
         type="button"
         class="form__action-button"

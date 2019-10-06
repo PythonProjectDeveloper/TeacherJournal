@@ -36,7 +36,7 @@ export class StudentFormComponent implements Student, ComponentCanDeactivate, On
   }
 
   canDeactivate(): boolean | Observable<boolean> {
-    return true;
+    return this.checkChange();
   }
 
   onSave() {
@@ -52,10 +52,16 @@ export class StudentFormComponent implements Student, ComponentCanDeactivate, On
 
     if (student.id) this.studentService.update(student);
     else this.id = this.studentService.create(student);
+
+    this.student = this.studentService.getStudent(this.id);
   }
 
-  checkChange() {
-    // if (this.firstName )
+  checkChange(): boolean {
+    console.log(this.student.firstName ,this.firstName)
+    return this.student.firstName === this.firstName
+        && this.student.lastName === this.lastName
+        && this.student.address === this.address
+        && this.student.description === this.description;
   }
 
 }

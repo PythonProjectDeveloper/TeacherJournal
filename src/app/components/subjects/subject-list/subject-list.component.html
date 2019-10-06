@@ -18,11 +18,11 @@
     </mat-card>
 
     <div class="subject-container__controls-wrapper">
-      <button class="subject-container__control-edit-button" mat-icon-button>
+      <button class="subject-container__control-edit-button" mat-icon-button (click)="onEdit(subject)">
         <mat-icon>edit</mat-icon>
       </button>
 
-      <button class="subject-container__control-delete-button" mat-icon-button>
+      <button class="subject-container__control-delete-button" mat-icon-button (click)="onDelete(subject)">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
