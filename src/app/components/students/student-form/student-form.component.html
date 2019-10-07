@@ -5,22 +5,22 @@
     <mat-card-content class="form__field-container">
       <mat-form-field>
         <mat-label>First Name</mat-label>
-        <input [(ngModel)]="firstName" matInput name="firstName" class="form__field" required>
+        <input [(ngModel)]="formPerson.firstName" matInput name="firstName" class="form__field" required>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Last Name</mat-label>
-        <input [(ngModel)]="lastName" matInput name="lastName" class="form__field" required>
+        <input [(ngModel)]="formPerson.lastName" matInput name="lastName" class="form__field" required>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Address</mat-label>
-        <input [(ngModel)]="address" matInput name="address" class="form__field">
+        <input [(ngModel)]="formPerson.address" matInput name="address" class="form__field">
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Description</mat-label>
-        <textarea [(ngModel)]="description" matInput name="description" class="form__field"></textarea>
+        <textarea [(ngModel)]="formPerson.description" matInput name="description" class="form__field"></textarea>
       </mat-form-field>
     </mat-card-content>
     
