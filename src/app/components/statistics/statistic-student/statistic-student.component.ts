@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IStudent } from 'src/app/common/entities/person';
+import { Person } from 'src/app/common/models/person';
+import { ActivatedRoute } from '@angular/router';
+import { StudentService } from 'src/app/common/services/student.service';
 
 @Component({
   selector: 'app-statistic-student',
@@ -7,11 +9,14 @@ import { IStudent } from 'src/app/common/entities/person';
   styleUrls: ['./statistic-student.component.scss']
 })
 export class StatisticStudentComponent implements OnInit {
-  @Input() student: IStudent;
+  student: Person;
 
-  constructor() { }
+  constructor(public studentService: StudentService, public route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.student = this.studentService.getStudent(params.id);
+    });
   }
 
 }

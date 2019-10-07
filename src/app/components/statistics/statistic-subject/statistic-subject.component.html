@@ -1,11 +1,3 @@
-<app-page-not-found *ngIf="!subject; else statisticBlock"
-  titleText="Select a subject"
-  description=""
->
-</app-page-not-found>
-
-<ng-template #statisticBlock>
-  <h2 class="title"> 
-    {{ subject.name | titlecase }}
-  </h2>
-</ng-template>
+<h2 class="title"> 
+  {{ subject.name | titlecase }}
+</h2>

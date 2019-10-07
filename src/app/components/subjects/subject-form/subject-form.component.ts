@@ -3,7 +3,7 @@ import { teachers } from 'src/app/common/constants/constants-person';
 import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
 import { Observable } from 'rxjs';
 import { SubjectService } from 'src/app/common/services/subject.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'src/app/common/models/subject';
 
 @Component({
@@ -16,7 +16,7 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit {
   storedSubject: Subject;
   formSubject: Subject;
 
-  constructor(public subjectService: SubjectService, public route: ActivatedRoute) { }
+  constructor(public subjectService: SubjectService, public route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -33,8 +33,11 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit {
   onSave() {
     if (!this.formSubject.name || !this.formSubject.teacherId) return;
 
-    if (this.formSubject.id) this.subjectService.update(this.formSubject);
-    else this.subjectService.create(this.formSubject);
+    if (this.formSubject.id) this.subjectService.updateSubject(this.formSubject);
+    else {
+      this.subjectService.createSubject(this.formSubject);
+      this.router.navigate(['subjects', 'subject', 'edit', this.formSubject.id]);
+    }
 
     this.setSubjects(this.formSubject);
   }

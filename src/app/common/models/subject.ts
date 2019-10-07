@@ -1,6 +1,6 @@
 import { ISubject } from '../entities/subject';
 import { ExtendedModel } from '../entities/extended-model';
-import { getSimpleCopy } from '../helpers/calculations';
+import * as _ from 'lodash';
 
 export class Subject implements ISubject, ExtendedModel<Subject> {
   id: string;
@@ -25,6 +25,6 @@ export class Subject implements ISubject, ExtendedModel<Subject> {
   }
 
   getCopy(): Subject {
-    return getSimpleCopy(this);
+    return _.cloneDeep(this);
   }
 }

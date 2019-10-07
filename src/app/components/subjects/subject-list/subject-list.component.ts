@@ -20,7 +20,7 @@ export class SubjectListComponent implements OnInit {
   }
 
   onDelete(subject: Subject) {
-    this.subjectService.delete(subject);
+    this.subjectService.deleteSubject(subject);
   }
 
 }

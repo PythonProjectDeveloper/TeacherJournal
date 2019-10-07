@@ -1,6 +1,6 @@
 import { IPerson, IStudent, ITeacher } from '../entities/person';
 import { ExtendedModel } from '../entities/extended-model';
-import { getSimpleCopy } from '../helpers/calculations';
+import * as _ from 'lodash';
 
 export class Person implements IPerson, ExtendedModel<Person> {
   id: string;
@@ -25,7 +25,7 @@ export class Person implements IPerson, ExtendedModel<Person> {
   }
   
   getCopy(): Person {
-    return getSimpleCopy(this);
+    return _.cloneDeep(this);
   }
 
 }

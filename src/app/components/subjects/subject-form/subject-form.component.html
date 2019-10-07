@@ -1,6 +1,6 @@
 <h2 class="title">Subject</h2>
 
-<form submit="" class="form">
+<form (submit)="onSave()" class="form">
   <mat-card>
 
     <mat-card-content class="form__field-container">
@@ -35,7 +35,6 @@
         type="submit"
         class="form__action-button"
         mat-stroked-button color="primary"
-        (click)="onSave()"
       >
         Save
       </button>

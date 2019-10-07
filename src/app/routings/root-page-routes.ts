@@ -6,13 +6,15 @@ import { StatisticPageComponent } from '../components/statistics/statistic-page/
 import { ExportComponent } from '../components/export/export.component';
 import { studentPageRoutes } from './student-page-routes';
 import { subjectPageRoutes } from './subject-page-routes';
+import { statisticPageRoutes } from './statistic-page';
+import { imageUrl, titleText, description } from '../shared/constants/constants-page-not-found';
 
 
 
 export const rootPageRoutes: Routes = [
   { path: '', component: StudentPageComponent, children: studentPageRoutes, data: { breadcrumb: "Students" } },
-  { path: 'subjects', component: SubjectPageComponent, children: subjectPageRoutes, data: { breadcrumb: "Subjects" }  },
-  { path: 'statistics', component: StatisticPageComponent, data: { breadcrumb: "Statistics" }  },
+  { path: 'subjects', component: SubjectPageComponent, children: subjectPageRoutes, data: { breadcrumb: "Subjects" } },
+  { path: 'statistics', component: StatisticPageComponent, children: statisticPageRoutes, data: { breadcrumb: "Statistics" } },
   { path: 'export', component: ExportComponent, data: { breadcrumb: "Export" }  },
-  { path: '**', component: PageNotFoundComponent },
+  { path: '**', component: PageNotFoundComponent, data: { imageUrl: imageUrl, titleText: titleText, description: description } },
 ];

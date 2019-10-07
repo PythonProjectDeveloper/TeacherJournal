@@ -25,18 +25,18 @@ export class SubjectService {
     this.dataChanged = new BehaviorSubject<Subject[]>(this.subjects);
   }
 
-  public create(subject: Subject) {
+  public createSubject(subject: Subject) {
     subject.id = uuid4();
     this.subjects = [subject, ...this.subjects];
     this.dataChanged.next(this.subjects);
   }
 
-  public update(subject: Subject) {
+  public updateSubject(subject: Subject) {
     const index = _.findIndex(this.subjects, { 'id': subject.id });
     this.subjects.splice(index, 1, subject);
   }
 
-  public delete(subject: Subject) {
+  public deleteSubject(subject: Subject) {
     this.subjects = _.filter(
       this.subjects,
       (currentSubject: Subject) => currentSubject.id !== subject.id

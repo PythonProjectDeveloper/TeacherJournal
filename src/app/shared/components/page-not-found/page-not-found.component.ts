@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-page-not-found',
@@ -6,7 +7,18 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./page-not-found.component.scss']
 })
 export class PageNotFoundComponent {
-  @Input() imageUrl: string = 'assets/images/not-found.png';
-  @Input() titleText: string = 'Page not found';
-  @Input() description: string = 'Maybe you entered the URL incorrectly. Try again or give it up)';
+  imageUrl: string;
+  titleText: string;
+  description: string;
+
+  constructor(public route: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
+      const data = this.route.snapshot.data;
+      this.imageUrl = data.imageUrl;
+      this.titleText = data.titleText;
+      this.description = data.description;
+    });
+  }
 }

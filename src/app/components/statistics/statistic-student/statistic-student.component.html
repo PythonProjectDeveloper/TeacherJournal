@@ -1,14 +1,5 @@
-<app-page-not-found *ngIf="!student; else statisticBlock"
-  titleText="Select a student"
-  description=""
->
-</app-page-not-found>
-
-
-<ng-template #statisticBlock>
-  <h2 class="title"> 
-    {{ student.firstName }}
-    {{ student.lastName }}
-  </h2>
-</ng-template>
+<h2 class="title"> 
+  {{ student.firstName }}
+  {{ student.lastName }}
+</h2>
 

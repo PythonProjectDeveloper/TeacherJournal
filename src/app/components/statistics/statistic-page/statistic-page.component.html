@@ -6,7 +6,7 @@
 
       <mat-tab class="sidenav-container__tab" label="Students">
         <mat-button-toggle-group class="sidenav-container__tab-content" name="fontStyle" aria-label="Font Style" [vertical]="true">
-          <mat-button-toggle [value]="student" *ngFor="let student of students" (change)="setCurrentObjectId($event)">
+          <mat-button-toggle [value]="student" *ngFor="let student of students" (change)="setCurrentObjectId($event)" routerLink="student/{{ currentObject?.id }}">
             {{ student.firstName }}
             {{ student.lastName }}
           </mat-button-toggle>
@@ -15,7 +15,7 @@
 
       <mat-tab class="sidenav-container__tab" label="Subjects">
         <mat-button-toggle-group class="sidenav-container__tab-content" name="fontStyle" aria-label="Font Style" [vertical]="true">
-          <mat-button-toggle [value]="subject" *ngFor="let subject of subjects" (change)="setCurrentObjectId($event)">
+          <mat-button-toggle [value]="subject" *ngFor="let subject of subjects" (change)="setCurrentObjectId($event)" routerLink="subject/{{ currentObject?.id }}">
             {{ subject.name | titlecase }}
           </mat-button-toggle>
         </mat-button-toggle-group>
@@ -23,9 +23,7 @@
     </mat-tab-group>
   </mat-drawer>
 
-  <!-- TODO: change swith to url navigation -->
-  <mat-drawer-content class="sidenav-container__content" [ngSwitch]="currentList">
-    <app-statistic-subject *ngSwitchCase="list.Subjects" [subject]="currentObject"></app-statistic-subject>
-    <app-statistic-student *ngSwitchCase="list.Students" [student]="currentObject"></app-statistic-student>
+  <mat-drawer-content class="sidenav-container__content">
+    <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>

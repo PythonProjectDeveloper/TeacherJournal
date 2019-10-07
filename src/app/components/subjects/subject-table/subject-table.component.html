@@ -1,4 +1,4 @@
-<h2 class="title">Mathematics</h2>
+<h2 class="title"> {{ subject.name | titlecase }} </h2>
 
 <div class="table-wrapper">
   <table class="mat-elevation-z8 table-wrapper__table" [dataSource]="dataSource" mat-table matSort>
@@ -17,7 +17,7 @@
       <td class="table-wrapper__simple-cell" mat-cell *matCellDef="let element"> {{ element.averageMark | number:'1.1-1' }} </td>
     </ng-container>
 
-    <ng-container matColumnDef="{{disCol}}" *ngFor="let disCol of workDaysColumns">
+    <ng-container matColumnDef="{{disCol}}" *ngFor="let disCol of dayNamesColumns">
       <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef>
         <input class="table-wrapper__header-cell-input" type="text" [value]="disCol">
       </th>
@@ -35,4 +35,4 @@
   </button>
 </div>
 
-<button mat-stroked-button color="primary" *ngIf="isTableDataChanged">save</button>
+<button mat-stroked-button color="primary" *ngIf="isTableDataChanged" (click)="onSave()">save</button>

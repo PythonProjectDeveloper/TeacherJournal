@@ -25,18 +25,18 @@ export class StudentService {
     this.dataChanged = new BehaviorSubject<Person[]>(this.persons);
   }
 
-  public create(person: Person) {
+  public createStudent(person: Person) {
     person.id = uuid4();
     this.persons = [person, ...this.persons];
     this.dataChanged.next(this.persons);
   }
 
-  public update(person: Person) {
+  public updateStudent(person: Person) {
     const index = _.findIndex(this.persons, { 'id': person.id });
     this.persons.splice(index, 1, person);
   }
 
-  public delete(person: Person) {
+  public deleteStudent(person: Person) {
     this.persons = _.filter(
       this.persons,
       (currentStudent: Person) => currentStudent.id !== person.id

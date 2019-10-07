@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { StudentService } from 'src/app/common/services/student.service';
 import { Person } from 'src/app/common/models/person';
+import { baseStudentColumn } from 'src/app/shared/constants/constants-table';
 
 @Component({
   selector: 'app-students-table',
@@ -9,7 +10,7 @@ import { Person } from 'src/app/common/models/person';
   styleUrls: ['./students-table.component.scss']
 })
 export class StudentsTableComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'address', 'description', 'controls'];
+  displayedColumns: string[] = baseStudentColumn;
   dataSource = new MatTableDataSource([]);
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -26,7 +27,7 @@ export class StudentsTableComponent implements OnInit {
   }
 
   onDelete(student: Person) {
-    this.studentService.delete(student);
+    this.studentService.deleteStudent(student);
   }
 
 }

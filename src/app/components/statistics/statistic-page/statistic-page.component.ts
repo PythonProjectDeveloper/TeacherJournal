@@ -4,6 +4,10 @@ import { students } from 'src/app/common/constants/constants-person';
 import { subjects } from 'src/app/common/constants/constants-subject';
 import { ISubject } from 'src/app/common/entities/subject';
 import { IStudent } from 'src/app/common/entities/person';
+import { SubjectService } from 'src/app/common/services/subject.service';
+import { StudentService } from 'src/app/common/services/student.service';
+import { Subject } from 'src/app/common/models/subject';
+import { Student } from 'src/app/common/models/person';
 
 enum List {
   Students = 'Students',
@@ -19,12 +23,14 @@ export class StatisticPageComponent implements OnInit {
   currentList = 'Students';
   currentObject: IStudent | ISubject | null = null;
   list = List;
-  students = students;
-  subjects = subjects;
+  students: Student[];
+  subjects: Subject[];
 
-  constructor() { }
+  constructor(public studentService: StudentService, public subjectService: SubjectService) { }
 
   ngOnInit() {
+    this.studentService.getStudents().subscribe((students) => this.students = students);
+    this.subjectService.getSubjects().subscribe((subjects) => this.subjects = subjects);
   }
 
   setCurrentList(event: MatTabChangeEvent) {
