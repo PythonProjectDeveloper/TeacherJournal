@@ -18,7 +18,7 @@ export class StudentFormComponent implements ComponentCanDeactivate, OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      const person = this.studentService.getStudent(params.id)
+      const person = this.studentService.getStudent(params.id);
 
       this.setPersons(person);
     });

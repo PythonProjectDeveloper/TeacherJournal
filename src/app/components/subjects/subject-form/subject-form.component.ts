@@ -1,69 +1,46 @@
 import { Component, OnInit } from '@angular/core';
-import { ISubject } from 'src/app/common/entities/subject';
 import { teachers } from 'src/app/common/constants/constants-person';
 import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
 import { Observable } from 'rxjs';
 import { SubjectService } from 'src/app/common/services/subject.service';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'src/app/common/models/subject';
 
 @Component({
   selector: 'app-subject-form',
   templateUrl: './subject-form.component.html',
   styleUrls: ['./subject-form.component.scss']
 })
-export class SubjectFormComponent implements ISubject, ComponentCanDeactivate, OnInit {
+export class SubjectFormComponent implements ComponentCanDeactivate, OnInit {
   teachers = teachers;
-  subject: ISubject;
-
-  id: string;
-  name: string;
-  teacherId: string;
-  cabinet: string;
-  description: string;
+  storedSubject: Subject;
+  formSubject: Subject;
 
   constructor(public subjectService: SubjectService, public route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      const subject = this.subjectService.getSubject(params.id)
+      const subject = this.subjectService.getSubject(params.id);
 
-      this.id = subject.id;
-      this.name = subject.name;
-      this.teacherId = subject.teacherId;
-      this.cabinet = subject.cabinet;
-      this.description = subject.description;
-
-      this.subject = subject;
+      this.setSubjects(subject);
     });
   }
 
   canDeactivate(): boolean | Observable<boolean> {
-    return this.checkChange();
+    return this.formSubject.isEqual(this.storedSubject);
   }
 
   onSave() {
-    if (!this.name || !this.teacherId) return;
+    if (!this.formSubject.name || !this.formSubject.teacherId) return;
 
-    const subject: ISubject = {
-      id: this.id,
-      name: this.name,
-      teacherId: this.teacherId,
-      cabinet: this.cabinet,
-      description: this.description
-    };
+    if (this.formSubject.id) this.subjectService.update(this.formSubject);
+    else this.subjectService.create(this.formSubject);
 
-    if (subject.id) this.subjectService.update(subject);
-    else this.id = this.subjectService.create(subject);
-
-    this.subject = this.subjectService.getSubject(this.id);
+    this.setSubjects(this.formSubject);
   }
 
-  checkChange(): boolean {
-    return this.subject.name === this.name
-        && this.subject.teacherId === this.teacherId
-        && this.subject.cabinet === this.cabinet
-        && this.subject.description === this.description;
+  setSubjects(storageSubject: Subject) {
+    this.formSubject = storageSubject.getCopy();
+    this.storedSubject = storageSubject;
   }
-
-
 }

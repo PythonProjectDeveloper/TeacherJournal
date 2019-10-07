@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ISubject } from 'src/app/common/entities/subject';
 import { SubjectService } from 'src/app/common/services/subject.service';
 import { Router } from '@angular/router';
+import { Subject } from 'src/app/common/models/subject';
 
 @Component({
   selector: 'app-subject-list',
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./subject-list.component.scss']
 })
 export class SubjectListComponent implements OnInit {
-  subjects: ISubject[];
+  subjects: Subject[];
 
   constructor(private subjectService: SubjectService, private router: Router) { }
 
@@ -20,11 +20,11 @@ export class SubjectListComponent implements OnInit {
       });
   }
 
-  onDelete(subject: ISubject) {
+  onDelete(subject: Subject) {
     this.subjectService.delete(subject);
   }
 
-  onEdit(subject: ISubject) {
+  onEdit(subject: Subject) {
     this.router.navigate(['subjects/subject/edit', subject.id]);
   }
 

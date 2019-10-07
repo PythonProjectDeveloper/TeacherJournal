@@ -1,61 +1,58 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { subjects } from '../constants/constants-subject';
-import { ISubject } from '../entities/subject';
 import uuid4 from 'uuid4';
 import { BehaviorSubject } from 'rxjs';
+import { Subject } from '../models/subject';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectService {
-  private subjects = subjects;
-  private dataChanged: BehaviorSubject<ISubject[]>;
+  private subjects: Subject[] = [];
+  private dataChanged: BehaviorSubject<Subject[]>;
 
   constructor() {
-    this.dataChanged = new BehaviorSubject<ISubject[]>(this.subjects);
+    this.subjects = _.map(subjects, (subject: Subject) =>
+      new Subject(
+        subject.id,
+        subject.name,
+        subject.teacherId,
+        subject.cabinet,
+        subject.description
+      )
+    );
+    this.dataChanged = new BehaviorSubject<Subject[]>(this.subjects);
   }
 
-  public create(subject: ISubject) {
+  public create(subject: Subject) {
     subject.id = uuid4();
     this.subjects = [subject, ...this.subjects];
     this.dataChanged.next(this.subjects);
-
-    return subject.id;
   }
 
-  public update(subject: ISubject) {
+  public update(subject: Subject) {
     const index = _.findIndex(this.subjects, { 'id': subject.id});
     this.subjects.splice(index, 1, subject);
   }
 
-  public delete(subject: ISubject) {
+  public delete(subject: Subject) {
     this.subjects = _.filter(
       this.subjects,
-      (currentSubject: ISubject) => currentSubject.id !== subject.id
+      (currentSubject: Subject) => currentSubject.id !== subject.id
     );
 
     this.dataChanged.next(this.subjects);
   }
 
-  public getSubjects(): BehaviorSubject<ISubject[]> {
+  public getSubjects(): BehaviorSubject<Subject[]> {
     return this.dataChanged;
   }
 
-  public getSubject(id: string): ISubject {
+  public getSubject(id: string): Subject {
     const subject =  _.find(this.subjects, { 'id': id });
 
-    return subject || this.getNewSubject();
-  }
-
-  private getNewSubject(): ISubject {
-    return {
-      id: '',
-      name: '',
-      teacherId: '',
-      cabinet: '',
-      description: ''
-    };
+    return subject || new Subject();
   }
 
 }

@@ -9,40 +9,40 @@ import { Student, Person } from '../models/person';
   providedIn: 'root'
 })
 export class StudentService {
-  private students: Person[] = [];
+  private persons: Person[] = [];
   private dataChanged: BehaviorSubject<Person[]>;
 
   constructor() {
-    this.students = _.map(students, (student: Person) =>
+    this.persons = _.map(students, (person: Person) =>
       new Student(
-        student.id,
-        student.firstName,
-        student.lastName,
-        student.address,
-        student.description
+        person.id,
+        person.firstName,
+        person.lastName,
+        person.address,
+        person.description
       )
     );
-    this.dataChanged = new BehaviorSubject<Person[]>(this.students);
+    this.dataChanged = new BehaviorSubject<Person[]>(this.persons);
   }
 
-  public create(student: Person) {
-    student.id = uuid4();
-    this.students = [student, ...this.students];
-    this.dataChanged.next(this.students);
+  public create(person: Person) {
+    person.id = uuid4();
+    this.persons = [person, ...this.persons];
+    this.dataChanged.next(this.persons);
   }
 
-  public update(student: Person) {
-    const index = _.findIndex(this.students, { 'id': student.id});
-    this.students.splice(index, 1, student);
+  public update(person: Person) {
+    const index = _.findIndex(this.persons, { 'id': person.id});
+    this.persons.splice(index, 1, person);
   }
 
-  public delete(student: Person) {
-    this.students = _.filter(
-      this.students,
-      (currentStudent: Person) => currentStudent.id !== student.id
+  public delete(person: Person) {
+    this.persons = _.filter(
+      this.persons,
+      (currentStudent: Person) => currentStudent.id !== person.id
     );
 
-    this.dataChanged.next(this.students);
+    this.dataChanged.next(this.persons);
   }
 
   public getStudents(): BehaviorSubject<Person[]> {
@@ -50,9 +50,9 @@ export class StudentService {
   }
 
   public getStudent(id: string): Person {
-    const student =  _.find(this.students, { 'id': id });
+    const person =  _.find(this.persons, { 'id': id });
 
-    return student || new Student();
+    return person || new Student();
   }
 
 }
