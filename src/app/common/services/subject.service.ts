@@ -32,7 +32,7 @@ export class SubjectService {
   }
 
   public update(subject: Subject) {
-    const index = _.findIndex(this.subjects, { 'id': subject.id});
+    const index = _.findIndex(this.subjects, { 'id': subject.id });
     this.subjects.splice(index, 1, subject);
   }
 

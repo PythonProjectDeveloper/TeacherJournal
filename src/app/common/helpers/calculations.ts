@@ -32,3 +32,7 @@ export function getJournalTableForm(students: IStudent[], journal: IJournal) {
 export function getWorkDays(journal: IJournal): string[] {
   return _.map(journal.days, 'name');
 }
+
+export function getSimpleCopy(obj: any) {
+  return Object.assign( Object.create( Object.getPrototypeOf(obj)), obj);
+}

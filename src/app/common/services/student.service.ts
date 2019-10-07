@@ -32,7 +32,7 @@ export class StudentService {
   }
 
   public update(person: Person) {
-    const index = _.findIndex(this.persons, { 'id': person.id});
+    const index = _.findIndex(this.persons, { 'id': person.id });
     this.persons.splice(index, 1, person);
   }
 

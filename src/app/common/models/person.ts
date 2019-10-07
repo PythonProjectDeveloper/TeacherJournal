@@ -1,7 +1,8 @@
 import { IPerson, IStudent, ITeacher } from '../entities/person';
 import { ExtendedModel } from '../entities/extended-model';
+import { getSimpleCopy } from '../helpers/calculations';
 
-export class Person implements IPerson, ExtendedModel<IPerson> {
+export class Person implements IPerson, ExtendedModel<Person> {
   id: string;
   firstName: string;
   lastName: string;
@@ -22,18 +23,11 @@ export class Person implements IPerson, ExtendedModel<IPerson> {
         && this.address === other.address
         && this.description === other.description;
   }
-
+  
   getCopy(): Person {
-    const { id, firstName, lastName, address, description } = this;
-
-    return new Person(
-      id,
-      firstName,
-      lastName,
-      address,
-      description
-    );
+    return getSimpleCopy(this);
   }
+
 }
 
 export class Student extends Person implements IStudent {

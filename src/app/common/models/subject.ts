@@ -1,7 +1,8 @@
 import { ISubject } from '../entities/subject';
 import { ExtendedModel } from '../entities/extended-model';
+import { getSimpleCopy } from '../helpers/calculations';
 
-export class Subject implements ISubject, ExtendedModel<ISubject> {
+export class Subject implements ISubject, ExtendedModel<Subject> {
   id: string;
   name: string;
   teacherId: string;
@@ -24,14 +25,6 @@ export class Subject implements ISubject, ExtendedModel<ISubject> {
   }
 
   getCopy(): Subject {
-    const { id, name, teacherId, cabinet, description } = this;
-
-    return new Subject(
-      id,
-      name,
-      teacherId,
-      cabinet,
-      description
-    );
+    return getSimpleCopy(this);
   }
 }
