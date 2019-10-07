@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { StudentService } from 'src/app/common/services/student.service';
-import { Router } from '@angular/router';
 import { Person } from 'src/app/common/models/person';
 
 @Component({
@@ -15,7 +14,7 @@ export class StudentsTableComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private studentService: StudentService, private router: Router) { }
+  constructor(private studentService: StudentService) { }
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
@@ -28,10 +27,6 @@ export class StudentsTableComponent implements OnInit {
 
   onDelete(student: Person) {
     this.studentService.delete(student);
-  }
-
-  onEdit(student: Person) {
-    this.router.navigate(['student/edit', student.id]);
   }
 
 }

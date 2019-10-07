@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { SubjectService } from 'src/app/common/services/subject.service';
-import { Router } from '@angular/router';
 import { Subject } from 'src/app/common/models/subject';
 
 @Component({
@@ -11,7 +10,7 @@ import { Subject } from 'src/app/common/models/subject';
 export class SubjectListComponent implements OnInit {
   subjects: Subject[];
 
-  constructor(private subjectService: SubjectService, private router: Router) { }
+  constructor(private subjectService: SubjectService) { }
 
   ngOnInit() {
     this.subjectService.getSubjects()
@@ -22,10 +21,6 @@ export class SubjectListComponent implements OnInit {
 
   onDelete(subject: Subject) {
     this.subjectService.delete(subject);
-  }
-
-  onEdit(subject: Subject) {
-    this.router.navigate(['subjects/subject/edit', subject.id]);
   }
 
 }

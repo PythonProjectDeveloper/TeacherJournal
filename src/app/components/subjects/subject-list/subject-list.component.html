@@ -18,7 +18,7 @@
     </mat-card>
 
     <div class="subject-container__controls-wrapper">
-      <button class="subject-container__control-edit-button" mat-icon-button (click)="onEdit(subject)">
+      <button class="subject-container__control-edit-button" mat-icon-button routerLink="subject/edit/{{ subject.id }}">
         <mat-icon>edit</mat-icon>
       </button>
 
