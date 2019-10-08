@@ -13,10 +13,11 @@
           type="text"
           [value]="dayName"
           (blur)="onChangeHeaderCell($event, dayNameIndex)"
+          appFocusHighlight="table-wrapper__header-cell-input__focus"
         >
       </th>
     </tr>
-    <tr class="table-wrapper__row" *ngFor="let studentMark of formJurnal.studentMarks">
+    <tr class="table-wrapper__row" *ngFor="let studentMark of formJurnal.studentMarks" appAverageMarkHighlight [averageMark]="studentMark.marks | average | number:'1.1-1'">
       <td class="table-wrapper__simple-cell"> {{ studentMark.firstName }} </td>
       <td class="table-wrapper__simple-cell"> {{ studentMark.lastName }} </td>
       <td class="table-wrapper__simple-cell"> {{ studentMark.marks | average | number:'1.1-1' }} </td>
@@ -26,6 +27,10 @@
           type="text"
           [value]="mark"
           (blur)="onChangeSimpleCell($event, studentMark.studentId, markIndex)"
+          appNumberCheck
+          [maxNumber]="10"
+          [minNumber]="0"
+          appFocusHighlight="table-wrapper__simple-cell-input__focus"
         >
       </td>
     </tr>

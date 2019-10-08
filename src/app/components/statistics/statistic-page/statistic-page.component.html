@@ -6,7 +6,12 @@
 
       <mat-tab class="sidenav-container__tab" label="Students">
         <mat-button-toggle-group class="sidenav-container__tab-content" name="fontStyle" aria-label="Font Style" [vertical]="true">
-          <mat-button-toggle [value]="student" *ngFor="let student of students" (change)="setCurrentObjectId($event)" routerLink="student/{{ currentObject?.id }}">
+          <mat-button-toggle
+            *ngFor="let student of students | asyncSort:'firstName' | async"
+            [value]="student"
+            (change)="setCurrentObjectId($event)"
+            routerLink="student/{{ currentObject?.id }}"
+          >
             {{ student.firstName }}
             {{ student.lastName }}
           </mat-button-toggle>
@@ -15,7 +20,12 @@
 
       <mat-tab class="sidenav-container__tab" label="Subjects">
         <mat-button-toggle-group class="sidenav-container__tab-content" name="fontStyle" aria-label="Font Style" [vertical]="true">
-          <mat-button-toggle [value]="subject" *ngFor="let subject of subjects" (change)="setCurrentObjectId($event)" routerLink="subject/{{ currentObject?.id }}">
+          <mat-button-toggle
+            *ngFor="let subject of subjects | asyncSort:'name' | async"
+            [value]="subject"
+            (change)="setCurrentObjectId($event)"
+            routerLink="subject/{{ currentObject?.id }}"
+          >
             {{ subject.name | titlecase }}
           </mat-button-toggle>
         </mat-button-toggle-group>

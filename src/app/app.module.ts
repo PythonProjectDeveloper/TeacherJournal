@@ -36,6 +36,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { ExitAboutGuard } from './common/guards/exit-about.guard';
 import { RouterModule } from '@angular/router';
 import { AveragePipe } from './common/pipes/average.pipe';
+import { AverageMarkHighlightDirective } from './common/directives/average-mark-highlight.directive';
+import { NumberCheckDirective } from './common/directives/number-check.directive';
+import { FocusHighlightDirective } from './common/directives/focus-highlight.directive';
+import { AsyncSortPipe } from './common/pipes/async-sort.pipe';
 
 @NgModule({
   declarations: [
@@ -52,7 +56,11 @@ import { AveragePipe } from './common/pipes/average.pipe';
     StatisticSubjectComponent,
     SubjectListComponent,
     SubjectTableComponent,
-    AveragePipe
+    AveragePipe,
+    AverageMarkHighlightDirective,
+    NumberCheckDirective,
+    FocusHighlightDirective,
+    AsyncSortPipe
   ],
   imports: [
     BrowserModule,

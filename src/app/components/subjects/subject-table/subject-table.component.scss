@@ -1,4 +1,5 @@
-
+$border-color: #0000003d;
+$text-color: gray;
 
 :host {
   display: flex;
@@ -18,32 +19,56 @@
     }
 
     &__row {
-      border-bottom: 1px solid #0000003d;
+      border-bottom: 1px solid $border-color;
+    }
+
+    &__header-cell {
+      border-left: 1px solid $border-color;
+    }
+
+    &__simple-cell {
+      border-top: 1px solid $border-color;
+      border-left: 1px solid $border-color;
+    }
+
+    &__header-cell:first-child,
+    &__simple-cell:first-child {
+      border-left: none;
     }
 
     &__header-cell, &__simple-cell {
       padding: 10px;
-      color: grey;
+      color: $text-color;
       text-align: left;
       max-width: 50px;
     }
 
     &__header-cell-input, &__simple-cell-input {
       width: 40px;
+      height: 40px;
       outline: none;
       border: none;
       text-align: center;
+      background: none;
+      color: $text-color;
+      box-sizing: border-box;
+
+      &__focus {
+        color: $text-color;
+        font-weight: 900;
+        border: 2px solid #30b6dd;
+      }
     }
 
     &__static-cell {
       min-width: 100px;
       max-width: 100px;
+      font-weight: 500;
     }
 
     &__input-wrapper {
       padding:0;
       width: 40px;
-      border: 1px solid #0000003d;
     }
 
   }
