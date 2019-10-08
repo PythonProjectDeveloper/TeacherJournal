@@ -1,8 +1,6 @@
 import { IJournal, IStudentMark } from '../entities/journal';
 import { ExtendedModel } from '../entities/extended-model';
 import * as _ from 'lodash';
-import { Person } from './person';
-import { IDaysMark } from '../entities/form';
 
 export class Journal implements IJournal, ExtendedModel<Journal> {
   subjectId: string;
@@ -16,46 +14,24 @@ export class Journal implements IJournal, ExtendedModel<Journal> {
   }
 
   isEqual(other: Journal): boolean {
-    return _.isEqual(this.dayNames, other.dayNames)
-        && _.isEqual(this.studentMarks, other.studentMarks);
+    return _.isEqual(this, other);
   }
   
   getCopy(): Journal {
     return _.cloneDeep(this);
   }
 
-  updateDayName(index: string, value: string) {
+  updateDayName(index: number, value: string) {
     this.dayNames[index] = value;
   }
 
-  updateMark(indexX: string, indexY: string, value: number) {
-    this.studentMarks[indexX][indexY] = value;
+  updateMark(studentId: string, index: number, value: string) {
+    const studentMark = _.find(this.studentMarks, { 'studentId': studentId })
+    studentMark.marks[index] = parseInt(value, 10) || null;
   }
 
   addColumn() {
     this.dayNames.push('');
     this.studentMarks.forEach((userMarks) => userMarks.marks.push(null))
   }
-
-  getDayNames(): string[] {
-    return this.dayNames;
-  }
-
-  getJournalTableForm() {
-    return this.studentMarks.map((sturentMark) => {
-      const averageMark = _.mean(_.filter(sturentMark.marks, Boolean));
-      const journalTableForm = {
-        firstName: sturentMark.firstName,
-        lastName: sturentMark.lastName,
-        averageMark
-      }
-      
-      this.dayNames.forEach((name, idx) =>
-        journalTableForm[name] = sturentMark.marks[idx]
-      );
-
-      return journalTableForm;
-    });
-  }
-
 }

@@ -1,9 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
 import { Observable } from "rxjs";
-import { baseJournalColumn } from 'src/app/shared/constants/constants-table';
 import { JournalService } from 'src/app/common/services/journal.service';
 import { Journal } from 'src/app/common/models/journal';
 import { ActivatedRoute } from '@angular/router';
@@ -16,35 +14,21 @@ import { Subject } from 'src/app/common/models/subject';
   styleUrls: ['./subject-table.component.scss']
 })
 export class SubjectTableComponent implements ComponentCanDeactivate, OnInit {
-  dataSource = new MatTableDataSource([]);
-  baseColumns = baseJournalColumn;
-  dayNamesColumns: string[];
-  displayedColumns: string[];
   isTableDataChanged = false;
   storedJurnal: Journal;
   formJurnal: Journal;
   subject: Subject;
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-
-  constructor(public journalService: JournalService, public subjectService: SubjectService, public route: ActivatedRoute) { }
-
-  ngOnInit() {
-    this.dataSource.sort = this.sort;
-
-    this.route.params.subscribe((params) => {
-      const journal = this.journalService.getJournal(params.id);
-
-      this.subject = this.subjectService.getSubject(params.id);
-
-      this.setTableData(journal)
-      this.setJournal(journal);
-    });
+  constructor(public journalService: JournalService, public subjectService: SubjectService, public route: ActivatedRoute) {
+    this.setJournal = this.setJournal.bind(this);
   }
 
-  onAddColumn() {
-    this.formJurnal.addColumn();
-    this.setTableData(this.formJurnal)
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.journalService.getJournal(params.id).subscribe(this.setJournal);
+
+      this.subject = this.subjectService.getSubject(params.id);
+    });
   }
 
   canDeactivate() : boolean | Observable<boolean>{
@@ -52,18 +36,31 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit {
   }
 
   onSave() {
-    this.journalService.saveJournal(this.formJurnal);
-    this.setJournal(this.formJurnal);
+    this.journalService.saveJournal(this.formJurnal).subscribe(this.setJournal);
   }
 
   setJournal(storedJurnal: Journal) {
     this.formJurnal = storedJurnal.getCopy();
     this.storedJurnal = storedJurnal;
+    this.isTableDataChanged = false;
   }
 
-  setTableData(journal: Journal) {
-    this.dayNamesColumns = journal.getDayNames();
-    this.dataSource.data = journal.getJournalTableForm();
-    this.displayedColumns = _.concat(this.baseColumns, this.dayNamesColumns);
+  onAddColumn() {
+    this.formJurnal.addColumn();
+  }
+
+  onChangeHeaderCell(event, index: number) {
+    this.formJurnal.updateDayName(index, event.target.value);
+    this.setSaveButtonVision();
+  }
+
+  onChangeSimpleCell(event, studentId: string, index: number) {
+    this.formJurnal.updateMark(studentId, index, event.target.value);
+    this.setSaveButtonVision();
+  }
+
+  setSaveButtonVision(){
+    const isEqual = this.formJurnal.isEqual(this.storedJurnal);
+    this.isTableDataChanged = !isEqual;
   }
 }

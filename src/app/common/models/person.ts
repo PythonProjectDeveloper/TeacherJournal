@@ -18,10 +18,7 @@ export class Person implements IPerson, ExtendedModel<Person> {
   }
 
   isEqual(other: Person): boolean {
-    return this.firstName === other.firstName
-        && this.lastName === other.lastName
-        && this.address === other.address
-        && this.description === other.description;
+    return _.isEqual(this, other);
   }
   
   getCopy(): Person {

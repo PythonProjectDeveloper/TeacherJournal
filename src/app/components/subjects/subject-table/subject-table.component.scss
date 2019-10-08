@@ -14,22 +14,36 @@
 
     &__table {
       width: 100%;
+      border-collapse: collapse; 
+    }
+
+    &__row {
+      border-bottom: 1px solid #0000003d;
     }
 
     &__header-cell, &__simple-cell {
       padding: 10px;
+      color: grey;
+      text-align: left;
+      max-width: 50px;
     }
 
-    &__header-cell-input {
-      outline: none;
-      border: none;
-      width: 40px;
-    }
-
-    &__simple-cell-input {
+    &__header-cell-input, &__simple-cell-input {
       width: 40px;
       outline: none;
       border: none;
+      text-align: center;
+    }
+
+    &__static-cell {
+      min-width: 100px;
+      max-width: 100px;
+    }
+
+    &__input-wrapper {
+      padding:0;
+      width: 40px;
+      border: 1px solid #0000003d;
     }
 
   }

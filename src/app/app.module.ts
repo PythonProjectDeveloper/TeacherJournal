@@ -35,6 +35,7 @@ import { SubjectTableComponent } from './components/subjects/subject-table/subje
 import { AppRoutingModule } from './app-routing.module';
 import { ExitAboutGuard } from './common/guards/exit-about.guard';
 import { RouterModule } from '@angular/router';
+import { AveragePipe } from './common/pipes/average.pipe';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { RouterModule } from '@angular/router';
     StatisticStudentComponent,
     StatisticSubjectComponent,
     SubjectListComponent,
-    SubjectTableComponent
+    SubjectTableComponent,
+    AveragePipe
   ],
   imports: [
     BrowserModule,

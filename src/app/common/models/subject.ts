@@ -18,10 +18,7 @@ export class Subject implements ISubject, ExtendedModel<Subject> {
   }
 
   isEqual(other: Subject): boolean {
-    return this.name === other.name
-        && this.teacherId === other.teacherId
-        && this.cabinet === other.cabinet
-        && this.description === other.description;
+    return _.isEqual(this, other);
   }
 
   getCopy(): Subject {
