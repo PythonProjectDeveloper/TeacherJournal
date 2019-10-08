@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { students } from '../constants/constants-person';
 import uuid4 from 'uuid4';
-import { BehaviorSubject } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Student, Person } from '../models/person';
 
 @Injectable({
@@ -10,7 +10,6 @@ import { Student, Person } from '../models/person';
 })
 export class StudentService {
   private persons: Person[] = [];
-  private dataChanged: BehaviorSubject<Person[]>;
 
   constructor() {
     this.persons = _.map(students, (person: Person) =>
@@ -22,37 +21,39 @@ export class StudentService {
         person.description
       )
     );
-    this.dataChanged = new BehaviorSubject<Person[]>(this.persons);
   }
 
-  public createStudent(person: Person) {
+  public createStudent(person: Person): Observable<Person> {
     person.id = uuid4();
     this.persons = [person, ...this.persons];
-    this.dataChanged.next(this.persons);
+
+    return of(person)
   }
 
-  public updateStudent(person: Person) {
+  public updateStudent(person: Person): Observable<Person> {
     const index = _.findIndex(this.persons, { 'id': person.id });
     this.persons.splice(index, 1, person);
+
+    return of(person)
   }
 
-  public deleteStudent(person: Person) {
+  public deleteStudent(person: Person): Observable<Person[]> {
     this.persons = _.filter(
       this.persons,
       (currentStudent: Person) => currentStudent.id !== person.id
     );
 
-    this.dataChanged.next(this.persons);
+    return of(this.persons);
   }
 
-  public getStudents(): BehaviorSubject<Person[]> {
-    return this.dataChanged;
+  public getStudents(): Observable<Person[]> {
+    return of(this.persons);
   }
 
-  public getStudent(id: string): Person {
+  public getStudent(id: string): Observable<Person> {
     const person =  _.find(this.persons, { 'id': id });
 
-    return person || new Student();
+    return of(person || new Student());
   }
 
 }

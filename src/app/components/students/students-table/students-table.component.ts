@@ -15,19 +15,22 @@ export class StudentsTableComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private studentService: StudentService) { }
+  constructor(private studentService: StudentService) {
+    this.setTableData = this.setTableData.bind(this);
+  }
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
 
-    this.studentService.getStudents()
-      .subscribe(students => {
-        this.dataSource.data = students;
-      });
+    this.studentService.getStudents().subscribe(this.setTableData);
   }
 
   onDelete(student: Person) {
-    this.studentService.deleteStudent(student);
+    this.studentService.deleteStudent(student).subscribe(this.setTableData);
+  }
+
+  setTableData(students: Person[]) {
+    this.dataSource.data = students;
   }
 
 }

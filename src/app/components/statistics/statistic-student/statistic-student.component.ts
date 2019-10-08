@@ -15,7 +15,7 @@ export class StatisticStudentComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.student = this.studentService.getStudent(params.id);
+      this.studentService.getStudent(params.id).subscribe(student => this.student = student);
     });
   }
 

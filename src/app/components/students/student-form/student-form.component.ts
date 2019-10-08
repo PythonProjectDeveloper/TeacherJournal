@@ -14,13 +14,13 @@ export class StudentFormComponent implements ComponentCanDeactivate, OnInit {
   storedPerson: Person;
   formPerson: Person;
 
-  constructor(public studentService: StudentService, public route: ActivatedRoute, private router: Router) { }
+  constructor(public studentService: StudentService, public route: ActivatedRoute, private router: Router) {
+    this.setPersons = this.setPersons.bind(this);
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      const person = this.studentService.getStudent(params.id);
-
-      this.setPersons(person);
+      this.studentService.getStudent(params.id).subscribe(this.setPersons);
     });
   }
 
@@ -31,13 +31,12 @@ export class StudentFormComponent implements ComponentCanDeactivate, OnInit {
   onSave() {
     if (!this.formPerson.firstName || !this.formPerson.lastName) return;
 
-    if (this.formPerson.id) this.studentService.updateStudent(this.formPerson);
-    else {
-      this.studentService.createStudent(this.formPerson);
+    if (this.formPerson.id) {
+      this.studentService.updateStudent(this.formPerson).subscribe(this.setPersons);
+    } else {
+      this.studentService.createStudent(this.formPerson).subscribe(this.setPersons);
       this.router.navigate(['/student', 'edit', this.formPerson.id]);
     }
-
-    this.setPersons(this.formPerson);
   }
 
   setPersons(storagePerson: Person) {

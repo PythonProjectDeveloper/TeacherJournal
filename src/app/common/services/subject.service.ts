@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { subjects } from '../constants/constants-subject';
 import uuid4 from 'uuid4';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of, Observable } from 'rxjs';
 import { Subject } from '../models/subject';
 
 @Injectable({
@@ -10,7 +10,6 @@ import { Subject } from '../models/subject';
 })
 export class SubjectService {
   private subjects: Subject[] = [];
-  private dataChanged: BehaviorSubject<Subject[]>;
 
   constructor() {
     this.subjects = _.map(subjects, (subject: Subject) =>
@@ -22,37 +21,39 @@ export class SubjectService {
         subject.description
       )
     );
-    this.dataChanged = new BehaviorSubject<Subject[]>(this.subjects);
   }
 
-  public createSubject(subject: Subject) {
+  public createSubject(subject: Subject): Observable<Subject>  {
     subject.id = uuid4();
     this.subjects = [subject, ...this.subjects];
-    this.dataChanged.next(this.subjects);
+
+    return of(subject)
   }
 
-  public updateSubject(subject: Subject) {
+  public updateSubject(subject: Subject): Observable<Subject> {
     const index = _.findIndex(this.subjects, { 'id': subject.id });
     this.subjects.splice(index, 1, subject);
+
+    return of(subject)
   }
 
-  public deleteSubject(subject: Subject) {
+  public deleteSubject(subject: Subject): Observable<Subject[]> {
     this.subjects = _.filter(
       this.subjects,
       (currentSubject: Subject) => currentSubject.id !== subject.id
     );
 
-    this.dataChanged.next(this.subjects);
+    return of(this.subjects);
   }
 
-  public getSubjects(): BehaviorSubject<Subject[]> {
-    return this.dataChanged;
+  public getSubjects(): Observable<Subject[]> {
+    return of(this.subjects);
   }
 
-  public getSubject(id: string): Subject {
+  public getSubject(id: string): Observable<Subject> {
     const subject =  _.find(this.subjects, { 'id': id });
 
-    return subject || new Subject();
+    return of(subject || new Subject());
   }
 
 }

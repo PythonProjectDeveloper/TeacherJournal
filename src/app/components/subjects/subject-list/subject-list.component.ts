@@ -10,17 +10,20 @@ import { Subject } from 'src/app/common/models/subject';
 export class SubjectListComponent implements OnInit {
   subjects: Subject[];
 
-  constructor(private subjectService: SubjectService) { }
+  constructor(private subjectService: SubjectService) {
+    this.setSubjects = this.setSubjects.bind(this);
+  }
 
   ngOnInit() {
-    this.subjectService.getSubjects()
-      .subscribe(students => {
-        this.subjects = students;
-      });
+    this.subjectService.getSubjects().subscribe(this.setSubjects);
   }
 
   onDelete(subject: Subject) {
-    this.subjectService.deleteSubject(subject);
+    this.subjectService.deleteSubject(subject).subscribe(this.setSubjects);
+  }
+
+  setSubjects(subjects: Subject[]) {
+    this.subjects = subjects;
   }
 
 }

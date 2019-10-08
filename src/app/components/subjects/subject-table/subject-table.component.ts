@@ -21,13 +21,13 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit {
 
   constructor(public journalService: JournalService, public subjectService: SubjectService, public route: ActivatedRoute) {
     this.setJournal = this.setJournal.bind(this);
+    this.setSubject = this.setSubject.bind(this);
   }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.journalService.getJournal(params.id).subscribe(this.setJournal);
-
-      this.subject = this.subjectService.getSubject(params.id);
+      this.subjectService.getSubject(params.id).subscribe(this.setSubject);
     });
   }
 
@@ -43,6 +43,10 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit {
     this.formJurnal = storedJurnal.getCopy();
     this.storedJurnal = storedJurnal;
     this.isTableDataChanged = false;
+  }
+
+  setSubject(subject: Subject) {
+    this.subject = subject;
   }
 
   onAddColumn() {

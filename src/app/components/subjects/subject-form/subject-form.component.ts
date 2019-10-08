@@ -16,13 +16,13 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit {
   storedSubject: Subject;
   formSubject: Subject;
 
-  constructor(public subjectService: SubjectService, public route: ActivatedRoute, private router: Router) { }
+  constructor(public subjectService: SubjectService, public route: ActivatedRoute, private router: Router) {
+    this.setSubjects = this.setSubjects.bind(this);
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      const subject = this.subjectService.getSubject(params.id);
-
-      this.setSubjects(subject);
+      this.subjectService.getSubject(params.id).subscribe(this.setSubjects);
     });
   }
 
@@ -33,13 +33,12 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit {
   onSave() {
     if (!this.formSubject.name || !this.formSubject.teacherId) return;
 
-    if (this.formSubject.id) this.subjectService.updateSubject(this.formSubject);
-    else {
-      this.subjectService.createSubject(this.formSubject);
+    if (this.formSubject.id) {
+      this.subjectService.updateSubject(this.formSubject).subscribe(this.setSubjects);
+    } else {
+      this.subjectService.createSubject(this.formSubject).subscribe(this.setSubjects);
       this.router.navigate(['subjects', 'subject', 'edit', this.formSubject.id]);
     }
-
-    this.setSubjects(this.formSubject);
   }
 
   setSubjects(storageSubject: Subject) {
