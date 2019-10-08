@@ -14,7 +14,21 @@ export class Journal implements IJournal, ExtendedModel<Journal> {
   }
 
   isEqual(other: Journal): boolean {
-    return _.isEqual(this, other);
+    const drop = (array: any) => _.dropRightWhile(array, (item: any) => !item);
+    const isSubjectIdEqual = this.subjectId === other.subjectId;
+    const isDayNamesEqual = _.isEqual(drop(this.dayNames), drop(other.dayNames));
+    let isMarksEqual = true;
+
+    for (const index in this.studentMarks) {
+      isMarksEqual = _.isEqual(
+        drop(this.studentMarks[index].marks),
+        drop(other.studentMarks[index].marks)
+      );
+
+      if (!isMarksEqual) break;
+    }
+
+    return isSubjectIdEqual && isDayNamesEqual && isMarksEqual;
   }
   
   getCopy(): Journal {
