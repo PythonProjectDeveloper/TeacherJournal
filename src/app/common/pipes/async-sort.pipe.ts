@@ -6,13 +6,19 @@ import * as _ from 'lodash';
 })
 export class AsyncSortPipe implements PipeTransform {
 
-  transform(items: any, ...args: string[]): any {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const sortedArray = _.sortBy(items, args);
-        resolve(sortedArray);
-      }, 0);
-    })
+  transform(collection: any, ...args: string[]): Promise<any> {
+
+    // if the collection is an observable object then convert to the promise
+    if (collection.subscribe && typeof collection.subscribe === 'function') {
+      collection = collection.toPromise();
+
+    // if the collection is an array then wrap in the promise
+    } else if (Array.isArray(collection)) {
+      collection = Promise.resolve(collection);
+    }
+
+    // sort received data and return them
+    return collection.then((items: any) => _.sortBy(items, args));
   }
 
 }

@@ -21,6 +21,8 @@ export class StudentsTableComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
+    this.sort.direction = 'asc';
+    this.sort.active = 'firstName';
 
     this.studentService.getStudents().subscribe(this.setTableData);
   }

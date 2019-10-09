@@ -4,7 +4,7 @@ import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
   selector: '[appAverageMarkHighlight]'
 })
 export class AverageMarkHighlightDirective {
-  @Input() public averageMark: number;
+  @Input('appAverageMarkHighlight') public averageMark: number;
 
   public averageMarkColors = [
     { maxAverageMark: 5, color: '#002bff1f' },

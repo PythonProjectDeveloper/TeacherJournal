@@ -1,6 +1,7 @@
 import { IJournal, IStudentMark } from '../entities/journal';
 import { ExtendedModel } from '../entities/extended-model';
 import * as _ from 'lodash';
+import { dropLastEmptyItems } from '../helpers/calculations';
 
 export class Journal implements IJournal, ExtendedModel<Journal> {
   subjectId: string;
@@ -14,21 +15,22 @@ export class Journal implements IJournal, ExtendedModel<Journal> {
   }
 
   isEqual(other: Journal): boolean {
-    const drop = (array: any) => _.dropRightWhile(array, (item: any) => !item);
     const isSubjectIdEqual = this.subjectId === other.subjectId;
-    const isDayNamesEqual = _.isEqual(drop(this.dayNames), drop(other.dayNames));
-    let isMarksEqual = true;
+    const isDayNamesEqual = _.isEqual(
+      dropLastEmptyItems(this.dayNames),
+      dropLastEmptyItems(other.dayNames)
+    );
 
     for (const index in this.studentMarks) {
-      isMarksEqual = _.isEqual(
-        drop(this.studentMarks[index].marks),
-        drop(other.studentMarks[index].marks)
+      const isMarksEqual = _.isEqual(
+        dropLastEmptyItems(this.studentMarks[index].marks),
+        dropLastEmptyItems(other.studentMarks[index].marks)
       );
 
-      if (!isMarksEqual) break;
+      if (!isMarksEqual) return isMarksEqual;
     }
 
-    return isSubjectIdEqual && isDayNamesEqual && isMarksEqual;
+    return isSubjectIdEqual && isDayNamesEqual;
   }
   
   getCopy(): Journal {
