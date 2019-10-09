@@ -1,0 +1,42 @@
+:host {
+
+  .subject-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 150px;
+
+    &__card-wrapper {
+      margin: 5px;
+      flex-grow: 2;
+      position: relative;
+    }
+
+    &__card {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 150px;
+      height: 100px;
+      cursor: pointer;
+      user-select: none;
+    }
+  
+    &__card-title {
+      color: rgba(0, 0, 0, 0.404);
+    }
+
+    &__controls-wrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    &__control-edit-button {
+      color: #0077008c;
+    }
+
+    &__control-delete-button {
+      color: #ff2d2dbf;
+    }
+  }
+}
