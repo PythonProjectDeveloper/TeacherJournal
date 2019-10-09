@@ -8,13 +8,13 @@ export class FocusHighlightDirective {
 
   constructor(private elementRef: ElementRef, private renderer2: Renderer2) { }
 
-  @HostListener("focus")
-  onFocus() {
+  @HostListener('focus')
+  public onFocus(): void {
     this.renderer2.addClass(this.elementRef.nativeElement, this.focusClass);
   }
 
-  @HostListener("blur")
-  onBlur() {
+  @HostListener('blur')
+  public onBlur(): void {
     this.renderer2.removeClass(this.elementRef.nativeElement, this.focusClass);
   }
 }

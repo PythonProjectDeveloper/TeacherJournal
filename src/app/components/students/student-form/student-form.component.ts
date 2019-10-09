@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StudentService } from 'src/app/common/services/student.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 import { Person } from 'src/app/common/models/person';
 
 @Component({
@@ -11,35 +11,35 @@ import { Person } from 'src/app/common/models/person';
   styleUrls: ['./student-form.component.scss']
 })
 export class StudentFormComponent implements ComponentCanDeactivate, OnInit {
-  storedPerson: Person;
-  formPerson: Person;
+  public storedPerson: Person;
+  public formPerson: Person;
 
   constructor(public studentService: StudentService, public route: ActivatedRoute, private router: Router) {
     this.setPersons = this.setPersons.bind(this);
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.studentService.getStudent(params.id).subscribe(this.setPersons);
     });
   }
 
-  canDeactivate(): boolean | Observable<boolean> {
+  public canDeactivate(): boolean | Observable<boolean> {
     return this.formPerson.isEqual(this.storedPerson);
   }
 
-  onSave() {
-    if (!this.formPerson.firstName || !this.formPerson.lastName) return;
+  public onSave(): void {
+    if (!this.formPerson.firstName || !this.formPerson.lastName) { return; }
 
     if (this.formPerson.id) {
       this.studentService.updateStudent(this.formPerson).subscribe(this.setPersons);
     } else {
       this.studentService.createStudent(this.formPerson).subscribe(this.setPersons);
-      this.router.navigate(['/student', 'edit', this.formPerson.id]);
+      this.router.navigate(['students', 'student', 'edit', this.formPerson.id]);
     }
   }
 
-  setPersons(storagePerson: Person) {
+  public setPersons(storagePerson: Person): void {
     this.formPerson = storagePerson.getCopy();
     this.storedPerson = storagePerson;
   }

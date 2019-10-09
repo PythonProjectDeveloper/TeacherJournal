@@ -2,7 +2,7 @@ import { AverageMarkHighlightDirective } from './average-mark-highlight.directiv
 
 describe('AverageMarkHighlightDirective', () => {
   it('should create an instance', () => {
-    const directive = new AverageMarkHighlightDirective();
+    const directive: AverageMarkHighlightDirective = new AverageMarkHighlightDirective();
     expect(directive).toBeTruthy();
   });
 });

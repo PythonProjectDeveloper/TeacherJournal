@@ -3,12 +3,12 @@ import { ExtendedModel } from '../entities/extended-model';
 import * as _ from 'lodash';
 
 export class Person implements IPerson, ExtendedModel<Person> {
-  id: string;
-  firstName: string;
-  lastName: string;
-  address: string;
-  description: string;
-  
+  public id: string;
+  public firstName: string;
+  public lastName: string;
+  public address: string;
+  public description: string;
+
   constructor(id: string = '', firstName: string = '', lastName: string = '', address: string = '', description: string = '') {
     this.id = id;
     this.firstName = firstName;
@@ -17,11 +17,11 @@ export class Person implements IPerson, ExtendedModel<Person> {
     this.description = description;
   }
 
-  isEqual(other: Person): boolean {
+  public isEqual(other: Person): boolean {
     return _.isEqual(this, other);
   }
-  
-  getCopy(): Person {
+
+  public getCopy(): Person {
     return _.cloneDeep(this);
   }
 

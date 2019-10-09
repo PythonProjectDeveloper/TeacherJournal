@@ -8,22 +8,26 @@ import { Subject } from 'src/app/common/models/subject';
   styleUrls: ['./subject-list.component.scss']
 })
 export class SubjectListComponent implements OnInit {
-  subjects: Subject[];
+  public subjects: Subject[];
 
   constructor(private subjectService: SubjectService) {
     this.setSubjects = this.setSubjects.bind(this);
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.subjectService.getSubjects().subscribe(this.setSubjects);
   }
 
-  onDelete(subject: Subject) {
+  public onDelete(subject: Subject): void {
     this.subjectService.deleteSubject(subject).subscribe(this.setSubjects);
   }
 
-  setSubjects(subjects: Subject[]) {
+  public setSubjects(subjects: Subject[]): void {
     this.subjects = subjects;
+  }
+
+  public onToolbarValueChanged(searchText: string): void {
+    this.subjectService.getSubjects(searchText).subscribe(this.setSubjects);
   }
 
 }

@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 })
 export class AveragePipe implements PipeTransform {
 
-  transform(array: number[]): any {
+  public transform(array: number[]): any {
     return _.mean(array.filter(Boolean));
   }
 

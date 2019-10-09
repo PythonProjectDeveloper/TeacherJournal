@@ -9,11 +9,11 @@ import { StudentService } from 'src/app/common/services/student.service';
   styleUrls: ['./statistic-student.component.scss']
 })
 export class StatisticStudentComponent implements OnInit {
-  student: Person;
+  public student: Person;
 
   constructor(public studentService: StudentService, public route: ActivatedRoute) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.studentService.getStudent(params.id).subscribe(student => this.student = student);
     });

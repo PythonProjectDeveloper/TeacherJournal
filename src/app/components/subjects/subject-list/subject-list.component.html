@@ -1,5 +1,7 @@
 <h2 class="title">Subjects</h2>
 
+<app-toolbar (valueChanged)="onToolbarValueChanged($event)"></app-toolbar>
+
 <div class="subject-container">
   <div class="subject-container__card-wrapper" *ngFor="let subject of subjects">
     <mat-card

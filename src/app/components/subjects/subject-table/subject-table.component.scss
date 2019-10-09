@@ -20,6 +20,14 @@ $text-color: gray;
 
     &__row {
       border-bottom: 1px solid $border-color;
+
+      &__average-mark-lt-5 {
+        background-color: #002bff1f;
+      }
+
+      &__average-mark-lt-11 {
+        background-color: #149a041c;
+      }
     }
 
     &__header-cell {

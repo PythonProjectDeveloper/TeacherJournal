@@ -20,15 +20,15 @@ export class JournalService {
     );
   }
 
-  saveJournal(journal: Journal): Observable<Journal> {
-    const index = _.findIndex(this.journals, { 'subjectId': journal.subjectId });
+  public saveJournal(journal: Journal): Observable<Journal> {
+    const index: number = _.findIndex(this.journals, { subjectId: journal.subjectId });
     this.journals.splice(index, 1, journal);
 
     return of(journal);
   }
 
-  getJournal(subjectId: string): Observable<Journal> {
-    const journal =  _.find(this.journals, { 'subjectId': subjectId });
+  public getJournal(subjectId: string): Observable<Journal> {
+    const journal: Journal =  _.find(this.journals, { subjectId });
 
     return of(journal);
   }

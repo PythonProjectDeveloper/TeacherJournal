@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent, MatButtonToggleChange } from '@angular/material';
-import { students } from 'src/app/common/constants/constants-person';
-import { subjects } from 'src/app/common/constants/constants-subject';
 import { ISubject } from 'src/app/common/entities/subject';
 import { IStudent } from 'src/app/common/entities/person';
 import { SubjectService } from 'src/app/common/services/subject.service';
@@ -20,25 +18,25 @@ enum List {
   styleUrls: ['./statistic-page.component.scss']
 })
 export class StatisticPageComponent implements OnInit {
-  currentList = 'Students';
-  currentObject: IStudent | ISubject | null = null;
-  list = List;
-  students: Student[];
-  subjects: Subject[];
+  public currentList = 'Students';
+  public currentObject: IStudent | ISubject | null = null;
+  public list = List;
+  public students: Student[];
+  public subjects: Subject[];
 
   constructor(public studentService: StudentService, public subjectService: SubjectService) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.studentService.getStudents().subscribe((students) => this.students = students);
     this.subjectService.getSubjects().subscribe((subjects) => this.subjects = subjects);
   }
 
-  setCurrentList(event: MatTabChangeEvent) {
+  public setCurrentList(event: MatTabChangeEvent): void {
     this.currentList = event.tab.textLabel;
     this.currentObject = null;
   }
 
-  setCurrentObjectId(event: MatButtonToggleChange) {
+  public setCurrentObjectId(event: MatButtonToggleChange): void {
     this.currentObject = event.value;
   }
 

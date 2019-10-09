@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Data } from '@angular/router';
 
 @Component({
   selector: 'app-page-not-found',
@@ -7,15 +7,15 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./page-not-found.component.scss']
 })
 export class PageNotFoundComponent {
-  imageUrl: string;
-  titleText: string;
-  description: string;
+  public imageUrl: string;
+  public titleText: string;
+  public description: string;
 
   constructor(public route: ActivatedRoute) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      const data = this.route.snapshot.data;
+      const data: Data = this.route.snapshot.data;
       this.imageUrl = data.imageUrl;
       this.titleText = data.titleText;
       this.description = data.description;

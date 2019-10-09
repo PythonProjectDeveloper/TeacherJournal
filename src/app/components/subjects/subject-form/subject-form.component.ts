@@ -12,26 +12,26 @@ import { Subject } from 'src/app/common/models/subject';
   styleUrls: ['./subject-form.component.scss']
 })
 export class SubjectFormComponent implements ComponentCanDeactivate, OnInit {
-  teachers = teachers;
-  storedSubject: Subject;
-  formSubject: Subject;
+  public teachers = teachers;
+  public storedSubject: Subject;
+  public formSubject: Subject;
 
   constructor(public subjectService: SubjectService, public route: ActivatedRoute, private router: Router) {
     this.setSubjects = this.setSubjects.bind(this);
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.subjectService.getSubject(params.id).subscribe(this.setSubjects);
     });
   }
 
-  canDeactivate(): boolean | Observable<boolean> {
+  public canDeactivate(): boolean | Observable<boolean> {
     return this.formSubject.isEqual(this.storedSubject);
   }
 
-  onSave() {
-    if (!this.formSubject.name || !this.formSubject.teacherId) return;
+  public onSave(): void {
+    if (!this.formSubject.name || !this.formSubject.teacherId) { return; }
 
     if (this.formSubject.id) {
       this.subjectService.updateSubject(this.formSubject).subscribe(this.setSubjects);
@@ -41,7 +41,7 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit {
     }
   }
 
-  setSubjects(storageSubject: Subject) {
+  public setSubjects(storageSubject: Subject): void {
     this.formSubject = storageSubject.getCopy();
     this.storedSubject = storageSubject;
   }

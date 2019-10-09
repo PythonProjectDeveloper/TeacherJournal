@@ -4,50 +4,50 @@ import * as _ from 'lodash';
 import { dropLastEmptyItems } from '../helpers/calculations';
 
 export class Journal implements IJournal, ExtendedModel<Journal> {
-  subjectId: string;
-  dayNames: string[];
-  studentMarks: IStudentMark[];
-  
+  public subjectId: string;
+  public dayNames: string[];
+  public studentMarks: IStudentMark[];
+
   constructor(subjectId: string = '', dayNames: string[] = [], studentMarks: IStudentMark[] = []) {
     this.subjectId = subjectId;
     this.dayNames = dayNames;
     this.studentMarks = studentMarks;
   }
 
-  isEqual(other: Journal): boolean {
-    const isSubjectIdEqual = this.subjectId === other.subjectId;
-    const isDayNamesEqual = _.isEqual(
+  public isEqual(other: Journal): boolean {
+    const isSubjectIdEqual: boolean = this.subjectId === other.subjectId;
+    const isDayNamesEqual: boolean = _.isEqual(
       dropLastEmptyItems(this.dayNames),
       dropLastEmptyItems(other.dayNames)
     );
 
-    for (const index in this.studentMarks) {
-      const isMarksEqual = _.isEqual(
+    for (const index of Object.keys(this.studentMarks)) {
+      const isMarksEqual: boolean = _.isEqual(
         dropLastEmptyItems(this.studentMarks[index].marks),
         dropLastEmptyItems(other.studentMarks[index].marks)
       );
 
-      if (!isMarksEqual) return isMarksEqual;
+      if (!isMarksEqual) { return isMarksEqual; }
     }
 
     return isSubjectIdEqual && isDayNamesEqual;
   }
-  
-  getCopy(): Journal {
+
+  public getCopy(): Journal {
     return _.cloneDeep(this);
   }
 
-  updateDayName(index: number, value: string) {
+  public updateDayName(index: number, value: string): void {
     this.dayNames[index] = value;
   }
 
-  updateMark(studentId: string, index: number, value: string) {
-    const studentMark = _.find(this.studentMarks, { 'studentId': studentId })
+  public updateMark(studentId: string, index: number, value: string): void {
+    const studentMark: IStudentMark = _.find(this.studentMarks, { studentId: studentId });
     studentMark.marks[index] = parseInt(value, 10) || null;
   }
 
-  addColumn() {
+  public addColumn(): void {
     this.dayNames.push('');
-    this.studentMarks.forEach((userMarks) => userMarks.marks.push(null))
+    this.studentMarks.forEach((userMarks) => userMarks.marks.push(null));
   }
 }

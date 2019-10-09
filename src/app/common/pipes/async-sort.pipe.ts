@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 })
 export class AsyncSortPipe implements PipeTransform {
 
-  transform(collection: any, ...args: string[]): Promise<any> {
+  public transform(collection: any, ...args: string[]): Promise<any> {
 
     // if the collection is an observable object then convert to the promise
     if (collection.subscribe && typeof collection.subscribe === 'function') {

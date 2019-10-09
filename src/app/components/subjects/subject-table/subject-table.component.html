@@ -21,6 +21,7 @@
       *ngFor="let studentMark of formJurnal.studentMarks | asyncSort:'firstName' | async"
       class="table-wrapper__row"
       [appAverageMarkHighlight]="studentMark.marks | average | number:'1.1-1'"
+      [averageMarkColors]="averageMarkColors"
     >
       <td class="table-wrapper__simple-cell"> {{ studentMark.firstName }} </td>
       <td class="table-wrapper__simple-cell"> {{ studentMark.lastName }} </td>

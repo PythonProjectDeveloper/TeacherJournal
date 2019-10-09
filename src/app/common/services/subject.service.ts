@@ -27,14 +27,14 @@ export class SubjectService {
     subject.id = uuid4();
     this.subjects = [subject, ...this.subjects];
 
-    return of(subject)
+    return of(subject);
   }
 
   public updateSubject(subject: Subject): Observable<Subject> {
-    const index = _.findIndex(this.subjects, { 'id': subject.id });
+    const index: number = _.findIndex(this.subjects, { id: subject.id });
     this.subjects.splice(index, 1, subject);
 
-    return of(subject)
+    return of(subject);
   }
 
   public deleteSubject(subject: Subject): Observable<Subject[]> {
@@ -46,12 +46,12 @@ export class SubjectService {
     return of(this.subjects);
   }
 
-  public getSubjects(): Observable<Subject[]> {
+  public getSubjects(searchText: string = ''): Observable<Subject[]> {
     return of(this.subjects);
   }
 
   public getSubject(id: string): Observable<Subject> {
-    const subject =  _.find(this.subjects, { 'id': id });
+    const subject: Subject =  _.find(this.subjects, { id });
 
     return of(subject || new Subject());
   }

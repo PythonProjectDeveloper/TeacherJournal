@@ -27,14 +27,14 @@ export class StudentService {
     person.id = uuid4();
     this.persons = [person, ...this.persons];
 
-    return of(person)
+    return of(person);
   }
 
   public updateStudent(person: Person): Observable<Person> {
-    const index = _.findIndex(this.persons, { 'id': person.id });
+    const index: number = _.findIndex(this.persons, { id: person.id });
     this.persons.splice(index, 1, person);
 
-    return of(person)
+    return of(person);
   }
 
   public deleteStudent(person: Person): Observable<Person[]> {
@@ -46,15 +46,14 @@ export class StudentService {
     return of(this.persons);
   }
 
-  public getStudents(): Observable<Person[]> {
+  public getStudents(searchText: string = ''): Observable<Person[]> {
     return of(this.persons);
   }
 
   public getStudent(id: string): Observable<Person> {
-    const person =  _.find(this.persons, { 'id': id });
+    const person: Person =  _.find(this.persons, { id });
 
     return of(person || new Student());
   }
 
 }
-

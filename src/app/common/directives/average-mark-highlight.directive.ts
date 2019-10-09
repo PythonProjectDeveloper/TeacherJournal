@@ -1,28 +1,29 @@
 import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 
+export interface IAverageMarkColor {
+  maxAverageMark: number;
+  class: string;
+}
+
 @Directive({
   selector: '[appAverageMarkHighlight]'
 })
 export class AverageMarkHighlightDirective {
   @Input('appAverageMarkHighlight') public averageMark: number;
-
-  public averageMarkColors = [
-    { maxAverageMark: 5, color: '#002bff1f' },
-    { maxAverageMark: 11, color: '#149a041c' }
-  ]
+  @Input() public averageMarkColors: IAverageMarkColor[];
 
   constructor(private elementRef: ElementRef, private renderer2: Renderer2) { }
-  
-  public ngOnChanges(): void {
-    const averageMarkColor = this.averageMarkColors.find(averageMarkColor =>
-      averageMarkColor.maxAverageMark > this.averageMark
-    );
 
-    this.highlight(averageMarkColor.color);
+  private highlight(cssClass: string): void {
+    this.renderer2.addClass(this.elementRef.nativeElement, cssClass);
   }
 
-  private highlight(color: string) {
-    this.renderer2.setStyle(this.elementRef.nativeElement, 'background-color', color);
+  public ngOnChanges(): void {
+    const averageMarkColor: IAverageMarkColor = this.averageMarkColors.find(currentAverageMarkColor =>
+      currentAverageMarkColor.maxAverageMark > this.averageMark
+    );
+
+    this.highlight(averageMarkColor.class);
   }
 
 }

@@ -9,11 +9,11 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./statistic-subject.component.scss']
 })
 export class StatisticSubjectComponent implements OnInit {
-  subject: Subject;
+  public subject: Subject;
 
   constructor(public subjectService: SubjectService, public route: ActivatedRoute) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.subjectService.getSubject(params.id).subscribe(subject => this.subject = subject);
     });

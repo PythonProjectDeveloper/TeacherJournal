@@ -1,7 +1,9 @@
 <h2 class="title">Students</h2>
 
+<app-toolbar (valueChanged)="onToolbarValueChanged($event)"></app-toolbar>
+
 <div class="table-wrapper">
-  <table class="mat-elevation-z8 table-wrapper__table" [dataSource]="dataSource" mat-table matSort>
+  <table class="mat-elevation-z8 table-wrapper__table" [dataSource]="dataSource" mat-table matSort matSortActive="firstName" matSortDirection="asc">
     <ng-container matColumnDef="id">
       <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
       <td class="table-wrapper__simple-cell" mat-cell *matCellDef="let element"> {{element.id | slice:0:4}} </td>
@@ -49,6 +51,6 @@
 
 <app-button 
   matTooltip="Add student"
-  routerLink="/student/add"
+  routerLink="student/add"
 >
 </app-button>

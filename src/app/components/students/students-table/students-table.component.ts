@@ -10,29 +10,31 @@ import { baseStudentColumn } from 'src/app/shared/constants/constants-table';
   styleUrls: ['./students-table.component.scss']
 })
 export class StudentsTableComponent implements OnInit {
-  displayedColumns: string[] = baseStudentColumn;
-  dataSource = new MatTableDataSource([]);
+  public displayedColumns: string[] = baseStudentColumn;
+  public dataSource = new MatTableDataSource([]);
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) public sort: MatSort;
 
   constructor(private studentService: StudentService) {
     this.setTableData = this.setTableData.bind(this);
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.dataSource.sort = this.sort;
-    this.sort.direction = 'asc';
-    this.sort.active = 'firstName';
 
     this.studentService.getStudents().subscribe(this.setTableData);
   }
 
-  onDelete(student: Person) {
+  public onDelete(student: Person): void {
     this.studentService.deleteStudent(student).subscribe(this.setTableData);
   }
 
-  setTableData(students: Person[]) {
+  public setTableData(students: Person[]): void {
     this.dataSource.data = students;
+  }
+
+  public onToolbarValueChanged(searchText: string): void {
+    this.studentService.getStudents(searchText).subscribe(this.setTableData);
   }
 
 }
