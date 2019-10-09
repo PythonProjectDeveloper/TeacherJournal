@@ -10,7 +10,6 @@ export class FocusHighlightDirective {
 
   @HostListener("focus")
   onFocus() {
-    console.log(this.focusClass)
     this.renderer2.addClass(this.elementRef.nativeElement, this.focusClass);
   }
 
