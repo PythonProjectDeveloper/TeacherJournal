@@ -6,53 +6,38 @@ import { catchError } from 'rxjs/operators';
 import { STUDENTS_API_URL } from '../constants/constants-person';
 import { assembleUrl } from '../helpers/calculations';
 import { LogService } from './log.service';
+import { HttpService } from './http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
   constructor(
-    private http: HttpClient,
-    private logSirvice: LogService
+    private httpService: HttpService
   ) { }
 
   public createStudent(person: Person): Observable<Person> {
     const url: string = STUDENTS_API_URL;
-    return this.http.post<Person>(url, person)
-      .pipe(
-        catchError((error) => this.logSirvice.handleHttpError<Person>(error, new Student()))
-      );
+    return this.httpService.post<Person>(url, person, new Person());
   }
 
   public updateStudent(person: Person): Observable<Person> {
     const url: string = assembleUrl(STUDENTS_API_URL, person.id);
-    return this.http.put<Person>(url, person)
-      .pipe(
-        catchError((error) => this.logSirvice.handleHttpError<Person>(error, new Student()))
-      );
+    return this.httpService.put<Person>(url, person, new Person());
   }
 
   public deleteStudent(person: Person): Observable<{}> {
     const url: string = assembleUrl(STUDENTS_API_URL, person.id);
-    return this.http.delete(url)
-      .pipe(
-        catchError((error) => this.logSirvice.handleHttpError<Person>(error, {}))
-      );
+    return this.httpService.delete<Person>(url, {} as Person);
   }
 
   public getStudents(searchText: string = ''): Observable<Person[]> {
     const url: string = STUDENTS_API_URL;
-    return this.http.get<Person[]>(url)
-      .pipe(
-        catchError((error) => this.logSirvice.handleHttpError<Person[]>(error, []))
-      );
+    return this.httpService.get<Person[]>(url, []);
   }
 
   public getStudent(id: string): Observable<Person> {
     const url: string = assembleUrl(STUDENTS_API_URL, id);
-    return this.http.get<Person>(url)
-      .pipe(
-        catchError((error) => this.logSirvice.handleHttpError<Person>(error, new Student()))
-      );
+    return this.httpService.get<Person>(url, new Student());
   }
 }

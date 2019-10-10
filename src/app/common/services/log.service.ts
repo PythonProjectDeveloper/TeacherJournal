@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Log } from '../models/log';
 import { LOGS_API_URL } from '../constants/constants-log';
-import { ILog } from '../entities/log';
 
 @Injectable({
   providedIn: 'root'
