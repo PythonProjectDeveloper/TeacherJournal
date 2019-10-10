@@ -1,59 +1,55 @@
 import { Injectable } from '@angular/core';
-import * as _ from 'lodash';
-import { students } from '../constants/constants-person';
-import uuid4 from 'uuid4';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Student, Person } from '../models/person';
+import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { STUDENTS_API_URL } from '../constants/constants-person';
+import { assembleUrl, handleError } from '../helpers/calculations';
+import { TypeHttpQuery } from '../entities/log';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
-  private persons: Person[] = [];
-
-  constructor() {
-    this.persons = _.map(students, (person: Person) =>
-      new Student(
-        person.id,
-        person.firstName,
-        person.lastName,
-        person.address,
-        person.description
-      )
-    );
-  }
+  constructor(private http: HttpClient) { }
 
   public createStudent(person: Person): Observable<Person> {
-    person.id = uuid4();
-    this.persons = [person, ...this.persons];
-
-    return of(person);
+    const url: string = STUDENTS_API_URL;
+    return this.http.post<Person>(url, person)
+      .pipe(
+        catchError((error) => handleError<Person>(this.http, TypeHttpQuery.POST, url, error, new Student()))
+      );
   }
 
   public updateStudent(person: Person): Observable<Person> {
-    const index: number = _.findIndex(this.persons, { id: person.id });
-    this.persons.splice(index, 1, person);
-
-    return of(person);
+    const url: string = assembleUrl(STUDENTS_API_URL, person.id);
+    return this.http.put<Person>(url, person)
+      .pipe(
+        catchError((error) => handleError<Person>(this.http, TypeHttpQuery.PUT, url, error, new Student()))
+      );
   }
 
-  public deleteStudent(person: Person): Observable<Person[]> {
-    this.persons = _.filter(
-      this.persons,
-      (currentStudent: Person) => currentStudent.id !== person.id
-    );
-
-    return of(this.persons);
+  public deleteStudent(person: Person): Observable<{}> {
+    const url: string = assembleUrl(STUDENTS_API_URL, person.id);
+    return this.http.delete(url)
+      .pipe(
+        catchError((error) => handleError<Person>(this.http, TypeHttpQuery.DELETE, url, error, {}))
+      );
   }
 
   public getStudents(searchText: string = ''): Observable<Person[]> {
-    return of(this.persons);
+    const url: string = STUDENTS_API_URL;
+    return this.http.get<Person[]>(url)
+      .pipe(
+        catchError((error) => handleError<Person[]>(this.http, TypeHttpQuery.GET, url, error, []))
+      );
   }
 
   public getStudent(id: string): Observable<Person> {
-    const person: Person =  _.find(this.persons, { id });
-
-    return of(person || new Student());
+    const url: string = assembleUrl(STUDENTS_API_URL, id);
+    return this.http.get<Person>(url)
+      .pipe(
+        catchError((error) => handleError<Person>(this.http, TypeHttpQuery.GET, url, error, new Student()))
+      );
   }
-
 }

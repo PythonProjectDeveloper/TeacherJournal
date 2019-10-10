@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { StudentService } from 'src/app/common/services/student.service';
 import { Person } from 'src/app/common/models/person';
-import { baseStudentColumn } from 'src/app/shared/constants/constants-table';
+import { BASE_STUDENT_COLUMNS } from 'src/app/shared/constants/constants-table';
 
 @Component({
   selector: 'app-students-table',
@@ -10,7 +10,7 @@ import { baseStudentColumn } from 'src/app/shared/constants/constants-table';
   styleUrls: ['./students-table.component.scss']
 })
 export class StudentsTableComponent implements OnInit {
-  public displayedColumns: string[] = baseStudentColumn;
+  public displayedColumns: string[] = BASE_STUDENT_COLUMNS;
   public dataSource = new MatTableDataSource([]);
 
   @ViewChild(MatSort, {static: true}) public sort: MatSort;

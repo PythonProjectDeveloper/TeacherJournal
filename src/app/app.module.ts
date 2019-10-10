@@ -40,7 +40,7 @@ import { AverageMarkHighlightDirective } from './common/directives/average-mark-
 import { NumberCheckDirective } from './common/directives/number-check.directive';
 import { FocusHighlightDirective } from './common/directives/focus-highlight.directive';
 import { AsyncSortPipe } from './common/pipes/async-sort.pipe';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HeaderInterceptor } from './common/interceptors/header.interceptor';
 import { UrlInterceptor } from './common/interceptors/url.interceptor';
 
@@ -83,12 +83,13 @@ import { UrlInterceptor } from './common/interceptors/url.interceptor';
     MatTabsModule,
     MatButtonToggleModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   providers: [
     ExitAboutGuard,
-    { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: UrlInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: UrlInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

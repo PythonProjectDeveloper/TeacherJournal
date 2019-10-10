@@ -1,3 +1,6 @@
-export const environment: any = {
-  production: true
+import { IEnvironment } from './ienvironment';
+
+export const environment: IEnvironment = {
+  production: true,
+  apiDomainUrl: ''
 };

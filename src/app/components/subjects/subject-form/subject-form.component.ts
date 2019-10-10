@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { teachers } from 'src/app/common/constants/constants-person';
 import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
 import { Observable } from 'rxjs';
 import { SubjectService } from 'src/app/common/services/subject.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'src/app/common/models/subject';
+import { Teacher } from 'src/app/common/models/person';
+import { TeacherService } from 'src/app/common/services/teacher.service';
 
 @Component({
   selector: 'app-subject-form',
@@ -12,17 +13,24 @@ import { Subject } from 'src/app/common/models/subject';
   styleUrls: ['./subject-form.component.scss']
 })
 export class SubjectFormComponent implements ComponentCanDeactivate, OnInit {
-  public teachers = teachers;
+  public teachers: Teacher[];
   public storedSubject: Subject;
   public formSubject: Subject;
 
-  constructor(public subjectService: SubjectService, public route: ActivatedRoute, private router: Router) {
+  constructor(
+    public subjectService: SubjectService,
+    public teacherService: TeacherService,
+    public route: ActivatedRoute,
+    private router: Router
+  ) {
     this.setSubjects = this.setSubjects.bind(this);
+    this.setTeachers = this.setTeachers.bind(this);
   }
 
   public ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.subjectService.getSubject(params.id).subscribe(this.setSubjects);
+      this.teacherService.getTeachers().subscribe(this.setTeachers);
     });
   }
 
@@ -44,5 +52,9 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit {
   public setSubjects(storageSubject: Subject): void {
     this.formSubject = storageSubject.getCopy();
     this.storedSubject = storageSubject;
+  }
+
+  public setTeachers(teachers: Teacher[]): void {
+    this.teachers = teachers;
   }
 }

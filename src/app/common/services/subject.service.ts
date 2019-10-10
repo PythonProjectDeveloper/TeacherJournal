@@ -1,59 +1,56 @@
 import { Injectable } from '@angular/core';
-import * as _ from 'lodash';
-import { subjects } from '../constants/constants-subject';
-import uuid4 from 'uuid4';
-import { BehaviorSubject, of, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Subject } from '../models/subject';
+import { HttpClient } from '@angular/common/http';
+import { handleError, assembleUrl } from '../helpers/calculations';
+import { catchError } from 'rxjs/operators';
+import { SUBJECTS_API_URL } from '../constants/constants-subject';
+import { TypeHttpQuery } from '../entities/log';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectService {
-  private subjects: Subject[] = [];
+  constructor(private http: HttpClient) { }
 
-  constructor() {
-    this.subjects = _.map(subjects, (subject: Subject) =>
-      new Subject(
-        subject.id,
-        subject.name,
-        subject.teacherId,
-        subject.cabinet,
-        subject.description
-      )
-    );
+  public createSubject(person: Subject): Observable<Subject> {
+    const url: string = SUBJECTS_API_URL;
+    return this.http.post<Subject>(url, person)
+      .pipe(
+        catchError((error) => handleError<Subject>(this.http, TypeHttpQuery.POST, url, error, new Subject()))
+      );
   }
 
-  public createSubject(subject: Subject): Observable<Subject>  {
-    subject.id = uuid4();
-    this.subjects = [subject, ...this.subjects];
-
-    return of(subject);
+  public updateSubject(person: Subject): Observable<Subject> {
+    const url: string = assembleUrl(SUBJECTS_API_URL, person.id);
+    return this.http.put<Subject>(url, person)
+      .pipe(
+        catchError((error) => handleError<Subject>(this.http, TypeHttpQuery.PUT, url, error, new Subject()))
+      );
   }
 
-  public updateSubject(subject: Subject): Observable<Subject> {
-    const index: number = _.findIndex(this.subjects, { id: subject.id });
-    this.subjects.splice(index, 1, subject);
-
-    return of(subject);
-  }
-
-  public deleteSubject(subject: Subject): Observable<Subject[]> {
-    this.subjects = _.filter(
-      this.subjects,
-      (currentSubject: Subject) => currentSubject.id !== subject.id
-    );
-
-    return of(this.subjects);
+  public deleteSubject(person: Subject): Observable<{}> {
+    const url: string = assembleUrl(SUBJECTS_API_URL, person.id);
+    return this.http.delete(url)
+      .pipe(
+        catchError((error) => handleError<Subject>(this.http, TypeHttpQuery.DELETE, url, error, {}))
+      );
   }
 
   public getSubjects(searchText: string = ''): Observable<Subject[]> {
-    return of(this.subjects);
+    const url: string = SUBJECTS_API_URL;
+    return this.http.get<Subject[]>(url)
+      .pipe(
+        catchError((error) => handleError<Subject[]>(this.http, TypeHttpQuery.GET, url, error, []))
+      );
   }
 
   public getSubject(id: string): Observable<Subject> {
-    const subject: Subject =  _.find(this.subjects, { id });
-
-    return of(subject || new Subject());
+    const url: string = assembleUrl(SUBJECTS_API_URL, id);
+    return this.http.get<Subject>(url)
+      .pipe(
+        catchError((error) => handleError<Subject>(this.http, TypeHttpQuery.GET, url, error, new Subject()))
+      );
   }
 
 }

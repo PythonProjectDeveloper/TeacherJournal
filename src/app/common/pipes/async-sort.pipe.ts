@@ -8,6 +8,8 @@ export class AsyncSortPipe implements PipeTransform {
 
   public transform(collection: any, ...args: string[]): Promise<any> {
 
+    collection = collection ? collection : [];
+
     // if the collection is an observable object then convert to the promise
     if (collection.subscribe && typeof collection.subscribe === 'function') {
       collection = collection.toPromise();

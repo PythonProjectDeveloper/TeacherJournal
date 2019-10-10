@@ -1,1 +1,1 @@
-export const baseStudentColumn: string[] = ['id', 'firstName', 'lastName', 'address', 'description', 'controls'];
+export const BASE_STUDENT_COLUMNS: string[] = ['id', 'firstName', 'lastName', 'address', 'description', 'controls'];
