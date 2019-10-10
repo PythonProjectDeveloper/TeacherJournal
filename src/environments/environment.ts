@@ -6,7 +6,7 @@ import { IEnvironment } from 'src/app/common/entities/environment';
 
 export const environment: IEnvironment = {
   production: false,
-  apiDomainUrl: 'http://localhost:5000'
+  apiDomainUrl: 'http://localhost:3000'
 };
 
 /*
