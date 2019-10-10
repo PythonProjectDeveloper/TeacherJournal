@@ -2,29 +2,33 @@ import { Injectable } from '@angular/core';
 import { Journal } from '../models/journal';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { assembleUrl, handleError } from '../helpers/calculations';
+import { assembleUrl } from '../helpers/calculations';
 import { catchError } from 'rxjs/operators';
 import { JOURNALS_API_URL } from '../constants/constants-journal';
-import { TypeHttpQuery } from '../entities/log';
+import { LogService } from './log.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JournalService {
-
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private logSirvice: LogService
+  ) { }
 
   public saveJournal(journal: Journal): Observable<Journal> {
-    return this.http.put<Journal>(assembleUrl(JOURNALS_API_URL, journal.subjectId), journal)
+    const url: string = assembleUrl(JOURNALS_API_URL, journal.subjectId);
+    return this.http.put<Journal>(url, journal)
       .pipe(
-        catchError((error) => handleError<Journal>(this.http, TypeHttpQuery.GET, JOURNALS_API_URL, error, new Journal()))
+        catchError((error) => this.logSirvice.handleHttpError<Journal>(error, new Journal()))
       );
   }
 
   public getJournal(subjectId: string): Observable<Journal> {
-    return this.http.get<Journal>(assembleUrl(JOURNALS_API_URL, subjectId))
+    const url: string = assembleUrl(JOURNALS_API_URL, subjectId);
+    return this.http.get<Journal>(url)
       .pipe(
-        catchError((error) => handleError<Journal>(this.http, TypeHttpQuery.GET, JOURNALS_API_URL, error, new Journal()))
+        catchError((error) => this.logSirvice.handleHttpError<Journal>(error, new Journal()))
       );
   }
 }

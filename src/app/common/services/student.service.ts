@@ -4,20 +4,23 @@ import { Student, Person } from '../models/person';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { STUDENTS_API_URL } from '../constants/constants-person';
-import { assembleUrl, handleError } from '../helpers/calculations';
-import { TypeHttpQuery } from '../entities/log';
+import { assembleUrl } from '../helpers/calculations';
+import { LogService } from './log.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private logSirvice: LogService
+  ) { }
 
   public createStudent(person: Person): Observable<Person> {
     const url: string = STUDENTS_API_URL;
     return this.http.post<Person>(url, person)
       .pipe(
-        catchError((error) => handleError<Person>(this.http, TypeHttpQuery.POST, url, error, new Student()))
+        catchError((error) => this.logSirvice.handleHttpError<Person>(error, new Student()))
       );
   }
 
@@ -25,7 +28,7 @@ export class StudentService {
     const url: string = assembleUrl(STUDENTS_API_URL, person.id);
     return this.http.put<Person>(url, person)
       .pipe(
-        catchError((error) => handleError<Person>(this.http, TypeHttpQuery.PUT, url, error, new Student()))
+        catchError((error) => this.logSirvice.handleHttpError<Person>(error, new Student()))
       );
   }
 
@@ -33,7 +36,7 @@ export class StudentService {
     const url: string = assembleUrl(STUDENTS_API_URL, person.id);
     return this.http.delete(url)
       .pipe(
-        catchError((error) => handleError<Person>(this.http, TypeHttpQuery.DELETE, url, error, {}))
+        catchError((error) => this.logSirvice.handleHttpError<Person>(error, {}))
       );
   }
 
@@ -41,7 +44,7 @@ export class StudentService {
     const url: string = STUDENTS_API_URL;
     return this.http.get<Person[]>(url)
       .pipe(
-        catchError((error) => handleError<Person[]>(this.http, TypeHttpQuery.GET, url, error, []))
+        catchError((error) => this.logSirvice.handleHttpError<Person[]>(error, []))
       );
   }
 
@@ -49,7 +52,7 @@ export class StudentService {
     const url: string = assembleUrl(STUDENTS_API_URL, id);
     return this.http.get<Person>(url)
       .pipe(
-        catchError((error) => handleError<Person>(this.http, TypeHttpQuery.GET, url, error, new Student()))
+        catchError((error) => this.logSirvice.handleHttpError<Person>(error, new Student()))
       );
   }
 }

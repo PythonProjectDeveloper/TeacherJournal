@@ -1,17 +1,20 @@
-import { ILog, TypeHttpQuery } from '../entities/log';
+import { ILog } from '../entities/log';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export class Log implements ILog {
-  public typeHttpQuery: TypeHttpQuery;
-  public url: string;
-  public description?: any;
+  public name: string;
+  public message: string;
+  public error: any;
+  public headers: any;
 
-  constructor(typeHttpQuery: TypeHttpQuery, url: string, description?: any) {
-    this.typeHttpQuery = typeHttpQuery;
-    this.url = url;
-    this.description = description;
+  constructor({ name, message, error, headers }: HttpErrorResponse) {
+    this.name = name;
+    this.message = message;
+    this.error = error;
+    this.headers = headers;
   }
 
   public printError(): void {
-    console.error(`Error: typeHttpQuery: ${this.typeHttpQuery} url: ${this.url}`, this.description.toString());
+    console.error(this.message);
   }
 }

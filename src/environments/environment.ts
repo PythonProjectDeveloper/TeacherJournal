@@ -1,4 +1,4 @@
-import { IEnvironment } from './ienvironment';
+import { IEnvironment } from 'src/app/common/entities/environment';
 
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
