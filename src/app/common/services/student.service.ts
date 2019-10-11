@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Student, Person } from '../models/person';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { HttpParams } from '@angular/common/http';
 import { STUDENTS_API_URL } from '../constants/constants-person';
 import { assembleUrl } from '../helpers/calculations';
-import { LogService } from './log.service';
 import { HttpService } from './http.service';
-import { IPerson } from '../entities/person';
 
 @Injectable({
   providedIn: 'root'
