@@ -9,7 +9,7 @@ export class Person implements IPerson, ExtendedModel<Person> {
   public address: string;
   public description: string;
 
-  constructor(id: string = '', firstName: string = '', lastName: string = '', address: string = '', description: string = '') {
+  constructor({ id = '', firstName = '', lastName = '', address = '', description = '' }: IPerson = {} as Person) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;

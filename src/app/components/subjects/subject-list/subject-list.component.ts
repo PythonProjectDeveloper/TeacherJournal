@@ -12,18 +12,23 @@ export class SubjectListComponent implements OnInit {
 
   constructor(private subjectService: SubjectService) {
     this.setSubjects = this.setSubjects.bind(this);
+    this.loadData = this.loadData.bind(this);
   }
 
   public ngOnInit(): void {
-    this.subjectService.getSubjects().subscribe(this.setSubjects);
+    this.loadData();
   }
 
   public onDelete(subject: Subject): void {
-    this.subjectService.deleteSubject(subject).subscribe(this.setSubjects);
+    this.subjectService.deleteSubject(subject).subscribe(this.loadData);
   }
 
   public setSubjects(subjects: Subject[]): void {
     this.subjects = subjects;
+  }
+
+  public loadData(): void {
+    this.subjectService.getSubjects().subscribe(this.setSubjects);
   }
 
   public onToolbarValueChanged(searchText: string): void {

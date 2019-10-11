@@ -5,7 +5,7 @@ import { StatisticStudentComponent } from '../components/statistics/statistic-st
 import { IMAGE_URL } from '../shared/constants/constants-page-not-found';
 
 export const statisticPageRoutes: Routes = [
-  { path: '', component: PageNotFoundComponent, data: { IMAGE_URL, titleText: 'Select a item.' } },
+  { path: '', component: PageNotFoundComponent, data: { imageUrl: IMAGE_URL, titleText: 'Select a item.' } },
   { path: 'student/:id', component: StatisticStudentComponent, data: { breadcrumb: 'student' } },
   { path: 'subject/:id', component: StatisticSubjectComponent, data: { breadcrumb: 'subject' } },
 ];

@@ -6,13 +6,22 @@ export class Subject implements ISubject, ExtendedModel<Subject> {
   public id: string;
   public name: string;
   public teacherId: string;
+  public journalId: string;
   public cabinet: string;
   public description: string;
 
-  constructor(id: string = '', name: string = '', teacherId: string = '', cabinet: string = '', description: string = '') {
+  constructor({
+    id = '',
+    name = '',
+    teacherId = '',
+    journalId = '',
+    cabinet = '',
+    description = ''
+  }: ISubject = {} as Subject) {
     this.id = id;
     this.name = name;
     this.teacherId = teacherId;
+    this.journalId = journalId;
     this.cabinet = cabinet;
     this.description = description;
   }

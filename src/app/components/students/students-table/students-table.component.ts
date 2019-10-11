@@ -17,20 +17,25 @@ export class StudentsTableComponent implements OnInit {
 
   constructor(private studentService: StudentService) {
     this.setTableData = this.setTableData.bind(this);
+    this.loadData = this.loadData.bind(this);
   }
 
   public ngOnInit(): void {
     this.dataSource.sort = this.sort;
 
-    this.studentService.getStudents().subscribe(this.setTableData);
+    this.loadData();
   }
 
   public onDelete(student: Person): void {
-    this.studentService.deleteStudent(student).subscribe(this.setTableData);
+    this.studentService.deleteStudent(student).subscribe(this.loadData);
   }
 
   public setTableData(students: Person[]): void {
     this.dataSource.data = students;
+  }
+
+  public loadData(): void {
+    this.studentService.getStudents().subscribe(this.setTableData);
   }
 
   public onToolbarValueChanged(searchText: string): void {

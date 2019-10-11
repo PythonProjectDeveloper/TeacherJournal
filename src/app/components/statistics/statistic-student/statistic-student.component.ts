@@ -9,7 +9,7 @@ import { StudentService } from 'src/app/common/services/student.service';
   styleUrls: ['./statistic-student.component.scss']
 })
 export class StatisticStudentComponent implements OnInit {
-  public student: Person;
+  public student: Person = {} as Person;
 
   constructor(public studentService: StudentService, public route: ActivatedRoute) { }
 

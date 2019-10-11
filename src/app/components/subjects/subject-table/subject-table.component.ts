@@ -16,22 +16,25 @@ import { IAverageMarkColor } from 'src/app/common/directives/average-mark-highli
 })
 export class SubjectTableComponent implements ComponentCanDeactivate, OnInit {
   public isTableDataChanged = false;
-  public storedJurnal: Journal;
-  public formJurnal: Journal;
-  public subject: Subject;
+  public storedJurnal: Journal = {} as Journal;
+  public formJurnal: Journal = {} as Journal;
+  public subject: Subject = {} as Subject;
   public averageMarkColors: IAverageMarkColor[] = [
     { maxAverageMark: 5, class: 'table-wrapper__row__average-mark-lt-5' },
     { maxAverageMark: 11, class: 'table-wrapper__row__average-mark-lt-11' }
   ];
 
-  constructor(public journalService: JournalService, public subjectService: SubjectService, public route: ActivatedRoute) {
+  constructor(
+    private journalService: JournalService,
+    private subjectService: SubjectService,
+    private route: ActivatedRoute
+  ) {
     this.setJournal = this.setJournal.bind(this);
     this.setSubject = this.setSubject.bind(this);
   }
 
   public ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.journalService.getJournal(params.id).subscribe(this.setJournal);
       this.subjectService.getSubject(params.id).subscribe(this.setSubject);
     });
   }
@@ -41,7 +44,7 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit {
   }
 
   public onSave(): void {
-    this.journalService.saveJournal(this.formJurnal).subscribe(this.setJournal);
+    this.journalService.updateJournal(this.formJurnal).subscribe(this.setJournal);
   }
 
   public setJournal(storedJurnal: Journal): void {
@@ -52,6 +55,8 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit {
 
   public setSubject(subject: Subject): void {
     this.subject = subject;
+
+    this.journalService.getJournal(subject.journalId).subscribe(this.setJournal);
   }
 
   public onAddColumn(): void {

@@ -15,6 +15,10 @@ export class AverageMarkHighlightDirective {
   constructor(private elementRef: ElementRef, private renderer2: Renderer2) { }
 
   private highlight(cssClass: string): void {
+    this.averageMarkColors.forEach((averageMarkColor) => {
+      this.renderer2.removeClass(this.elementRef.nativeElement, averageMarkColor.class);
+    });
+
     this.renderer2.addClass(this.elementRef.nativeElement, cssClass);
   }
 

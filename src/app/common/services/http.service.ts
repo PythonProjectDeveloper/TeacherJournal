@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { LogService } from './log.service';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +37,17 @@ export class HttpService {
   public get<T>(url: string, defaultValue: T, httpOptions?: object): Observable<T> {
     const httpResponse: Observable<T> = this.http.get<T>(url, httpOptions);
     return this.handleResult(httpResponse, defaultValue);
+  }
+
+  public convertToObject<T>(object$: Observable<any>, inst: any): Observable<T> {
+    return object$.pipe(
+      map((item) => new inst(item))
+    );
+  }
+
+  public convertToObjects<T>(objects$: Observable<any[]>, inst: any): Observable<T[]> {
+    return objects$.pipe(
+      map((items) => items.map(item => new inst(item)))
+    );
   }
 }

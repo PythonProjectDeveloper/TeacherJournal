@@ -14,6 +14,7 @@ export class TeacherService {
 
   public getTeachers(): Observable<Person[]> {
     const url: string = TEACHERS_API_URL;
-    return this.httpService.get<Person[]>(url, []);
+    const response$: Observable<Person[]> = this.httpService.get<Person[]>(url, []);
+    return this.httpService.convertToObjects<Person>(response$, Person);
   }
 }

@@ -15,5 +15,5 @@ export const rootPageRoutes: Routes = [
   { path: 'subjects', component: SubjectPageComponent, children: subjectPageRoutes, data: { breadcrumb: 'Subjects' } },
   { path: 'statistics', component: StatisticPageComponent, children: statisticPageRoutes, data: { breadcrumb: 'Statistics' } },
   { path: 'export', component: ExportComponent, data: { breadcrumb: 'Export' }  },
-  { path: '**', component: PageNotFoundComponent, data: { IMAGE_URL, TITLE_TEXT, DESCRIPTION } },
+  { path: '**', component: PageNotFoundComponent, data: { imageUrl: IMAGE_URL, titleText: TITLE_TEXT, description: DESCRIPTION } },
 ];

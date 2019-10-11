@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./statistic-subject.component.scss']
 })
 export class StatisticSubjectComponent implements OnInit {
-  public subject: Subject;
+  public subject: Subject = {} as Subject;
 
   constructor(public subjectService: SubjectService, public route: ActivatedRoute) { }
 

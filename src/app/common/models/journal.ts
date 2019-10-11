@@ -4,18 +4,18 @@ import * as _ from 'lodash';
 import { dropLastEmptyItems } from '../helpers/calculations';
 
 export class Journal implements IJournal, ExtendedModel<Journal> {
-  public subjectId: string;
+  public id: string;
   public dayNames: string[];
   public studentMarks: IStudentMark[];
 
-  constructor(subjectId: string = '', dayNames: string[] = [], studentMarks: IStudentMark[] = []) {
-    this.subjectId = subjectId;
+  constructor({ id = '', dayNames = [], studentMarks = [] }: IJournal = {} as Journal) {
+    this.id = id;
     this.dayNames = dayNames;
     this.studentMarks = studentMarks;
   }
 
   public isEqual(other: Journal): boolean {
-    const isSubjectIdEqual: boolean = this.subjectId === other.subjectId;
+    const isIdEqual: boolean = this.id === other.id;
     const isDayNamesEqual: boolean = _.isEqual(
       dropLastEmptyItems(this.dayNames),
       dropLastEmptyItems(other.dayNames)
@@ -30,7 +30,7 @@ export class Journal implements IJournal, ExtendedModel<Journal> {
       if (!isMarksEqual) { return isMarksEqual; }
     }
 
-    return isSubjectIdEqual && isDayNamesEqual;
+    return isIdEqual && isDayNamesEqual;
   }
 
   public getCopy(): Journal {
@@ -42,7 +42,7 @@ export class Journal implements IJournal, ExtendedModel<Journal> {
   }
 
   public updateMark(studentId: string, index: number, value: string): void {
-    const studentMark: IStudentMark = _.find(this.studentMarks, { studentId: studentId });
+    const studentMark: IStudentMark = _.find(this.studentMarks, { studentId });
     studentMark.marks[index] = parseInt(value, 10) || null;
   }
 

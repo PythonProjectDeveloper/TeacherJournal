@@ -14,13 +14,14 @@ import { TeacherService } from 'src/app/common/services/teacher.service';
 })
 export class SubjectFormComponent implements ComponentCanDeactivate, OnInit {
   public teachers: Teacher[];
-  public storedSubject: Subject;
-  public formSubject: Subject;
+  public storedSubject: Subject = {} as Subject;
+  public formSubject: Subject = {} as Subject;
+  public isEditForm: boolean;
 
   constructor(
-    public subjectService: SubjectService,
-    public teacherService: TeacherService,
-    public route: ActivatedRoute,
+    private subjectService: SubjectService,
+    private teacherService: TeacherService,
+    private route: ActivatedRoute,
     private router: Router
   ) {
     this.setSubjects = this.setSubjects.bind(this);
@@ -31,6 +32,8 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit {
     this.route.params.subscribe((params) => {
       this.subjectService.getSubject(params.id).subscribe(this.setSubjects);
       this.teacherService.getTeachers().subscribe(this.setTeachers);
+
+      this.isEditForm = Boolean(params.id);
     });
   }
 
@@ -44,14 +47,18 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit {
     if (this.formSubject.id) {
       this.subjectService.updateSubject(this.formSubject).subscribe(this.setSubjects);
     } else {
+      this.isEditForm = true;
       this.subjectService.createSubject(this.formSubject).subscribe(this.setSubjects);
-      this.router.navigate(['subjects', 'subject', 'edit', this.formSubject.id]);
     }
   }
 
   public setSubjects(storageSubject: Subject): void {
     this.formSubject = storageSubject.getCopy();
     this.storedSubject = storageSubject;
+
+    if (this.isEditForm) {
+      this.router.navigate(['subjects', 'subject', 'edit', this.formSubject.id]);
+    }
   }
 
   public setTeachers(teachers: Teacher[]): void {

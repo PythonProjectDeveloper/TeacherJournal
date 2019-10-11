@@ -13,13 +13,15 @@ export class JournalService {
     private httpService: HttpService
   ) { }
 
-  public saveJournal(journal: Journal): Observable<Journal> {
-    const url: string = assembleUrl(JOURNALS_API_URL, journal.subjectId);
-    return this.httpService.put<Journal>(url, journal, new Journal());
+  public updateJournal(journal: Journal): Observable<Journal> {
+    const url: string = assembleUrl(JOURNALS_API_URL, journal.id);
+    const response$: Observable<Journal> = this.httpService.put<Journal>(url, journal, new Journal());
+    return this.httpService.convertToObject<Journal>(response$, Journal);
   }
 
-  public getJournal(subjectId: string): Observable<Journal> {
-    const url: string = assembleUrl(JOURNALS_API_URL, subjectId);
-    return this.httpService.get<Journal>(url, new Journal());
+  public getJournal(id: string): Observable<Journal> {
+    const url: string = assembleUrl(JOURNALS_API_URL, id);
+    const response$: Observable<Journal> = this.httpService.get<Journal>(url, new Journal());
+    return this.httpService.convertToObject<Journal>(response$, Journal);
   }
 }
