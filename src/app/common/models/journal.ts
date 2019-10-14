@@ -56,13 +56,7 @@ export class Journal implements IJournal, IExtendedModel<Journal> {
     this.studentMarks.forEach((userMarks) => userMarks.marks.splice(index, 1));
   }
 
-  public isLastColumnEmpty(): boolean {
-    if (_.last(this.dayNames)) { return false; }
-
-    for (const index of Object.keys(this.studentMarks)) {
-      if (_.last(this.studentMarks[index].marks)) { return false; }
-    }
-
-    return true;
+  public isAllHeadersFill(): boolean {
+    return this.dayNames.reduce((isFill, name) => isFill ? Boolean(name) : isFill, true);
   }
 }

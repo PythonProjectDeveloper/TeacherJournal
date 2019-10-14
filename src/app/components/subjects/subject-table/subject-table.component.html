@@ -1,4 +1,4 @@
-<h2 class="title"> {{ subject.name | titlecase }} </h2>
+<h2 class="title"> {{ subject?.name | titlecase }} </h2>
 
 <!-- TODO: fix bug with filling cells -->
 <div class="table-wrapper">
@@ -7,7 +7,7 @@
       <th class="table-wrapper__header-cell table-wrapper__static-cell"> First Name </th>
       <th class="table-wrapper__header-cell table-wrapper__static-cell"> Last Name </th>
       <th class="table-wrapper__header-cell table-wrapper__static-cell"> Average Mark </th>
-      <th class="table-wrapper__header-cell table-wrapper__input-wrapper" *ngFor="let dayName of formJurnal.dayNames; let dayNameIndex = index"> 
+      <th class="table-wrapper__header-cell table-wrapper__input-wrapper" *ngFor="let dayName of formJournal?.dayNames; let dayNameIndex = index"> 
         <input
           class="table-wrapper__header-cell-input"
           type="text"
@@ -21,7 +21,7 @@
       </th>
     </tr>
     <tr
-      *ngFor="let studentMark of formJurnal.studentMarks | asyncSort:'firstName' | async"
+      *ngFor="let studentMark of formJournal?.studentMarks | asyncSort:'firstName' | async"
       class="table-wrapper__row"
       [appAverageMarkHighlight]="studentMark.marks | average | number:'1.1-1'"
       [averageMarkColors]="averageMarkColors"
@@ -43,8 +43,7 @@
       </td>
     </tr>
   </table>
-
-  <button class="add-button" mat-mini-fab color="primary" (click)="onAddColumn()">
+  <button class="add-button" mat-mini-fab color="primary" (click)="onAddColumn()" *ngIf="formJournal?.isAllHeadersFill()">
     <mat-icon>add</mat-icon>
   </button>
 </div>

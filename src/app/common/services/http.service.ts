@@ -38,16 +38,4 @@ export class HttpService {
     const httpResponse: Observable<T> = this.http.get<T>(url, httpOptions);
     return this.handleResult(httpResponse, defaultValue);
   }
-
-  public convertToObject<T>(object$: Observable<any>, inst: any): Observable<T> {
-    return object$.pipe(
-      map((item) => new inst(item))
-    );
-  }
-
-  public convertToObjects<T>(objects$: Observable<any[]>, inst: any): Observable<T[]> {
-    return objects$.pipe(
-      map((items) => items.map(item => new inst(item)))
-    );
-  }
 }

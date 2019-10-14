@@ -16,9 +16,9 @@ import { IAverageMarkColor } from 'src/app/common/directives/average-mark-highli
 })
 export class SubjectTableComponent implements ComponentCanDeactivate, OnInit {
   public isTableDataChanged = false;
-  public storedJurnal: Journal = {} as Journal;
-  public formJurnal: Journal = {} as Journal;
-  public subject: Subject = {} as Subject;
+  public storedJournal: Journal;
+  public formJournal: Journal;
+  public subject: Subject;
   public averageMarkColors: IAverageMarkColor[] = [
     { maxAverageMark: 5, class: 'table-wrapper__row__average-mark-lt-5' },
     { maxAverageMark: 11, class: 'table-wrapper__row__average-mark-lt-11' }
@@ -44,12 +44,12 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit {
   }
 
   public onSave(): void {
-    this.journalService.updateJournal(this.formJurnal).subscribe(this.setJournal);
+    this.journalService.updateJournal(this.formJournal).subscribe(this.setJournal);
   }
 
-  public setJournal(storedJurnal: Journal): void {
-    this.formJurnal = storedJurnal.getCopy();
-    this.storedJurnal = storedJurnal;
+  public setJournal(storedJournal: Journal): void {
+    this.formJournal = storedJournal.getCopy();
+    this.storedJournal = storedJournal;
     this.isTableDataChanged = false;
   }
 
@@ -59,27 +59,24 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit {
     this.journalService.getJournal(subject.journalId).subscribe(this.setJournal);
   }
 
-  // TODO: if last column is empty don't add new column
   public onAddColumn(): void {
-    if (this.formJurnal.isLastColumnEmpty()) { return; }
-
-    this.formJurnal.addColumn();
+    this.formJournal.addColumn();
   }
 
   public onRemoveColumn(index: number): void {
-    this.formJurnal.removeColumn(index);
+    this.formJournal.removeColumn(index);
     this.setSaveButtonVision();
   }
 
   // FIXME: remove cell copying
   public onChangeHeaderCell(event: FocusEvent, index: number): void {
-    this.formJurnal.updateDayName(index, (event.target as HTMLInputElement).value);
+    this.formJournal.updateDayName(index, (event.target as HTMLInputElement).value);
     this.setSaveButtonVision();
   }
 
   // FIXME: remove cell copying
   public onChangeSimpleCell(event: FocusEvent, studentId: string, index: number): void {
-    this.formJurnal.updateMark(studentId, index, (event.target as HTMLInputElement).value);
+    this.formJournal.updateMark(studentId, index, (event.target as HTMLInputElement).value);
     this.setSaveButtonVision();
   }
 
@@ -88,6 +85,6 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit {
   }
 
   public isJournalChanged(): boolean {
-    return this.formJurnal.isEqual(this.storedJurnal);
+    return this.formJournal.isEqual(this.storedJournal);
   }
 }
