@@ -40,7 +40,7 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit {
   }
 
   public canDeactivate(): boolean | Observable<boolean> {
-    return this.formJurnal.isEqual(this.storedJurnal);
+    return this.isJournalChanged();
   }
 
   public onSave(): void {
@@ -84,7 +84,10 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit {
   }
 
   public setSaveButtonVision(): void {
-    const isEqual: boolean = this.formJurnal.isEqual(this.storedJurnal);
-    this.isTableDataChanged = !isEqual;
+    this.isTableDataChanged = !this.isJournalChanged();
+  }
+
+  public isJournalChanged(): boolean {
+    return this.formJurnal.isEqual(this.storedJurnal);
   }
 }
