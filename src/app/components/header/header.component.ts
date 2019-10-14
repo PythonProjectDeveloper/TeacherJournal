@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MAIN_MENU } from 'src/app/common/constants/constants-menu';
 
 @Component({
   selector: 'app-header',
@@ -6,4 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  public mainMenu = MAIN_MENU;
 }

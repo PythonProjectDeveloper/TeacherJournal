@@ -1,9 +1,9 @@
 import { IJournal, IStudentMark } from '../entities/journal';
-import { ExtendedModel } from '../entities/extended-model';
+import { IExtendedModel } from '../entities/extended-model';
 import * as _ from 'lodash';
 import { dropLastEmptyItems } from '../helpers/calculations';
 
-export class Journal implements IJournal, ExtendedModel<Journal> {
+export class Journal implements IJournal, IExtendedModel<Journal> {
   public id: string;
   public dayNames: string[];
   public studentMarks: IStudentMark[];

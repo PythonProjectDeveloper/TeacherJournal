@@ -1,8 +1,8 @@
 import { ISubject } from '../entities/subject';
-import { ExtendedModel } from '../entities/extended-model';
+import { IExtendedModel } from '../entities/extended-model';
 import * as _ from 'lodash';
 
-export class Subject implements ISubject, ExtendedModel<Subject> {
+export class Subject implements ISubject, IExtendedModel<Subject> {
   public id: string;
   public name: string;
   public teacherId: string;

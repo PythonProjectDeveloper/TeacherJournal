@@ -3,36 +3,13 @@
   <h1 class="header__title">Teacher journal</h1>
 </div>
 <mat-card class="header__menu">
-  <button
+  <button *ngFor="let menuItem of mainMenu"
     class="header__menu-item"
-    mat-stroked-button routerLink="/"
+    mat-stroked-button
+    [routerLink]="menuItem.routerLink"
     routerLinkActive="header__menu-item__active"
-    [routerLinkActiveOptions]="{ exact: true }"
+    [routerLinkActiveOptions]="menuItem.routerLinkActiveOptions"
   >
-    Students
-  </button>
-
-  <button
-    class="header__menu-item"
-    mat-stroked-button routerLink="/subjects"
-    routerLinkActive="header__menu-item__active"
-  >
-    Subjects
-  </button>
-
-  <button
-    class="header__menu-item"
-    mat-stroked-button routerLink="/statistics"
-    routerLinkActive="header__menu-item__active"
-  >
-    Statistics
-  </button>
-
-  <button
-    class="header__menu-item"
-    mat-stroked-button routerLink="/export"
-    routerLinkActive="header__menu-item__active"
-  >
-    Export
+    {{ menuItem.text }}
   </button>
 </mat-card>

@@ -1,8 +1,8 @@
 import { IPerson, IStudent, ITeacher } from '../entities/person';
-import { ExtendedModel } from '../entities/extended-model';
+import { IExtendedModel } from '../entities/extended-model';
 import * as _ from 'lodash';
 
-export class Person implements IPerson, ExtendedModel<Person> {
+export class Person implements IPerson, IExtendedModel<Person> {
   public id: string;
   public firstName: string;
   public lastName: string;
