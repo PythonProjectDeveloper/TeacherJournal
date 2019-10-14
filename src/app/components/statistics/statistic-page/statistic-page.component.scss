@@ -1,0 +1,33 @@
+.sidenav-container {
+  height: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  background: white;
+
+  &__sidenav,
+  &__tab-group {
+    height: 100%;
+  }
+
+  &__tab-content {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 0;
+    overflow: auto;
+    height: 100%;
+  }
+
+  &__content {
+    padding: 5px;
+  }
+}
+
+:host {
+  ::ng-deep {
+    .mat-tab-body,
+    .mat-tab-body-wrapper,
+    .mat-tab-body-content {
+      height: 100%;
+    }
+  }
+} 
