@@ -43,6 +43,7 @@ import { AsyncSortPipe } from './common/pipes/async-sort.pipe';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HeaderInterceptor } from './common/interceptors/header.interceptor';
 import { UrlInterceptor } from './common/interceptors/url.interceptor';
+import { LeaveGuardModalWindowComponent } from './components/leave-guard-modal-window/leave-guard-modal-window.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { UrlInterceptor } from './common/interceptors/url.interceptor';
     AverageMarkHighlightDirective,
     NumberCheckDirective,
     FocusHighlightDirective,
-    AsyncSortPipe
+    AsyncSortPipe,
+    LeaveGuardModalWindowComponent
   ],
   imports: [
     BrowserModule,
