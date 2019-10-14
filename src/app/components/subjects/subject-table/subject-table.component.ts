@@ -59,15 +59,25 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit {
     this.journalService.getJournal(subject.journalId).subscribe(this.setJournal);
   }
 
+  // TODO: if last column is empty don't add new column
   public onAddColumn(): void {
+    if (this.formJurnal.isLastColumnEmpty()) { return; }
+
     this.formJurnal.addColumn();
   }
 
+  public onRemoveColumn(index: number): void {
+    this.formJurnal.removeColumn(index);
+    this.setSaveButtonVision();
+  }
+
+  // FIXME: remove cell copying
   public onChangeHeaderCell(event: FocusEvent, index: number): void {
     this.formJurnal.updateDayName(index, (event.target as HTMLInputElement).value);
     this.setSaveButtonVision();
   }
 
+  // FIXME: remove cell copying
   public onChangeSimpleCell(event: FocusEvent, studentId: string, index: number): void {
     this.formJurnal.updateMark(studentId, index, (event.target as HTMLInputElement).value);
     this.setSaveButtonVision();

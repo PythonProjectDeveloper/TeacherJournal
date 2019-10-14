@@ -50,4 +50,19 @@ export class Journal implements IJournal, IExtendedModel<Journal> {
     this.dayNames.push('');
     this.studentMarks.forEach((userMarks) => userMarks.marks.push(null));
   }
+
+  public removeColumn(index: number): void {
+    this.dayNames.splice(index, 1);
+    this.studentMarks.forEach((userMarks) => userMarks.marks.splice(index, 1));
+  }
+
+  public isLastColumnEmpty(): boolean {
+    if (_.last(this.dayNames)) { return false; }
+
+    for (const index of Object.keys(this.studentMarks)) {
+      if (_.last(this.studentMarks[index].marks)) { return false; }
+    }
+
+    return true;
+  }
 }

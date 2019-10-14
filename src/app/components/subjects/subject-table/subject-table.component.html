@@ -15,6 +15,9 @@
           (blur)="onChangeHeaderCell($event, dayNameIndex)"
           appFocusHighlight="table-wrapper__header-cell-input__focus"
         >
+        <button class="table-wrapper__remove-button" mat-icon-button (click)="onRemoveColumn(dayNameIndex)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </th>
     </tr>
     <tr

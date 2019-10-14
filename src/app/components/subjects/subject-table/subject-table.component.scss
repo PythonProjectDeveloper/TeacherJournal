@@ -77,6 +77,14 @@ $text-color: gray;
     &__input-wrapper {
       padding:0;
       width: 40px;
+      position: relative;
+    }
+
+    &__remove-button {
+      position: absolute;
+      left: -13px;
+      top: -33px;
+      color: #ff2d2dbf;
     }
 
   }
