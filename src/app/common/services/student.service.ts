@@ -28,7 +28,7 @@ export class StudentService {
     return this.converterService.convertToObject<Person>(response$, Student);
   }
 
-  public deleteStudent(person: Person): Observable<{}> {
+  public deleteStudent(person: Person): Observable<any> {
     const url: string = assembleUrl(STUDENTS_API_URL, person.id);
     const response$: Observable<Person | {}> = this.httpService.delete<Person>(url, {} as Person);
     return this.converterService.convertToObject<Person>(response$, Student);

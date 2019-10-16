@@ -44,6 +44,12 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HeaderInterceptor } from './common/interceptors/header.interceptor';
 import { UrlInterceptor } from './common/interceptors/url.interceptor';
 import { LeaveGuardModalWindowComponent } from './components/leave-guard-modal-window/leave-guard-modal-window.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { environment } from 'src/environments/environment';
+import { StudentEffects } from './redux/effects/students';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducers } from './redux/reducers';
 
 @NgModule({
   declarations: [
@@ -86,7 +92,10 @@ import { LeaveGuardModalWindowComponent } from './components/leave-guard-modal-w
     MatButtonToggleModule,
     AppRoutingModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([ StudentEffects ]),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [
     ExitAboutGuard,

@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
-import { StudentService } from 'src/app/common/services/student.service';
 import { Person } from 'src/app/common/models/person';
 import { BASE_STUDENT_COLUMNS } from 'src/app/shared/constants/constants-table';
+import { Store, select } from '@ngrx/store';
+import { IReducer } from 'src/app/redux/reducers';
+import { deleteStudent, loadStudents, updateFilterText } from 'src/app/redux/actions/students';
+import { getStudents, getFilterText } from 'src/app/redux/selectors/students';
 
 @Component({
   selector: 'app-students-table',
@@ -15,31 +18,21 @@ export class StudentsTableComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) public sort: MatSort;
 
-  constructor(private studentService: StudentService) {
-    this.setTableData = this.setTableData.bind(this);
-    this.loadData = this.loadData.bind(this);
+  constructor(private store: Store<IReducer>) {
+    store.pipe(select(getStudents)).subscribe((students) => this.dataSource.data = students);
   }
 
   public ngOnInit(): void {
     this.dataSource.sort = this.sort;
-
-    this.loadData();
+    this.store.dispatch(loadStudents());
   }
 
   public onDelete(student: Person): void {
-    this.studentService.deleteStudent(student).subscribe(this.loadData);
+    this.store.dispatch(deleteStudent(student));
   }
 
-  public setTableData(students: Person[]): void {
-    this.dataSource.data = students;
-  }
-
-  public loadData(): void {
-    this.studentService.getStudents().subscribe(this.setTableData);
-  }
-
-  public onToolbarValueChanged(searchText: string): void {
-    this.studentService.getStudents(searchText).subscribe(this.setTableData);
+  public onToolbarValueChanged(filterText: string): void {
+    this.store.dispatch(updateFilterText({ filterText }));
   }
 
 }

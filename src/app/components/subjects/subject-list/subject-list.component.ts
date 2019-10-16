@@ -9,6 +9,7 @@ import { Subject } from 'src/app/common/models/subject';
 })
 export class SubjectListComponent implements OnInit {
   public subjects: Subject[];
+  public filterText = '';
 
   constructor(private subjectService: SubjectService) {
     this.setSubjects = this.setSubjects.bind(this);
@@ -28,11 +29,12 @@ export class SubjectListComponent implements OnInit {
   }
 
   public loadData(): void {
-    this.subjectService.getSubjects().subscribe(this.setSubjects);
+    this.subjectService.getSubjects(this.filterText).subscribe(this.setSubjects);
   }
 
-  public onToolbarValueChanged(searchText: string): void {
-    this.subjectService.getSubjects(searchText).subscribe(this.setSubjects);
+  public onToolbarValueChanged(filterText: string): void {
+    this.filterText = filterText;
+    this.loadData();
   }
 
 }

@@ -17,9 +17,9 @@ export class LeaveGuardModalWindowComponent {
   ) { }
 
   public ngOnInit(): void {
-    this.leaveGuardModalWindowService.getModalWindowStatus().subscribe((isOpen) => {
-      this.isOpen = isOpen;
-    });
+    this.leaveGuardModalWindowService
+      .getModalWindowStatus()
+      .subscribe(isOpen => this.isOpen = isOpen);
   }
 
   public onSetAnswer(answer: boolean): void {
