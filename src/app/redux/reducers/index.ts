@@ -1,6 +1,6 @@
 import { reducer as studentReducer, StudentPageState } from './students';
 
-export interface IReducer {
+export interface IGlobalState {
   students: StudentPageState;
 }
 

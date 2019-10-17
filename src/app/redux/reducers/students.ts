@@ -11,7 +11,7 @@ export interface StudentPageState {
 
 export const initialState: StudentPageState = {
   students: [],
-  student: null,
+  student: new Student(),
   filterText: ''
 };
 

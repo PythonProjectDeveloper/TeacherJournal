@@ -4,7 +4,7 @@ import { map, switchMap, withLatestFrom, tap, pluck } from 'rxjs/operators';
 import { StudentService } from 'src/app/common/services/student.service';
 import * as StudentPageActions from '../actions/students';
 import { Store, select } from '@ngrx/store';
-import { IReducer } from '../reducers';
+import { IGlobalState } from '../reducers';
 import { getFilterText } from '../selectors/students';
 
 @Injectable()
@@ -13,46 +13,34 @@ export class StudentEffects {
   public loadStudents$ = createEffect(() => this.actions$.pipe(
     ofType(StudentPageActions.loadStudents),
     withLatestFrom(this.store.pipe(select(getFilterText))),
-    switchMap(([_, filterText]) => this.studentService.getStudents(filterText)
-      .pipe(
-        map(students => StudentPageActions.setStudents({ students }))
-      ))
-    )
-  );
+    switchMap(([_, filterText]) => this.studentService.getStudents(filterText)),
+    map(students => StudentPageActions.setStudents({ students }))
+  ));
 
   public loadStudent$ = createEffect(() => this.actions$.pipe(
     ofType(StudentPageActions.loadStudent),
-    switchMap(id => this.studentService.getStudent(id)
-      .pipe(
-        map(student => StudentPageActions.setStudent(student))
-      ))
-    )
-  );
+    map(action => action.id),
+    switchMap(id => this.studentService.getStudent(id)),
+    map(student => StudentPageActions.setStudent({ student }))
+  ));
 
   public updateStudent$ = createEffect(() => this.actions$.pipe(
     ofType(StudentPageActions.updateStudent),
-    switchMap(person => this.studentService.updateStudent(person)
-      .pipe(
-        map(student => StudentPageActions.updateStudent(student))
-      ))
-    )
-  );
+    switchMap(person => this.studentService.updateStudent(person)),
+    map(student => StudentPageActions.setStudent({ student }))
+  ));
 
   public createStudent$ = createEffect(() => this.actions$.pipe(
     ofType(StudentPageActions.createStudent),
-    switchMap(person => this.studentService.createStudent(person)
-      .pipe(
-        map(student => StudentPageActions.createStudent(student))
-      ))
-    )
-  );
+    switchMap(person => this.studentService.createStudent(person)),
+    map(student => StudentPageActions.setStudent({ student }))
+  ));
 
   public deleteStudent$ = createEffect(() => this.actions$.pipe(
     ofType(StudentPageActions.deleteStudent),
     switchMap(person => this.studentService.deleteStudent(person)),
     map(() => StudentPageActions.loadStudents())
-    )
-  );
+  ));
 
   public updateFilterText$ = createEffect(() => this.actions$.pipe(
     ofType(StudentPageActions.updateFilterText),
@@ -66,6 +54,6 @@ export class StudentEffects {
   constructor(
     private actions$: Actions,
     private studentService: StudentService,
-    private store: Store<IReducer>
+    private store: Store<IGlobalState>
   ) {}
 }

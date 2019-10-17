@@ -1,7 +1,21 @@
 import { StudentPageState } from '../reducers/students';
 import * as _ from 'lodash';
-import { IReducer } from '../reducers';
+import { IGlobalState } from '../reducers';
+import { createSelector } from '@ngrx/store';
 
-export const getStudents: any = (state: IReducer) => state.students.students;
-export const getStudent: any = (state: IReducer) => state.students.student;
-export const getFilterText: any = (state: IReducer) => state.students.filterText;
+export const getStudentState: any = (state: IGlobalState) => state.students;
+
+export const getStudents: any = createSelector(
+  getStudentState,
+  (state: StudentPageState) => state.students
+);
+
+export const getStudent: any = createSelector(
+  getStudentState,
+  (state: StudentPageState) => state.student
+);
+
+export const getFilterText: any = createSelector(
+  getStudentState,
+  (state: StudentPageState) => state.filterText
+);

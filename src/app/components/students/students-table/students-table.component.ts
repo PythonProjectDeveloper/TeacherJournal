@@ -1,30 +1,38 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { Person } from 'src/app/common/models/person';
 import { BASE_STUDENT_COLUMNS } from 'src/app/shared/constants/constants-table';
 import { Store, select } from '@ngrx/store';
-import { IReducer } from 'src/app/redux/reducers';
+import { IGlobalState } from 'src/app/redux/reducers';
 import { deleteStudent, loadStudents, updateFilterText } from 'src/app/redux/actions/students';
-import { getStudents, getFilterText } from 'src/app/redux/selectors/students';
+import { getStudents } from 'src/app/redux/selectors/students';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-students-table',
   templateUrl: './students-table.component.html',
   styleUrls: ['./students-table.component.scss']
 })
-export class StudentsTableComponent implements OnInit {
+export class StudentsTableComponent implements OnInit, OnDestroy {
   public displayedColumns: string[] = BASE_STUDENT_COLUMNS;
   public dataSource = new MatTableDataSource([]);
+  public destroy$: Subject<boolean> = new Subject<boolean>();
 
   @ViewChild(MatSort, {static: true}) public sort: MatSort;
 
-  constructor(private store: Store<IReducer>) {
-    store.pipe(select(getStudents)).subscribe((students) => this.dataSource.data = students);
+  constructor(private store: Store<IGlobalState>) {
+    store
+      .pipe(
+        takeUntil(this.destroy$),
+        select(getStudents)
+      )
+      .subscribe((students) => this.dataSource.data = students);
   }
 
   public ngOnInit(): void {
     this.dataSource.sort = this.sort;
-    this.store.dispatch(loadStudents());
+    this.store.dispatch(updateFilterText(''));
   }
 
   public onDelete(student: Person): void {
@@ -35,4 +43,8 @@ export class StudentsTableComponent implements OnInit {
     this.store.dispatch(updateFilterText({ filterText }));
   }
 
+  public ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  }
 }
