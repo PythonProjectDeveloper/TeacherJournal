@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
-import { Observable } from 'rxjs';
-import { SubjectService } from 'src/app/common/services/subject.service';
+import { Observable, Subject as RXJSSubject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'src/app/common/models/subject';
 import { Teacher } from 'src/app/common/models/person';
-import { TeacherService } from 'src/app/common/services/teacher.service';
+import { Store, select } from '@ngrx/store';
+import { IGlobalState } from 'src/app/redux/reducers';
+import { createSubject, updateSubject, loadSubject } from 'src/app/redux/actions/subjects';
+import { takeUntil } from 'rxjs/operators';
+import { getSubject } from 'src/app/redux/selectors/subjects';
+import { loadTeachers } from 'src/app/redux/actions/teachers';
+import { getTeachers } from 'src/app/redux/selectors/teachers';
 
 @Component({
   selector: 'app-subject-form',
@@ -14,13 +19,13 @@ import { TeacherService } from 'src/app/common/services/teacher.service';
 })
 export class SubjectFormComponent implements ComponentCanDeactivate, OnInit {
   public teachers: Teacher[];
-  public storedSubject: Subject = {} as Subject;
-  public formSubject: Subject = {} as Subject;
+  public storedSubject: Subject;
+  public formSubject: Subject;
   public isEditForm: boolean;
+  public destroy$: RXJSSubject<boolean> = new RXJSSubject<boolean>();
 
   constructor(
-    private subjectService: SubjectService,
-    private teacherService: TeacherService,
+    private store: Store<IGlobalState>,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -29,12 +34,28 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit {
   }
 
   public ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.subjectService.getSubject(params.id).subscribe(this.setSubjects);
-      this.teacherService.getTeachers().subscribe(this.setTeachers);
+    this.store
+      .pipe(
+        takeUntil(this.destroy$),
+        select(getSubject)
+      )
+      .subscribe(this.setSubjects);
 
-      this.isEditForm = Boolean(params.id);
-    });
+    this.store
+      .pipe(
+        takeUntil(this.destroy$),
+        select(getTeachers)
+      )
+      .subscribe(this.setTeachers);
+
+    this.route.params
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(({ id }) => {
+        this.store.dispatch(loadSubject({ id }));
+        this.store.dispatch(loadTeachers());
+
+        this.isEditForm = Boolean(id);
+      });
   }
 
   public canDeactivate(): boolean | Observable<boolean> {
@@ -44,11 +65,11 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit {
   public onSave(): void {
     if (!this.formSubject.name || !this.formSubject.teacherId) { return; }
 
-    if (this.formSubject.id) {
-      this.subjectService.updateSubject(this.formSubject).subscribe(this.setSubjects);
+    if (this.isEditForm) {
+      this.store.dispatch(updateSubject(this.formSubject));
     } else {
       this.isEditForm = true;
-      this.subjectService.createSubject(this.formSubject).subscribe(this.setSubjects);
+      this.store.dispatch(createSubject(this.formSubject));
     }
   }
 
@@ -64,4 +85,10 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit {
   public setTeachers(teachers: Teacher[]): void {
     this.teachers = teachers;
   }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  }
+
 }

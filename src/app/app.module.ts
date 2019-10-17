@@ -50,6 +50,8 @@ import { environment } from 'src/environments/environment';
 import { StudentEffects } from './redux/effects/students';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './redux/reducers';
+import { SubjectEffects } from './redux/effects/subjects';
+import { TeacherEffects } from './redux/effects/teachers';
 
 @NgModule({
   declarations: [
@@ -94,7 +96,7 @@ import { reducers } from './redux/reducers';
     RouterModule,
     HttpClientModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([ StudentEffects ]),
+    EffectsModule.forRoot([ StudentEffects, SubjectEffects, TeacherEffects ]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [

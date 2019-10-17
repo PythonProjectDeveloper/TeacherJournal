@@ -4,7 +4,7 @@ import { Person } from 'src/app/common/models/person';
 import { BASE_STUDENT_COLUMNS } from 'src/app/shared/constants/constants-table';
 import { Store, select } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
-import { deleteStudent, loadStudents, updateFilterText } from 'src/app/redux/actions/students';
+import { deleteStudent, updateFilterText } from 'src/app/redux/actions/students';
 import { getStudents } from 'src/app/redux/selectors/students';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
