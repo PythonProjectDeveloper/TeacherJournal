@@ -1,5 +1,6 @@
 import { createAction, props, ActionCreator } from '@ngrx/store';
 import { Subject } from 'src/app/common/models/subject';
+import { Journal } from 'src/app/common/models/journal';
 
 const PAGE: string = '[Subject Page]';
 
@@ -14,3 +15,7 @@ export const deleteSubject: ActionCreator<string, any> = createAction(`${PAGE} D
 
 export const updateFilterText: ActionCreator<string, any> = createAction(`${PAGE} Update Filter Text`, props<{ filterText: string }>());
 export const setFilterText: ActionCreator<string, any> = createAction(`${PAGE} Set Filter Text`, props<{ filterText: string }>());
+
+export const loadJournal: ActionCreator<string, any> = createAction(`${PAGE} Load Journal`, props<{ id: string }>());
+export const setJournal: ActionCreator<string, any> = createAction(`${PAGE} Set Journal`, props<Journal>());
+export const updateJournal: ActionCreator<string, any> = createAction(`${PAGE} Update Journal`, props<Journal>());

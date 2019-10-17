@@ -6,6 +6,7 @@ import * as SubjectPageActions from '../actions/subjects';
 import { Store, select } from '@ngrx/store';
 import { IGlobalState } from '../reducers';
 import { getFilterText } from '../selectors/subjects';
+import { JournalService } from 'src/app/common/services/journal.service';
 
 @Injectable()
 export class SubjectEffects {
@@ -26,19 +27,19 @@ export class SubjectEffects {
 
   public updateSubject$ = createEffect(() => this.actions$.pipe(
     ofType(SubjectPageActions.updateSubject),
-    switchMap(person => this.subjectService.updateSubject(person)),
+    switchMap(subject => this.subjectService.updateSubject(subject)),
     map(subject => SubjectPageActions.setSubject({ subject }))
   ));
 
   public createSubject$ = createEffect(() => this.actions$.pipe(
     ofType(SubjectPageActions.createSubject),
-    switchMap(person => this.subjectService.createSubject(person)),
+    switchMap(subject => this.subjectService.createSubject(subject)),
     map(subject => SubjectPageActions.setSubject({ subject }))
   ));
 
   public deleteSubject$ = createEffect(() => this.actions$.pipe(
     ofType(SubjectPageActions.deleteSubject),
-    switchMap(person => this.subjectService.deleteSubject(person)),
+    switchMap(subject => this.subjectService.deleteSubject(subject)),
     map(() => SubjectPageActions.loadSubjects())
   ));
 
@@ -51,9 +52,32 @@ export class SubjectEffects {
     ])
   ));
 
+  public loadJournal$ = createEffect(() => this.actions$.pipe(
+    ofType(SubjectPageActions.loadJournal),
+    map(action => action.id),
+    // get student by id
+    // save student
+    // get journal id from student
+    // get journal by id
+    // save journal
+    switchMap(id => this.subjectService.getSubject(id)),
+    withLatestFrom(subject => this.journalService.getJournal(subject.journalId)),
+    switchMap(([subject, journal]) => [
+      SubjectPageActions.setSubject({ subject }),
+      SubjectPageActions.setJournal({ journal })
+    ])
+  ));
+
+  public updateJournal$ = createEffect(() => this.actions$.pipe(
+    ofType(SubjectPageActions.updateJournal),
+    switchMap(journal => this.journalService.updateJournal(journal)),
+    map(journal => SubjectPageActions.setJournal({ journal }))
+  ));
+
   constructor(
     private actions$: Actions,
     private subjectService: SubjectService,
+    private journalService: JournalService,
     private store: Store<IGlobalState>
   ) {}
 }

@@ -26,19 +26,19 @@ export class StudentEffects {
 
   public updateStudent$ = createEffect(() => this.actions$.pipe(
     ofType(StudentPageActions.updateStudent),
-    switchMap(person => this.studentService.updateStudent(person)),
+    switchMap(student => this.studentService.updateStudent(student)),
     map(student => StudentPageActions.setStudent({ student }))
   ));
 
   public createStudent$ = createEffect(() => this.actions$.pipe(
     ofType(StudentPageActions.createStudent),
-    switchMap(person => this.studentService.createStudent(person)),
+    switchMap(student => this.studentService.createStudent(student)),
     map(student => StudentPageActions.setStudent({ student }))
   ));
 
   public deleteStudent$ = createEffect(() => this.actions$.pipe(
     ofType(StudentPageActions.deleteStudent),
-    switchMap(person => this.studentService.deleteStudent(person)),
+    switchMap(student => this.studentService.deleteStudent(student)),
     map(() => StudentPageActions.loadStudents())
   ));
 

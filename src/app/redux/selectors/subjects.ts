@@ -19,3 +19,8 @@ export const getFilterText: any = createSelector(
   getSubjectState,
   (state: SubjectPageState) => state.filterText
 );
+
+export const getJournal: any = createSelector(
+  getSubjectState,
+  (state: SubjectPageState) => state.journal
+);

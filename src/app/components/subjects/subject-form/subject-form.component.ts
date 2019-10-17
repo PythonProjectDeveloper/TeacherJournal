@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
 import { Observable, Subject as RXJSSubject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,7 +17,7 @@ import { getTeachers } from 'src/app/redux/selectors/teachers';
   templateUrl: './subject-form.component.html',
   styleUrls: ['./subject-form.component.scss']
 })
-export class SubjectFormComponent implements ComponentCanDeactivate, OnInit {
+export class SubjectFormComponent implements ComponentCanDeactivate, OnInit, OnDestroy {
   public teachers: Teacher[];
   public storedSubject: Subject;
   public formSubject: Subject;
