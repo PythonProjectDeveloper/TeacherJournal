@@ -6,7 +6,10 @@ import { Directive, Input, ElementRef, Renderer2, HostListener } from '@angular/
 export class FocusHighlightDirective {
   @Input('appFocusHighlight') public focusClass: string;
 
-  constructor(private elementRef: ElementRef, private renderer2: Renderer2) { }
+  constructor(
+    private elementRef: ElementRef,
+    private renderer2: Renderer2
+  ) { }
 
   @HostListener('focus')
   public onFocus(): void {

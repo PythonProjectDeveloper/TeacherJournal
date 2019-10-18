@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET, RoutesRecognized, ActivatedRouteSnapshot } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { isNullOrUndefined } from 'util';
 import * as _ from 'lodash';
+import { Subscription } from 'rxjs';
 
 interface Breadcrumb {
   label: string;
@@ -15,10 +16,14 @@ interface Breadcrumb {
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss']
 })
-export class BreadcrumbComponent implements OnInit {
+export class BreadcrumbComponent implements OnInit, OnDestroy {
   public breadcrumbs: Breadcrumb[];
+  public subscription: Subscription;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   private createBreadcrumbs(route: ActivatedRoute, breadcrumbs: Breadcrumb[] = []): Breadcrumb[] {
     const children: ActivatedRoute[] = route.children;
@@ -44,9 +49,13 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.router.events
+    this.subscription = this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => this.breadcrumbs = this.createBreadcrumbs(this.activatedRoute.root));
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

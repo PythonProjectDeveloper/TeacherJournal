@@ -7,7 +7,9 @@ export class NumberCheckDirective {
   @Input() public maxNumber: number;
   @Input() public minNumber: number;
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(
+    private elementRef: ElementRef
+  ) { }
 
   @HostListener('input', ['$event.target.value'])
   public onInput(inputValue: string): void {

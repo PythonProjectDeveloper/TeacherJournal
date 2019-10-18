@@ -16,7 +16,9 @@ export class SubjectListComponent implements OnInit, OnDestroy {
   public subjects: Subject[];
   public destroy$: RXJSSubject<boolean> = new RXJSSubject<boolean>();
 
-  constructor(private store: Store<IGlobalState>) {
+  constructor(
+    private store: Store<IGlobalState>
+  ) {
     store
       .pipe(
         takeUntil(this.destroy$),

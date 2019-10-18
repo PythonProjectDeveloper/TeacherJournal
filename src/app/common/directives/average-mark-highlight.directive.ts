@@ -12,7 +12,10 @@ export class AverageMarkHighlightDirective {
   @Input('appAverageMarkHighlight') public averageMark: number;
   @Input() public averageMarkColors: IAverageMarkColor[];
 
-  constructor(private elementRef: ElementRef, private renderer2: Renderer2) { }
+  constructor(
+    private elementRef: ElementRef,
+    private renderer2: Renderer2
+  ) { }
 
   private highlight(cssClass: string): void {
     this.averageMarkColors.forEach((averageMarkColor) => {

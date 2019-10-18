@@ -21,7 +21,9 @@ export class StudentsTableComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatSort, {static: true}) public sort: MatSort;
 
-  constructor(private store: Store<IGlobalState>) {
+  constructor(
+    private store: Store<IGlobalState>
+  ) {
     store
       .pipe(
         takeUntil(this.destroy$),
