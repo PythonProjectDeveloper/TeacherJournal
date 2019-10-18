@@ -55,17 +55,12 @@ export class SubjectEffects {
   public loadJournal$ = createEffect(() => this.actions$.pipe(
     ofType(SubjectPageActions.loadJournal),
     map(action => action.id),
-    // get student by id
-    // save student
-    // get journal id from student
-    // get journal by id
-    // save journal
     switchMap(id => this.subjectService.getSubject(id)),
-    withLatestFrom(subject => this.journalService.getJournal(subject.journalId)),
-    switchMap(([subject, journal]) => [
+    switchMap(subject => this.journalService.getJournal(subject.journalId).pipe(
+      switchMap((journal) => [
       SubjectPageActions.setSubject({ subject }),
       SubjectPageActions.setJournal({ journal })
-    ])
+    ])))
   ));
 
   public updateJournal$ = createEffect(() => this.actions$.pipe(

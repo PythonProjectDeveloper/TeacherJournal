@@ -37,10 +37,6 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
   }
 
   public ngOnInit(): void {
-    // this.route.params.subscribe((params) => {
-    //   this.subjectService.getSubject(params.id).subscribe(this.setSubject);
-    // });
-
     this.store
     .pipe(
       takeUntil(this.destroy$),
@@ -67,7 +63,6 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
   }
 
   public onSave(): void {
-    // this.journalService.updateJournal(this.formJournal).subscribe(this.setJournal);
     this.store.dispatch(updateJournal(this.formJournal));
   }
 
@@ -79,8 +74,6 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
 
   public setSubject(subject: Subject): void {
     this.subject = subject;
-
-    // this.journalService.getJournal(subject.journalId).subscribe(this.setJournal);
   }
 
   public onAddColumn(): void {
@@ -105,7 +98,7 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
   }
 
   public setSaveButtonVision(): void {
-    this.isTableDataChanged = !this.isJournalChanged();
+    this.isTableDataChanged = this.isJournalChanged();
   }
 
   public isJournalChanged(): boolean {
