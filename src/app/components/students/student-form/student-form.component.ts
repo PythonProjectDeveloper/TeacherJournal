@@ -3,11 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
 import { Observable, Subject } from 'rxjs';
 import { Person } from 'src/app/common/models/person';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { loadStudent, createStudent, updateStudent } from 'src/app/redux/actions/students';
 import { getStudent } from 'src/app/redux/selectors/students';
-import { takeUntil } from 'rxjs/operators';
+import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
 
 @Component({
   selector: 'app-student-form',
@@ -29,20 +29,12 @@ export class StudentFormComponent implements ComponentCanDeactivate, OnInit, OnD
   }
 
   public ngOnInit(): void {
-    this.store
-      .pipe(
-        takeUntil(this.destroy$),
-        select(getStudent)
-      )
-      .subscribe(this.setPersons);
+    selectWithDestroyFlag(this.store, this.destroy$, getStudent).subscribe(this.setPersons);
+    setDestroyFlag(this.route.params, this.destroy$).subscribe(({ id }) => {
+      this.store.dispatch(loadStudent({ id }));
 
-    this.route.params
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(({ id }) => {
-        this.store.dispatch(loadStudent({ id }));
-
-        this.isEditForm = Boolean(id);
-      });
+      this.isEditForm = Boolean(id);
+    });
   }
 
   public canDeactivate(): boolean | Observable<boolean> {

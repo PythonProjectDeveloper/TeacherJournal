@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Subject as RXJSSubject } from 'rxjs';
 import { Subject } from 'src/app/common/models/subject';
 import { ActivatedRoute } from '@angular/router';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
-import { takeUntil } from 'rxjs/operators';
 import { getSubject } from 'src/app/redux/selectors/subjects';
 import { loadSubject } from 'src/app/redux/actions/subjects';
+import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
 
 @Component({
   selector: 'app-statistic-subject',
@@ -23,9 +23,8 @@ export class StatisticSubjectComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.store.pipe(takeUntil(this.destroy$), select(getSubject)).subscribe(subject => this.subject = subject);
-
-    this.route.params.pipe(takeUntil(this.destroy$)).subscribe(({ id }) => this.store.dispatch(loadSubject({ id })));
+    selectWithDestroyFlag(this.store, this.destroy$, getSubject).subscribe(subject => this.subject = subject);
+    setDestroyFlag(this.route.params, this.destroy$).subscribe(({ id }) => this.store.dispatch(loadSubject({ id })));
   }
 
   public ngOnDestroy(): void {

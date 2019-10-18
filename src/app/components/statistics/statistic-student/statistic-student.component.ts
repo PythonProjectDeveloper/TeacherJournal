@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Person } from 'src/app/common/models/person';
 import { ActivatedRoute } from '@angular/router';
 import { Subject as RXJSSubject } from 'rxjs';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { getStudent } from 'src/app/redux/selectors/students';
 import { loadStudent } from 'src/app/redux/actions/students';
-import { takeUntil } from 'rxjs/operators';
+import { setDestroyFlag, selectWithDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
 
 @Component({
   selector: 'app-statistic-student',
@@ -23,9 +23,8 @@ export class StatisticStudentComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void {
-    this.store.pipe(takeUntil(this.destroy$), select(getStudent)).subscribe(student => this.student = student);
-
-    this.route.params.pipe(takeUntil(this.destroy$)).subscribe(({ id }) => this.store.dispatch(loadStudent({ id })));
+    selectWithDestroyFlag(this.store, this.destroy$, getStudent).subscribe(student => this.student = student);
+    setDestroyFlag(this.route.params, this.destroy$).subscribe(({ id }) => this.store.dispatch(loadStudent({ id })));
   }
 
   public ngOnDestroy(): void {

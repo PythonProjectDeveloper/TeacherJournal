@@ -11,6 +11,7 @@ import { Store, select } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { getJournal, getSubject } from 'src/app/redux/selectors/subjects';
 import { loadJournal, updateJournal } from 'src/app/redux/actions/subjects';
+import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
 
 @Component({
   selector: 'app-subject-table',
@@ -37,25 +38,11 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
   }
 
   public ngOnInit(): void {
-    this.store
-    .pipe(
-      takeUntil(this.destroy$),
-      select(getJournal)
-    )
-    .subscribe(this.setJournal);
-
-    this.store
-    .pipe(
-      takeUntil(this.destroy$),
-      select(getSubject)
-    )
-    .subscribe(this.setSubject);
-
-    this.route.params
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(({ id }) => {
-        this.store.dispatch(loadJournal({ id }));
-      });
+    selectWithDestroyFlag(this.store, this.destroy$, getJournal).subscribe(this.setJournal);
+    selectWithDestroyFlag(this.store, this.destroy$, getSubject).subscribe(this.setSubject);
+    setDestroyFlag(this.route.params, this.destroy$).subscribe(({ id }) => {
+      this.store.dispatch(loadJournal({ id }));
+    });
   }
 
   public canDeactivate(): boolean | Observable<boolean> {

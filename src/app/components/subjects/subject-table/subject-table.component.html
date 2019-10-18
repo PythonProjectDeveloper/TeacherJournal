@@ -21,7 +21,7 @@
       </th>
     </tr>
     <tr
-      *ngFor="let studentMark of formJournal?.studentMarks | asyncSort:'firstName' | async"
+      *ngFor="let studentMark of formJournal?.studentMarks | asyncSort:'firstName'"
       class="table-wrapper__row"
       [appAverageMarkHighlight]="studentMark.marks | average | number:'1.1-1'"
       [averageMarkColors]="averageMarkColors"
