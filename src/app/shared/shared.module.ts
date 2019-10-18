@@ -7,6 +7,9 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { RouterModule } from '@angular/router';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
+import { TranslateLanguageSettings } from '../common/helpers/factories';
 
 @NgModule({
   declarations: [ButtonComponent, PageNotFoundComponent, BreadcrumbComponent, ToolbarComponent],
@@ -19,7 +22,9 @@ import { FormsModule } from '@angular/forms';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    TranslateModule.forChild(TranslateLanguageSettings())
   ],
   exports: [ButtonComponent, PageNotFoundComponent, BreadcrumbComponent, ToolbarComponent]
 })

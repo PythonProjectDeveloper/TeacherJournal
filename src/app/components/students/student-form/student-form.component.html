@@ -4,22 +4,22 @@
   <mat-card>
     <mat-card-content class="form__field-container">
       <mat-form-field>
-        <mat-label>First Name</mat-label>
+        <mat-label translate>First Name</mat-label>
         <input [(ngModel)]="formPerson.firstName" matInput name="firstName" class="form__field" required>
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Last Name</mat-label>
+        <mat-label translate>Last Name</mat-label>
         <input [(ngModel)]="formPerson.lastName" matInput name="lastName" class="form__field" required>
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Address</mat-label>
+        <mat-label translate>Address</mat-label>
         <input [(ngModel)]="formPerson.address" matInput name="address" class="form__field">
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Description</mat-label>
+        <mat-label translate>Description</mat-label>
         <textarea [(ngModel)]="formPerson.description" matInput name="description" class="form__field"></textarea>
       </mat-form-field>
     </mat-card-content>
@@ -29,6 +29,7 @@
         type="submit"
         class="form__action-button"
         mat-stroked-button color="primary"
+        translate
       >
         Save
       </button>
@@ -39,6 +40,7 @@
         mat-stroked-button
         color="warn"
         routerLink="/"
+        translate
       >
         Cancel
       </button>

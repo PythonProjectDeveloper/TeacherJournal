@@ -5,27 +5,27 @@
 <div class="table-wrapper">
   <table class="mat-elevation-z8 table-wrapper__table" [dataSource]="dataSource" mat-table matSort matSortActive="firstName" matSortDirection="asc">
     <ng-container matColumnDef="id">
-      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header translate> ID </th>
       <td class="table-wrapper__simple-cell" mat-cell *matCellDef="let element"> {{element.id | slice:0:4}} </td>
     </ng-container>
   
     <ng-container matColumnDef="firstName">
-      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header translate> First Name </th>
       <td class="table-wrapper__simple-cell" mat-cell *matCellDef="let element"> {{element.firstName}} </td>
     </ng-container>
   
     <ng-container matColumnDef="lastName">
-      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header translate> Last Name </th>
       <td class="table-wrapper__simple-cell" mat-cell *matCellDef="let element"> {{element.lastName}} </td>
     </ng-container>
   
     <ng-container matColumnDef="address">
-      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header translate> Address </th>
       <td class="table-wrapper__simple-cell" mat-cell *matCellDef="let element"> {{element.address}} </td>
     </ng-container>
   
     <ng-container matColumnDef="description">
-      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header translate> Description </th>
       <td class="table-wrapper__simple-cell" mat-cell *matCellDef="let element"> {{element.description| slice:0:250}} </td>
     </ng-container>
   
@@ -50,7 +50,7 @@
 </div>
 
 <app-button 
-  matTooltip="Add student"
+  [matTooltip]="'Add student' | translate"
   routerLink="student/add"
 >
 </app-button>

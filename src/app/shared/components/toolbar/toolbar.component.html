@@ -1,7 +1,7 @@
 <form (submit)="onClick()" class="toolbar__form">
   <mat-form-field class="toolbar__input-wrapper">
-    <input matInput name="name" placeholder="Query" [(ngModel)]="searchText">
+    <input matInput name="name" [placeholder]="'Query' | translate" [(ngModel)]="searchText">
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
-  <button class="toolbar__button" mat-button type="submit" color="primary">Search</button>
+  <button class="toolbar__button" mat-button type="submit" color="primary" translate>Search</button>
 </form>

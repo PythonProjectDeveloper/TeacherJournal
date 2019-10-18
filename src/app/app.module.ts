@@ -52,6 +52,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './redux/reducers';
 import { SubjectEffects } from './redux/effects/subjects';
 import { TeacherEffects } from './redux/effects/teachers';
+import { TranslateModule } from '@ngx-translate/core';
+import { TranslateLanguageSettings } from './common/helpers/factories';
 
 @NgModule({
   declarations: [
@@ -98,6 +100,7 @@ import { TeacherEffects } from './redux/effects/teachers';
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([ StudentEffects, SubjectEffects, TeacherEffects ]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+    TranslateModule.forRoot(TranslateLanguageSettings())
   ],
   providers: [
     ExitAboutGuard,
