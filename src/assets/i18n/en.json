@@ -31,13 +31,15 @@
     "averageMark": "Average Mark",
     "query": "Query"
   },
-  "buttons": {
+  "actions": {
     "ok": "Ok",
     "save": "Save",
     "cancel": "Cancel",
     "addSubject": "Add subject",
     "addStudent": "Add student",
-    "search": "Search"
+    "search": "Search",
+    "exportPdf": "Export as PDF file",
+    "exportExcel": "Export as Excel file"
   },
   "leaveGuard" : {
     "text": "Do you want to leave the page without saving data?"
