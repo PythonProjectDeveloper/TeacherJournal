@@ -1,0 +1,38 @@
+<h2 class="title">Subjects</h2>
+
+<app-toolbar (valueChanged)="onToolbarValueChanged($event)"></app-toolbar>
+
+<div class="subject-container">
+  <div class="subject-container__card-wrapper" *ngFor="let subject of subjects">
+    <mat-card
+      class="subject-container__card example-ripple-container mat-elevation-z4"
+      matRipple
+      [matRippleCentered]="true"
+      routerLink="subject/journal/{{ subject.id }}"
+    >
+      <mat-card-title
+      class="subject-container__card-title"
+      >
+        {{ subject.name | titlecase }}
+      </mat-card-title>
+
+
+    </mat-card>
+
+    <div class="subject-container__controls-wrapper">
+      <button class="subject-container__control-edit-button" mat-icon-button routerLink="subject/edit/{{ subject.id }}">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button class="subject-container__control-delete-button" mat-icon-button (click)="onDelete(subject)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-button
+  matTooltip="Add subject"
+  routerLink="subject/add"
+>
+</app-button>

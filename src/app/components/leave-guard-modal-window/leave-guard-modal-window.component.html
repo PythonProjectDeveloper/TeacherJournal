@@ -1,0 +1,12 @@
+<mat-card class="modal-window__card">
+  <img mat-card-image src="assets/images/not-found.png">
+  <mat-card-content>
+    <p>
+      Do you want to leave the page without saving data?
+    </p>
+  </mat-card-content>
+  <mat-card-actions class="modal-window__card-actions">
+    <button class="modal-window__card-button" mat-button mat-stroked-button color="primary" (click)="onSetAnswer(true)">Ok</button>
+    <button class="modal-window__card-button" mat-stroked-button color="warn" (click)="onSetAnswer(false)">Cancel</button>
+  </mat-card-actions>
+</mat-card>

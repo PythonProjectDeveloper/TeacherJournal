@@ -1,0 +1,33 @@
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  align-items: center;
+  user-select: none;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 3px 5px;
+  box-sizing: border-box;
+
+  &__home-link {
+    outline: none;
+    cursor: pointer;
+  }
+
+  &__breadcrumb-arrow,
+  &__breadcrumb-link,
+  &__home-link {
+    color: #848484;
+  }
+
+  &__breadcrumb-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &__breadcrumb-wrapper:last-child &__breadcrumb-link {
+    pointer-events: none;
+    color: rgb(65, 51, 51);
+  }
+}
