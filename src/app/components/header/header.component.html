@@ -1,6 +1,6 @@
 <div class="header__logo-wrapper">
   <mat-icon class="header__logo" [inline]="true">beenhere</mat-icon>
-  <h1 class="header__title" translate>Teacher journal</h1>
+  <h1 class="header__title" translate>title</h1>
 </div>
 <mat-card class="header__menu">
   <button *ngFor="let menuItem of mainMenu"
@@ -8,8 +8,7 @@
     mat-stroked-button
     [routerLink]="menuItem.routerLink"
     routerLinkActive="header__menu-item__active"
-    translate
   >
-    {{ menuItem.text }}
+  {{ 'pages.' + menuItem.text | translate }}
   </button>
 </mat-card>

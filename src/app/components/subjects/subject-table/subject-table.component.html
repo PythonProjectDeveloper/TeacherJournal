@@ -4,9 +4,9 @@
 <div class="table-wrapper">
   <table class="mat-elevation-z8 table-wrapper__table">
     <tr class="table-wrapper__row">
-      <th class="table-wrapper__header-cell table-wrapper__static-cell" translate> First Name </th>
-      <th class="table-wrapper__header-cell table-wrapper__static-cell" translate> Last Name </th>
-      <th class="table-wrapper__header-cell table-wrapper__static-cell" translate> Average Mark </th>
+      <th class="table-wrapper__header-cell table-wrapper__static-cell" translate> fields.firstName </th>
+      <th class="table-wrapper__header-cell table-wrapper__static-cell" translate> fields.lastName </th>
+      <th class="table-wrapper__header-cell table-wrapper__static-cell" translate> fields.averageMark </th>
       <th class="table-wrapper__header-cell table-wrapper__input-wrapper" *ngFor="let dayName of formJournal?.dayNames; let dayNameIndex = index"> 
         <input
           class="table-wrapper__header-cell-input"
@@ -48,4 +48,4 @@
   </button>
 </div>
 
-<button mat-stroked-button color="primary" *ngIf="isTableDataChanged" (click)="onSave()" translate>save</button>
+<button mat-stroked-button color="primary" *ngIf="isTableDataChanged" (click)="onSave()"> {{ 'buttons.save' | translate }} </button>
