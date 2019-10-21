@@ -4,9 +4,9 @@
 <div class="table-wrapper">
   <table class="mat-elevation-z8 table-wrapper__table">
     <tr class="table-wrapper__row">
-      <th class="table-wrapper__header-cell table-wrapper__static-cell" translate> fields.firstName </th>
-      <th class="table-wrapper__header-cell table-wrapper__static-cell" translate> fields.lastName </th>
-      <th class="table-wrapper__header-cell table-wrapper__static-cell" translate> fields.averageMark </th>
+      <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'fields.firstName' | translate }} </th>
+      <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'fields.lastName' | translate }} </th>
+      <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'fields.averageMark' | translate }} </th>
       <th class="table-wrapper__header-cell table-wrapper__input-wrapper" *ngFor="let dayName of formJournal?.dayNames; let dayNameIndex = index"> 
         <input
           class="table-wrapper__header-cell-input"

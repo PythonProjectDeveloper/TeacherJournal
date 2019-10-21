@@ -3,7 +3,7 @@
   "pageNotFound" : {
     "titleText": {
       "Page not found": "Page not found",
-      "Select a item.": "Select a item."
+      "Select a item.": "Select a item"
     },
     "description": "Maybe you entered the URL incorrectly. Try again or give it up)"
   },
