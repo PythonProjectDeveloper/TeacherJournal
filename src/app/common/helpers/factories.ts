@@ -1,17 +1,18 @@
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpBackend } from '@angular/common/http';
 import { TranslateModuleConfig, TranslateLoader } from '@ngx-translate/core';
 
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+// work only with http HttpBackend
+export function translateHttpLoaderFactory(httpBackend: HttpBackend): TranslateHttpLoader {
+  return new TranslateHttpLoader(new HttpClient(httpBackend));
 }
 
 export function TranslateLanguageSettings(): TranslateModuleConfig {
   return {
     loader: {
       provide: TranslateLoader,
-      useFactory: HttpLoaderFactory,
-      deps: [HttpClient]
+      deps: [HttpBackend],
+      useFactory: translateHttpLoaderFactory
     }
   };
 }

@@ -26,6 +26,6 @@ import { TranslateLanguageSettings } from '../common/helpers/factories';
     HttpClientModule,
     TranslateModule.forChild(TranslateLanguageSettings())
   ],
-  exports: [ButtonComponent, PageNotFoundComponent, BreadcrumbComponent, ToolbarComponent]
+  exports: [ButtonComponent, PageNotFoundComponent, BreadcrumbComponent, ToolbarComponent, TranslateModule]
 })
 export class SharedModule { }
