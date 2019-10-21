@@ -72,13 +72,11 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
     this.setSaveButtonVision();
   }
 
-  // FIXME: remove cell copying
   public onChangeHeaderCell(event: FocusEvent, index: number): void {
     this.formJournal.updateDayName(index, (event.target as HTMLInputElement).value);
     this.setSaveButtonVision();
   }
 
-  // FIXME: remove cell copying
   public onChangeSimpleCell(event: FocusEvent, studentId: string, index: number): void {
     this.formJournal.updateMark(studentId, index, (event.target as HTMLInputElement).value);
     this.setSaveButtonVision();
@@ -90,6 +88,10 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
 
   public isJournalChanged(): boolean {
     return !this.formJournal.isEqual(this.storedJournal);
+  }
+
+  public trackByIndex(index: number): number {
+    return index;
   }
 
   public ngOnDestroy(): void {
