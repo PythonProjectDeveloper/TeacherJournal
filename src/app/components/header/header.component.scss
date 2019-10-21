@@ -30,21 +30,43 @@
       }
     }
   }
+
+  .languages {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
 }
 
 @media screen and (max-width: 400px) {
-  .header__logo {
-    display: flex;
-    align-items: center;
-  }
+  :host {
+    .header__logo {
+      display: flex;
+      align-items: center;
+    }
 
-  .header__title {
-    text-align: center;
-  }
+    .header__title {
+      text-align: center;
+    }
 
-  .header__menu {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+    .header__menu {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .languages {
+      position: static;
+      margin-bottom: 5px;
+      width: 100%;
+
+      &__wrapper {
+        display: flex;
+        justify-content: center;
+      }
+
+      &__language {
+        width: 100%;
+      }
+    }
   }
 }

@@ -2,6 +2,12 @@
   <mat-icon class="header__logo" [inline]="true">beenhere</mat-icon>
   <h1 class="header__title" translate>title</h1>
 </div>
+<div class="languages">
+  <mat-button-toggle-group (change)="useLanguage($event)" class="languages__wrapper">
+    <mat-button-toggle class="languages__language" value="en"> EN </mat-button-toggle>
+    <mat-button-toggle class="languages__language" value="ru"> RU </mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
 <mat-card class="header__menu">
   <button *ngFor="let menuItem of mainMenu"
     class="header__menu-item"
