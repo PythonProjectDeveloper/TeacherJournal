@@ -49,7 +49,7 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit, OnD
   }
 
   public onSave(): void {
-    if (!this.formSubject.name || !this.formSubject.teacherId) { return; }
+    if (!this.formSubject.isValid()) { return; }
 
     if (this.isEditForm) {
       this.store.dispatch(updateSubject(this.formSubject));

@@ -33,4 +33,8 @@ export class Subject implements ISubject, IExtendedModel<Subject> {
   public getCopy(): Subject {
     return _.cloneDeep(this);
   }
+
+  public isValid(): boolean {
+    return this.name && this.teacherId ? true : false;
+  }
 }

@@ -25,6 +25,10 @@ export class Person implements IPerson, IExtendedModel<Person> {
     return _.cloneDeep(this);
   }
 
+  public isValid(): boolean {
+    return this.firstName && this.lastName ? true : false;
+  }
+
 }
 
 export class Student extends Person implements IStudent {

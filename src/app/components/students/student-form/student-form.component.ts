@@ -42,7 +42,7 @@ export class StudentFormComponent implements ComponentCanDeactivate, OnInit, OnD
   }
 
   public onSave(): void {
-    if (!this.formPerson.firstName || !this.formPerson.lastName) { return; }
+    if (!this.formPerson.isValid()) { return; }
 
     if (this.isEditForm) {
       this.store.dispatch(updateStudent(this.formPerson));
