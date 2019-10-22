@@ -632,37 +632,37 @@
     {
       "subjectName": "physics",
       "dates": [
-        { "04/02": null },
-        { "05/02": null },
-        { "06/02": null },
-        { "07/02": null }
+        { "name": "04/02", "state": null },
+        { "name": "05/02", "state": null },
+        { "name": "06/02", "state": null },
+        { "name": "07/02", "state": null }
       ]
     },
     {
       "subjectName": "chemistry",
       "dates": [
-        { "04/02": null },
-        { "05/02": null },
-        { "06/02": null },
-        { "07/02": null }
+        { "name": "04/02", "state": null },
+        { "name": "05/02", "state": null },
+        { "name": "06/02", "state": null },
+        { "name": "07/02", "state": null }
       ]
     },
     {
       "subjectName": "biology",
       "dates": [
-        { "04/02": null },
-        { "05/02": null },
-        { "06/02": null },
-        { "07/02": null }
+        { "name": "04/02", "state": null },
+        { "name": "05/02", "state": null },
+        { "name": "06/02", "state": null },
+        { "name": "07/02", "state": null }
       ]
     },
     {
       "subjectName": "literature",
       "dates": [
-        { "04/02": null },
-        { "05/02": null },
-        { "06/02": null },
-        { "07/02": null }
+        { "name": "04/02", "state": null },
+        { "name": "05/02", "state": null },
+        { "name": "06/02", "state": null },
+        { "name": "07/02", "state": null }
       ]
     }
   ],
