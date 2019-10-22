@@ -628,5 +628,43 @@
       ]
     }
   ],
+  "subjectDates": [
+    {
+      "subjectName": "physics",
+      "dates": [
+        { "04/02": null },
+        { "05/02": null },
+        { "06/02": null },
+        { "07/02": null }
+      ]
+    },
+    {
+      "subjectName": "chemistry",
+      "dates": [
+        { "04/02": null },
+        { "05/02": null },
+        { "06/02": null },
+        { "07/02": null }
+      ]
+    },
+    {
+      "subjectName": "biology",
+      "dates": [
+        { "04/02": null },
+        { "05/02": null },
+        { "06/02": null },
+        { "07/02": null }
+      ]
+    },
+    {
+      "subjectName": "literature",
+      "dates": [
+        { "04/02": null },
+        { "05/02": null },
+        { "06/02": null },
+        { "07/02": null }
+      ]
+    }
+  ],
   "logs": []
 }
