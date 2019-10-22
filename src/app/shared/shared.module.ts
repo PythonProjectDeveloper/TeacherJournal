@@ -10,9 +10,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslateLanguageSettings } from '../common/helpers/factories';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 
 @NgModule({
-  declarations: [ButtonComponent, PageNotFoundComponent, BreadcrumbComponent, ToolbarComponent],
+  declarations: [ButtonComponent, PageNotFoundComponent, BreadcrumbComponent, ToolbarComponent, DropdownComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -26,6 +27,6 @@ import { TranslateLanguageSettings } from '../common/helpers/factories';
     HttpClientModule,
     TranslateModule.forChild(TranslateLanguageSettings())
   ],
-  exports: [ButtonComponent, PageNotFoundComponent, BreadcrumbComponent, ToolbarComponent, TranslateModule]
+  exports: [ButtonComponent, PageNotFoundComponent, BreadcrumbComponent, ToolbarComponent, DropdownComponent, TranslateModule]
 })
 export class SharedModule { }
