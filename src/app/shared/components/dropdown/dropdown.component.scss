@@ -1,4 +1,17 @@
 :host {
   display: block;
   margin-bottom: 10px;
+
+  .dropdown-picker {
+    &__subjects {
+      padding: 10px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    &__footer-menu {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 }

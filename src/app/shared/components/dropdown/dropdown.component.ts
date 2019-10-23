@@ -25,7 +25,7 @@ export class DropdownComponent implements OnInit, OnDestroy, ControlValueAccesso
   public students: Person[] = [];
   public destroy$: Subject<boolean> = new Subject<boolean>();
   public childChanged = false;
-  public printDates = '';
+  public isInputOpen = false;
 
   constructor(
     private dataPickerService: DataPickerService,
@@ -42,19 +42,19 @@ export class DropdownComponent implements OnInit, OnDestroy, ControlValueAccesso
     return [];
   }
 
-  public getPrintDates(dates: ISubjectDates[]): string {
-    const printDates: string[] = dates.reduce((acc, subjectDate) => {
+  public getViewDates(dates: ISubjectDates[]): string {
+    const viewDates: string[] = dates.reduce((acc, subjectDate) => {
       const selectedDates: string[] = subjectDate.dates.reduce((dateArray, currentDate) =>
         currentDate.state ? dateArray.concat([currentDate.name]) : dateArray
-      ,                                                        []);
+      , []);
 
       const selectedDateString: string = `${subjectDate.subjectName}: ${selectedDates.join(';')}`;
       if (selectedDates.length) { acc.push(selectedDateString); }
 
       return acc;
-    },                                        []);
+    }, []);
 
-    return printDates.length ? printDates.join(' ') : this.DEFAULT_PRINT_DATES;
+    return viewDates.length ? viewDates.join(' ') : this.DEFAULT_PRINT_DATES;
   }
 
   public setForm(dates: ISubjectDates[]): void {
@@ -62,7 +62,7 @@ export class DropdownComponent implements OnInit, OnDestroy, ControlValueAccesso
       subjectDates: this.fb.array(dates.map(subjectDates => this.getSubjectDatesControl(subjectDates)))
     });
 
-    this.printDates = this.getPrintDates(dates);
+    this.viewDates = this.getViewDates(dates);
   }
 
   public getSubjectDatesControl(subjectDates: any): FormGroup {
@@ -110,7 +110,7 @@ export class DropdownComponent implements OnInit, OnDestroy, ControlValueAccesso
 
       this.childChanged = false;
 
-      this.printDates = this.getPrintDates(this.form.value.subjectDates);
+      this.viewDates = this.getViewDates(this.form.value.subjectDates);
     });
 
     return formGroup;
@@ -150,6 +150,22 @@ export class DropdownComponent implements OnInit, OnDestroy, ControlValueAccesso
   public ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();
+  }
+
+  public toggleCheckboxs(flag: boolean): void {
+    const value: any = this.form.value;
+    value.subjectDates.forEach(subjectDate => subjectDate.state = flag);
+    this.form.setValue(value);
+  }
+
+  public toggleCollapses(flag: boolean): void {
+    const value: any = this.form.value;
+    value.subjectDates.forEach(subjectDate => subjectDate.isExpended = flag);
+    this.form.setValue(value);
+  }
+
+  public toggleInput(flag: boolean): void {
+    this.isInputOpen = flag;
   }
 
 }

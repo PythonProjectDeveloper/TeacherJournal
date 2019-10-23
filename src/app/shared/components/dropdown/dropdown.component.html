@@ -1,29 +1,45 @@
 <mat-accordion class="dropdown-picker" [formGroup]="form" *ngIf="form">
-  <mat-expansion-panel>
-    <mat-expansion-panel-header> {{ printDates }} </mat-expansion-panel-header>
+  <mat-expansion-panel [expanded]="isInputOpen" (opened)="toggleInput(true)">
+    <mat-expansion-panel-header> {{ viewDates }} </mat-expansion-panel-header>
+    <div class="dropdown-picker__header-menu">
+      <button mat-button color="primary" (click)="toggleCheckboxs(true)">CHECK ALL</button>
+      <button mat-button color="primary" (click)="toggleCheckboxs(false)">UNCHECK ALL</button>
+    </div>
+    <div class="dropdown-picker__subjects">
+      <!-- TODO: make collapse component -->
+      <mat-accordion class="dropdown-picker__subject" formArrayName="subjectDates" *ngFor="let subjectDate of form.controls.subjectDates.controls; let i = index">
+        <mat-expansion-panel [formGroupName]="i"
+                            [expanded]="subjectDate.value.isExpended"
+                            (opened)="changePanelState(subjectDate, true)"
+                            (closed)="changePanelState(subjectDate, false)">
 
-    <mat-accordion class="dropdown-picker__subject" formArrayName="subjectDates" *ngFor="let subjectDate of form.controls.subjectDates.controls; let i = index">
-      <mat-expansion-panel [formGroupName]="i" (opened)="changePanelState(subjectDate, true)" (closed)="changePanelState(subjectDate, false)">
-        <mat-expansion-panel-header>
-          <mat-checkbox formControlName="state"
-                        [indeterminate]="subjectDate.value.state === null"
-                        (click)="$event.stopPropagation()"
-          >
-            {{ subjectDate.value.subjectName | titlecase }}
-          </mat-checkbox>
-        </mat-expansion-panel-header>
-
-        <!-- TODO: remove div wrappers -->
-        <div formArrayName="dates" *ngFor="let date of subjectDate.controls.dates.controls; let idx = index">
-          <div [formGroupName]="idx">
-            <mat-checkbox formControlName="state">
-              {{ date.value.name }}
+          <mat-expansion-panel-header>
+            <mat-checkbox formControlName="state"
+                          [indeterminate]="subjectDate.value.state === null"
+                          (click)="$event.stopPropagation()"
+            >
+              {{ subjectDate.value.subjectName | titlecase }}
             </mat-checkbox>
-          </div>
-        </div>
+          </mat-expansion-panel-header>
 
-      </mat-expansion-panel>
-    </mat-accordion>
+          <div formArrayName="dates" *ngFor="let date of subjectDate.controls.dates.controls; let idx = index">
+            <div [formGroupName]="idx">
+              <mat-checkbox formControlName="state">
+                {{ date.value.name }}
+              </mat-checkbox>
+            </div>
+          </div>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="dropdown-picker__footer-menu">
+      <div>
+        <button mat-button color="primary" (click)="toggleCollapses(true)">EXPAND ALL</button>
+        <button mat-button color="primary" (click)="toggleCollapses(false)">COLLAPSE ALL</button>
+      </div>
+      <button mat-button color="primary" (click)="toggleInput(false)">CLOSE</button>
+    </div>
 
   </mat-expansion-panel>
 </mat-accordion>
