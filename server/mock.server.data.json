@@ -632,37 +632,37 @@
     {
       "subjectName": "physics",
       "dates": [
-        { "name": "04/02", "state": null },
-        { "name": "05/02", "state": null },
-        { "name": "06/02", "state": null },
-        { "name": "07/02", "state": null }
+        { "name": "04/02", "state": false },
+        { "name": "05/02", "state": false },
+        { "name": "06/02", "state": false },
+        { "name": "07/02", "state": false }
       ]
     },
     {
       "subjectName": "chemistry",
       "dates": [
-        { "name": "04/02", "state": null },
-        { "name": "05/02", "state": null },
-        { "name": "06/02", "state": null },
-        { "name": "07/02", "state": null }
+        { "name": "04/02", "state": false },
+        { "name": "05/02", "state": false },
+        { "name": "06/02", "state": false },
+        { "name": "07/02", "state": false }
       ]
     },
     {
       "subjectName": "biology",
       "dates": [
-        { "name": "04/02", "state": null },
-        { "name": "05/02", "state": null },
-        { "name": "06/02", "state": null },
-        { "name": "07/02", "state": null }
+        { "name": "04/02", "state": false },
+        { "name": "05/02", "state": false },
+        { "name": "06/02", "state": false },
+        { "name": "07/02", "state": false }
       ]
     },
     {
       "subjectName": "literature",
       "dates": [
-        { "name": "04/02", "state": null },
-        { "name": "05/02", "state": null },
-        { "name": "06/02", "state": null },
-        { "name": "07/02", "state": null }
+        { "name": "04/02", "state": false },
+        { "name": "05/02", "state": false },
+        { "name": "06/02", "state": false },
+        { "name": "07/02", "state": false }
       ]
     }
   ],
