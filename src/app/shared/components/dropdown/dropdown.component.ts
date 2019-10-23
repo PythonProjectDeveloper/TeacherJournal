@@ -44,15 +44,15 @@ export class DropdownComponent implements OnInit, OnDestroy, ControlValueAccesso
 
   public getPrintDates(dates: ISubjectDates[]): string {
     const printDates: string[] = dates.reduce((acc, subjectDate) => {
-      const selectedDates: string[] = subjectDate.dates.reduce((dates, currentDate) =>
-        currentDate.state ? dates.concat([currentDate.name]) : dates
-      , []);
+      const selectedDates: string[] = subjectDate.dates.reduce((dateArray, currentDate) =>
+        currentDate.state ? dateArray.concat([currentDate.name]) : dateArray
+      ,                                                        []);
 
       const selectedDateString: string = `${subjectDate.subjectName}: ${selectedDates.join(';')}`;
       if (selectedDates.length) { acc.push(selectedDateString); }
 
       return acc;
-    }, []);
+    },                                        []);
 
     return printDates.length ? printDates.join(' ') : this.DEFAULT_PRINT_DATES;
   }
