@@ -19,6 +19,7 @@ import {
   MatExpansionModule,
   MatCheckboxModule
 } from '@angular/material';
+import { DropdownCollapseComponent } from './components/dropdown/dropdown-collapse/dropdown-collapse.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {
     PageNotFoundComponent,
     BreadcrumbComponent,
     ToolbarComponent,
-    DropdownComponent
+    DropdownComponent,
+    DropdownCollapseComponent
   ],
   imports: [
     CommonModule,

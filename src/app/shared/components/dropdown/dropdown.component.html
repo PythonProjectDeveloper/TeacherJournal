@@ -5,34 +5,13 @@
       <button mat-button color="primary" (click)="toggleCheckboxs(true)">CHECK ALL</button>
       <button mat-button color="primary" (click)="toggleCheckboxs(false)">UNCHECK ALL</button>
     </div>
+
     <div class="dropdown-picker__subjects">
-      <!-- TODO: make collapse component -->
-      <mat-accordion class="dropdown-picker__subject" formArrayName="subjectDates" *ngFor="let subjectDate of form.controls.subjectDates.controls; let i = index">
-        <mat-expansion-panel [formGroupName]="i"
-                            [expanded]="subjectDate.value.isExpended"
-                            (opened)="changePanelState(subjectDate, true)"
-                            (closed)="changePanelState(subjectDate, false)">
-
-          <mat-expansion-panel-header>
-            <mat-checkbox formControlName="state"
-                          [indeterminate]="subjectDate.value.state === null"
-                          (click)="$event.stopPropagation()"
-            >
-              {{ subjectDate.value.subjectName | titlecase }}
-            </mat-checkbox>
-          </mat-expansion-panel-header>
-
-          <div formArrayName="dates" *ngFor="let date of subjectDate.controls.dates.controls; let idx = index">
-            <div [formGroupName]="idx">
-              <mat-checkbox formControlName="state">
-                {{ date.value.name }}
-              </mat-checkbox>
-            </div>
-          </div>
-
-        </mat-expansion-panel>
-      </mat-accordion>
+      <div formArrayName="subjectDates" *ngFor="let subjectDate of form.controls.subjectDates.controls; let i = index">
+        <app-dropdown-collapse [formGroupName]="i" [formControl]="subjectDate"></app-dropdown-collapse>
+      </div>
     </div>
+
     <div class="dropdown-picker__footer-menu">
       <div>
         <button mat-button color="primary" (click)="toggleCollapses(true)">EXPAND ALL</button>
