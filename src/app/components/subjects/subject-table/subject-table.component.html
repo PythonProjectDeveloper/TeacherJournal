@@ -1,0 +1,50 @@
+<h2 class="title"> {{ subject?.name | titlecase }} </h2>
+
+<div class="table-wrapper">
+  <table class="mat-elevation-z8 table-wrapper__table">
+    <tr class="table-wrapper__row">
+      <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'fields.firstName' | translate }} </th>
+      <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'fields.lastName' | translate }} </th>
+      <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'fields.averageMark' | translate }} </th>
+      <th class="table-wrapper__header-cell table-wrapper__input-wrapper" *ngFor="let dayName of formJournal?.dayNames; trackBy:trackByIndex; let dayNameIndex = index"> 
+        <input
+          class="table-wrapper__header-cell-input"
+          type="text"
+          [value]="dayName"
+          (blur)="onChangeHeaderCell($event, dayNameIndex)"
+          appFocusHighlight="table-wrapper__header-cell-input__focus"
+        >
+        <button class="table-wrapper__remove-button" mat-icon-button (click)="onRemoveColumn(dayNameIndex)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </th>
+    </tr>
+    <tr
+      *ngFor="let studentMark of formJournal?.studentMarks | asyncSort:'firstName'"
+      class="table-wrapper__row"
+      [appAverageMarkHighlight]="studentMark.marks | average | number:'1.1-1'"
+      [averageMarkColors]="averageMarkColors"
+    >
+      <td class="table-wrapper__simple-cell"> {{ studentMark.firstName }} </td>
+      <td class="table-wrapper__simple-cell"> {{ studentMark.lastName }} </td>
+      <td class="table-wrapper__simple-cell"> {{ studentMark.marks | average | number:'1.1-1' }} </td>
+      <td class="table-wrapper__simple-cell table-wrapper__input-wrapper" *ngFor="let mark of studentMark.marks; trackBy:trackByIndex; let markIndex = index">
+        <input
+          class="table-wrapper__simple-cell-input"
+          type="text"
+          [value]="mark"
+          (blur)="onChangeSimpleCell($event, studentMark.studentId, markIndex)"
+          appNumberCheck
+          [maxNumber]="10"
+          [minNumber]="0"
+          appFocusHighlight="table-wrapper__simple-cell-input__focus"
+        >
+      </td>
+    </tr>
+  </table>
+  <button class="add-button" mat-mini-fab color="primary" (click)="onAddColumn()" *ngIf="formJournal?.isAllHeadersFill()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<button mat-stroked-button color="primary" *ngIf="isTableDataChanged" (click)="onSave()"> {{ 'actions.save' | translate }} </button>

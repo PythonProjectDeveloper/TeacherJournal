@@ -1,0 +1,29 @@
+<mat-accordion class="dropdown-picker">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header> Dates </mat-expansion-panel-header>
+
+    <mat-accordion class="dropdown-picker__subject" [formGroup]="subject" *ngFor="let subject of subjects">
+      <mat-expansion-panel formArrayName="dates" *ngFor="let date of dates; let i = index">
+        <mat-expansion-panel-header>
+          <mat-checkbox
+            [value]="getCommonSubjectDatesState"
+            [indeterminate]="true"
+            (change)="onAllDatesChacked"
+          >
+          {{ subject.subjectName }}
+          </mat-checkbox>
+
+        </mat-expansion-panel-header>
+
+        <mat-checkbox 
+          formControlName="date.state"
+          (change)="onDataChacked"
+        >
+          {{ date.name }}
+        </mat-checkbox>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </mat-expansion-panel>
+</mat-accordion>

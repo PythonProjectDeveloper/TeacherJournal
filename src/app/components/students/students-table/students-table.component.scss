@@ -1,0 +1,31 @@
+.table-wrapper {
+    width: 100%;
+    margin-bottom: 150px;
+
+  &__table {
+    width: 780px;
+    overflow: auto;
+  }
+
+  &__header-cell, &__simple-cell {
+    padding: 10px;
+  }
+
+  &__simple-cell[data-column-name="id"],
+  &__header-cell[data-column-name="id"] {
+    max-width: 22px;
+    overflow: hidden;
+  }
+
+  &__controls-wrapper {
+    display: flex;
+  }
+
+  &__control-edit-button {
+    color: #0077008c;
+  }
+
+  &__control-delete-button {
+    color: #ff2d2dbf;
+  }
+}
