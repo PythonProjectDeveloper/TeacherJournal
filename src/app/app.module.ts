@@ -54,6 +54,9 @@ import { SubjectEffects } from './redux/effects/subjects';
 import { TeacherEffects } from './redux/effects/teachers';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslateLanguageSettings } from './common/helpers/factories';
+import { BannerComponent } from './components/banner/banner.component';
+import { SimpleMessageComponent } from './components/banner/simple-message/simple-message.component';
+import { BannerDirective } from './common/directives/banner.directive';
 
 @NgModule({
   declarations: [
@@ -75,7 +78,10 @@ import { TranslateLanguageSettings } from './common/helpers/factories';
     NumberCheckDirective,
     FocusHighlightDirective,
     AsyncSortPipe,
-    LeaveGuardModalWindowComponent
+    LeaveGuardModalWindowComponent,
+    BannerComponent,
+    SimpleMessageComponent,
+    BannerDirective
   ],
   imports: [
     BrowserModule,
@@ -107,6 +113,7 @@ import { TranslateLanguageSettings } from './common/helpers/factories';
     { provide: HTTP_INTERCEPTORS, useClass: UrlInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true }
   ],
+  entryComponents: [ SimpleMessageComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

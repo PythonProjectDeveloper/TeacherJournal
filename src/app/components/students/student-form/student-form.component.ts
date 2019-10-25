@@ -8,6 +8,7 @@ import { IGlobalState } from 'src/app/redux/reducers';
 import { loadStudent, createStudent, updateStudent } from 'src/app/redux/actions/students';
 import { getStudent } from 'src/app/redux/selectors/students';
 import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
+import { BannerService } from 'src/app/common/services/banner.service';
 
 @Component({
   selector: 'app-student-form',
@@ -23,7 +24,8 @@ export class StudentFormComponent implements ComponentCanDeactivate, OnInit, OnD
   constructor(
     private store: Store<IGlobalState>,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private bunnerService: BannerService
   ) {
     this.setPersons = this.setPersons.bind(this);
   }
@@ -50,6 +52,8 @@ export class StudentFormComponent implements ComponentCanDeactivate, OnInit, OnD
       this.isEditForm = true;
       this.store.dispatch(createStudent(this.formPerson));
     }
+
+    this.bunnerService.setBannerStatus(true);
   }
 
   public setPersons(storagePerson: Person): void {

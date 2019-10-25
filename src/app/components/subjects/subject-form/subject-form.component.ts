@@ -11,6 +11,7 @@ import { getSubject } from 'src/app/redux/selectors/subjects';
 import { loadTeachers } from 'src/app/redux/actions/teachers';
 import { getTeachers } from 'src/app/redux/selectors/teachers';
 import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
+import { BannerService } from 'src/app/common/services/banner.service';
 
 @Component({
   selector: 'app-subject-form',
@@ -27,7 +28,8 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit, OnD
   constructor(
     private store: Store<IGlobalState>,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private bunnerService: BannerService
   ) {
     this.setSubjects = this.setSubjects.bind(this);
     this.setTeachers = this.setTeachers.bind(this);
@@ -57,6 +59,8 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit, OnD
       this.isEditForm = true;
       this.store.dispatch(createSubject(this.formSubject));
     }
+
+    this.bunnerService.setBannerStatus(true);
   }
 
   public setSubjects(storageSubject: Subject): void {
