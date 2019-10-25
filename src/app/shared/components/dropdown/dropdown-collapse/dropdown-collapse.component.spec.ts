@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DropdownCollapseComponent } from './dropdown-collapse.component';
+// import { DropdownCollapseComponent } from './dropdown-collapse.component';
 
-describe('DropdownCollapseComponent', () => {
-  let component: DropdownCollapseComponent;
-  let fixture: ComponentFixture<DropdownCollapseComponent>;
+// describe('DropdownCollapseComponent', () => {
+//   let component: DropdownCollapseComponent;
+//   let fixture: ComponentFixture<DropdownCollapseComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ DropdownCollapseComponent ]
-    })
-    .compileComponents();
-  }));
+//   beforeEach(async(() => {
+//     TestBed.configureTestingModule({
+//       declarations: [ DropdownCollapseComponent ]
+//     })
+//     .compileComponents();
+//   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DropdownCollapseComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//   beforeEach(() => {
+//     fixture = TestBed.createComponent(DropdownCollapseComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

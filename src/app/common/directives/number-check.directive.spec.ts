@@ -1,8 +1,31 @@
-import { NumberCheckDirective } from './number-check.directive';
+// import { NumberCheckDirective } from './number-check.directive';
+// import { TestBed, ComponentFixture } from '@angular/core/testing';
+// import { By } from '@angular/platform-browser';
+// import { DebugElement, Component } from '@angular/core';
 
-describe('NumberCheckDirective', () => {
-  it('should create an instance', () => {
-    const directive: NumberCheckDirective = new NumberCheckDirective();
-    expect(directive).toBeTruthy();
-  });
-});
+// @Component({
+//   template: `
+//   <input appNumberCheck [maxNumber]="11" [minNumber]="0" />
+//   `
+// })
+// class TestComponent { }
+
+// describe('NumberCheckDirective', () => {
+//   let input: DebugElement;
+//   let fixture: ComponentFixture<TestComponent>;
+
+//   beforeEach(() => {
+//     fixture = TestBed.configureTestingModule({
+//       declarations: [ NumberCheckDirective, TestComponent ]
+//     })
+//     .createComponent(TestComponent);
+
+//     fixture.detectChanges();
+
+//     input = fixture.debugElement.query(By.directive(NumberCheckDirective));
+//   });
+
+//   it('should create an instance', () => {
+//     expect(input.nativeElement.value).toBeTruthy();
+//   });
+// });
