@@ -1,8 +1,9 @@
-// import { BannerDirective } from './banner.directive';
+import { BannerDirective } from './banner.directive';
+import { ViewContainerRef } from '@angular/core';
 
-// describe('BannerDirective', () => {
-//   it('should create an instance', () => {
-//     const directive = new BannerDirective();
-//     expect(directive).toBeTruthy();
-//   });
-// });
+describe('BannerDirective', () => {
+  it('should create an instance', () => {
+    const directive: BannerDirective = new BannerDirective({} as ViewContainerRef);
+    expect(directive).toBeTruthy();
+  });
+});
