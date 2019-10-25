@@ -5,7 +5,7 @@ describe('AveragePipe', () => {
 
   describe('#transform', () => {
     it('should work with number[] and return average value', () => {
-      expect(pipe.transform([4, 2, 8, 6])).toEqual(20);
+      expect(pipe.transform([4, 2, 8, 6])).toEqual(5);
     });
 
     it('should ignore no number value', () => {

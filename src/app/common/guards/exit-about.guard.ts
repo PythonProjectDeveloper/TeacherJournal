@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵConsole } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CanDeactivate } from '@angular/router';
 import { LeaveGuardModalWindowService } from '../services/leave-guard-modal-window.service';
