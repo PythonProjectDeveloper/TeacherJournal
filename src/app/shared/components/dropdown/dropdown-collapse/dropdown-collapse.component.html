@@ -1,0 +1,25 @@
+<mat-accordion class="dropdown-picker__subject" [formGroup]="data">
+  <mat-expansion-panel 
+                      [expanded]="data.value.isExpended"
+                      (opened)="changePanelState(data, true)"
+                      (closed)="changePanelState(data, false)">
+
+    <mat-expansion-panel-header>
+      <mat-checkbox formControlName="state"
+                    [indeterminate]="data.value.state === null"
+                    (click)="$event.stopPropagation()"
+      >
+        {{ data.value.subjectName | titlecase }}
+      </mat-checkbox>
+    </mat-expansion-panel-header>
+
+    <div formArrayName="dates" *ngFor="let date of data.controls.dates.controls; let idx = index">
+      <div [formGroupName]="idx">
+        <mat-checkbox formControlName="state">
+          {{ date.value.name }}
+        </mat-checkbox>
+      </div>
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>

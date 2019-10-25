@@ -1,0 +1,72 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 10px;
+
+  .header {
+    &__logo-wrapper {
+      display: flex;
+      margin-right: 10px;
+      color: orange;
+    }
+
+    &__logo {
+      font-size: 80px;
+    }
+
+    &__menu {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    &__menu-item {
+      border-radius: 0;
+      color: #6f6f6f;
+
+      &__active {
+        color: #2700ffc7;
+      }
+    }
+  }
+
+  .languages {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  :host {
+    .header__logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .header__title {
+      text-align: center;
+    }
+
+    .header__menu {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .languages {
+      position: static;
+      margin-bottom: 5px;
+      width: 100%;
+
+      &__wrapper {
+        display: flex;
+        justify-content: center;
+      }
+
+      &__language {
+        width: 100%;
+      }
+    }
+  }
+}
