@@ -6,7 +6,7 @@ import { Subject, Observable } from 'rxjs';
 })
 export class LeaveGuardModalWindowService {
   private answer: Subject<boolean> = new Subject();
-  public isOpen: Subject<boolean> = new Subject();
+  private isOpen: Subject<boolean> = new Subject();
 
   public setAnswer(answer: boolean): void {
     this.isOpen.next(false);
