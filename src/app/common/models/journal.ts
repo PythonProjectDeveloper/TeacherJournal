@@ -56,7 +56,7 @@ export class Journal implements IJournal, IExtendedModel<Journal> {
     this.studentMarks.forEach((userMarks) => userMarks.marks.splice(index, 1));
   }
 
-  public isAllHeadersFill(): boolean {
+  public isValid(): boolean {
     return this.dayNames.reduce((isFill, name) => isFill ? Boolean(name) : isFill, true);
   }
 }
