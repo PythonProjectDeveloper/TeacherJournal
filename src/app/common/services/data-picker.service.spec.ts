@@ -1,12 +1,18 @@
-// import { TestBed } from '@angular/core/testing';
+import { DataPickerService } from './data-picker.service';
+import { of } from 'rxjs';
 
-// import { DataPickerService } from './data-picker.service';
+describe('DataPickerService', () => {
+  describe('#getSubjectDates', () => {
+    it('should return observable subject date array', () => {
+      const serverData: any = [1, 2, 3];
+      const httpService: any = { get: jasmine.createSpy().and.returnValue(of(serverData)) };
+      let service: DataPickerService = new DataPickerService(httpService);
 
-// describe('DataPickerService', () => {
-//   beforeEach(() => TestBed.configureTestingModule({}));
+      service.getSubjectDates().subscribe(data => {
+        expect(data).toEqual(serverData);
+      });
 
-//   it('should be created', () => {
-//     const service: DataPickerService = TestBed.get(DataPickerService);
-//     expect(service).toBeTruthy();
-//   });
-// });
+      expect(httpService.get).toHaveBeenCalled();
+    });
+  });
+});
