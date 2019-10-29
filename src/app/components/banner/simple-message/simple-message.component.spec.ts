@@ -1,25 +1,42 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { SimpleMessageComponent } from './simple-message.component';
+import { SimpleMessageComponent } from './simple-message.component';
 
-// describe('SimpleMessageComponent', () => {
-//   let component: SimpleMessageComponent;
-//   let fixture: ComponentFixture<SimpleMessageComponent>;
+let component: SimpleMessageComponent;
+let fixture: ComponentFixture<SimpleMessageComponent>;
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ SimpleMessageComponent ]
-//     })
-//     .compileComponents();
-//   }));
+function configureTestingModule(): void {
+  TestBed.configureTestingModule({
+    declarations: [ SimpleMessageComponent ]
+  })
+  .compileComponents();
+}
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(SimpleMessageComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+function setComponent(): void {
+  fixture = TestBed.createComponent(SimpleMessageComponent);
+  component = fixture.componentInstance;
+  fixture.detectChanges();
+}
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+describe('SimpleMessageComponent', () => {
+  describe('#markup', () => {
+    beforeEach(async(configureTestingModule));
+    beforeEach(setComponent);
+
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
+
+    it('should set parameters', () => {
+      const data: string = 'some data';
+
+      component.data = data;
+
+      fixture.detectChanges();
+
+      const banner: any = fixture.nativeElement.querySelector('.banner');
+
+      expect(banner.innerText).toEqual(data);
+    });
+  });
+});

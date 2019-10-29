@@ -3,8 +3,10 @@ import { of, Observable } from 'rxjs';
 import { ConverterService } from './converter.service';
 import { Person } from '../models/person';
 
+const filterData: string = 'some data';
 const responseObject: any = {};
 const responseObjects: any[] = [{}, {}, {}];
+const filteredResponseObjects: any[] = [{}, {}];
 const id: string = '_ID_';
 
 class TestHttpClient {
@@ -20,8 +22,14 @@ class TestHttpClient {
     return of(responseObject);
   }
 
-  public get(url: string): Observable<any> {
-    return url.endsWith(id) ? of(responseObject) : of(responseObjects);
+  public get(url: string, _: any , httpOptions: any): Observable<any> {
+    if (url.endsWith(id)) { return of(responseObject); }
+
+    const param: any = httpOptions.params.updates.pop();
+
+    if (param && param.value === filterData) { return of(filteredResponseObjects); }
+
+    return of(responseObjects);
   }
 }
 
@@ -57,11 +65,23 @@ describe('StudentService', () => {
 
   describe('#getStudents', () => {
     it('should return observable converted result of request', () => {
-      service.getStudents().subscribe(students =>
+      service.getStudents().subscribe(students => {
         students.forEach(student =>
           expect(student instanceof Person).toEqual(true)
-        )
-      );
+        );
+
+        expect(students.length).toEqual(3);
+      });
+    });
+
+    it('should add filter data to request params', () => {
+      service.getStudents(filterData).subscribe(students => {
+        students.forEach(student =>
+          expect(student instanceof Person).toEqual(true)
+        );
+
+        expect(students.length).toEqual(2);
+      });
     });
   });
 
