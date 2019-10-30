@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject as RXJSSubject } from 'rxjs';
 import { Subject } from 'src/app/common/models/subject';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { deleteSubject, updateFilterText } from 'src/app/redux/actions/subjects';
-import { takeUntil } from 'rxjs/operators';
 import { getSubjects } from 'src/app/redux/selectors/subjects';
+import { selectWithDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
 
 @Component({
   selector: 'app-subject-list',
@@ -18,16 +18,11 @@ export class SubjectListComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<IGlobalState>
-  ) {
-    store
-      .pipe(
-        takeUntil(this.destroy$),
-        select(getSubjects)
-      )
-      .subscribe((subjects) => this.subjects = subjects);
-  }
+  ) { }
 
   public ngOnInit(): void {
+    selectWithDestroyFlag(this.store, this.destroy$, getSubjects).subscribe((subjects) => this.subjects = subjects);
+
     this.store.dispatch(updateFilterText(''));
   }
 

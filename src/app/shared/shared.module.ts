@@ -35,7 +35,6 @@ import { DropdownCollapseComponent } from './components/dropdown/dropdown-collap
     MatButtonModule,
     MatIconModule,
     RouterModule,
-    RouterModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,

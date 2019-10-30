@@ -4,7 +4,6 @@ import { PageNotFoundComponent } from './page-not-found.component';
 import { of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { not } from '@angular/compiler/src/output/output_ast';
 
 let component: PageNotFoundComponent;
 let fixture: ComponentFixture<PageNotFoundComponent>;
