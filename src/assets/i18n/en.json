@@ -1,0 +1,48 @@
+{
+  "title": "Teacher journal",
+  "pageNotFound" : {
+    "titleText": {
+      "Page not found": "Page not found",
+      "Select a item.": "Select a item"
+    },
+    "description": "Maybe you entered the URL incorrectly. Try again or give it up)"
+  },
+  "pages": {
+    "Students": "Students",
+    "Subjects": "Subjects",
+    "Statistics": "Statistics",
+    "Export": "Export",
+    "student": "Student",
+    "subject": "Subject",
+    "Add student": "Add student",
+    "Edit student": "Edit student",
+    "Add subject": "Add subject",
+    "Edit Subject": "Edit Subject",
+    "Journal": "Journal"
+  },
+  "fields": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "address": "Address",
+    "description": "Description",
+    "name": "Name",
+    "teacher": "Teacher",
+    "cabinet": "Cabinet",
+    "averageMark": "Average Mark",
+    "query": "Query"
+  },
+  "actions": {
+    "ok": "Ok",
+    "save": "Save",
+    "cancel": "Cancel",
+    "addSubject": "Add subject",
+    "addStudent": "Add student",
+    "search": "Search",
+    "exportPdf": "Export as PDF file",
+    "exportExcel": "Export as Excel file"
+  },
+  "leaveGuard" : {
+    "text": "Do you want to leave the page without saving data?"
+  },
+  "bannerMessage": "Here can be your advertising!"
+}
