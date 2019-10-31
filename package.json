@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start-server": "json-server --watch ./server/mock.server.data.json"
+    "server": "json-server --watch ./server/mock.server.data.json"
   },
   "private": true,
   "dependencies": {
@@ -27,10 +27,15 @@
     "@ngrx/store-devtools": "^8.4.0",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
+    "exceljs": "^3.3.0",
+    "file-saver": "^2.0.2",
     "hammerjs": "^2.0.8",
+    "jspdf": "^1.5.3",
+    "jspdf-autotable": "^3.2.10",
     "lodash": "^4.17.15",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
+    "xlsx": "^0.15.1",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {

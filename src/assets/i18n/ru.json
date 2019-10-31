@@ -18,6 +18,7 @@
     "Edit student": "Изменить студента",
     "Add subject": "Добавить предмет",
     "Edit Subject": "Изменить предмет",
+    "Journals": "Журналы",
     "Journal": "Журнал"
   },
   "fields": {
@@ -39,7 +40,8 @@
     "addStudent": "Добавить студента",
     "search": "Искать",
     "exportPdf": "Экспортировать как PDF файл",
-    "exportExcel": "Экспортировать как Excel файл"
+    "exportExcel": "Экспортировать как Excel файл",
+    "download": "Скачать"
   },
   "leaveGuard" : {
     "text": "Вы хотите покинуть страницу без сохранения изменений?"

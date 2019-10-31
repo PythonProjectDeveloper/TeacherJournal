@@ -18,6 +18,7 @@
     "Edit student": "Edit student",
     "Add subject": "Add subject",
     "Edit Subject": "Edit Subject",
+    "Journals": "Journals",
     "Journal": "Journal"
   },
   "fields": {
@@ -39,7 +40,8 @@
     "addStudent": "Add student",
     "search": "Search",
     "exportPdf": "Export as PDF file",
-    "exportExcel": "Export as Excel file"
+    "exportExcel": "Export as Excel file",
+    "download": "Download"
   },
   "leaveGuard" : {
     "text": "Do you want to leave the page without saving data?"

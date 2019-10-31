@@ -14,7 +14,8 @@ import {
   MatRippleModule,
   MatSidenavModule,
   MatTabsModule,
-  MatButtonToggleModule
+  MatButtonToggleModule,
+  MatRadioModule
 } from '@angular/material';
 
 import { AppComponent } from './root/app.component';
@@ -57,6 +58,7 @@ import { TranslateLanguageSettings } from './common/helpers/factories';
 import { BannerComponent } from './components/banner/banner.component';
 import { SimpleMessageComponent } from './components/banner/simple-message/simple-message.component';
 import { BannerDirective } from './common/directives/banner.directive';
+import { ExportToolbarComponent } from './components/export/export-toolbar/export-toolbar.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,8 @@ import { BannerDirective } from './common/directives/banner.directive';
     LeaveGuardModalWindowComponent,
     BannerComponent,
     SimpleMessageComponent,
-    BannerDirective
+    BannerDirective,
+    ExportToolbarComponent
   ],
   imports: [
     BrowserModule,
@@ -103,6 +106,7 @@ import { BannerDirective } from './common/directives/banner.directive';
     AppRoutingModule,
     RouterModule,
     HttpClientModule,
+    MatRadioModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([ StudentEffects, SubjectEffects, TeacherEffects ]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
