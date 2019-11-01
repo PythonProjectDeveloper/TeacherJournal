@@ -27,7 +27,6 @@ export class StatisticSubjectComponent implements OnInit {
     private graphService: GraphService
   ) { }
 
-  // FIXME: bug with label positions
   public ngOnInit(): void {
     selectWithDestroyFlag(this.store, this.destroy$, getSubject).subscribe(subject => {
       this.subject = subject;

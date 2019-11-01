@@ -96,17 +96,17 @@ export class SubjectGraphDrawer {
       .data(dataReady)
       .enter()
       .append('text')
-        .text( d => d.data.key )
-        .attr('transform', d => {
-          const pos: number[] = outerArc.centroid(d);
-          const midangle: number = this.getMidAngle(d);
-          pos[0] = radius * 0.9 * (midangle < Math.PI ? 1 : -1);
-          return 'translate(' + pos + ')';
-        })
-        .style('text-anchor', d => {
-          const midangle: number = this.getMidAngle(d);
-          return midangle < Math.PI ? 'start' : 'end';
-        });
+      .text( d => d.data.key )
+      .attr('transform', d => {
+        const pos: number[] = outerArc.centroid(d);
+        const midangle: number = this.getMidAngle(d);
+        pos[0] = radius * 0.99 * (midangle < Math.PI ? 1 : -1);
+        return 'translate(' + pos + ')';
+      })
+      .style('text-anchor', d => {
+        const midangle: number = this.getMidAngle(d);
+        return midangle < Math.PI ? 'start' : 'end';
+      });
   }
 
   public buildPieChart(svg: any, dataReady: any, arc: any, color: any): void {
@@ -118,7 +118,7 @@ export class SubjectGraphDrawer {
       .attr('d', arc)
       .attr('fill', d => color(d.data.key) )
       .attr('stroke', '#ffffff')
-      .style('stroke-width', '1px')
+      .style('stroke-width', '2px')
       .style('opacity', 0.6);
   }
 
@@ -164,6 +164,6 @@ export class SubjectGraphDrawer {
 
     this.buildPieChart(svg, dataReady, arc, color);
     this.addChartPolylines(svg, dataReady, arc, outerArc, radius);
-    this.addLabelPolylines(svg, dataReady, arc, radius);
+    this.addLabelPolylines(svg, dataReady, outerArc, radius);
   }
 }
