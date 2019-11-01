@@ -1,0 +1,99 @@
+$border-color: #0000003d;
+$text-color: gray;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 780px;
+
+  .table-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 10px 0;
+
+    &__table {
+      width: 100%;
+      border-collapse: collapse; 
+    }
+
+    &__row {
+      border-bottom: 1px solid $border-color;
+
+      &__average-mark-lt-5 {
+        background-color: #002bff1f;
+      }
+
+      &__average-mark-lt-11 {
+        background-color: #149a041c;
+      }
+    }
+
+    &__header-cell {
+      border-left: 1px solid $border-color;
+    }
+
+    &__simple-cell {
+      border-top: 1px solid $border-color;
+      border-left: 1px solid $border-color;
+    }
+
+    &__header-cell:first-child,
+    &__simple-cell:first-child {
+      border-left: none;
+    }
+
+    &__header-cell, &__simple-cell {
+      padding: 10px;
+      color: $text-color;
+      text-align: left;
+      max-width: 50px;
+    }
+
+    &__header-cell-input, &__simple-cell-input {
+      width: 40px;
+      height: 40px;
+      outline: none;
+      border: none;
+      text-align: center;
+      background: none;
+      color: $text-color;
+      box-sizing: border-box;
+
+      &__focus {
+        color: $text-color;
+        font-weight: 900;
+        border: 2px solid #30b6dd;
+      }
+    }
+
+    &__static-cell {
+      min-width: 100px;
+      max-width: 100px;
+      font-weight: 500;
+    }
+
+    &__input-wrapper {
+      padding:0;
+      width: 40px;
+      position: relative;
+    }
+
+    &__remove-button {
+      position: absolute;
+      left: -13px;
+      top: -33px;
+      color: #ff2d2dbf;
+    }
+
+  }
+  
+  .add-button {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+  }
+}
+
+

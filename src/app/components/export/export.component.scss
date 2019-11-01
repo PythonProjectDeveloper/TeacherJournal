@@ -1,0 +1,14 @@
+:host {
+  height: 200px;
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hidden {
+    display: none;
+  }
+}

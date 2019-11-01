@@ -1,0 +1,50 @@
+{
+  "title": "Журнал учителя",
+  "pageNotFound" : {
+    "titleText": {
+      "Page not found": "Страница не найдена",
+      "Select a item.": "Выберите чёнить слева"
+    },
+    "description": "Возможно вы ввели некоректный URL. Попробуйте снова или прекратите попытки)"
+  },
+  "pages": {
+    "Students": "Студенты",
+    "Subjects": "Предметы",
+    "Statistics": "Статистика",
+    "Export": "Экспорт",
+    "student": "Студент",
+    "subject": "Предмет",
+    "Add student": "Добавить студента",
+    "Edit student": "Изменить студента",
+    "Add subject": "Добавить предмет",
+    "Edit Subject": "Изменить предмет",
+    "Journals": "Журналы",
+    "Journal": "Журнал"
+  },
+  "fields": {
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "address": "Адрес",
+    "description": "Описание",
+    "name": "Имя",
+    "teacher": "Учитель",
+    "cabinet": "Кабинет",
+    "averageMark": "Средняя оценка",
+    "query": "Запрос"
+  },
+  "actions": {
+    "ok": "Продолжить",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "addSubject": "Добавить предмет",
+    "addStudent": "Добавить студента",
+    "search": "Искать",
+    "exportPdf": "Экспортировать как PDF файл",
+    "exportExcel": "Экспортировать как Excel файл",
+    "download": "Скачать"
+  },
+  "leaveGuard" : {
+    "text": "Вы хотите покинуть страницу без сохранения изменений?"
+  },
+  "bannerMessage": "Здесь может быть ваша реклама!"
+}

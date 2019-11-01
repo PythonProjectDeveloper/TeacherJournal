@@ -1,0 +1,24 @@
+<mat-accordion class="dropdown-picker" [formGroup]="form" *ngIf="form">
+  <mat-expansion-panel [expanded]="isInputOpen" (opened)="toggleInput(true)">
+    <mat-expansion-panel-header> {{ viewDates }} </mat-expansion-panel-header>
+    <div class="dropdown-picker__header-menu">
+      <button mat-button color="primary" (click)="toggleCheckboxs(true)">CHECK ALL</button>
+      <button mat-button color="primary" (click)="toggleCheckboxs(false)">UNCHECK ALL</button>
+    </div>
+
+    <div class="dropdown-picker__subjects">
+      <div formArrayName="subjectDates" *ngFor="let subjectDate of form.controls.subjectDates.controls; let i = index">
+        <app-dropdown-collapse [formGroupName]="i" [formControl]="subjectDate"></app-dropdown-collapse>
+      </div>
+    </div>
+
+    <div class="dropdown-picker__footer-menu">
+      <div>
+        <button mat-button color="primary" (click)="toggleCollapses(true)">EXPAND ALL</button>
+        <button mat-button color="primary" (click)="toggleCollapses(false)">COLLAPSE ALL</button>
+      </div>
+      <button mat-button color="primary" (click)="toggleInput(false)">CLOSE</button>
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>
