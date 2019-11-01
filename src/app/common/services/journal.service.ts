@@ -26,4 +26,10 @@ export class JournalService {
     const response$: Observable<Journal> = this.httpService.get<Journal>(url, new Journal());
     return this.converterService.convertToObject<Journal>(response$, Journal);
   }
+
+  public getJournals(): Observable<Journal[]> {
+    const url: string = JOURNALS_API_URL;
+    const response$: Observable<Journal[]> = this.httpService.get<Journal[]>(url, []);
+    return this.converterService.convertToObjects<Journal>(response$, Journal);
+  }
 }

@@ -7,6 +7,8 @@ import { IGlobalState } from 'src/app/redux/reducers';
 import { getSubject } from 'src/app/redux/selectors/subjects';
 import { loadSubject } from 'src/app/redux/actions/subjects';
 import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
+import { GraphService } from 'src/app/common/services/graph.service';
+import { SubjectGraphDrawer } from 'src/app/common/models/draph-drawers';
 
 @Component({
   selector: 'app-statistic-subject',
@@ -16,14 +18,30 @@ import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ng
 export class StatisticSubjectComponent implements OnInit {
   public subject: Subject;
   public destroy$: RXJSSubject<boolean> = new RXJSSubject<boolean>();
+  public graphDrawer = new SubjectGraphDrawer();
+  public selector = 'graph';
 
   constructor(
     private store: Store<IGlobalState>,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private graphService: GraphService
   ) { }
 
+  // FIXME: bug with label positions
   public ngOnInit(): void {
-    selectWithDestroyFlag(this.store, this.destroy$, getSubject).subscribe(subject => this.subject = subject);
+    selectWithDestroyFlag(this.store, this.destroy$, getSubject).subscribe(subject => {
+      this.subject = subject;
+
+      if (subject.id) {
+        const graphWrapper: HTMLElement = document.getElementById(this.selector);
+
+        if (graphWrapper) {
+          graphWrapper.innerHTML = '';
+        }
+
+        this.graphService.getSubjectGraphData(subject.journalId).subscribe(data => this.graphDrawer.draw(data, `.${this.selector}`));
+      }
+    });
     setDestroyFlag(this.route.params, this.destroy$).subscribe(({ id }) => this.store.dispatch(loadSubject({ id })));
   }
 

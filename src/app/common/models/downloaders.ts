@@ -17,11 +17,11 @@ export class PDFDownloader implements IDownloader {
   }
 
   public getData(data: any[]): any[] {
-    const col: string[] = [...Object.keys(data[0])];
+    const col: string[] = Object.keys(data[0]);
     const rows: any[] = [];
 
     data.forEach(rowObj => {
-      const row: any[] = [...Object.values(rowObj)];
+      const row: any[] = Object.values(rowObj);
       rows.push(row);
     });
 

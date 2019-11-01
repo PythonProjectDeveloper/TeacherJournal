@@ -1,5 +1,6 @@
 export interface IJournal {
   id: string;
+  subjectName: string;
   dayNames: string[];
   studentMarks: IStudentMark[];
 }

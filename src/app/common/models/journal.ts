@@ -5,11 +5,13 @@ import { dropLastEmptyItems } from '../helpers/calculations';
 
 export class Journal implements IJournal, IExtendedModel<Journal> {
   public id: string;
+  public subjectName: string;
   public dayNames: string[];
   public studentMarks: IStudentMark[];
 
-  constructor({ id = '', dayNames = [], studentMarks = [] }: IJournal = {} as Journal) {
+  constructor({ id = '', subjectName= '', dayNames = [], studentMarks = [] }: IJournal = {} as Journal) {
     this.id = id;
+    this.subjectName = subjectName;
     this.dayNames = dayNames;
     this.studentMarks = studentMarks;
   }
