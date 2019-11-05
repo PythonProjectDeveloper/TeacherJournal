@@ -129,7 +129,6 @@
     ],
     "variable-name": [
       true,
-      "check-format",
       "allow-leading-underscore",
       "ban-keywords"
     ],

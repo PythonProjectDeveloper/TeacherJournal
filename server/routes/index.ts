@@ -6,15 +6,15 @@ import initExportRoutes from './export';
 import initStatisticRoutes from './statistic';
 import { Router } from 'express';
 
-export default function initRoutes(database: any): Router {
+export default function initRoutes(): Router {
   const router: Router = Router();
 
-  initTeacherRoutes(router, database);
-  initStudentRoutes(router, database);
-  initSubjectRoutes(router, database);
-  initJournalRoutes(router, database);
-  initExportRoutes(router, database);
-  initStatisticRoutes(router, database);
+  initTeacherRoutes(router);
+  initStudentRoutes(router);
+  initSubjectRoutes(router);
+  initJournalRoutes(router);
+  initExportRoutes(router);
+  initStatisticRoutes(router);
 
   return router;
 }

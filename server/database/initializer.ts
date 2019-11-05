@@ -1,22 +1,22 @@
-import { SUBJECTS, STUDENTS, TEACHERS } from 'constants/collections';
 import mockData from 'mock.server.data.json';
 import { config } from 'environments';
+import { Model, Document } from 'mongoose';
+import { Subject } from './shemas/subject';
+import { Student, Teacher } from './shemas/person';
+import { Journal } from './shemas/journals';
 
-export function initDatabaseCollections(database: any): void {
-  if (!config.production) { return; }
+export function initDatabaseCollections(): void {
+  if (config.production) { return; }
 
-  initDatabaseCollection(database, TEACHERS, mockData.teachers);
-  initDatabaseCollection(database, STUDENTS, mockData.students);
-  initDatabaseCollection(database, SUBJECTS, mockData.subjects);
+  // initDatabaseCollection(Teacher, mockData.teachers);
+  // initDatabaseCollection(Student, mockData.students);
+  // initDatabaseCollection(Subject, mockData.subjects);
+  // initDatabaseCollection(Journal, mockData.journals);
 }
 
-export function initDatabaseCollection(database: any, collectionName: string, data: any[]): any {
-  const collection: any = database.collection(collectionName);
-
-  collection.countDocuments({}, {}, (err, count) => {
+export function initDatabaseCollection(model: Model<Document, {}>, data: any[]): void {
+  model.collection.countDocuments({}, {}, (err, count) => {
       if (err) { return; }
-      if (count === 0) { collection.insertMany(data); }
+      if (count === 0) { model.collection.insertMany(data); }
   });
-
-  return collection;
 }

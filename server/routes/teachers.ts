@@ -1,48 +1,60 @@
-import { Router } from 'express';
-import { ObjectID } from 'mongodb';
+import { Router } from 'express-serve-static-core';
+import { Document } from 'mongoose';
+import { Teacher } from 'database/shemas/person';
 
-export default function routes(router: Router, database: any): void {
-  router.get('/teachers/:id', (req, res) => {
-    const id: string = req.params.id;
-    const details: any = { '_id': new ObjectID(id) };
+export default function routes(router: Router): void {
+  router.get('/teachers', (request, response) => {
 
-    database.collection('teachers').findOne(details, (err, item) => {
-      const data: any = err ? {'error': 'An error has occurred'} : item;
+      Teacher.find({}, (err, teachers) => {
+          const data: any = err ? {'error': 'An error has occurred'} : teachers;
 
-      res.send(data);
-    });
-  });
-
-  router.post('/teachers', (req, res) => {
-      const teacher: any = req.body;
-
-      database.collection('teachers').insert(teacher, (err, result) => {
-        const data: any = err ? {'error': 'An error has occurred'} : result.ops[0];
-
-        res.send(data);
+          response.send(data);
       });
-    });
-
-  router.delete('/teachers/:id', (req, res) => {
-    const id: string = req.params.id;
-    const details: any = { '_id': new ObjectID(id) };
-
-    database.collection('teachers').remove(details, (err, item) => {
-      const data: any = err ? {'error': 'An error has occurred'} : `Note ${ id } deleted!`;
-
-      res.send(data);
-    });
   });
 
-  router.put ('/teachers/:id', (req, res) => {
-    const id: string = req.params.id;
-    const details: any = { '_id': new ObjectID(id) };
-    const teacher: any = req.body;
+  router.get('/teachers/:id', (request, response) => {
 
-    database.collection('teachers').update(details, teacher, (err, result) => {
+    const id: string = request.params.id;
+
+    Teacher.findOne({_id: id}, (err, teacher) => {
       const data: any = err ? {'error': 'An error has occurred'} : teacher;
 
-      res.send(data);
+      response.send(data);
+    });
+  });
+
+  router.post('/teachers', (request, response) => {
+
+    if (!request.body) { return response.sendStatus(400); }
+
+    const teacher: Document = new Teacher(request.body);
+
+    teacher.save((err) => {
+      const data: any = err ? {'error': 'An error has occurred'} : teacher;
+
+      response.send(data);
+    });
+  });
+
+  router.delete('/teachers/:id', (request, response) => {
+
+    const id: string = request.params.id;
+    Teacher.findByIdAndDelete(id, (err, teacher) => {
+      const data: any = err ? {'error': 'An error has occurred'} : teacher;
+
+      response.send(data);
+    });
+  });
+
+  router.put('/teachers', (request, response) => {
+
+    if (!request.body) { return response.sendStatus(400); }
+    const id: any = request.body.id;
+
+    Teacher.findOneAndUpdate({_id: id}, request.body, {new: true}, (err, teacher) => {
+      const data: any = err ? {'error': 'An error has occurred'} : teacher;
+
+      response.send(data);
     });
   });
 }
