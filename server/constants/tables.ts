@@ -8,7 +8,6 @@ export const TableName: ITableName = {
   Teacher: 'Teacher',
   Subject: 'Subject',
   Journal: 'Journal',
-  Date: 'Date',
+  Day: 'Day',
   Mark: 'Mark',
-
 };

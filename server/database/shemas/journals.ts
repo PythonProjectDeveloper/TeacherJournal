@@ -1,22 +1,24 @@
-import mongoose, { Schema, Model } from 'mongoose';
+import mongoose, { Schema, Model, Document } from 'mongoose';
 import { SubjectSchema } from './subject';
 import { TableName } from 'constants/tables';
+import { StudentSchema } from './person';
 
-export const MarkSchema: Schema = new mongoose.Schema({
-  student: { type: mongoose.Schema.Types.ObjectId, ref: TableName.Subject },
+export const MarkSchema: Schema = new Schema({
+  studentID: { type: Schema.Types.ObjectId, ref: TableName.Student },
   value: { type: Number, default: null },
 });
 
-export const DateSchema: Schema = new mongoose.Schema({
+export const DaySchema: Schema = new Schema({
   name: { type: String, required: true },
   marks: [MarkSchema],
 });
 
-export const JournalSchema: Schema = new mongoose.Schema({
+export const JournalSchema: Schema = new Schema({
   subject: SubjectSchema,
-  days: [DateSchema],
+  students: [StudentSchema],
+  days: [DaySchema],
 });
 
-export const Journal: Model<mongoose.Document, {}> = mongoose.model(TableName.Journal, JournalSchema);
-export const Date: Model<mongoose.Document, {}> = mongoose.model(TableName.Date, DateSchema);
-export const Mark: Model<mongoose.Document, {}> = mongoose.model(TableName.Mark, MarkSchema);
+export const Journal: Model<Document, {}> = mongoose.model(TableName.Journal, JournalSchema);
+export const Day: Model<Document, {}> = mongoose.model(TableName.Day, DaySchema);
+export const Mark: Model<Document, {}> = mongoose.model(TableName.Mark, MarkSchema);

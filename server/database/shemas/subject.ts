@@ -1,13 +1,11 @@
-import mongoose, { Model, Schema } from 'mongoose';
-import { TeacherSchema } from './person';
+import mongoose, { Model, Schema, Document } from 'mongoose';
 import { TableName } from 'constants/tables';
 
-export const SubjectSchema: Schema = new mongoose.Schema({
+export const SubjectSchema: Schema = new Schema({
   name: { type: String, required: true },
-  teacher: TeacherSchema,
-  journalId: { type: mongoose.Schema.Types.ObjectId, ref: TableName.Journal },
+  teacherID: { type: Schema.Types.ObjectId, ref: TableName.Teacher },
   cabinet: { type: String },
   description: { type: String },
 });
 
-export const Subject: Model<mongoose.Document, {}> = mongoose.model(TableName.Subject, SubjectSchema);
+export const Subject: Model<Document, {}> = mongoose.model(TableName.Subject, SubjectSchema);

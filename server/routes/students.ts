@@ -5,7 +5,7 @@ import { Student } from 'database/shemas/person';
 export default function routes(router: Router): void {
   router.get('/students', (request, response) => {
 
-      Student.find({}, (err, students) => {
+      Student.find((err, students) => {
           const data: any = err ? {'error': 'An error has occurred'} : students;
 
           response.send(data);
@@ -14,9 +14,7 @@ export default function routes(router: Router): void {
 
   router.get('/students/:id', (request, response) => {
 
-    const id: string = request.params.id;
-
-    Student.findOne({_id: id}, (err, student) => {
+    Student.findById(request.params.id, (err, student) => {
       const data: any = err ? {'error': 'An error has occurred'} : student;
 
       response.send(data);
@@ -38,8 +36,7 @@ export default function routes(router: Router): void {
 
   router.delete('/students/:id', (request, response) => {
 
-    const id: string = request.params.id;
-    Student.findByIdAndDelete(id, (err, student) => {
+    Student.findByIdAndDelete(request.params.id, (err, student) => {
       const data: any = err ? {'error': 'An error has occurred'} : student;
 
       response.send(data);
@@ -49,9 +46,8 @@ export default function routes(router: Router): void {
   router.put('/students', (request, response) => {
 
     if (!request.body) { return response.sendStatus(400); }
-    const id: any = request.body.id;
 
-    Student.findOneAndUpdate({_id: id}, request.body, {new: true}, (err, student) => {
+    Student.findByIdAndUpdate(request.body.id, request.body, {new: true}, (err, student) => {
       const data: any = err ? {'error': 'An error has occurred'} : student;
 
       response.send(data);

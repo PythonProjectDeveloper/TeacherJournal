@@ -21,6 +21,7 @@ export class JournalService {
     return this.converterService.convertToObject<Journal>(response$, Journal);
   }
 
+  // TODO: change journal id to subject id
   public getJournal(id: string): Observable<Journal> {
     const url: string = assembleUrl(JOURNALS_API_URL, id);
     const response$: Observable<Journal> = this.httpService.get<Journal>(url, new Journal());
