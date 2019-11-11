@@ -4,30 +4,24 @@ import { Journal } from '../database/shemas/journals';
 export default function routes(router: Router): void {
   router.get('/journals', (request, response) => {
 
-    Journal.find((err, journals) => {
-        const data: any = err ? {'error': 'An error has occurred'} : journals;
-
-        response.send(data);
-    });
-});
+  Journal.find()
+    .then(data => response.send(data))
+    .catch(err => response.send(err));
+  });
 
   router.get('/journals/:id', (request, response) => {
 
-    Journal.findOne({ 'subject._id': request.params.id}, (err, journal) => {
-      const data: any = err ? {'error': 'An error has occurred'} : journal;
-
-      response.send(data);
-    });
+    Journal.findOne({ 'subject._id': request.params.id})
+      .then(data => response.send(data))
+      .catch(err => response.send(err));
   });
 
   router.put('/journals', (request, response) => {
 
     if (!request.body) { return response.sendStatus(400); }
 
-    Journal.findByIdAndUpdate(request.params.id, request.body, {new: true}, (err, journal) => {
-      const data: any = err ? {'error': 'An error has occurred'} : journal;
-
-      response.send(data);
-    });
+    Journal.findByIdAndUpdate(request.params.id, request.body, {new: true})
+      .then(data => response.send(data))
+      .catch(err => response.send(err));
   });
 }

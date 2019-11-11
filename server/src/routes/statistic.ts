@@ -27,7 +27,7 @@ export default function routes(router: Router): void {
 
         response.send(metrics);
       })
-      .catch(err => response.send({'error': 'An error has occurred', description: err}));
+      .catch(err => response.send(err));
   });
 
   router.get('/graph/subject/:id', (request, response) => {
@@ -47,6 +47,6 @@ export default function routes(router: Router): void {
 
         response.send(metrics);
       })
-      .catch(err => response.send({'error': 'An error has occurred', description: err}));
+      .catch(err => response.send(err));
   });
 }

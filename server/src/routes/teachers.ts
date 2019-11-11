@@ -5,51 +5,42 @@ import { Teacher } from '../database/shemas/person';
 export default function routes(router: Router): void {
   router.get('/teachers', (request, response) => {
 
-      Teacher.find((err, teachers) => {
-          const data: any = err ? {'error': 'An error has occurred'} : teachers;
-
-          response.send(data);
-      });
+    Teacher.find()
+      .then(data => response.send(data))
+      .catch(err => response.send(err));
   });
 
   router.get('/teachers/:id', (request, response) => {
 
-    Teacher.findById(request.params.id, (err, teacher) => {
-      const data: any = err ? {'error': 'An error has occurred'} : teacher;
-
-      response.send(data);
-    });
+    Teacher.findById(request.params.id)
+      .then(data => response.send(data))
+      .catch(err => response.send(err));
   });
 
   router.post('/teachers', (request, response) => {
 
-    if (!request.body) { return response.sendStatus(400); }
+    // if (!request.body) { return response.sendStatus(400); }
+    console.log(request.body)
 
     const teacher: Document = new Teacher(request.body);
 
-    teacher.save((err) => {
-      const data: any = err ? {'error': 'An error has occurred'} : teacher;
-
-      response.send(data);
-    });
+    teacher.save()
+      .then(data => response.send(data))
+      .catch(err => response.send(err));
   });
 
   router.delete('/teachers/:id', (request, response) => {
-    Teacher.findByIdAndDelete(request.params.id, (err, teacher) => {
-      const data: any = err ? {'error': 'An error has occurred'} : teacher;
-
-      response.send(data);
-    });
+    Teacher.findByIdAndDelete(request.params.id)
+      .then(data => response.send(data))
+      .catch(err => response.send(err));
   });
 
   router.put('/teachers', (request, response) => {
 
     if (!request.body) { return response.sendStatus(400); }
 
-    Teacher.findByIdAndUpdate(request.body.id, request.body, {new: true}, (err, teacher) => {
-      const data: any = err ? {'error': 'An error has occurred'} : teacher;
-
-      response.send(data);
-    });
+    Teacher.findByIdAndUpdate(request.body.id, request.body, {new: true})
+      .then(data => response.send(data))
+      .catch(err => response.send(err));
   });
 }

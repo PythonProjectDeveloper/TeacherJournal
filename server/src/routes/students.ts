@@ -5,20 +5,16 @@ import { Student } from '../database/shemas/person';
 export default function routes(router: Router): void {
   router.get('/students', (request, response) => {
 
-      Student.find((err, students) => {
-          const data: any = err ? {'error': 'An error has occurred'} : students;
-
-          response.send(data);
-      });
+    Student.find()
+      .then(data => response.send(data))
+      .catch(err => response.send(err));
   });
 
   router.get('/students/:id', (request, response) => {
 
-    Student.findById(request.params.id, (err, student) => {
-      const data: any = err ? {'error': 'An error has occurred'} : student;
-
-      response.send(data);
-    });
+    Student.findById(request.params.id)
+      .then(data => response.send(data))
+      .catch(err => response.send(err));
   });
 
   router.post('/students', (request, response) => {
@@ -27,30 +23,24 @@ export default function routes(router: Router): void {
 
     const student: Document = new Student(request.body);
 
-    student.save((err) => {
-      const data: any = err ? {'error': 'An error has occurred'} : student;
-
-      response.send(data);
-    });
+    student.save()
+      .then(data => response.send(data))
+      .catch(err => response.send(err));
   });
 
   router.delete('/students/:id', (request, response) => {
 
-    Student.findByIdAndDelete(request.params.id, (err, student) => {
-      const data: any = err ? {'error': 'An error has occurred'} : student;
-
-      response.send(data);
-    });
+    Student.findByIdAndDelete(request.params.id)
+      .then(data => response.send(data))
+      .catch(err => response.send(err));
   });
 
   router.put('/students', (request, response) => {
 
     if (!request.body) { return response.sendStatus(400); }
 
-    Student.findByIdAndUpdate(request.body.id, request.body, {new: true}, (err, student) => {
-      const data: any = err ? {'error': 'An error has occurred'} : student;
-
-      response.send(data);
-    });
+    Student.findByIdAndUpdate(request.body.id, request.body, {new: true})
+      .then(data => response.send(data))
+      .catch(err => response.send(err));
   });
 }

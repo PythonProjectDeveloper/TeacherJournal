@@ -9,7 +9,7 @@ export default function routes(router: Router): void {
     Student.find()
       .select('firstName lastName address')
       .then(data => response.send(data))
-      .catch(err => response.send({'error': 'An error has occurred', description: err}));
+      .catch(err => response.send(err));
   });
 
   router.get('/export/subjects', (request, response) => {
@@ -17,7 +17,7 @@ export default function routes(router: Router): void {
     Subject.find()
       .select('name cabinet')
       .then(data => response.send(data))
-      .catch(err => response.send({'error': 'An error has occurred', description: err}));
+      .catch(err => response.send(err));
   });
 
   router.get('/export/journals', (request, response) => {
@@ -45,7 +45,7 @@ export default function routes(router: Router): void {
 
         response.send(updatedJournals);
       })
-      .catch(err => response.send({'error': 'An error has occurred', description: err}));
+      .catch(err => response.send(err));
 
   });
 }
