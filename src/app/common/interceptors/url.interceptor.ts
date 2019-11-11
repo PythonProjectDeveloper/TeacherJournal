@@ -9,7 +9,7 @@ export class UrlInterceptor implements HttpInterceptor {
   public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     const updatedRequest: HttpRequest<any> = request.clone({
-      url: assembleUrl(environment.apiDomainUrl, request.url)
+      url: assembleUrl(environment.apiDomainUrl, 'api', request.url)
     });
 
     return next.handle(updatedRequest);

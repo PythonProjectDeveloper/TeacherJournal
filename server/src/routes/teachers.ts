@@ -19,8 +19,7 @@ export default function routes(router: Router): void {
 
   router.post('/teachers', (request, response) => {
 
-    // if (!request.body) { return response.sendStatus(400); }
-    console.log(request.body)
+    if (!request.body) { return response.sendStatus(400); }
 
     const teacher: Document = new Teacher(request.body);
 
