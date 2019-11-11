@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { Journal } from 'database/shemas/journals';
+import { Journal } from '../database/shemas/journals';
 
 export default function routes(router: Router): void {
   router.get('/journals', (request, response) => {

@@ -1,6 +1,5 @@
 import express from 'express';
-import { config } from 'environments';
-import { MongoClient } from 'mongodb';
+import { config } from '../environments';
 import initMiddlewares from './middleware';
 
 export function initServer(): void {

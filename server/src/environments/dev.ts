@@ -1,4 +1,4 @@
-import { IEnvironment } from 'entities/environment';
+import { IEnvironment } from '../entities/environment';
 
 export const environment: IEnvironment = {
   production: false,
@@ -6,6 +6,6 @@ export const environment: IEnvironment = {
   database: {
     url: 'localhost',
     name: 'teacher-journal',
-    port: 0
+    port: 27017
   }
 };

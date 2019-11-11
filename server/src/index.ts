@@ -1,5 +1,5 @@
-import { initServer } from 'core';
-import { connectToDatabase } from 'database';
+import { initServer } from './core';
+import { connectToDatabase } from './database';
 
 connectToDatabase()
   .then(() => initServer())

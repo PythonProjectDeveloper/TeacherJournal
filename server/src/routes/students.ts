@@ -1,6 +1,6 @@
 import { Router } from 'express-serve-static-core';
 import { Document } from 'mongoose';
-import { Student } from 'database/shemas/person';
+import { Student } from '../database/shemas/person';
 
 export default function routes(router: Router): void {
   router.get('/students', (request, response) => {

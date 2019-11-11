@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { connected, error, disconnected, termination } from 'constants/term-color';
+import { connected, error, disconnected, termination } from '../constants/term-color';
 
 export function initEvents(url: string): void {
   mongoose.connection.on('connected', () => {

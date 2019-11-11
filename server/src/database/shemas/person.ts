@@ -1,6 +1,6 @@
 import mongoose, { Model, Schema, Document } from 'mongoose';
 import extendSchema from 'mongoose-extend-schema';
-import { TableName } from 'constants/tables';
+import { TableName } from '../../constants/tables';
 
 export const PersonSchema: Schema = new Schema({
   firstName: { type: String, required: true },

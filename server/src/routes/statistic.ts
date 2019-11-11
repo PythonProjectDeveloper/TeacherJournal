@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { Journal } from 'database/shemas/journals';
+import { Journal } from '../database/shemas/journals';
 
 export default function routes(router: Router): void {
   router.get('/graph/student/:id', (request, response) => {
@@ -23,7 +23,7 @@ export default function routes(router: Router): void {
           graphData.push({ group: journal.subject.name, value: average });
 
           return graphData;
-        }, []);
+        }, [] as any[]);
 
         response.send(metrics);
       })

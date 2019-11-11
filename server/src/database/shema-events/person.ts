@@ -1,6 +1,7 @@
-import { PersonSchema } from 'database/shemas/person';
-import { Mark, Journal } from 'database/shemas/journals';
+
 import { Document } from 'mongoose';
+import { PersonSchema } from '../shemas/person';
+import { Journal, Mark } from '../shemas/journals';
 
 export function initPersonEvents(): void {
   PersonSchema.post('save', async person => {

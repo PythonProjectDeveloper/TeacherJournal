@@ -1,5 +1,5 @@
 import mongoose, { Model, Schema, Document } from 'mongoose';
-import { TableName } from 'constants/tables';
+import { TableName } from '../../constants/tables';
 
 export const SubjectSchema: Schema = new Schema({
   name: { type: String, required: true },

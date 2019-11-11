@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { Student } from 'database/shemas/person';
-import { Journal } from 'database/shemas/journals';
-import { Subject } from 'database/shemas/subject';
+import { Student } from '../database/shemas/person';
+import { Journal } from '../database/shemas/journals';
+import { Subject } from '../database/shemas/subject';
 
 export default function routes(router: Router): void {
   router.get('/export/students', (request, response) => {
@@ -25,7 +25,7 @@ export default function routes(router: Router): void {
     Journal.find()
       .then(journals => {
         const updatedJournals: any[] = journals.reduce((acc, journal: any) => {
-          acc.push({ subject:  journal.subject.name });
+          acc.push({ subject: journal.subject.name });
 
           for (const key of Object.keys(journal.students)) {
             const row: any = {
@@ -41,7 +41,7 @@ export default function routes(router: Router): void {
           acc.push({});
 
           return acc;
-        }, []);
+        }, [] as any[]);
 
         response.send(updatedJournals);
       })

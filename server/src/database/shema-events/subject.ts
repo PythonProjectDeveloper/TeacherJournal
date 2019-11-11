@@ -1,7 +1,7 @@
 import { Document } from 'mongoose';
-import { SubjectSchema } from 'database/shemas/subject';
-import { Journal } from 'database/shemas/journals';
-import { Student } from 'database/shemas/person';
+import { SubjectSchema } from '../shemas/subject';
+import { Journal } from '../shemas/journals';
+import { Student } from '../shemas/person';
 
 export function initSubjectEvents(): void {
   SubjectSchema.post('save', async subject => {

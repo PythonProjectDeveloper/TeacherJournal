@@ -1,5 +1,5 @@
-import mockData from 'mock.server.data.json';
-import { config } from 'environments';
+import mockData from '../../mock.server.data.json';
+import { config } from '../environments';
 import { Model, Document } from 'mongoose';
 import { Subject } from './shemas/subject';
 import { Student, Teacher } from './shemas/person';
