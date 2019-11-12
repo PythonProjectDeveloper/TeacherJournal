@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
-import { JournalService } from './journal.service';
-import { map } from 'rxjs/operators';
-// import { parseJournal, parseJournals } from '../helpers/statistic-parser';
 import { Observable } from 'rxjs';
+import { STUDENT_GRAPH_API_URL, SUBJECT_GRAPH_API_URL } from '../constants/constants-statistic';
+import { HttpService } from './http.service';
+import { assembleUrl } from '../helpers/calculations';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GraphService {
   constructor(
-    private journalService: JournalService,
+    private httpService: HttpService,
   ) {}
 
   public getStudentGraphData(id: string): Observable<any> {
-    return this.journalService.getJournals();
-    // .pipe(map(journals => parseJournals(journals, id)));
+    const url: string = assembleUrl(STUDENT_GRAPH_API_URL, id);
+    return this.httpService.get(url, []);
   }
 
   public getSubjectGraphData(id: string): Observable<any> {
-    return this.journalService.getJournal(id);
-    // .pipe(map(parseJournal));
+    const url: string = assembleUrl(SUBJECT_GRAPH_API_URL, id);
+    return this.httpService.get(url, {});
   }
 }

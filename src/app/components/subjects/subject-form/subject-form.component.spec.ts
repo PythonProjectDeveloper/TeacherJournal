@@ -19,7 +19,7 @@ import { Teacher } from 'src/app/common/models/person';
 let component: SubjectFormComponent;
 let fixture: ComponentFixture<SubjectFormComponent>;
 let store: any;
-const subject: Subject = new Subject({ id: 'x', name: 'x', teacherId: 'x', journalId: 'x', cabinet: 'x', description: 'x' });
+const subject: Subject = new Subject({ _id: 'x', name: 'x', teacher: 'x', cabinet: 'x', description: 'x' });
 const id: string = '3';
 
 class MockRoute {
@@ -118,7 +118,7 @@ describe('SubjectListComponent', () => {
 
       expect(component.canDeactivate()).toEqual(true);
 
-      component.formSubject.id = '100';
+      component.formSubject._id = '100';
 
       expect(component.canDeactivate()).toEqual(false);
     });
@@ -199,7 +199,7 @@ describe('SubjectListComponent', () => {
 
       component.setSubjects(subject);
 
-      expect(router.navigate).toHaveBeenCalledWith(['subjects', 'subject', 'edit', subject.id]);
+      expect(router.navigate).toHaveBeenCalledWith(['subjects', 'subject', 'edit', subject._id]);
     });
 
     it('should copy subject in local from', () => {

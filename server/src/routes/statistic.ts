@@ -5,11 +5,12 @@ export default function routes(router: Router): void {
   router.get('/graph/student/:id', (request, response) => {
     // kind of data = [{ group: 'subject name', value: 'mark average' }];
     Journal.find()
+      .populate('subject')
       .then(journals => {
 
         const metrics: any[] = journals.reduce((graphData, journal: any) => {
           const marks: number[] = journal.days.reduce((marks, day) => {
-            day.marks.findOne({ studentID: request.params.id })
+            day.marks.findOne({ student: request.params.id })
               .then(mark => {
                 if (mark) { marks.push(mark); }
               });
@@ -25,6 +26,7 @@ export default function routes(router: Router): void {
           return graphData;
         }, [] as any[]);
 
+
         response.send(metrics);
       })
       .catch(err => response.send(err));
@@ -32,15 +34,15 @@ export default function routes(router: Router): void {
 
   router.get('/graph/subject/:id', (request, response) => {
 
-    Journal.findOne({ 'subject._id': request.params.id})
+    Journal.findOne({ subject: request.params.id})
       .then((journal: any) => {
 
         // kind of data = { a: 9, b: 20, c: 30, d: 8, e: 12, f: 3, g: 7, h: 14 }
         const metrics: any = journal.days.reduce((graphData, day) => {
           day.marks.forEach(mark => {
-            if (!mark) { return; }
+            if (!mark.value) { return; }
 
-            (mark in graphData) ? graphData[mark] += 1 : graphData[mark] = 1;
+            (mark in graphData) ? graphData[mark.value] += 1 : graphData[mark.value] = 1;
           });
           return graphData;
         }, {});

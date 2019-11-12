@@ -4,9 +4,6 @@ import { Log } from '../database/shemas/log';
 
 export default function routes(router: Router): void {
   router.post('/logs', (request, response) => {
-
-    if (!request.body) { return response.sendStatus(400); }
-
     const log: Document = new Log(request.body);
 
     log.save()

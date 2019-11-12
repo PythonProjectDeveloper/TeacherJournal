@@ -17,7 +17,7 @@ import { BehaviorSubject } from 'rxjs';
 let component: StudentFormComponent;
 let fixture: ComponentFixture<StudentFormComponent>;
 let store: any;
-const student: Student = new Student({ id: 'x', firstName: 'x', lastName: 'x', address: 'x', description: 'x' });
+const student: Student = new Student({ _id: 'x', firstName: 'x', lastName: 'x', address: 'x', description: 'x' });
 const id: string = '3';
 
 class MockRoute {
@@ -107,7 +107,7 @@ describe('StudentListComponent', () => {
 
       expect(component.canDeactivate()).toEqual(true);
 
-      component.formPerson.id = '100';
+      component.formPerson._id = '100';
 
       expect(component.canDeactivate()).toEqual(false);
     });
@@ -176,7 +176,7 @@ describe('StudentListComponent', () => {
 
       component.setPersons(student);
 
-      expect(router.navigate).toHaveBeenCalledWith(['students', 'student', 'edit', student.id]);
+      expect(router.navigate).toHaveBeenCalledWith(['students', 'student', 'edit', student._id]);
     });
 
     it('should copy student in local from', () => {

@@ -44,7 +44,7 @@ export async function initJournalDatabaseCollection(model: Model<Document, {}>, 
       name: day.name,
       marks: students.map(student => ({
         student: student._id,
-        value: getRandomMark(0, 11),
+        value: getRandomMark(0, 10),
       }))
     }))
   }));

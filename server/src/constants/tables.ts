@@ -10,4 +10,5 @@ export const TableName: ITableName = {
   Journal: 'Journal',
   Day: 'Day',
   Mark: 'Mark',
+  Log: 'Log'
 };

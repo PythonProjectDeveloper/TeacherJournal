@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { Observable } from 'rxjs';
-import { SUBJECT_DATES_API_URL } from '../constants/constants-datapicker';
+import { WIDGET_JOURNAL_DATES_API_URL } from '../constants/constants-datapicker';
 import { ISubjectDates } from '../entities/subject-dates';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class DataPickerService {
   ) { }
 
   public getSubjectDates(): Observable<ISubjectDates[]> {
-    const url: string = SUBJECT_DATES_API_URL;
+    const url: string = WIDGET_JOURNAL_DATES_API_URL;
     return this.httpService.get<ISubjectDates[]>(url, []);
   }
 }

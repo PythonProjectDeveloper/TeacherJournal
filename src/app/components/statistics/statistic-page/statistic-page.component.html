@@ -10,7 +10,7 @@
             *ngFor="let student of students$ | asyncSort:'firstName' | async"
             [value]="student"
             (change)="setCurrentObjectId($event)"
-            routerLink="student/{{ currentObject?.id }}"
+            routerLink="student/{{ currentObject?._id }}"
           >
             {{ student.firstName }}
             {{ student.lastName }}
@@ -24,7 +24,7 @@
             *ngFor="let subject of subjects$ | asyncSort:'name' | async"
             [value]="subject"
             (change)="setCurrentObjectId($event)"
-            routerLink="subject/{{ currentObject?.id }}"
+            routerLink="subject/{{ currentObject?._id }}"
           >
             {{ subject.name | titlecase }}
           </mat-button-toggle>

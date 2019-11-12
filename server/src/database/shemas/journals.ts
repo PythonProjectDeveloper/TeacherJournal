@@ -1,6 +1,4 @@
 import mongoose, { Schema, Model, Document } from 'mongoose';
-import { SubjectSchema } from './subject';
-import { StudentSchema } from './person';
 import { TableName } from '../../constants/tables';
 
 export const MarkSchema: Schema = new Schema({

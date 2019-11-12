@@ -31,14 +31,14 @@ export class StatisticSubjectComponent implements OnInit {
     selectWithDestroyFlag(this.store, this.destroy$, getSubject).subscribe(subject => {
       this.subject = subject;
 
-      if (subject.id) {
+      if (subject._id) {
         const graphWrapper: HTMLElement = document.getElementById(this.selector);
 
         if (graphWrapper) {
           graphWrapper.innerHTML = '';
         }
 
-        this.graphService.getSubjectGraphData(subject.journalId).subscribe(data => this.graphDrawer.draw(data, `.${this.selector}`));
+        this.graphService.getSubjectGraphData(subject._id).subscribe(data => this.graphDrawer.draw(data, `.${this.selector}`));
       }
     });
     setDestroyFlag(this.route.params, this.destroy$).subscribe(({ id }) => this.store.dispatch(loadSubject({ id })));

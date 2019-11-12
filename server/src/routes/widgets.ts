@@ -14,6 +14,7 @@ export default function routes(router: Router): void {
   router.get('/widget/journals', (request, response) => {
 
   Journal.find()
+    .populate('subject')
     .then(journals => {
       const data = journals.map((journal: any) => ({
         subjectName: journal.subject.name,
