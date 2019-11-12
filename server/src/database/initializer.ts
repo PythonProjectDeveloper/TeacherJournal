@@ -23,7 +23,7 @@ export async function initDatabaseCollections(): Promise<void> {
 export async function initDatabaseCollection(model: Model<Document, {}>, data: any[]): Promise<void> {
   await model.collection
     .insertMany(data)
-    .catch(() => error(INITIALIZATION_ERROR_MESSAGE));
+    .catch(() => console.log(error(INITIALIZATION_ERROR_MESSAGE)));
 }
 
 export async function initSubjectDatabaseCollection(model: Model<Document, {}>, subjects: any[]): Promise<void> {

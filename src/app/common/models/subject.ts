@@ -3,25 +3,22 @@ import { IExtendedModel } from '../entities/extended-model';
 import * as _ from 'lodash';
 
 export class Subject implements ISubject, IExtendedModel<Subject> {
-  public id: string;
+  public _id: string;
   public name: string;
-  public teacherId: string;
-  public journalId: string;
+  public teacher: string;
   public cabinet: string;
   public description: string;
 
   constructor({
-    id = '',
+    _id = '',
     name = '',
-    teacherId = '',
-    journalId = '',
+    teacher = '',
     cabinet = '',
     description = ''
   }: ISubject = {} as Subject) {
-    this.id = id;
+    this._id = _id;
     this.name = name;
-    this.teacherId = teacherId;
-    this.journalId = journalId;
+    this.teacher = teacher;
     this.cabinet = cabinet;
     this.description = description;
   }
@@ -35,6 +32,6 @@ export class Subject implements ISubject, IExtendedModel<Subject> {
   }
 
   public isValid(): boolean {
-    return this.name && this.teacherId ? true : false;
+    return this.name && this.teacher ? true : false;
   }
 }

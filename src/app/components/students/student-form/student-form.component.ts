@@ -61,7 +61,7 @@ export class StudentFormComponent implements ComponentCanDeactivate, OnInit, OnD
     this.storedPerson = storagePerson;
 
     if (this.isEditForm) {
-      this.router.navigate(['students', 'student', 'edit', this.formPerson.id]);
+      this.router.navigate(['students', 'student', 'edit', this.formPerson._id]);
     }
   }
 

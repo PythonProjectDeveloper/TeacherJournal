@@ -1,13 +1,19 @@
+import { ISubject } from './subject';
+import { IStudent } from './person';
+
 export interface IJournal {
-  id: string;
-  subjectName: string;
-  dayNames: string[];
-  studentMarks: IStudentMark[];
+  _id: string;
+  subject: ISubject;
+  students: IStudent[];
+  days: IDay[];
 }
 
-export interface IStudentMark {
-  studentId: string;
-  firstName: string;
-  lastName: string;
-  marks: number[]| null[];
+export interface IDay {
+  name: string;
+  marks: IMark[];
+}
+
+export interface IMark {
+  student: string;
+  value: number | null;
 }

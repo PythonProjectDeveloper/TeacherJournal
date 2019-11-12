@@ -23,13 +23,13 @@ export class StudentService {
   }
 
   public updateStudent(person: Person): Observable<Person> {
-    const url: string = assembleUrl(STUDENTS_API_URL, person.id);
+    const url: string = assembleUrl(STUDENTS_API_URL, person._id);
     const response$: Observable<Person> = this.httpService.put<Person>(url, person, new Person());
     return this.converterService.convertToObject<Person>(response$, Student);
   }
 
   public deleteStudent(person: Person): Observable<any> {
-    const url: string = assembleUrl(STUDENTS_API_URL, person.id);
+    const url: string = assembleUrl(STUDENTS_API_URL, person._id);
     const response$: Observable<Person | {}> = this.httpService.delete<Person>(url, {} as Person);
     return this.converterService.convertToObject<Person>(response$, Student);
   }

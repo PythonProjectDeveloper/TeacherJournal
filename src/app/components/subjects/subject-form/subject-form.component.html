@@ -11,8 +11,8 @@
 
       <mat-form-field>
         <mat-label translate>fields.teacher</mat-label>
-        <mat-select [(value)]="formSubject.teacherId" class="form__field" required>
-          <mat-option name="teacherId" *ngFor="let teacher of teachers" [value]="teacher.id">
+        <mat-select [(value)]="formSubject.teacher" class="form__field" required>
+          <mat-option name="teacherId" *ngFor="let teacher of teachers" [value]="teacher._id">
             {{teacher.firstName}}
             {{teacher.lastName}}
           </mat-option>

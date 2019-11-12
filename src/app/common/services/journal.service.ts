@@ -16,7 +16,7 @@ export class JournalService {
   ) { }
 
   public updateJournal(journal: Journal): Observable<Journal> {
-    const url: string = assembleUrl(JOURNALS_API_URL, journal.id);
+    const url: string = assembleUrl(JOURNALS_API_URL, journal._id);
     const response$: Observable<Journal> = this.httpService.put<Journal>(url, journal, new Journal());
     return this.converterService.convertToObject<Journal>(response$, Journal);
   }

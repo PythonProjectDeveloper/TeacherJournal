@@ -23,13 +23,13 @@ export class SubjectService {
   }
 
   public updateSubject(subject: Subject): Observable<Subject> {
-    const url: string = assembleUrl(SUBJECTS_API_URL, subject.id);
+    const url: string = assembleUrl(SUBJECTS_API_URL, subject._id);
     const response$: Observable<Subject> = this.httpService.put<Subject>(url, subject, new Subject());
     return this.converterService.convertToObject<Subject>(response$, Subject);
   }
 
   public deleteSubject(subject: Subject): Observable<{}> {
-    const url: string = assembleUrl(SUBJECTS_API_URL, subject.id);
+    const url: string = assembleUrl(SUBJECTS_API_URL, subject._id);
     const response$: Observable<Subject | {}> = this.httpService.delete<Subject>(url, {} as Subject);
     return this.converterService.convertToObject<Subject>(response$, Subject);
   }

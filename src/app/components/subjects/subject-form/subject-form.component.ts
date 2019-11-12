@@ -68,7 +68,7 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit, OnD
     this.storedSubject = storageSubject;
 
     if (this.isEditForm) {
-      this.router.navigate(['subjects', 'subject', 'edit', this.formSubject.id]);
+      this.router.navigate(['subjects', 'subject', 'edit', this.formSubject._id]);
     }
   }
 

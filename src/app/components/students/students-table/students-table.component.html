@@ -6,7 +6,7 @@
   <table class="mat-elevation-z8 table-wrapper__table" [dataSource]="dataSource" mat-table matSort matSortActive="firstName" matSortDirection="asc">
     <ng-container matColumnDef="id">
       <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-      <td class="table-wrapper__simple-cell" mat-cell *matCellDef="let element"> {{element.id | slice:0:4}} </td>
+      <td class="table-wrapper__simple-cell" mat-cell *matCellDef="let element"> {{element._id | slice:0:4}} </td>
     </ng-container>
   
     <ng-container matColumnDef="firstName">
@@ -33,7 +33,7 @@
       <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef></th>
       <td class="table-wrapper__simple-cell" mat-cell  *matCellDef="let element">
         <div class="table-wrapper__controls-wrapper">
-          <button class="table-wrapper__control-edit-button" mat-icon-button routerLink="student/edit/{{ element.id }}">
+          <button class="table-wrapper__control-edit-button" mat-icon-button routerLink="student/edit/{{ element._id }}">
             <mat-icon>edit</mat-icon>
           </button>
   

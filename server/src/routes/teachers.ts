@@ -18,9 +18,7 @@ export default function routes(router: Router): void {
   });
 
   router.post('/teachers', (request, response) => {
-
-    if (!request.body) { return response.sendStatus(400); }
-
+    delete request.body._id;
     const teacher: Document = new Teacher(request.body);
 
     teacher.save()
@@ -34,11 +32,8 @@ export default function routes(router: Router): void {
       .catch(err => response.send(err));
   });
 
-  router.put('/teachers', (request, response) => {
-
-    if (!request.body) { return response.sendStatus(400); }
-
-    Teacher.findByIdAndUpdate(request.body.id, request.body, {new: true})
+  router.put('/teachers/:id', (request, response) => {
+    Teacher.findByIdAndUpdate(request.params.id, request.body, {new: true})
       .then(data => response.send(data))
       .catch(err => response.send(err));
   });

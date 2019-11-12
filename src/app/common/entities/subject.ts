@@ -1,8 +1,7 @@
 export interface ISubject {
-  id: string;
+  _id: string;
   name: string;
-  teacherId: string;
-  journalId: string;
+  teacher: string;
   cabinet: string;
   description: string;
 }
