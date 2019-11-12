@@ -4,7 +4,7 @@ import { StudentSchema } from './person';
 import { TableName } from '../../constants/tables';
 
 export const MarkSchema: Schema = new Schema({
-  studentID: { type: Schema.Types.ObjectId, ref: TableName.Student },
+  student: { type: Schema.Types.ObjectId, ref: TableName.Student },
   value: { type: Number, default: null },
 });
 
@@ -14,8 +14,8 @@ export const DaySchema: Schema = new Schema({
 });
 
 export const JournalSchema: Schema = new Schema({
-  subject: SubjectSchema,
-  students: [StudentSchema],
+  subject: { type: Schema.Types.ObjectId, ref: TableName.Subject },
+  students: [{ type: Schema.Types.ObjectId, ref: TableName.Student }],
   days: [DaySchema],
 });
 

@@ -3,7 +3,7 @@ import { TableName } from '../../constants/tables';
 
 export const SubjectSchema: Schema = new Schema({
   name: { type: String, required: true },
-  teacherID: { type: Schema.Types.ObjectId, ref: TableName.Teacher },
+  teacher: { type: Schema.Types.ObjectId, ref: TableName.Teacher },
   cabinet: { type: String },
   description: { type: String },
 });
