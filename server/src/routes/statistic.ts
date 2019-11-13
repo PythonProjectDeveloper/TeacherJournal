@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import { Journal } from '../database/shemas/journals';
+import { isNull } from 'util';
+import { mean } from 'lodash';
 
 export default function routes(router: Router): void {
   router.get('/graph/student/:id', (request, response) => {
@@ -9,23 +11,18 @@ export default function routes(router: Router): void {
       .then(journals => {
 
         const metrics: any[] = journals.reduce((graphData, journal: any) => {
-          const marks: number[] = journal.days.reduce((marks, day) => {
-            day.marks.findOne({ student: request.params.id })
-              .then(mark => {
-                if (mark) { marks.push(mark); }
-              });
+          const marks: number[] = journal.days.reduce((subjectMarks, day) => {
+            const mark = day.marks.find(dayMark => dayMark.student.toString() === request.params.id);
 
-            return marks;
+            if (mark && !isNull(mark.value)) { subjectMarks.push(mark.value); }
+
+            return subjectMarks;
           }, []);
 
-          const sum: number = marks.reduce((acc, mark) => acc + sum, 0);
-          const average: number = sum / marks.length;
-
-          graphData.push({ group: journal.subject.name, value: average });
+          graphData.push({ group: journal.subject.name, value: mean(marks) });
 
           return graphData;
         }, [] as any[]);
-
 
         response.send(metrics);
       })
@@ -37,12 +34,13 @@ export default function routes(router: Router): void {
     Journal.findOne({ subject: request.params.id})
       .then((journal: any) => {
 
-        // kind of data = { a: 9, b: 20, c: 30, d: 8, e: 12, f: 3, g: 7, h: 14 }
+        // kind of data = { [key: mark value]: quantity }
         const metrics: any = journal.days.reduce((graphData, day) => {
+
           day.marks.forEach(mark => {
             if (!mark.value) { return; }
 
-            (mark in graphData) ? graphData[mark.value] += 1 : graphData[mark.value] = 1;
+            (mark.value in graphData) ? graphData[mark.value] += 1 : graphData[mark.value] = 1;
           });
           return graphData;
         }, {});
