@@ -3,6 +3,7 @@ import { SubjectForm } from './subject';
 
 // tslint:disable-next-line: variable-name
 export const JournalForm: FormGroup = new FormGroup({
+  _id: new FormControl('', [ Validators.maxLength(24) ]),
   subject: SubjectForm,
   students: new FormArray([]),
   days: new FormArray([]),

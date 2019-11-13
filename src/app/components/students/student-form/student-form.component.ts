@@ -8,8 +8,10 @@ import { loadStudent, createStudent, updateStudent } from 'src/app/redux/actions
 import { getStudent } from 'src/app/redux/selectors/students';
 import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
 import { BannerService } from 'src/app/common/services/banner.service';
+import { PersonForm } from 'src/app/common/forms/person';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IPerson } from 'src/app/common/entities/person';
-import { isEqual, cloneDeep } from 'lodash';
+import { isEqual } from 'lodash';
 
 @Component({
   selector: 'app-student-form',
@@ -17,8 +19,8 @@ import { isEqual, cloneDeep } from 'lodash';
   styleUrls: ['./student-form.component.scss']
 })
 export class StudentFormComponent implements ComponentCanDeactivate, OnInit, OnDestroy {
-  public storedPerson: IPerson;
-  public formPerson: IPerson;
+  public person: IPerson;
+  public form: FormGroup = PersonForm;
   public isEditForm: boolean;
   public destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -27,12 +29,17 @@ export class StudentFormComponent implements ComponentCanDeactivate, OnInit, OnD
     private route: ActivatedRoute,
     private router: Router,
     private bunnerService: BannerService
-  ) {
-    this.setPersons = this.setPersons.bind(this);
-  }
+  ) { }
 
   public ngOnInit(): void {
-    selectWithDestroyFlag(this.store, this.destroy$, getStudent).subscribe(this.setPersons);
+    selectWithDestroyFlag(this.store, this.destroy$, getStudent).subscribe(person => {
+      this.person = person;
+      this.form.setValue(person);
+
+      if (this.isEditForm) {
+        this.router.navigate(['students', 'student', 'edit', person._id]);
+      }
+    });
     setDestroyFlag(this.route.params, this.destroy$).subscribe(({ id }) => {
       this.store.dispatch(loadStudent({ id }));
 
@@ -41,29 +48,20 @@ export class StudentFormComponent implements ComponentCanDeactivate, OnInit, OnD
   }
 
   public canDeactivate(): boolean | Observable<boolean> {
-    return isEqual(this.formPerson, this.storedPerson);
+    return isEqual(this.form.value, this.person);
   }
 
   public onSave(): void {
-    if (!this.formPerson.firstName || !this.formPerson.lastName) { return; }
+    if (!this.form.valid) { return; }
 
     if (this.isEditForm) {
-      this.store.dispatch(updateStudent(this.formPerson));
+      this.store.dispatch(updateStudent(this.form.value));
     } else {
       this.isEditForm = true;
-      this.store.dispatch(createStudent(this.formPerson));
+      this.store.dispatch(createStudent(this.form.value));
     }
 
     this.bunnerService.setBannerStatus(true);
-  }
-
-  public setPersons(storagePerson: IPerson): void {
-    this.formPerson = cloneDeep(storagePerson);
-    this.storedPerson = storagePerson;
-
-    if (this.isEditForm) {
-      this.router.navigate(['students', 'student', 'edit', this.formPerson._id]);
-    }
   }
 
   public ngOnDestroy(): void {

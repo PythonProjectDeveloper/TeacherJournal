@@ -11,3 +11,11 @@ export interface IStudent extends IPerson {
 
 export interface ITeacher extends IPerson {
 }
+
+export const PERSON: IPerson = {
+  _id: '',
+  firstName: '',
+  lastName: '',
+  address: '',
+  description: ''
+}

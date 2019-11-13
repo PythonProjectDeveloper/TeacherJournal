@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
 import { STUDENTS_API_URL } from '../constants/constants-person';
 import { assembleUrl } from '../helpers/calculations';
 import { HttpService } from './http.service';
-import { IPerson } from '../entities/person';
+import { IPerson, PERSON } from '../entities/person';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +38,6 @@ export class StudentService {
 
   public getStudent(id: string): Observable<IPerson> {
     const url: string = assembleUrl(STUDENTS_API_URL, id);
-    return this.httpService.get<IPerson>(url);
+    return id ? this.httpService.get<IPerson>(url) : of(PERSON);
   }
 }

@@ -1,26 +1,26 @@
 <h2 class="title" translate>pages.student</h2>
 
-<form (submit)="onSave()" class="form">
+<form (submit)="onSave()" class="form" [formGroup]="form">
   <mat-card>
     <mat-card-content class="form__field-container">
       <mat-form-field>
         <mat-label translate>fields.firstName</mat-label>
-        <input [(ngModel)]="formPerson.firstName" matInput name="firstName" class="form__field" required maxlength="50">
+        <input formControlName="firstName" matInput class="form__field" required>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label translate>fields.lastName</mat-label>
-        <input [(ngModel)]="formPerson.lastName" matInput name="lastName" class="form__field" required maxlength="50">
+        <input formControlName="lastName" matInput class="form__field" required>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label translate>fields.address</mat-label>
-        <input [(ngModel)]="formPerson.address" matInput name="address" class="form__field" maxlength="50">
+        <input formControlName="address" matInput class="form__field">
       </mat-form-field>
 
       <mat-form-field>
         <mat-label translate>fields.description</mat-label>
-        <textarea [(ngModel)]="formPerson.description" matInput name="description" class="form__field" maxlength="200"></textarea>
+        <textarea formControlName="description" matInput class="form__field"></textarea>
       </mat-form-field>
     </mat-card-content>
     

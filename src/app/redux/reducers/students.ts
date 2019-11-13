@@ -1,7 +1,7 @@
 
 import { createReducer, on, ActionReducer, Action } from '@ngrx/store';
 import * as StudentPageActions from '../actions/students';
-import { IStudent } from 'src/app/common/entities/person';
+import { IStudent, PERSON } from 'src/app/common/entities/person';
 
 export interface StudentPageState {
   students: IStudent[];
@@ -11,7 +11,7 @@ export interface StudentPageState {
 
 export const initialState: StudentPageState = {
   students: [],
-  student: {} as IStudent,
+  student: PERSON,
   filterText: ''
 };
 

@@ -1,7 +1,8 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 // tslint:disable-next-line: variable-name
-export const PersonForm: FormGroup = new FormGroup({
+export let PersonForm: FormGroup = new FormGroup({
+  _id: new FormControl('', [ Validators.maxLength(24) ]),
   firstName: new FormControl('', [ Validators.required, Validators.maxLength(50) ]),
   lastName: new FormControl('', [ Validators.required, Validators.maxLength(50) ]),
   address: new FormControl('', [ Validators.maxLength(50) ]),
