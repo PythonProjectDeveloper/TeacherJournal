@@ -5,3 +5,11 @@ export interface ISubject {
   cabinet: string;
   description: string;
 }
+
+export const SUBJECT: ISubject = {
+  _id: '',
+  name: '',
+  teacher: '',
+  cabinet: '',
+  description: ''
+}

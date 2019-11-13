@@ -6,6 +6,6 @@ export const SubjectSchema: Schema = new Schema({
   teacher: { type: Schema.Types.ObjectId, ref: TableName.Teacher },
   cabinet: { type: String },
   description: { type: String },
-});
+}, { versionKey: false });
 
 export const Subject: Model<Document, {}> = mongoose.model(TableName.Subject, SubjectSchema);

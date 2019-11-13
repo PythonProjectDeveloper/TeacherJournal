@@ -7,7 +7,7 @@ export const PersonSchema: Schema = new Schema({
   lastName: { type: String, required: true },
   address: { type: String },
   description: { type: String },
-}, { versionKey: false });
+}, { versionKey: false } );
 
 export const StudentSchema: Schema = extendSchema(PersonSchema, {});
 export const TeacherSchema: Schema = extendSchema(PersonSchema, {});

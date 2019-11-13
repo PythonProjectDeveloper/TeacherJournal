@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { assembleUrl } from '../helpers/calculations';
 import { SUBJECTS_API_URL } from '../constants/constants-subject';
 import { HttpService } from './http.service';
 import { HttpParams } from '@angular/common/http';
-import { ISubject } from '../entities/subject';
+import { ISubject, SUBJECT } from '../entities/subject';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +38,7 @@ export class SubjectService {
 
   public getSubject(id: string): Observable<ISubject> {
     const url: string = assembleUrl(SUBJECTS_API_URL, id);
-    return this.httpService.get<ISubject>(url);
+    return id ? this.httpService.get<ISubject>(url) : of(SUBJECT);
   }
 
 }
