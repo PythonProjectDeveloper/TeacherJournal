@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import { ExportType, TableType } from '../constants/constants-export';
 import { IDownloader } from '../entities/downloaders';
 import { DOWNLOADERS } from '../models/downloaders';
-import { Person } from '../models/person';
 import { Observable } from 'rxjs';
-import { Journal } from '../models/journal';
-import { Subject } from '../models/subject';
-import { map } from 'rxjs/operators';
-// import { parseStudents, parseJournals, parseSubjects } from '../helpers/export-parser';
-import { StudentService } from './student.service';
-import { SubjectService } from './subject.service';
-import { JournalService } from './journal.service';
+import { HttpService } from './http.service';
+import {
+  ExportType,
+  TableType,
+  SUBJECTS_EXPORT_API_URL,
+  STUDENTS_EXPORT_API_URL,
+  JOURNALS_EXPORT_API_URL
+} from '../constants/constants-export';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +18,7 @@ export class DownloadService {
   private downloader: IDownloader;
 
   constructor(
-    private studentService: StudentService,
-    private subjectService: SubjectService,
-    private journalService: JournalService,
+    private httpService: HttpService,
   ) {}
 
   public setDownloader(type: ExportType): void {
@@ -34,14 +31,26 @@ export class DownloadService {
     });
   }
 
+  public getStudents(): Observable<any[]> {
+    const url: string = STUDENTS_EXPORT_API_URL;
+    return this.httpService.get(url, []);
+  }
+
+  public getSubjects(): Observable<any[]> {
+    const url: string = SUBJECTS_EXPORT_API_URL;
+    return this.httpService.get(url, []);
+  }
+
+  public getJournals(): Observable<any[]> {
+    const url: string = JOURNALS_EXPORT_API_URL;
+    return this.httpService.get(url, []);
+  }
+
   public getData(tableType: TableType): Observable<any> {
     switch (tableType) {
-      case TableType.STUDENTS: return this.studentService.getStudents();
-      // .pipe(map(parseStudents));
-      case TableType.SUBJECTS: return this.subjectService.getSubjects();
-      // .pipe(map(parseSubjects));
-      case TableType.JOURNALS: return this.journalService.getJournals();
-      // .pipe(map(parseJournals));
+      case TableType.STUDENTS: return this.getStudents();
+      case TableType.SUBJECTS: return this.getSubjects();
+      case TableType.JOURNALS: return this.getJournals();
       default: throw Error(`There is not data loader for ${tableType}`);
     }
   }
