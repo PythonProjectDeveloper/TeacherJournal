@@ -1,10 +1,10 @@
 
 import { createReducer, on, ActionReducer, Action } from '@ngrx/store';
 import * as TeacherPageActions from '../actions/teachers';
-import { Teacher } from 'src/app/common/models/person';
+import { ITeacher } from 'src/app/common/entities/person';
 
 export interface TeacherPageState {
-  teachers: Teacher[];
+  teachers: ITeacher[];
 }
 
 export const initialState: TeacherPageState = {

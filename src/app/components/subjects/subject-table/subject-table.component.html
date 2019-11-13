@@ -1,4 +1,4 @@
-<h2 class="title"> {{ subject?.name | titlecase }} </h2>
+<h2 class="title"> {{ formJournal?.subject?.name | titlecase }} </h2>
 
 <div class="table-wrapper">
   <table class="mat-elevation-z8 table-wrapper__table">
@@ -6,34 +6,34 @@
       <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'fields.firstName' | translate }} </th>
       <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'fields.lastName' | translate }} </th>
       <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'fields.averageMark' | translate }} </th>
-      <th class="table-wrapper__header-cell table-wrapper__input-wrapper" *ngFor="let dayName of formJournal?.dayNames; trackBy:trackByIndex; let dayNameIndex = index"> 
+      <th class="table-wrapper__header-cell table-wrapper__input-wrapper" *ngFor="let day of formJournal?.days; let dayIndex = index"> 
         <input
           class="table-wrapper__header-cell-input"
           type="text"
-          [value]="dayName"
-          (blur)="onChangeHeaderCell($event, dayNameIndex)"
+          [(ngModel)]="day.name"
+          (blur)='setSaveButtonVision()'
           appFocusHighlight="table-wrapper__header-cell-input__focus"
         >
-        <button class="table-wrapper__remove-button" mat-icon-button (click)="onRemoveColumn(dayNameIndex)">
+        <button class="table-wrapper__remove-button" mat-icon-button (click)="onRemoveColumn(dayIndex)">
           <mat-icon>delete</mat-icon>
         </button>
       </th>
     </tr>
     <tr
-      *ngFor="let studentMark of formJournal?.studentMarks | asyncSort:'firstName'"
+      *ngFor="let student of formJournal?.students; let studentIndex = index"
       class="table-wrapper__row"
-      [appAverageMarkHighlight]="studentMark.marks | average | number:'1.1-1'"
+      [appAverageMarkHighlight]="getStudentMarks(student._id, formJournal?.days) | average | number:'1.1-1'"
       [averageMarkColors]="averageMarkColors"
     >
-      <td class="table-wrapper__simple-cell"> {{ studentMark.firstName }} </td>
-      <td class="table-wrapper__simple-cell"> {{ studentMark.lastName }} </td>
-      <td class="table-wrapper__simple-cell"> {{ studentMark.marks | average | number:'1.1-1' }} </td>
-      <td class="table-wrapper__simple-cell table-wrapper__input-wrapper" *ngFor="let mark of studentMark.marks; trackBy:trackByIndex; let markIndex = index">
+      <td class="table-wrapper__simple-cell"> {{ student.firstName }} </td>
+      <td class="table-wrapper__simple-cell"> {{ student.lastName }} </td>
+      <td class="table-wrapper__simple-cell"> {{ getStudentMarks(student._id, formJournal?.days) | average | number:'1.1-1' }} </td>
+      <td class="table-wrapper__simple-cell table-wrapper__input-wrapper" *ngFor="let day of formJournal?.days">
         <input
           class="table-wrapper__simple-cell-input"
           type="text"
-          [value]="mark"
-          (blur)="onChangeSimpleCell($event, studentMark.studentId, markIndex)"
+          [(ngModel)]="day.marks[studentIndex].value"
+          (blur)='setSaveButtonVision()'
           appNumberCheck
           [maxNumber]="10"
           [minNumber]="0"

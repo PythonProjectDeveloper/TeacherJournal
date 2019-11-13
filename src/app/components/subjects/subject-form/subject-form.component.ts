@@ -2,8 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
 import { Observable, Subject as RXJSSubject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'src/app/common/models/subject';
-import { Teacher } from 'src/app/common/models/person';
 import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { createSubject, updateSubject, loadSubject } from 'src/app/redux/actions/subjects';
@@ -12,6 +10,9 @@ import { loadTeachers } from 'src/app/redux/actions/teachers';
 import { getTeachers } from 'src/app/redux/selectors/teachers';
 import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
 import { BannerService } from 'src/app/common/services/banner.service';
+import { ISubject } from 'src/app/common/entities/subject';
+import { ITeacher } from 'src/app/common/entities/person';
+import { isEqual, cloneDeep } from 'lodash';
 
 @Component({
   selector: 'app-subject-form',
@@ -19,9 +20,9 @@ import { BannerService } from 'src/app/common/services/banner.service';
   styleUrls: ['./subject-form.component.scss']
 })
 export class SubjectFormComponent implements ComponentCanDeactivate, OnInit, OnDestroy {
-  public teachers: Teacher[];
-  public storedSubject: Subject;
-  public formSubject: Subject;
+  public teachers: ITeacher[];
+  public storedSubject: ISubject;
+  public formSubject: ISubject;
   public isEditForm: boolean;
   public destroy$: RXJSSubject<boolean> = new RXJSSubject<boolean>();
 
@@ -47,11 +48,11 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit, OnD
   }
 
   public canDeactivate(): boolean | Observable<boolean> {
-    return this.formSubject.isEqual(this.storedSubject);
+    return isEqual(this.formSubject, this.storedSubject);
   }
 
   public onSave(): void {
-    if (!this.formSubject.isValid()) { return; }
+    if (!this.formSubject.name || !this.formSubject.teacher) { return; }
 
     if (this.isEditForm) {
       this.store.dispatch(updateSubject(this.formSubject));
@@ -63,8 +64,8 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit, OnD
     this.bunnerService.setBannerStatus(true);
   }
 
-  public setSubjects(storageSubject: Subject): void {
-    this.formSubject = storageSubject.getCopy();
+  public setSubjects(storageSubject: ISubject): void {
+    this.formSubject = cloneDeep(storageSubject);
     this.storedSubject = storageSubject;
 
     if (this.isEditForm) {
@@ -72,7 +73,7 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit, OnD
     }
   }
 
-  public setTeachers(teachers: Teacher[]): void {
+  public setTeachers(teachers: ITeacher[]): void {
     this.teachers = teachers;
   }
 

@@ -1,16 +1,16 @@
 import { createAction, props, ActionCreator } from '@ngrx/store';
-import { Student } from 'src/app/common/models/person';
+import { IStudent } from 'src/app/common/entities/person';
 
-const PAGE: string = '[Student Page]';
+const PAGE: string = '[IStudent Page]';
 
 export const loadStudents: ActionCreator<string, any> = createAction(`${PAGE} Load Students`);
-export const setStudents: ActionCreator<string, any> = createAction(`${PAGE} Set Students`, props<Student[]>());
+export const setStudents: ActionCreator<string, any> = createAction(`${PAGE} Set Students`, props<IStudent[]>());
 
-export const loadStudent: ActionCreator<string, any> = createAction(`${PAGE} Load Student`, props<{ id: string }>());
-export const setStudent: ActionCreator<string, any> = createAction(`${PAGE} Set Student`, props<Student>());
-export const createStudent: ActionCreator<string, any> = createAction(`${PAGE} Create Student`, props<Student>());
-export const updateStudent: ActionCreator<string, any> = createAction(`${PAGE} Update Student`, props<Student>());
-export const deleteStudent: ActionCreator<string, any> = createAction(`${PAGE} Delete Student`, props<Student>());
+export const loadStudent: ActionCreator<string, any> = createAction(`${PAGE} Load IStudent`, props<{ id: string }>());
+export const setStudent: ActionCreator<string, any> = createAction(`${PAGE} Set IStudent`, props<IStudent>());
+export const createStudent: ActionCreator<string, any> = createAction(`${PAGE} Create IStudent`, props<IStudent>());
+export const updateStudent: ActionCreator<string, any> = createAction(`${PAGE} Update IStudent`, props<IStudent>());
+export const deleteStudent: ActionCreator<string, any> = createAction(`${PAGE} Delete IStudent`, props<IStudent>());
 
 export const updateFilterText: ActionCreator<string, any> = createAction(`${PAGE} Update Filter Text`, props<{ filterText: string }>());
 export const setFilterText: ActionCreator<string, any> = createAction(`${PAGE} Set Filter Text`, props<{ filterText: string }>());

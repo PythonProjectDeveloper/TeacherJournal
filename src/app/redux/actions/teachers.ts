@@ -1,7 +1,7 @@
 import { createAction, props, ActionCreator } from '@ngrx/store';
-import { Teacher } from 'src/app/common/models/person';
+import { ITeacher } from 'src/app/common/entities/person';
 
-const PAGE: string = '[Teacher Page]';
+const PAGE: string = '[ITeacher Page]';
 
 export const loadTeachers: ActionCreator<string, any> = createAction(`${PAGE} Load Teachers`);
-export const setTeachers: ActionCreator<string, any> = createAction(`${PAGE} Set Teachers`, props<Teacher[]>());
+export const setTeachers: ActionCreator<string, any> = createAction(`${PAGE} Set Teachers`, props<ITeacher[]>());

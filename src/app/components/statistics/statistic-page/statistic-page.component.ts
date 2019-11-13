@@ -3,8 +3,6 @@ import { MatTabChangeEvent, MatButtonToggleChange } from '@angular/material';
 import { Observable } from 'rxjs';
 import { ISubject } from 'src/app/common/entities/subject';
 import { IStudent } from 'src/app/common/entities/person';
-import { Subject } from 'src/app/common/models/subject';
-import { Student } from 'src/app/common/models/person';
 import { select, Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { getStudents } from 'src/app/redux/selectors/students';
@@ -26,8 +24,8 @@ export class StatisticPageComponent implements OnInit {
   public currentList = 'Students';
   public currentObject: IStudent | ISubject | null = null;
   public list = List;
-  public students$: Observable<Student[]>;
-  public subjects$: Observable<Subject[]>;
+  public students$: Observable<IStudent[]>;
+  public subjects$: Observable<ISubject[]>;
 
   constructor(
     private store: Store<IGlobalState>

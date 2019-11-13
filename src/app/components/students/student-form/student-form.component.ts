@@ -2,13 +2,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
 import { Observable, Subject } from 'rxjs';
-import { Person } from 'src/app/common/models/person';
 import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { loadStudent, createStudent, updateStudent } from 'src/app/redux/actions/students';
 import { getStudent } from 'src/app/redux/selectors/students';
 import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
 import { BannerService } from 'src/app/common/services/banner.service';
+import { IPerson } from 'src/app/common/entities/person';
+import { isEqual, cloneDeep } from 'lodash';
 
 @Component({
   selector: 'app-student-form',
@@ -16,8 +17,8 @@ import { BannerService } from 'src/app/common/services/banner.service';
   styleUrls: ['./student-form.component.scss']
 })
 export class StudentFormComponent implements ComponentCanDeactivate, OnInit, OnDestroy {
-  public storedPerson: Person;
-  public formPerson: Person;
+  public storedPerson: IPerson;
+  public formPerson: IPerson;
   public isEditForm: boolean;
   public destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -40,11 +41,11 @@ export class StudentFormComponent implements ComponentCanDeactivate, OnInit, OnD
   }
 
   public canDeactivate(): boolean | Observable<boolean> {
-    return this.formPerson.isEqual(this.storedPerson);
+    return isEqual(this.formPerson, this.storedPerson);
   }
 
   public onSave(): void {
-    if (!this.formPerson.isValid()) { return; }
+    if (!this.formPerson.firstName || !this.formPerson.lastName) { return; }
 
     if (this.isEditForm) {
       this.store.dispatch(updateStudent(this.formPerson));
@@ -56,8 +57,8 @@ export class StudentFormComponent implements ComponentCanDeactivate, OnInit, OnD
     this.bunnerService.setBannerStatus(true);
   }
 
-  public setPersons(storagePerson: Person): void {
-    this.formPerson = storagePerson.getCopy();
+  public setPersons(storagePerson: IPerson): void {
+    this.formPerson = cloneDeep(storagePerson);
     this.storedPerson = storagePerson;
 
     if (this.isEditForm) {

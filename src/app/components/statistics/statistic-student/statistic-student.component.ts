@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Person } from 'src/app/common/models/person';
 import { ActivatedRoute } from '@angular/router';
 import { Subject as RXJSSubject } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -8,7 +7,8 @@ import { getStudent } from 'src/app/redux/selectors/students';
 import { loadStudent } from 'src/app/redux/actions/students';
 import { setDestroyFlag, selectWithDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
 import { GraphService } from 'src/app/common/services/graph.service';
-import { StudentGraphDrawer } from 'src/app/common/models/draph-drawers';
+import { StudentGraphDrawer } from 'src/app/common/helpers/draph-drawers';
+import { IPerson } from 'src/app/common/entities/person';
 
 @Component({
   selector: 'app-statistic-student',
@@ -16,7 +16,7 @@ import { StudentGraphDrawer } from 'src/app/common/models/draph-drawers';
   styleUrls: ['./statistic-student.component.scss']
 })
 export class StatisticStudentComponent implements OnInit, OnDestroy {
-  public student: Person;
+  public student: IPerson;
   public destroy$: RXJSSubject<boolean> = new RXJSSubject<boolean>();
   public graphDrawer = new StudentGraphDrawer();
   public selector = 'graph';

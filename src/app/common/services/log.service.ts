@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Log } from '../models/log';
 import { LOGS_API_URL } from '../constants/constants-log';
+import { ILog } from '../entities/log';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +17,12 @@ export class LogService {
     error: any,
     defaultValue: any
   ): Observable<T> {
-    const log: Log = new Log(error);
 
     // send log to log server
-    this.http.post<Log>(LOGS_API_URL, log);
+    this.http.post<ILog>(LOGS_API_URL, error);
 
     // show error to user
-    log.printError();
+    console.log(error.message);
 
     return of(defaultValue as T);
   }

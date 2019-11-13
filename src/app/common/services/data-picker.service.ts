@@ -14,6 +14,6 @@ export class DataPickerService {
 
   public getSubjectDates(): Observable<ISubjectDates[]> {
     const url: string = WIDGET_JOURNAL_DATES_API_URL;
-    return this.httpService.get<ISubjectDates[]>(url, []);
+    return this.httpService.get<ISubjectDates[]>(url);
   }
 }

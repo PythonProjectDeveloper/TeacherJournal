@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
-import { Person } from 'src/app/common/models/person';
 import { BASE_STUDENT_COLUMNS } from 'src/app/shared/constants/constants-table';
 import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
@@ -8,6 +7,7 @@ import { deleteStudent, updateFilterText } from 'src/app/redux/actions/students'
 import { getStudents } from 'src/app/redux/selectors/students';
 import { Subject } from 'rxjs';
 import { selectWithDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
+import { IPerson } from 'src/app/common/entities/person';
 
 @Component({
   selector: 'app-students-table',
@@ -32,7 +32,7 @@ export class StudentsTableComponent implements OnInit, OnDestroy {
     this.store.dispatch(updateFilterText(''));
   }
 
-  public onDelete(student: Person): void {
+  public onDelete(student: IPerson): void {
     this.store.dispatch(deleteStudent(student));
   }
 

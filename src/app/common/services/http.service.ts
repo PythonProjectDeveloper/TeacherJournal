@@ -13,28 +13,28 @@ export class HttpService {
     private logSirvice: LogService
   ) { }
 
-  private handleResult<T>(httpResponse: Observable<T>, defaultValue: T): Observable<T> {
+  private handleResult<T>(httpResponse: Observable<T>, defaultValue: any): Observable<T> {
     return httpResponse.pipe(
       catchError((error) => this.logSirvice.handleHttpError<T>(error, defaultValue))
     );
   }
 
-  public post<T>(url: string, body: T, defaultValue: T, httpOptions?: object): Observable<T> {
+  public post<T>(url: string, body: T, httpOptions?: object, defaultValue: any = {}): Observable<T> {
     const httpResponse: Observable<T> = this.http.post<T>(url, body, httpOptions);
     return this.handleResult(httpResponse, defaultValue);
   }
 
-  public put<T>(url: string, body: T, defaultValue: T, httpOptions?: object): Observable<T> {
+  public put<T>(url: string, body: T, httpOptions?: object, defaultValue: any = {}): Observable<T> {
     const httpResponse: Observable<T> = this.http.put<T>(url, body, httpOptions);
     return this.handleResult(httpResponse, defaultValue);
   }
 
-  public delete<T>(url: string, defaultValue: T, httpOptions?: object): Observable<{}> {
+  public delete<T>(url: string, httpOptions?: object, defaultValue: any = {}): Observable<{}> {
     const httpResponse: Observable<T | {}> = this.http.delete(url, httpOptions);
     return this.handleResult(httpResponse, defaultValue);
   }
 
-  public get<T>(url: string, defaultValue: T, httpOptions?: object): Observable<T> {
+  public get<T>(url: string, httpOptions?: object, defaultValue: any = {}): Observable<T> {
     const httpResponse: Observable<T> = this.http.get<T>(url, httpOptions);
     return this.handleResult(httpResponse, defaultValue);
   }

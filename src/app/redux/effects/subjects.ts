@@ -52,17 +52,6 @@ export class SubjectEffects {
     ])
   ));
 
-  // public loadJournal$ = createEffect(() => this.actions$.pipe(
-  //   ofType(SubjectPageActions.loadJournal),
-  //   map(action => action.id),
-  //   switchMap(id => this.subjectService.getSubject(id)),
-  //   switchMap(subject => this.journalService.getJournal(subject.journalId).pipe(
-  //     switchMap((journal) => [
-  //     SubjectPageActions.setSubject({ subject }),
-  //     SubjectPageActions.setJournal({ journal })
-  //   ])))
-  // ));
-
   public loadJournal$ = createEffect(() => this.actions$.pipe(
     ofType(SubjectPageActions.loadJournal),
     map(action => action.id),

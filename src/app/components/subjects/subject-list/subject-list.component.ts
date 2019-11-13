@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject as RXJSSubject } from 'rxjs';
-import { Subject } from 'src/app/common/models/subject';
 import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { deleteSubject, updateFilterText } from 'src/app/redux/actions/subjects';
 import { getSubjects } from 'src/app/redux/selectors/subjects';
 import { selectWithDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
+import { ISubject } from 'src/app/common/entities/subject';
 
 @Component({
   selector: 'app-subject-list',
@@ -13,7 +13,7 @@ import { selectWithDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
   styleUrls: ['./subject-list.component.scss']
 })
 export class SubjectListComponent implements OnInit, OnDestroy {
-  public subjects: Subject[];
+  public subjects: ISubject[];
   public destroy$: RXJSSubject<boolean> = new RXJSSubject<boolean>();
 
   constructor(
@@ -26,7 +26,7 @@ export class SubjectListComponent implements OnInit, OnDestroy {
     this.store.dispatch(updateFilterText(''));
   }
 
-  public onDelete(subject: Subject): void {
+  public onDelete(subject: ISubject): void {
     this.store.dispatch(deleteSubject(subject));
   }
 

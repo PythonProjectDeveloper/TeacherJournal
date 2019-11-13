@@ -14,11 +14,11 @@ export class GraphService {
 
   public getStudentGraphData(id: string): Observable<any> {
     const url: string = assembleUrl(STUDENT_GRAPH_API_URL, id);
-    return this.httpService.get(url, []);
+    return this.httpService.get(url);
   }
 
   public getSubjectGraphData(id: string): Observable<any> {
     const url: string = assembleUrl(SUBJECT_GRAPH_API_URL, id);
-    return this.httpService.get(url, {});
+    return this.httpService.get(url);
   }
 }

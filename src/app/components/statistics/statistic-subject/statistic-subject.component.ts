@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject as RXJSSubject } from 'rxjs';
-import { Subject } from 'src/app/common/models/subject';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
@@ -8,7 +7,8 @@ import { getSubject } from 'src/app/redux/selectors/subjects';
 import { loadSubject } from 'src/app/redux/actions/subjects';
 import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
 import { GraphService } from 'src/app/common/services/graph.service';
-import { SubjectGraphDrawer } from 'src/app/common/models/draph-drawers';
+import { SubjectGraphDrawer } from 'src/app/common/helpers/draph-drawers';
+import { ISubject } from 'src/app/common/entities/subject';
 
 @Component({
   selector: 'app-statistic-subject',
@@ -16,7 +16,7 @@ import { SubjectGraphDrawer } from 'src/app/common/models/draph-drawers';
   styleUrls: ['./statistic-subject.component.scss']
 })
 export class StatisticSubjectComponent implements OnInit {
-  public subject: Subject;
+  public subject: ISubject;
   public destroy$: RXJSSubject<boolean> = new RXJSSubject<boolean>();
   public graphDrawer = new SubjectGraphDrawer();
   public selector = 'graph';

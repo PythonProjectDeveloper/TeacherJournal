@@ -1,51 +1,44 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Subject } from '../models/subject';
 import { assembleUrl } from '../helpers/calculations';
 import { SUBJECTS_API_URL } from '../constants/constants-subject';
 import { HttpService } from './http.service';
 import { HttpParams } from '@angular/common/http';
-import { ConverterService } from './converter.service';
+import { ISubject } from '../entities/subject';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectService {
   constructor(
-    private httpService: HttpService,
-    private converterService: ConverterService
+    private httpService: HttpService
   ) { }
 
-  public createSubject(subject: Subject): Observable<Subject> {
+  public createSubject(subject: ISubject): Observable<ISubject> {
     const url: string = SUBJECTS_API_URL;
-    const response$: Observable<Subject> = this.httpService.post<Subject>(url, subject, new Subject());
-    return this.converterService.convertToObject<Subject>(response$, Subject);
+    return this.httpService.post<ISubject>(url, subject);
   }
 
-  public updateSubject(subject: Subject): Observable<Subject> {
+  public updateSubject(subject: ISubject): Observable<ISubject> {
     const url: string = assembleUrl(SUBJECTS_API_URL, subject._id);
-    const response$: Observable<Subject> = this.httpService.put<Subject>(url, subject, new Subject());
-    return this.converterService.convertToObject<Subject>(response$, Subject);
+    return  this.httpService.put<ISubject>(url, subject);
   }
 
-  public deleteSubject(subject: Subject): Observable<{}> {
+  public deleteSubject(subject: ISubject): Observable<{}> {
     const url: string = assembleUrl(SUBJECTS_API_URL, subject._id);
-    const response$: Observable<Subject | {}> = this.httpService.delete<Subject>(url, {} as Subject);
-    return this.converterService.convertToObject<Subject>(response$, Subject);
+    return  this.httpService.delete<ISubject>(url);
   }
 
   // TODO: change search after adding server side
-  public getSubjects(searchText: string = ''): Observable<Subject[]> {
+  public getSubjects(searchText: string = ''): Observable<ISubject[]> {
     const url: string = SUBJECTS_API_URL;
     const params: HttpParams = new HttpParams().set('name_like', searchText);
-    const response$: Observable<Subject[]> = this.httpService.get<Subject[]>(url, [], { params });
-    return this.converterService.convertToObjects<Subject>(response$, Subject);
+    return this.httpService.get<ISubject[]>(url, { params });
   }
 
-  public getSubject(id: string): Observable<Subject> {
+  public getSubject(id: string): Observable<ISubject> {
     const url: string = assembleUrl(SUBJECTS_API_URL, id);
-    const response$: Observable<Subject> = this.httpService.get<Subject>(url, new Subject());
-    return this.converterService.convertToObject<Subject>(response$, Subject);
+    return this.httpService.get<ISubject>(url);
   }
 
 }

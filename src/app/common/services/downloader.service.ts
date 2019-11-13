@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IDownloader } from '../entities/downloaders';
-import { DOWNLOADERS } from '../models/downloaders';
+import { DOWNLOADERS } from '../helpers/downloaders';
 import { Observable } from 'rxjs';
 import { HttpService } from './http.service';
 import {
@@ -33,17 +33,17 @@ export class DownloadService {
 
   public getStudents(): Observable<any[]> {
     const url: string = STUDENTS_EXPORT_API_URL;
-    return this.httpService.get(url, []);
+    return this.httpService.get(url);
   }
 
   public getSubjects(): Observable<any[]> {
     const url: string = SUBJECTS_EXPORT_API_URL;
-    return this.httpService.get(url, []);
+    return this.httpService.get(url);
   }
 
   public getJournals(): Observable<any[]> {
     const url: string = JOURNALS_EXPORT_API_URL;
-    return this.httpService.get(url, []);
+    return this.httpService.get(url);
   }
 
   public getData(tableType: TableType): Observable<any> {

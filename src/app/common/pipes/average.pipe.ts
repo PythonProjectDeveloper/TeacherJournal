@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import * as _ from 'lodash';
+import { without, mean, map, filter } from 'lodash';
+import { isNumber } from 'util';
 
 @Pipe({
   name: 'average',
@@ -8,7 +9,7 @@ import * as _ from 'lodash';
 export class AveragePipe implements PipeTransform {
 
   public transform(array: number[]): any {
-    return _.mean(array.filter(Boolean));
+    return mean(filter(array, item => isNumber(item) && !isNaN(item)));
   }
 
 }
