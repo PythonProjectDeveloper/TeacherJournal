@@ -20,7 +20,7 @@ import { FormGroup, FormArray, AbstractControl } from '@angular/forms';
   styleUrls: ['./subject-table.component.scss']
 })
 export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, OnDestroy {
-  public isTableDataChanged = false;
+  public canDataBeSave = false;
   public journal: IJournal;
   public form: FormGroup;
   public destroy$: RXJSSubject<boolean> = new RXJSSubject<boolean>();
@@ -41,7 +41,11 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
       this.journal = journal;
       this.form = createJournalForm(journal);
 
-      this.isTableDataChanged = false;
+      setDestroyFlag(this.form.valueChanges, this.destroy$).subscribe(val => {
+        this.setSaveButtonVision();
+      });
+
+      this.canDataBeSave = false;
     });
     setDestroyFlag(this.route.params, this.destroy$).subscribe(({ id }) => {
       this.store.dispatch(loadJournal({ id }));
@@ -75,7 +79,7 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
   }
 
   public setSaveButtonVision(): void {
-    this.isTableDataChanged = this.isJournalChanged() && this.form.valid;
+    this.canDataBeSave = this.isJournalChanged() && this.form.valid;
   }
 
   public isJournalChanged(): boolean {

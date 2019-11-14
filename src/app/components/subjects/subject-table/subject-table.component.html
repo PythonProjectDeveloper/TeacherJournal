@@ -14,7 +14,6 @@
               class="table-wrapper__header-cell-input"
               type="text"
               formControlName="name"
-              (blur)='setSaveButtonVision()'
               appFocusHighlight="table-wrapper__header-cell-input__focus"
             >
           </ng-container>
@@ -39,7 +38,6 @@
               class="table-wrapper__simple-cell-input"
               type="text"
               formControlName="value"
-              (blur)='setSaveButtonVision()'
               appNumberCheck
               [maxNumber]="10"
               [minNumber]="0"
@@ -54,5 +52,5 @@
     </button>
   </div>
 
-  <button type="submit" mat-stroked-button color="primary" *ngIf="isTableDataChanged"> {{ 'actions.save' | translate }} </button>
+  <button type="submit" mat-stroked-button color="primary" *ngIf="canDataBeSave"> {{ 'actions.save' | translate }} </button>
 </form>
