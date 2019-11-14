@@ -9,8 +9,10 @@ import { IGlobalState } from 'src/app/redux/reducers';
 import { getJournal } from 'src/app/redux/selectors/subjects';
 import { loadJournal, updateJournal } from 'src/app/redux/actions/subjects';
 import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
-import { find, map, isEqual, cloneDeep } from 'lodash';
+import { find, map, isEqual } from 'lodash';
 import { IDay, IJournal } from 'src/app/common/entities/journal';
+import { createJournalForm, createDayForm } from 'src/app/common/forms/journal';
+import { FormGroup, FormArray, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-subject-table',
@@ -19,8 +21,8 @@ import { IDay, IJournal } from 'src/app/common/entities/journal';
 })
 export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, OnDestroy {
   public isTableDataChanged = false;
-  public storedJournal: IJournal;
-  public formJournal: IJournal;
+  public journal: IJournal;
+  public form: FormGroup;
   public destroy$: RXJSSubject<boolean> = new RXJSSubject<boolean>();
   public averageMarkColors: IAverageMarkColor[] = [
     { maxAverageMark: 5, class: 'table-wrapper__row__average-mark-lt-5' },
@@ -30,12 +32,15 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
   constructor(
     private store: Store<IGlobalState>,
     private route: ActivatedRoute
-  ) {
-    this.setJournal = this.setJournal.bind(this);
-  }
+  ) { }
 
   public ngOnInit(): void {
-    selectWithDestroyFlag(this.store, this.destroy$, getJournal).subscribe(this.setJournal);
+    selectWithDestroyFlag(this.store, this.destroy$, getJournal).subscribe(journal => {
+      this.journal = journal;
+      this.form = createJournalForm(journal);
+
+      this.isTableDataChanged = false;
+    });
     setDestroyFlag(this.route.params, this.destroy$).subscribe(({ id }) => {
       this.store.dispatch(loadJournal({ id }));
     });
@@ -46,26 +51,20 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
   }
 
   public onSave(): void {
-    this.store.dispatch(updateJournal(this.formJournal));
-  }
-
-  public setJournal(storedJournal: IJournal): void {
-    this.formJournal = cloneDeep(storedJournal);
-    this.storedJournal = storedJournal;
-    this.isTableDataChanged = false;
+    this.store.dispatch(updateJournal(this.form.value));
   }
 
   public onAddColumn(): void {
     const newDay: IDay = {
       name: '',
-      marks: map(this.formJournal.students, student => ({ student: student._id, value: null }))
+      marks: map(this.journal.students, student => ({ student: student._id, value: null }))
     };
 
-    this.formJournal.days.push(newDay);
+    (<FormArray>this.form.get('days')).push(createDayForm(newDay));
   }
 
   public onRemoveColumn(index: number): void {
-    this.formJournal.days.splice(index, 1);
+    (<FormArray>this.form.get('days')).removeAt(index);
 
     this.setSaveButtonVision();
   }
@@ -75,7 +74,7 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
   }
 
   public isJournalChanged(): boolean {
-    return !isEqual(this.formJournal, this.storedJournal);
+    return !isEqual(this.form.value, this.journal);
   }
 
   public getStudentMarks(id: string, days: any): number {
@@ -85,6 +84,15 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
   public ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();
+  }
+
+  public getMarkControl(dayIdx: string, markIdx: string): FormGroup {
+    const days: FormArray = (<FormArray>this.form.get('days'));
+    const day: FormGroup = (<FormGroup>days.controls[dayIdx]);
+    const marks: FormArray = (<FormArray>day.get('marks'));
+    const mark: FormGroup = (<FormGroup>marks.controls[markIdx]);
+
+    return mark;
   }
 
     // public isEqual(other: IJournal): boolean {

@@ -12,8 +12,8 @@ import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ng
 import { BannerService } from 'src/app/common/services/banner.service';
 import { ISubject } from 'src/app/common/entities/subject';
 import { ITeacher } from 'src/app/common/entities/person';
-import { isEqual, cloneDeep } from 'lodash';
-import { SubjectForm } from 'src/app/common/forms/subject';
+import { isEqual } from 'lodash';
+import { createSubjectForm } from 'src/app/common/forms/subject';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -24,7 +24,7 @@ import { FormGroup } from '@angular/forms';
 export class SubjectFormComponent implements ComponentCanDeactivate, OnInit, OnDestroy {
   public teachers: ITeacher[];
   public subject: ISubject;
-  public form: FormGroup = SubjectForm;
+  public form: FormGroup;
   public isEditForm: boolean;
   public destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -38,7 +38,7 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit, OnD
   public ngOnInit(): void {
     selectWithDestroyFlag(this.store, this.destroy$, getSubject).subscribe(subject => {
       this.subject = subject;
-      this.form.setValue(subject);
+      this.form = createSubjectForm(subject);
 
       if (this.isEditForm) {
         this.router.navigate(['subjects', 'subject', 'edit', subject._id]);

@@ -12,4 +12,4 @@ export const SUBJECT: ISubject = {
   teacher: '',
   cabinet: '',
   description: ''
-}
+};

@@ -8,8 +8,8 @@ import { loadStudent, createStudent, updateStudent } from 'src/app/redux/actions
 import { getStudent } from 'src/app/redux/selectors/students';
 import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
 import { BannerService } from 'src/app/common/services/banner.service';
-import { PersonForm } from 'src/app/common/forms/person';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { createPersonForm } from 'src/app/common/forms/person';
+import { FormGroup} from '@angular/forms';
 import { IPerson } from 'src/app/common/entities/person';
 import { isEqual } from 'lodash';
 
@@ -20,7 +20,7 @@ import { isEqual } from 'lodash';
 })
 export class StudentFormComponent implements ComponentCanDeactivate, OnInit, OnDestroy {
   public person: IPerson;
-  public form: FormGroup = PersonForm;
+  public form: FormGroup;
   public isEditForm: boolean;
   public destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -34,7 +34,7 @@ export class StudentFormComponent implements ComponentCanDeactivate, OnInit, OnD
   public ngOnInit(): void {
     selectWithDestroyFlag(this.store, this.destroy$, getStudent).subscribe(person => {
       this.person = person;
-      this.form.setValue(person);
+      this.form = createPersonForm(person);
 
       if (this.isEditForm) {
         this.router.navigate(['students', 'student', 'edit', person._id]);

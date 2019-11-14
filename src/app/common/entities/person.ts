@@ -18,4 +18,4 @@ export const PERSON: IPerson = {
   lastName: '',
   address: '',
   description: ''
-}
+};

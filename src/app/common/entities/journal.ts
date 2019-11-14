@@ -1,4 +1,4 @@
-import { ISubject } from './subject';
+import { ISubject, SUBJECT } from './subject';
 import { IStudent } from './person';
 
 export interface IJournal {
@@ -17,3 +17,20 @@ export interface IMark {
   student: string;
   value: number | null;
 }
+
+export const JOURNAL: IJournal = {
+  _id: '',
+  subject: SUBJECT,
+  students: [],
+  days: []
+};
+
+export const DAY: IDay = {
+  name: '',
+  marks: []
+};
+
+export const MARK: IMark = {
+  student: '',
+  value: null
+};

@@ -2,7 +2,7 @@
 import { createReducer, on, ActionReducer, Action } from '@ngrx/store';
 import * as SubjectPageActions from '../actions/subjects';
 import { ISubject, SUBJECT } from 'src/app/common/entities/subject';
-import { IJournal } from 'src/app/common/entities/journal';
+import { IJournal, JOURNAL } from 'src/app/common/entities/journal';
 
 export interface SubjectPageState {
   subjects: ISubject[];
@@ -14,7 +14,7 @@ export interface SubjectPageState {
 export const initialState: SubjectPageState = {
   subjects: [],
   subject: SUBJECT,
-  journal: {} as IJournal,
+  journal: JOURNAL,
   filterText: ''
 };
 

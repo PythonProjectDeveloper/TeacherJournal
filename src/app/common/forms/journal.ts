@@ -1,22 +1,28 @@
 import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
-import { SubjectForm } from './subject';
+import { createSubjectForm } from './subject';
+import { IMark, MARK, IDay, DAY, JOURNAL, IJournal } from '../entities/journal';
+import { map } from 'lodash';
+import { createPersonForm } from './person';
 
-// tslint:disable-next-line: variable-name
-export const JournalForm: FormGroup = new FormGroup({
-  _id: new FormControl('', [ Validators.maxLength(24) ]),
-  subject: SubjectForm,
-  students: new FormArray([]),
-  days: new FormArray([]),
-});
+export function createJournalForm({ _id, subject, students, days }: IJournal = JOURNAL): FormGroup {
+  return new FormGroup({
+    _id: new FormControl(_id, [ Validators.maxLength(24) ]),
+    subject: createSubjectForm(subject),
+    students: new FormArray(map(students, createPersonForm)),
+    days: new FormArray(map(days, createDayForm))
+  });
+}
 
-// tslint:disable-next-line: variable-name
-export const DayForm: FormGroup = new FormGroup({
-  name: new FormControl('', [ Validators.maxLength(20) ]),
-  marks: new FormArray([])
-});
+export function createDayForm({ name, marks }: IDay = DAY): FormGroup {
+  return new FormGroup({
+    name: new FormControl(name, [ Validators.maxLength(20) ]),
+    marks: new FormArray(map(marks, createMarkForm))
+  });
+}
 
-// tslint:disable-next-line: variable-name
-export const MarkForm: FormGroup = new FormGroup({
-  student: new FormControl('', [ Validators.maxLength(24) ]),
-  value: new FormControl(null, [ Validators.min(0), Validators.max(10) ])
-});
+export function createMarkForm({ student, value }: IMark = MARK): FormGroup {
+  return new FormGroup({
+    student: new FormControl(student, [ Validators.maxLength(24) ]),
+    value: new FormControl(value, [ Validators.min(0), Validators.max(10) ])
+  });
+}
