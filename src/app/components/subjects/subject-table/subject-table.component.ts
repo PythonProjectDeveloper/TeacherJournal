@@ -9,7 +9,7 @@ import { IGlobalState } from 'src/app/redux/reducers';
 import { getJournal } from 'src/app/redux/selectors/subjects';
 import { loadJournal, updateJournal } from 'src/app/redux/actions/subjects';
 import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
-import { find, map, isEqual } from 'lodash';
+import { find, map, isEqual, transform, isObject } from 'lodash';
 import { IDay, IJournal } from 'src/app/common/entities/journal';
 import { createJournalForm, createDayForm } from 'src/app/common/forms/journal';
 import { FormGroup, FormArray, AbstractControl } from '@angular/forms';
@@ -28,6 +28,8 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
     { maxAverageMark: 5, class: 'table-wrapper__row__average-mark-lt-5' },
     { maxAverageMark: 11, class: 'table-wrapper__row__average-mark-lt-11' }
   ];
+
+  get days(): FormArray { return this.form.get('days') as FormArray; }
 
   constructor(
     private store: Store<IGlobalState>,
@@ -51,26 +53,29 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
   }
 
   public onSave(): void {
+    if (this.form.invalid) { return; }
+
     this.store.dispatch(updateJournal(this.form.value));
   }
 
   public onAddColumn(): void {
     const newDay: IDay = {
+      _id: '',
       name: '',
-      marks: map(this.journal.students, student => ({ student: student._id, value: null }))
+      marks: map(this.journal.students, student => ({ _id: '', student: student._id, value: null }))
     };
 
-    (<FormArray>this.form.get('days')).push(createDayForm(newDay));
+    this.days.push(createDayForm(newDay));
   }
 
   public onRemoveColumn(index: number): void {
-    (<FormArray>this.form.get('days')).removeAt(index);
+    this.days.removeAt(index);
 
     this.setSaveButtonVision();
   }
 
   public setSaveButtonVision(): void {
-    this.isTableDataChanged = this.isJournalChanged();
+    this.isTableDataChanged = this.isJournalChanged() && this.form.valid;
   }
 
   public isJournalChanged(): boolean {
@@ -87,34 +92,10 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
   }
 
   public getMarkControl(dayIdx: string, markIdx: string): FormGroup {
-    const days: FormArray = (<FormArray>this.form.get('days'));
-    const day: FormGroup = (<FormGroup>days.controls[dayIdx]);
+    const day: FormGroup = (<FormGroup>this.days.controls[dayIdx]);
     const marks: FormArray = (<FormArray>day.get('marks'));
     const mark: FormGroup = (<FormGroup>marks.controls[markIdx]);
 
     return mark;
   }
-
-    // public isEqual(other: IJournal): boolean {
-  //   const isIdEqual: boolean = this._id === other._id;
-  //   const isDayNamesEqual: boolean = _.isEqual(
-  //     dropLastEmptyItems(this.dayNames),
-  //     dropLastEmptyItems(other.dayNames)
-  //   );
-
-  //   for (const index of Object.keys(this.studentMarks)) {
-  //     const isMarksEqual: boolean = _.isEqual(
-  //       dropLastEmptyItems(this.studentMarks[index].marks),
-  //       dropLastEmptyItems(other.studentMarks[index].marks)
-  //     );
-
-  //     if (!isMarksEqual) { return isMarksEqual; }
-  //   }
-
-  //   return isIdEqual && isDayNamesEqual;
-  // }
-
-  // public isValid(): boolean {
-  //   return this.days.reduce((isFill, day) => isFill ? Boolean(day.name) : isFill, true);
-  // }
 }

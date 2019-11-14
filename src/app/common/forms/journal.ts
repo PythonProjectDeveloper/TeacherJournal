@@ -13,15 +13,17 @@ export function createJournalForm({ _id, subject, students, days }: IJournal = J
   });
 }
 
-export function createDayForm({ name, marks }: IDay = DAY): FormGroup {
+export function createDayForm({ _id, name, marks }: IDay = DAY): FormGroup {
   return new FormGroup({
-    name: new FormControl(name, [ Validators.maxLength(20) ]),
+    _id: new FormControl(_id, [ Validators.maxLength(24) ]),
+    name: new FormControl(name, [ Validators.maxLength(20), Validators.required ]),
     marks: new FormArray(map(marks, createMarkForm))
   });
 }
 
-export function createMarkForm({ student, value }: IMark = MARK): FormGroup {
+export function createMarkForm({ _id, student, value }: IMark = MARK): FormGroup {
   return new FormGroup({
+    _id: new FormControl(_id, [ Validators.maxLength(24) ]),
     student: new FormControl(student, [ Validators.maxLength(24) ]),
     value: new FormControl(value, [ Validators.min(0), Validators.max(10) ])
   });

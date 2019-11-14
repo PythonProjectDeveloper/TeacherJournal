@@ -9,11 +9,13 @@ export interface IJournal {
 }
 
 export interface IDay {
+  _id: string;
   name: string;
   marks: IMark[];
 }
 
 export interface IMark {
+  _id: string;
   student: string;
   value: number | null;
 }
@@ -26,11 +28,13 @@ export const JOURNAL: IJournal = {
 };
 
 export const DAY: IDay = {
+  _id: '',
   name: '',
   marks: []
 };
 
 export const MARK: IMark = {
+  _id: '',
   student: '',
   value: null
 };

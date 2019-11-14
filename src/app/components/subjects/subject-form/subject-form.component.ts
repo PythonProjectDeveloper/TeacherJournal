@@ -58,7 +58,7 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit, OnD
   }
 
   public onSave(): void {
-    if (!this.form.valid) { return; }
+    if (this.form.invalid) { return; }
 
     if (this.isEditForm) {
       this.store.dispatch(updateSubject(this.form.value));

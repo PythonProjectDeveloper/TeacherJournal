@@ -1,5 +1,5 @@
 
-<form class="form" [formGroup]="form">
+<form (submit)="onSave()" class="form" [formGroup]="form">
   <h2 class="title"> {{ journal.subject.name | titlecase }} </h2>
 
   <div class="table-wrapper">
@@ -49,11 +49,10 @@
         </td>
       </tr>
     </table>
-    <!-- <button class="add-button" mat-mini-fab color="primary" (click)="onAddColumn()" *ngIf="formJournal?.isValid()"> -->
-    <button class="add-button" mat-mini-fab color="primary" (click)="onAddColumn()">
+    <button type="button" class="add-button" mat-mini-fab color="primary" (click)="onAddColumn()">
       <mat-icon>add</mat-icon>
     </button>
   </div>
 
-  <button mat-stroked-button color="primary" *ngIf="isTableDataChanged" (click)="onSave()"> {{ 'actions.save' | translate }} </button>
+  <button type="submit" mat-stroked-button color="primary" *ngIf="isTableDataChanged"> {{ 'actions.save' | translate }} </button>
 </form>

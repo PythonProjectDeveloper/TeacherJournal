@@ -66,6 +66,10 @@ $text-color: gray;
         font-weight: 900;
         border: 2px solid #30b6dd;
       }
+
+      &.ng-invalid {
+        border: 2px solid red;
+      }
     }
 
     &__static-cell {
