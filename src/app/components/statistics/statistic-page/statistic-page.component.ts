@@ -9,6 +9,7 @@ import { getStudents } from 'src/app/redux/selectors/students';
 import { getSubjects } from 'src/app/redux/selectors/subjects';
 import { loadStudents } from 'src/app/redux/actions/students';
 import { loadSubjects } from 'src/app/redux/actions/subjects';
+import { IRequestDates } from 'src/app/shared/common/entities/dropdown';
 
 enum List {
   Students = 'Students',
@@ -48,7 +49,8 @@ export class StatisticPageComponent implements OnInit {
     this.currentObject = event.value;
   }
 
-  public onDropdownValueChanged(filterData: any): void {
+  public onDropdownValueChanged(filterData: IRequestDates[]): void {
+    console.log('data changed')
     // this.store.dispatch(loadStudents({ filterData }));
   }
 
