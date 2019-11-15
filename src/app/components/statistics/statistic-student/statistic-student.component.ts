@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject as RXJSSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { getStudent } from 'src/app/redux/selectors/students';
@@ -17,7 +17,7 @@ import { IPerson } from 'src/app/common/entities/person';
 })
 export class StatisticStudentComponent implements OnInit, OnDestroy {
   public student: IPerson;
-  public destroy$: RXJSSubject<boolean> = new RXJSSubject<boolean>();
+  public destroy$: Subject<boolean> = new Subject<boolean>();
   public graphDrawer = new StudentGraphDrawer();
   public selector = 'graph';
 

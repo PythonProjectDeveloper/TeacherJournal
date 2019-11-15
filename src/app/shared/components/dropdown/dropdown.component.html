@@ -2,8 +2,8 @@
   <mat-expansion-panel [expanded]="isInputOpen" (opened)="toggleInput(true)">
     <mat-expansion-panel-header> {{ viewDates }} </mat-expansion-panel-header>
     <div class="dropdown-picker__header-menu">
-      <button mat-button color="primary" (click)="toggleCheckboxs(true)">CHECK ALL</button>
-      <button mat-button color="primary" (click)="toggleCheckboxs(false)">UNCHECK ALL</button>
+      <button mat-button color="primary" (click)="toggleCheckboxs(true)"> {{ 'widgets.dropdown.checkAll' | translate | uppercase }} </button>
+      <button mat-button color="primary" (click)="toggleCheckboxs(false)"> {{ 'widgets.dropdown.uncheckAll' | translate | uppercase }} </button>
     </div>
 
     <div class="dropdown-picker__subjects">
@@ -14,10 +14,10 @@
 
     <div class="dropdown-picker__footer-menu">
       <div>
-        <button mat-button color="primary" (click)="toggleCollapses(true)">EXPAND ALL</button>
-        <button mat-button color="primary" (click)="toggleCollapses(false)">COLLAPSE ALL</button>
+        <button mat-button color="primary" (click)="toggleCollapses(true)"> {{ 'widgets.dropdown.expandAll' | translate | uppercase }} </button>
+        <button mat-button color="primary" (click)="toggleCollapses(false)"> {{ 'widgets.dropdown.collapseAll' | translate | uppercase }} </button>
       </div>
-      <button mat-button color="primary" (click)="toggleInput(false)">CLOSE</button>
+      <button mat-button color="primary" (click)="toggleInput(false)"> {{ 'actions.close' | translate | uppercase }} </button>
     </div>
 
   </mat-expansion-panel>

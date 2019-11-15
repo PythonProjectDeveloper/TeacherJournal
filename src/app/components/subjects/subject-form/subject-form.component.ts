@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
-import { Observable, Subject as RXJSSubject, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';

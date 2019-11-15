@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subject as RXJSSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { deleteSubject, updateFilterText } from 'src/app/redux/actions/subjects';
@@ -14,7 +14,7 @@ import { ISubject } from 'src/app/common/entities/subject';
 })
 export class SubjectListComponent implements OnInit, OnDestroy {
   public subjects: ISubject[];
-  public destroy$: RXJSSubject<boolean> = new RXJSSubject<boolean>();
+  public destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private store: Store<IGlobalState>

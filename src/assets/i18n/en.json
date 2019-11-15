@@ -41,10 +41,20 @@
     "search": "Search",
     "exportPdf": "Export as PDF file",
     "exportExcel": "Export as Excel file",
-    "download": "Download"
+    "download": "Download",
+    "close": "Close"
   },
   "leaveGuard" : {
     "text": "Do you want to leave the page without saving data?"
   },
-  "bannerMessage": "Here can be your advertising!"
+  "bannerMessage": "Here can be your advertising!",
+  "widgets" : {
+    "dropdown" : {
+      "selectDate": "Select a date",
+      "expandAll": "EXPAND ALL",
+      "collapseAll": "COLLAPSE ALL",
+      "checkAll": "CHECK ALL",
+      "uncheckAll": "UNCHECK ALL"
+    }
+  }
 }

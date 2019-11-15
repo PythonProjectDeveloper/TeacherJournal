@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as _ from 'lodash';
 import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
-import { Observable, Subject as RXJSSubject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { IAverageMarkColor } from 'src/app/common/directives/average-mark-highlight.directive';
 import { Store } from '@ngrx/store';
@@ -9,10 +9,10 @@ import { IGlobalState } from 'src/app/redux/reducers';
 import { getJournal } from 'src/app/redux/selectors/subjects';
 import { loadJournal, updateJournal } from 'src/app/redux/actions/subjects';
 import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
-import { find, map, isEqual, transform, isObject } from 'lodash';
+import { find, map, isEqual } from 'lodash';
 import { IDay, IJournal } from 'src/app/common/entities/journal';
 import { createJournalForm, createDayForm } from 'src/app/common/forms/journal';
-import { FormGroup, FormArray, AbstractControl } from '@angular/forms';
+import { FormGroup, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-subject-table',
@@ -23,7 +23,7 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
   public canDataBeSave = false;
   public journal: IJournal;
   public form: FormGroup;
-  public destroy$: RXJSSubject<boolean> = new RXJSSubject<boolean>();
+  public destroy$: Subject<boolean> = new Subject<boolean>();
   public averageMarkColors: IAverageMarkColor[] = [
     { maxAverageMark: 5, class: 'table-wrapper__row__average-mark-lt-5' },
     { maxAverageMark: 11, class: 'table-wrapper__row__average-mark-lt-11' }

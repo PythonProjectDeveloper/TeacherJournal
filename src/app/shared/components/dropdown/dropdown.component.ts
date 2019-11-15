@@ -7,6 +7,8 @@ import { DEFAULT_PRINT_DATES } from '../../constants/dropdown';
 import { IRequestDates, IDropDown } from '../../common/entities/dropdown';
 import { chain } from 'lodash';
 import { createDropDownWidgetForm } from '../../common/forms/dropdown';
+import { TranslateService } from '@ngx-translate/core';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dropdown',
@@ -18,10 +20,13 @@ export class DropdownComponent implements OnInit, OnDestroy {
   public viewDates: string;
   public destroy$: Subject<boolean> = new Subject<boolean>();
   public isInputOpen = false;
+  public defaultText: string;
+  public selectedDates: IRequestDates[] = [];
   @Output() public onChanged = new EventEmitter<IRequestDates[]>();
 
   constructor(
-    private dataPickerService: DataPickerService
+    private dataPickerService: DataPickerService,
+    private translate: TranslateService
   ) { }
 
   public ngOnInit(): void {
@@ -31,14 +36,20 @@ export class DropdownComponent implements OnInit, OnDestroy {
 
       this.updateViewDates(dates);
     });
+    setDestroyFlag(this.translate.onLangChange, this.destroy$).subscribe(({ translations }) => {
+      const text: string = translations.widgets.dropdown.selectDate;
 
+      this.defaultText = text;
+      this.setViewDatesString(this.selectedDates, text);
+    });
   }
 
   public updateViewDates(dropdowns: IDropDown[]): void {
-    const dates: IRequestDates[] = this.getViewDates(dropdowns);
-    this.viewDates = this.getViewDatesString(dates);
+    this.selectedDates = this.getViewDates(dropdowns);
 
-    this.onChanged.emit(dates);
+    this.setViewDatesString(this.selectedDates, this.defaultText);
+
+    this.onChanged.emit(this.selectedDates);
   }
 
   public getViewDates(dropdowns: IDropDown[]): IRequestDates[] {
@@ -51,10 +62,10 @@ export class DropdownComponent implements OnInit, OnDestroy {
       .value();
   }
 
-  public getViewDatesString(subjects: IRequestDates[]): string {
+  public setViewDatesString(subjects: IRequestDates[], defaultText: string): void {
     const viewDatesString: string[] = subjects.map((date) => `${ date.subject }: [${ date.dates.join(', ') }]`, []);
 
-    return viewDatesString.length ? viewDatesString.join(', ') : DEFAULT_PRINT_DATES;
+    this.viewDates = viewDatesString.length ? viewDatesString.join(', ') : defaultText;
   }
 
   public ngOnDestroy(): void {

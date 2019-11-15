@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject as RXJSSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
@@ -17,7 +17,7 @@ import { ISubject } from 'src/app/common/entities/subject';
 })
 export class StatisticSubjectComponent implements OnInit {
   public subject: ISubject;
-  public destroy$: RXJSSubject<boolean> = new RXJSSubject<boolean>();
+  public destroy$: Subject<boolean> = new Subject<boolean>();
   public graphDrawer = new SubjectGraphDrawer();
   public selector = 'graph';
 

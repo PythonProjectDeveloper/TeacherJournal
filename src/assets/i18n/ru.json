@@ -41,10 +41,20 @@
     "search": "Искать",
     "exportPdf": "Экспортировать как PDF файл",
     "exportExcel": "Экспортировать как Excel файл",
-    "download": "Скачать"
+    "download": "Скачать",
+    "close": "закрыть"
   },
   "leaveGuard" : {
     "text": "Вы хотите покинуть страницу без сохранения изменений?"
   },
-  "bannerMessage": "Здесь может быть ваша реклама!"
+  "bannerMessage": "Здесь может быть ваша реклама!",
+  "widgets" : {
+    "dropdown" : {
+      "selectDate": "Выберите дату",
+      "expandAll": "РАЗВЕРНУТЬ ВСЕ",
+      "collapseAll": "СВЕРНУТЬ ВСЕ",
+      "checkAll": "ВЫБРАТЬ ВСЕ",
+      "uncheckAll": "ОТМЕНИТЬ ВСЕ"
+    }
+  }
 }
