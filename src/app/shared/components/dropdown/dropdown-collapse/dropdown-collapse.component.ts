@@ -1,6 +1,8 @@
 import { Component, OnInit, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup, FormBuilder } from '@angular/forms';
-import { IDate } from 'src/app/common/entities/subject-dates';
+import { createCollapseForm, createDropDownForm } from 'src/app/shared/common/forms/dropdown';
+import { getCollapseState } from 'src/app/shared/helpers/calculations';
+
 
 @Component({
   selector: 'app-dropdown-collapse',
@@ -15,7 +17,7 @@ import { IDate } from 'src/app/common/entities/subject-dates';
   ]
 })
 export class DropdownCollapseComponent implements OnInit, ControlValueAccessor {
-  public data: FormGroup;
+  public form: FormGroup;
   public childChanged = false;
 
   constructor(
@@ -37,24 +39,24 @@ export class DropdownCollapseComponent implements OnInit, ControlValueAccessor {
   }
 
   public writeValue(data: any): void {
-    this.data = this.getSubjectDatesControl(data);
+    this.form = this.getSubjectDatesControl(data);
   }
 
-  public changePanelState(subjectDate: FormGroup, flag: boolean): void {
-    const value: any = subjectDate.value;
-    value.isExpended = flag;
+  public changePanelState(form: FormGroup, flag: boolean): void {
+    form.value.isExpended = flag;
 
-    subjectDate.setValue(value);
+    form.patchValue(form.value);
   }
 
-  public getSubjectDatesControl(subjectDates: any): FormGroup {
-    let lastState: boolean = this.getWrapChecked(subjectDates.dates);
+  public getSubjectDatesControl(dropdowns: any): FormGroup {
+    let lastState: boolean = getCollapseState(dropdowns.dates);
     const formGroup: FormGroup = this.fb.group({
-      subjectName: subjectDates.subjectName,
+      subjectName: dropdowns.subjectName,
       state: lastState,
-      isExpended: subjectDates.isExpended || false,
-      dates: this.fb.array(subjectDates.dates.map(date => this.getDateControl(date)))
+      isExpended: dropdowns.isExpended || false,
+      dates: this.fb.array(dropdowns.dates.map(date => this.getDateControl(date)))
     });
+    // const formGroup: FormGroup = createDropDownForm(dropdowns);
 
     formGroup.valueChanges.subscribe(val => {
       if (lastState === val.state) { return; }
@@ -64,18 +66,17 @@ export class DropdownCollapseComponent implements OnInit, ControlValueAccessor {
       }
 
       lastState = val.state;
-      formGroup.setValue(val);
+      formGroup.patchValue(val, {emitEvent: false, onlySelf: true});
+      //, {emitEvent: false, onlySelf: true}
     });
 
     return formGroup;
   }
 
-  public getDateControl(date: IDate): FormGroup {
+  public getDateControl(date: any): FormGroup {
     let lastState: boolean = date.state;
-    const formGroup: FormGroup = this.fb.group({
-      name: date.name,
-      state: date.state
-    });
+
+    const formGroup: FormGroup = createCollapseForm(date);
 
     formGroup.valueChanges.subscribe((val) => {
       if (lastState === val.state) { return; }
@@ -83,25 +84,16 @@ export class DropdownCollapseComponent implements OnInit, ControlValueAccessor {
       this.childChanged = true;
 
       lastState = val.state;
-      formGroup.setValue(val);
+      formGroup.patchValue(val);
       const grandfatherValue: any = formGroup.parent.parent.value;
-      grandfatherValue.state = this.getWrapChecked(grandfatherValue.dates);
-      formGroup.parent.parent.setValue(grandfatherValue);
+      grandfatherValue.state = getCollapseState(grandfatherValue.dates);
+      formGroup.parent.parent.patchValue(grandfatherValue);
 
       this.childChanged = false;
 
-      this.onChange(this.data.value);
+      this.onChange(this.form.value, {emitEvent: false, onlySelf: true});
     });
 
     return formGroup;
-  }
-
-  public getWrapChecked(dates: IDate[]): boolean | null {
-    const quantity: number = dates.reduce((acc, date) => date.state ? acc + 1 : acc, 0);
-
-    if (quantity === 0) { return false; }
-    if (quantity === dates.length) { return true; }
-
-    return null;
   }
 }

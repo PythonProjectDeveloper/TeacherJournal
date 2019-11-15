@@ -48,4 +48,8 @@ export class StatisticPageComponent implements OnInit {
     this.currentObject = event.value;
   }
 
+  public onDropdownValueChanged(filterData: any): void {
+    // this.store.dispatch(loadStudents({ filterData }));
+  }
+
 }

@@ -7,9 +7,9 @@
     </div>
 
     <div class="dropdown-picker__subjects">
-      <div formArrayName="subjectDates" *ngFor="let subjectDate of form.controls.subjectDates.controls; let i = index">
-        <app-dropdown-collapse [formGroupName]="i" [formControl]="subjectDate"></app-dropdown-collapse>
-      </div>
+      <ng-container formArrayName="dropdowns" *ngFor="let dropdown of form.controls.dropdowns.controls; let i = index">
+        <app-dropdown-collapse [formGroupName]="i" [formControl]="dropdown"></app-dropdown-collapse>
+      </ng-container >
     </div>
 
     <div class="dropdown-picker__footer-menu">
