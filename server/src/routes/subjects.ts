@@ -5,7 +5,17 @@ import { Subject } from '../database/shemas/subject';
 export default function routes(router: Router): void {
   router.get('/subjects', (request, response) => {
 
-    Subject.find()
+    const regex = new RegExp( request.query.filter, 'i');
+    const params = { $regex: regex };
+
+    Subject
+      .find()
+      .or([
+        { name: params },
+        { cabinet: params },
+        { description: params }
+      ])
+      .exec()
       .then(data => response.send(data))
       .catch(err => response.send(err));
   });

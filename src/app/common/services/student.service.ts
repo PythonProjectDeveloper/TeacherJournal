@@ -30,9 +30,9 @@ export class StudentService {
   }
 
   // TODO: change search after adding server side
-  public getStudents(searchText: string = ''): Observable<IPerson[]> {
+  public getStudents(filter: string = ''): Observable<IPerson[]> {
     const url: string = STUDENTS_API_URL;
-    const params: HttpParams = new HttpParams().set('firstName_like', searchText);
+    const params: HttpParams = new HttpParams().set('filter', filter);
     return this.httpService.get<IPerson[]>(url, { params });
   }
 

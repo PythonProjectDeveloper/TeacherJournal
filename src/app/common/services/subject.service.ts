@@ -30,9 +30,9 @@ export class SubjectService {
   }
 
   // TODO: change search after adding server side
-  public getSubjects(searchText: string = ''): Observable<ISubject[]> {
+  public getSubjects(filter: string = ''): Observable<ISubject[]> {
     const url: string = SUBJECTS_API_URL;
-    const params: HttpParams = new HttpParams().set('name_like', searchText);
+    const params: HttpParams = new HttpParams().set('filter', filter);
     return this.httpService.get<ISubject[]>(url, { params });
   }
 

@@ -4,8 +4,18 @@ import { Student } from '../database/shemas/person';
 
 export default function routes(router: Router): void {
   router.get('/students', (request, response) => {
+    const regex = new RegExp( request.query.filter, 'i');
+    const params = { $regex: regex };
 
-    Student.find()
+    Student
+      .find()
+      .or([
+        { firstName: params },
+        { lastName: params },
+        { address: params },
+        { description: params }
+      ])
+      .exec()
       .then(data => response.send(data))
       .catch(err => response.send(err));
   });
