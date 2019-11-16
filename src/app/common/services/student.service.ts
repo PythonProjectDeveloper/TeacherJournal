@@ -5,6 +5,7 @@ import { STUDENTS_API_URL } from '../constants/constants-person';
 import { assembleUrl } from '../helpers/calculations';
 import { HttpService } from './http.service';
 import { IPerson, PERSON } from '../entities/person';
+import { IRequestDates } from 'src/app/shared/common/entities/dropdown';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +30,9 @@ export class StudentService {
     return this.httpService.delete<IPerson>(url);
   }
 
-  public getStudents(filter: string = ''): Observable<IPerson[]> {
+  public getStudents(filter: string | IRequestDates = ''): Observable<IPerson[]> {
     const url: string = STUDENTS_API_URL;
-    const params: HttpParams = new HttpParams().set('filter', filter);
+    const params: HttpParams = new HttpParams().set('filter', JSON.stringify(filter));
     return this.httpService.get<IPerson[]>(url, { params });
   }
 
