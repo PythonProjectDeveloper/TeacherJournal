@@ -3,7 +3,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup } from '@angular/for
 import { createDropDownForm } from 'src/app/shared/common/forms/dropdown';
 import { IDropDown } from 'src/app/shared/common/entities/dropdown';
 
-
 @Component({
   selector: 'app-dropdown-collapse',
   templateUrl: './dropdown-collapse.component.html',
@@ -32,7 +31,8 @@ export class DropdownCollapseComponent implements ControlValueAccessor {
 
   public writeValue(data: IDropDown): void {
     this.form = createDropDownForm(data);
-    this.form.valueChanges.subscribe(() => this.onChange(this.form.value));
+
+    setTimeout(() => this.form.valueChanges.subscribe(() => this.onChange(this.form.value)));
   }
 
   public changePanelState(form: FormGroup, flag: boolean): void {
