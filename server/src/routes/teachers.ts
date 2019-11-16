@@ -1,5 +1,4 @@
 import { Router } from 'express-serve-static-core';
-import { Document } from 'mongoose';
 import { Teacher } from '../database/shemas/person';
 
 export default function routes(router: Router): void {
@@ -19,7 +18,7 @@ export default function routes(router: Router): void {
 
   router.post('/teachers', (request, response) => {
     delete request.body._id;
-    const teacher: Document = new Teacher(request.body);
+    const teacher = new Teacher(request.body);
 
     teacher.save()
       .then(data => response.send(data))

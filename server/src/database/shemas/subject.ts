@@ -1,5 +1,6 @@
-import mongoose, { Model, Schema, Document } from 'mongoose';
+import mongoose, { Model, Schema } from 'mongoose';
 import { TableName } from '../../constants/tables';
+import { ISubjectModel } from '../../entities/subject';
 
 export const SubjectSchema: Schema = new Schema({
   name: { type: String, required: true },
@@ -8,4 +9,4 @@ export const SubjectSchema: Schema = new Schema({
   description: { type: String },
 }, { versionKey: false });
 
-export const Subject: Model<Document, {}> = mongoose.model(TableName.Subject, SubjectSchema);
+export const Subject: Model<ISubjectModel, {}> = mongoose.model<ISubjectModel>(TableName.Subject, SubjectSchema);

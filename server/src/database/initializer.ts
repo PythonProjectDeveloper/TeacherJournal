@@ -37,8 +37,6 @@ export async function initJournalDatabaseCollection(model: Model<Document, {}>, 
   const subjects = await Subject.find().select('_id');
   const students = await Student.find().select('_id');
 
-
-
   const data = journals.map((journal, idx) => {
     const marks = students.map(student => ({
       student: student._id,

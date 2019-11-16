@@ -50,7 +50,6 @@ export class StatisticPageComponent implements OnInit {
   }
 
   public onDropdownValueChanged(filterData: IRequestDates[]): void {
-    console.log('data changed', filterData)
     this.store.dispatch(updateFilterData({ filterData }));
   }
 

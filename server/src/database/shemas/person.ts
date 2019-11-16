@@ -1,6 +1,7 @@
-import mongoose, { Model, Schema, Document } from 'mongoose';
+import mongoose, { Model, Schema } from 'mongoose';
 import extendSchema from 'mongoose-extend-schema';
 import { TableName } from '../../constants/tables';
+import { IPersonModel, IStudentModel, ITeacherModel } from '../../entities/person';
 
 export const PersonSchema: Schema = new Schema({
   firstName: { type: String, required: true },
@@ -12,6 +13,6 @@ export const PersonSchema: Schema = new Schema({
 export const StudentSchema: Schema = extendSchema(PersonSchema, {});
 export const TeacherSchema: Schema = extendSchema(PersonSchema, {});
 
-export const Person: Model<Document, {}> = mongoose.model(TableName.Person, PersonSchema);
-export const Student: Model<Document, {}> = mongoose.model(TableName.Student, StudentSchema);
-export const Teacher: Model<Document, {}> = mongoose.model(TableName.Teacher, TeacherSchema);
+export const Person: Model<IPersonModel, {}> = mongoose.model<IPersonModel>(TableName.Person, PersonSchema);
+export const Student: Model<IStudentModel, {}> = mongoose.model<IStudentModel>(TableName.Student, StudentSchema);
+export const Teacher: Model<ITeacherModel, {}> = mongoose.model<ITeacherModel>(TableName.Teacher, TeacherSchema);

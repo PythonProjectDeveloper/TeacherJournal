@@ -1,6 +1,13 @@
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { map } from 'lodash';
-import { IDropDownState, DEFAULT_DROPDOWN_STATE, ICollapseState, DEFAULT_COLLAPSE_STATE, DROPDOWN_WIDGET, IDropDownWidget } from '../entities/dropdown';
+import {
+  IDropDownState,
+  DEFAULT_DROPDOWN_STATE,
+  ICollapseState,
+  DEFAULT_COLLAPSE_STATE,
+  DROPDOWN_WIDGET,
+  IDropDownWidget
+} from '../entities/dropdown';
 import { getCollapseState } from '../../helpers/calculations';
 
 export function createDropDownWidgetForm({ dropdowns }: IDropDownWidget = DROPDOWN_WIDGET): FormGroup {
@@ -23,7 +30,7 @@ export function createDropDownForm({
   });
 
   form.valueChanges.subscribe(val => {
-    const isCollapsed = getCollapseState(val.dates);
+    const isCollapsed: boolean = getCollapseState(val.dates);
 
     // if the state changed when clicked
     if (val.state !== isCollapsed) {

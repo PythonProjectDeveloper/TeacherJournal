@@ -1,5 +1,6 @@
-import mongoose, { Schema, Model, Document } from 'mongoose';
+import mongoose, { Schema, Model } from 'mongoose';
 import { TableName } from '../../constants/tables';
+import { IJournalModel, IDayModel, IMarkModel } from '../../entities/journals';
 
 export const MarkSchema: Schema = new Schema({
   student: { type: Schema.Types.ObjectId, ref: TableName.Student },
@@ -17,6 +18,6 @@ export const JournalSchema: Schema = new Schema({
   days: [DaySchema],
 });
 
-export const Journal: Model<Document, {}> = mongoose.model(TableName.Journal, JournalSchema);
-export const Day: Model<Document, {}> = mongoose.model(TableName.Day, DaySchema);
-export const Mark: Model<Document, {}> = mongoose.model(TableName.Mark, MarkSchema);
+export const Journal: Model<IJournalModel, {}> = mongoose.model<IJournalModel>(TableName.Journal, JournalSchema);
+export const Day: Model<IDayModel, {}> = mongoose.model<IDayModel>(TableName.Day, DaySchema);
+export const Mark: Model<IMarkModel, {}> = mongoose.model<IMarkModel>(TableName.Mark, MarkSchema);

@@ -1,5 +1,6 @@
-import mongoose, { Model, Schema, Document } from 'mongoose';
+import mongoose, { Model, Schema } from 'mongoose';
 import { TableName } from '../../constants/tables';
+import { ILogModel } from '../../entities/log';
 
 export const LogSchema: Schema = new Schema({
   name: { type: String },
@@ -8,4 +9,4 @@ export const LogSchema: Schema = new Schema({
   headers: { type: Schema.Types.Mixed },
 });
 
-export const Log: Model<Document, {}> = mongoose.model(TableName.Log, LogSchema);
+export const Log: Model<ILogModel, {}> = mongoose.model<ILogModel>(TableName.Log, LogSchema);

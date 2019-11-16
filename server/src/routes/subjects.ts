@@ -29,7 +29,7 @@ export default function routes(router: Router): void {
 
   router.post('/subjects', (request, response) => {
     delete request.body._id;
-    const subject: Document = new Subject(request.body);
+    const subject = new Subject(request.body);
 
     subject.save()
       .then(data => response.send(data))

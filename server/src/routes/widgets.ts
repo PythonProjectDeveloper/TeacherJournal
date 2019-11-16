@@ -16,7 +16,7 @@ export default function routes(router: Router): void {
   Journal.find()
     .populate('subject')
     .then(journals => {
-      const data = journals.map((journal: any) => ({
+      const data = journals.map(journal => ({
         subjectName: journal.subject.name,
         dates: journal.days.map(day => ({ name: day.name, state: false }))
       }));
