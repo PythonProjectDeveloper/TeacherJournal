@@ -1,31 +1,31 @@
 export interface IDropDownWidget {
-  dropdowns: IDropDown[];
+  dropdowns: IDropDownState[];
 }
 
 export const DROPDOWN_WIDGET: IDropDownWidget = {
   dropdowns: [],
 };
 
-export interface IDropDown {
+export interface IDropDownState {
   subjectName: string;
-  dates: ICollapse[];
+  dates: ICollapseState[];
   state: boolean | null;
   isExpended: boolean;
 }
 
-export const DROPDOWN: IDropDown = {
+export const DEFAULT_DROPDOWN_STATE: IDropDownState = {
   subjectName: '',
   dates: [],
   state: false,
   isExpended: false,
 };
 
-export interface ICollapse {
+export interface ICollapseState {
   name: string;
   state: boolean;
 }
 
-export const COLLAPSE: ICollapse = {
+export const DEFAULT_COLLAPSE_STATE: ICollapseState = {
   name: '',
   state: false,
 };

@@ -9,7 +9,13 @@ import { find } from 'lodash';
 export default function routes(router: Router): void {
   router.get('/students', async (request, response) => {
     const filterData = JSON.parse(request.query.filter);
+//     [ { name: 's', type: 'stringFilter' }, {dates: { condition: '<', date: '1996'}, type: 'dateFilter' } ]
+// {
+//   field: 'name/date',
+//   condition: '',
 
+// }
+// return filterData.filter(filter => allFilters[filter.type](data, filter.options))
     // selection for student page
     if (isString(filterData) || !filterData.length) {
       const regex = new RegExp( filterData, 'i');

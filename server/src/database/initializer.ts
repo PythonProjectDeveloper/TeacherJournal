@@ -28,7 +28,7 @@ export async function initDatabaseCollection(model: Model<Document, {}>, data: a
 
 export async function initSubjectDatabaseCollection(model: Model<Document, {}>, subjects: any[]): Promise<void> {
   const teachers = await Teacher.find().select('_id');
-  const data = subjects.map((subject, idx) => ({...subject, teacher: teachers[idx]._id}));
+  const data = subjects.map((subject, idx) => ({ ...subject, teacher: teachers[idx]._id }));
 
   initDatabaseCollection(model, data);
 }
@@ -37,17 +37,25 @@ export async function initJournalDatabaseCollection(model: Model<Document, {}>, 
   const subjects = await Subject.find().select('_id');
   const students = await Student.find().select('_id');
 
-  const data = journals.map((journal, idx) => ({
-    subject: subjects[idx]._id,
-    students: students.map(doc => doc._id),
-    days: journal.days.map(day => ({
+
+
+  const data = journals.map((journal, idx) => {
+    const marks = students.map(student => ({
+      student: student._id,
+      value: getRandomMark(0, 10),
+    }));
+
+    const days = journal.days.map(day => ({
       name: day.name,
-      marks: students.map(student => ({
-        student: student._id,
-        value: getRandomMark(0, 10),
-      }))
-    }))
-  }));
+      marks
+    }));
+
+    return {
+      subject: subjects[idx]._id,
+      students: students.map(doc => doc._id),
+      days
+    };
+  });
 
   initDatabaseCollection(model, data);
 }

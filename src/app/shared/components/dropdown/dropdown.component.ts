@@ -3,7 +3,7 @@ import { DataPickerService } from 'src/app/common/services/data-picker.service';
 import { FormGroup } from '@angular/forms';
 import { setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
 import { Subject } from 'rxjs';
-import { IRequestDates, IDropDown, IDropDownWidget } from '../../common/entities/dropdown';
+import { IRequestDates, IDropDownState, IDropDownWidget } from '../../common/entities/dropdown';
 import { chain } from 'lodash';
 import { createDropDownWidgetForm } from '../../common/forms/dropdown';
 import { TranslateService } from '@ngx-translate/core';
@@ -47,7 +47,7 @@ export class DropdownComponent implements OnInit, OnDestroy {
     this.setViewDatesString(this.selectedDates, text);
   }
 
-  public updateViewDates(dropdowns: IDropDown[]): void {
+  public updateViewDates(dropdowns: IDropDownState[]): void {
     this.selectedDates = this.getViewDates(dropdowns);
 
     this.setViewDatesString(this.selectedDates, this.defaultText);
@@ -55,7 +55,7 @@ export class DropdownComponent implements OnInit, OnDestroy {
     this.onChanged.emit(this.selectedDates);
   }
 
-  public getViewDates(dropdowns: IDropDown[]): IRequestDates[] {
+  public getViewDates(dropdowns: IDropDownState[]): IRequestDates[] {
     return chain(dropdowns)
       .map(dropdown => ({
         subject: dropdown.subjectName,

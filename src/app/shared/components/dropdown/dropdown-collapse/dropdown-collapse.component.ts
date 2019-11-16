@@ -1,7 +1,7 @@
 import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup } from '@angular/forms';
 import { createDropDownForm } from 'src/app/shared/common/forms/dropdown';
-import { IDropDown } from 'src/app/shared/common/entities/dropdown';
+import { IDropDownState } from 'src/app/shared/common/entities/dropdown';
 
 @Component({
   selector: 'app-dropdown-collapse',
@@ -29,14 +29,14 @@ export class DropdownCollapseComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  public writeValue(data: IDropDown): void {
+  public writeValue(data: IDropDownState): void {
     this.form = createDropDownForm(data);
 
-    setTimeout(() => this.form.valueChanges.subscribe(() => this.onChange(this.form.value)));
+    setTimeout(() => this.form.valueChanges.subscribe(this.onChange));
   }
 
-  public changePanelState(form: FormGroup, flag: boolean): void {
-    form.value.isExpended = flag;
+  public changePanelState(form: FormGroup, isExpanded: boolean): void {
+    form.value.isExpended = isExpanded;
 
     form.patchValue(form.value);
   }
