@@ -13,8 +13,8 @@ export const createSubject: ActionCreator<string, any> = createAction(`${PAGE} C
 export const updateSubject: ActionCreator<string, any> = createAction(`${PAGE} Update ISubject`, props<ISubject>());
 export const deleteSubject: ActionCreator<string, any> = createAction(`${PAGE} Delete ISubject`, props<ISubject>());
 
-export const updateFilterText: ActionCreator<string, any> = createAction(`${PAGE} Update Filter Text`, props<{ filterText: string }>());
-export const setFilterText: ActionCreator<string, any> = createAction(`${PAGE} Set Filter Text`, props<{ filterText: string }>());
+export const updateFilterData: ActionCreator<string, any> = createAction(`${PAGE} Update Filter Text`, props<{ filterData: string }>());
+export const setFilterData: ActionCreator<string, any> = createAction(`${PAGE} Set Filter Text`, props<{ filterData: string }>());
 
 export const loadJournal: ActionCreator<string, any> = createAction(`${PAGE} Load IJournal`, props<{ id: string }>());
 export const setJournal: ActionCreator<string, any> = createAction(`${PAGE} Set IJournal`, props<IJournal>());

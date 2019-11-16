@@ -5,7 +5,7 @@ import { SubjectService } from 'src/app/common/services/subject.service';
 import * as SubjectPageActions from '../actions/subjects';
 import { Store, select } from '@ngrx/store';
 import { IGlobalState } from '../reducers';
-import { getFilterText } from '../selectors/subjects';
+import { getFilterData } from '../selectors/subjects';
 import { JournalService } from 'src/app/common/services/journal.service';
 
 @Injectable()
@@ -13,8 +13,8 @@ export class SubjectEffects {
 
   public loadSubjects$ = createEffect(() => this.actions$.pipe(
     ofType(SubjectPageActions.loadSubjects),
-    withLatestFrom(this.store.pipe(select(getFilterText))),
-    switchMap(([_, filterText]) => this.subjectService.getSubjects(filterText)),
+    withLatestFrom(this.store.pipe(select(getFilterData))),
+    switchMap(([_, filterData]) => this.subjectService.getSubjects(filterData)),
     map(subjects => SubjectPageActions.setSubjects({ subjects }))
   ));
 
@@ -43,11 +43,11 @@ export class SubjectEffects {
     map(() => SubjectPageActions.loadSubjects())
   ));
 
-  public updateFilterText$ = createEffect(() => this.actions$.pipe(
-    ofType(SubjectPageActions.updateFilterText),
-    map(action => action.filterText),
-    switchMap(filterText => [
-      SubjectPageActions.setFilterText({ filterText }),
+  public updateFilterData$ = createEffect(() => this.actions$.pipe(
+    ofType(SubjectPageActions.updateFilterData),
+    map(action => action.filterData),
+    switchMap(filterData => [
+      SubjectPageActions.setFilterData({ filterData }),
       SubjectPageActions.loadSubjects()
     ])
   ));

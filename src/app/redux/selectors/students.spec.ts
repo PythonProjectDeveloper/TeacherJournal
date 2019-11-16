@@ -1,5 +1,5 @@
 import { initialState } from '../reducers/students';
-import { getStudentState, getStudents, getStudent, getFilterText } from './students';
+import { getStudentState, getStudents, getStudent, getFilterData } from './students';
 
 describe('Students selectors', () => {
   const globalState: any = { students: initialState };
@@ -22,9 +22,9 @@ describe('Students selectors', () => {
     });
   });
 
-  describe('#getFilterText', () => {
+  describe('#getFilterData', () => {
     it('should return filter text', () => {
-      expect(getFilterText(globalState)).toEqual(initialState.filterText);
+      expect(getFilterData(globalState)).toEqual(initialState.filterData);
     });
   });
 });

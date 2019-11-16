@@ -13,14 +13,14 @@ import { Store } from '@ngrx/store';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { initialState } from 'src/app/redux/reducers/subjects';
-import { updateFilterText, deleteSubject } from 'src/app/redux/actions/subjects';
+import { updateFilterData, deleteSubject } from 'src/app/redux/actions/subjects';
 import { HAMMER_LOADER } from '@angular/platform-browser';
 import { Subject } from 'src/app/common/models/subject';
 
 let component: SubjectListComponent;
 let fixture: ComponentFixture<SubjectListComponent>;
 let store: any;
-const filterText: string = 'filter Text';
+const filterData: string = 'filter Text';
 
 @Component({
   selector: 'app-button',
@@ -39,7 +39,7 @@ class TestToolbarComponent {
   @Output() public valueChanged = new EventEmitter();
 
   public onClick(): void {
-    this.valueChanged.emit(filterText);
+    this.valueChanged.emit(filterData);
   }
 }
 
@@ -92,7 +92,7 @@ describe('SubjectListComponent', () => {
 
       component.ngOnInit();
 
-      expect(store.dispatch).toHaveBeenCalledWith(updateFilterText(''));
+      expect(store.dispatch).toHaveBeenCalledWith(updateFilterData({ filterData: '' }));
     });
   });
 
@@ -118,9 +118,9 @@ describe('SubjectListComponent', () => {
     it('should update filter text in store', () => {
       spyOn(store, 'dispatch');
 
-      component.onToolbarValueChanged(filterText);
+      component.onToolbarValueChanged(filterData);
 
-      expect(store.dispatch).toHaveBeenCalledWith(updateFilterText({ filterText }));
+      expect(store.dispatch).toHaveBeenCalledWith(updateFilterData({ filterData }));
     });
   });
 

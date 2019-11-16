@@ -5,15 +5,15 @@ import { StudentService } from 'src/app/common/services/student.service';
 import * as StudentPageActions from '../actions/students';
 import { Store, select } from '@ngrx/store';
 import { IGlobalState } from '../reducers';
-import { getFilterText } from '../selectors/students';
+import { getFilterData } from '../selectors/students';
 
 @Injectable()
 export class StudentEffects {
 
   public loadStudents$ = createEffect(() => this.actions$.pipe(
     ofType(StudentPageActions.loadStudents),
-    withLatestFrom(this.store.pipe(select(getFilterText))),
-    switchMap(([_, filterText]) => this.studentService.getStudents(filterText)),
+    withLatestFrom(this.store.pipe(select(getFilterData))),
+    switchMap(([_, filterData]) => this.studentService.getStudents(filterData)),
     map(students => StudentPageActions.setStudents({ students }))
   ));
 
@@ -42,11 +42,11 @@ export class StudentEffects {
     map(() => StudentPageActions.loadStudents())
   ));
 
-  public updateFilterText$ = createEffect(() => this.actions$.pipe(
-    ofType(StudentPageActions.updateFilterText),
-    map(action => action.filterText),
-    switchMap(filterText => [
-      StudentPageActions.setFilterText({ filterText }),
+  public updateFilterData$ = createEffect(() => this.actions$.pipe(
+    ofType(StudentPageActions.updateFilterData),
+    map(action => action.filterData),
+    switchMap(filterData => [
+      StudentPageActions.setFilterData({ filterData }),
       StudentPageActions.loadStudents()
     ])
   ));

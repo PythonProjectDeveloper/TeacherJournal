@@ -8,21 +8,21 @@ export interface SubjectPageState {
   subjects: ISubject[];
   subject: ISubject;
   journal: IJournal;
-  filterText: string;
+  filterData: string;
 }
 
 export const initialState: SubjectPageState = {
   subjects: [],
   subject: SUBJECT,
   journal: JOURNAL,
-  filterText: ''
+  filterData: ''
 };
 
 const subjectReducer: ActionReducer<SubjectPageState> = createReducer(
   initialState,
   on(SubjectPageActions.setSubjects, (state, { subjects }) => ({ ...state, subjects })),
   on(SubjectPageActions.setSubject, (state, { subject }) => ({ ...state, subject })),
-  on(SubjectPageActions.setFilterText, (state, { filterText }) => ({ ...state, filterText })),
+  on(SubjectPageActions.setFilterData, (state, { filterData }) => ({ ...state, filterData })),
   on(SubjectPageActions.setJournal, (state, { journal }) => ({ ...state, journal }))
 );
 

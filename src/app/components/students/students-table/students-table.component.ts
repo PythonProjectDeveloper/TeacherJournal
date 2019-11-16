@@ -3,7 +3,7 @@ import { MatTableDataSource, MatSort } from '@angular/material';
 import { BASE_STUDENT_COLUMNS } from 'src/app/shared/constants/constants-table';
 import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
-import { deleteStudent, updateFilterText } from 'src/app/redux/actions/students';
+import { deleteStudent, updateFilterData } from 'src/app/redux/actions/students';
 import { getStudents } from 'src/app/redux/selectors/students';
 import { Subject } from 'rxjs';
 import { selectWithDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
@@ -29,15 +29,15 @@ export class StudentsTableComponent implements OnInit, OnDestroy {
     selectWithDestroyFlag(this.store, this.destroy$, getStudents).subscribe((students) => this.dataSource.data = students);
 
     this.dataSource.sort = this.sort;
-    this.store.dispatch(updateFilterText(''));
+    this.store.dispatch(updateFilterData({ filterData: '' }));
   }
 
   public onDelete(student: IPerson): void {
     this.store.dispatch(deleteStudent(student));
   }
 
-  public onToolbarValueChanged(filterText: string): void {
-    this.store.dispatch(updateFilterText({ filterText }));
+  public onToolbarValueChanged(filterData: string): void {
+    this.store.dispatch(updateFilterData({ filterData }));
   }
 
   public ngOnDestroy(): void {

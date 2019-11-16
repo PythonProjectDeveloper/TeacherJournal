@@ -12,5 +12,5 @@ export const createStudent: ActionCreator<string, any> = createAction(`${PAGE} C
 export const updateStudent: ActionCreator<string, any> = createAction(`${PAGE} Update IStudent`, props<IStudent>());
 export const deleteStudent: ActionCreator<string, any> = createAction(`${PAGE} Delete IStudent`, props<IStudent>());
 
-export const updateFilterText: ActionCreator<string, any> = createAction(`${PAGE} Update Filter Text`, props<{ filterText: string }>());
-export const setFilterText: ActionCreator<string, any> = createAction(`${PAGE} Set Filter Text`, props<{ filterText: string }>());
+export const updateFilterData: ActionCreator<string, any> = createAction(`${PAGE} Update Filter Text`, props<{ filterData: string }>());
+export const setFilterData: ActionCreator<string, any> = createAction(`${PAGE} Set Filter Text`, props<{ filterData: string }>());

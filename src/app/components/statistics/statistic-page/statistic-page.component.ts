@@ -7,7 +7,7 @@ import { select, Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { getStudents } from 'src/app/redux/selectors/students';
 import { getSubjects } from 'src/app/redux/selectors/subjects';
-import { loadStudents } from 'src/app/redux/actions/students';
+import { updateFilterData } from 'src/app/redux/actions/students';
 import { loadSubjects } from 'src/app/redux/actions/subjects';
 import { IRequestDates } from 'src/app/shared/common/entities/dropdown';
 
@@ -36,7 +36,7 @@ export class StatisticPageComponent implements OnInit {
     this.students$ = this.store.pipe(select(getStudents));
     this.subjects$ = this.store.pipe(select(getSubjects));
 
-    this.store.dispatch(loadStudents());
+    this.store.dispatch(updateFilterData({ filterData: [] }));
     this.store.dispatch(loadSubjects());
   }
 
@@ -50,8 +50,8 @@ export class StatisticPageComponent implements OnInit {
   }
 
   public onDropdownValueChanged(filterData: IRequestDates[]): void {
-    console.log('data changed')
-    // this.store.dispatch(loadStudents({ filterData }));
+    console.log('data changed', filterData)
+    this.store.dispatch(updateFilterData({ filterData }));
   }
 
 }

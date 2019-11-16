@@ -15,7 +15,7 @@ export const getStudent: any = createSelector(
   (state: StudentPageState) => state.student
 );
 
-export const getFilterText: any = createSelector(
+export const getFilterData: any = createSelector(
   getStudentState,
-  (state: StudentPageState) => state.filterText
+  (state: StudentPageState) => state.filterData
 );

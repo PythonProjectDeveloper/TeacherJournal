@@ -14,14 +14,14 @@ import { Store } from '@ngrx/store';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { initialState } from 'src/app/redux/reducers/students';
-import { updateFilterText, deleteStudent } from 'src/app/redux/actions/students';
+import { updateFilterData, deleteStudent } from 'src/app/redux/actions/students';
 import { HAMMER_LOADER } from '@angular/platform-browser';
 import { Student } from 'src/app/common/models/person';
 
 let component: StudentsTableComponent;
 let fixture: ComponentFixture<StudentsTableComponent>;
 let store: any;
-const filterText: string = 'filter Text';
+const filterData: string = 'filter Text';
 
 @Component({
   selector: 'app-button',
@@ -40,7 +40,7 @@ class TestToolbarComponent {
   @Output() public valueChanged = new EventEmitter();
 
   public onClick(): void {
-    this.valueChanged.emit(filterText);
+    this.valueChanged.emit(filterData);
   }
 }
 
@@ -93,7 +93,7 @@ describe('StudentListComponent', () => {
 
       component.ngOnInit();
 
-      expect(store.dispatch).toHaveBeenCalledWith(updateFilterText(''));
+      expect(store.dispatch).toHaveBeenCalledWith(updateFilterData({ filterData: '' }));
     });
   });
 
@@ -119,9 +119,9 @@ describe('StudentListComponent', () => {
     it('should update filter text in store', () => {
       spyOn(store, 'dispatch');
 
-      component.onToolbarValueChanged(filterText);
+      component.onToolbarValueChanged(filterData);
 
-      expect(store.dispatch).toHaveBeenCalledWith(updateFilterText({ filterText }));
+      expect(store.dispatch).toHaveBeenCalledWith(updateFilterData({ filterData }));
     });
   });
 

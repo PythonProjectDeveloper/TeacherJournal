@@ -6,20 +6,20 @@ import { IStudent, PERSON } from 'src/app/common/entities/person';
 export interface StudentPageState {
   students: IStudent[];
   student: IStudent;
-  filterText: string;
+  filterData: string;
 }
 
 export const initialState: StudentPageState = {
   students: [],
   student: PERSON,
-  filterText: ''
+  filterData: ''
 };
 
 const studentReducer: ActionReducer<StudentPageState> = createReducer(
   initialState,
   on(StudentPageActions.setStudents, (state, { students }) => ({ ...state, students })),
   on(StudentPageActions.setStudent, (state, { student }) => ({ ...state, student })),
-  on(StudentPageActions.setFilterText, (state, { filterText }) => ({ ...state, filterText }))
+  on(StudentPageActions.setFilterData, (state, { filterData }) => ({ ...state, filterData }))
 );
 
 export function reducer(state: StudentPageState | undefined, action: Action): StudentPageState {

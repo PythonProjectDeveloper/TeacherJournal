@@ -1,5 +1,5 @@
 import { initialState, reducer } from '../reducers/subjects';
-import { setSubjects, setSubject, setFilterText, setJournal } from '../actions/subjects';
+import { setSubjects, setSubject, setFilterData, setJournal } from '../actions/subjects';
 
 describe('Subject selectors', () => {
   describe('#setSubjects', () => {
@@ -22,13 +22,13 @@ describe('Subject selectors', () => {
     });
   });
 
-  describe('#setFilterText', () => {
+  describe('#setFilterData', () => {
     it('should set filter text', () => {
-      const filterText: any = 'test data';
-      const action: any = setFilterText({ filterText });
+      const filterData: any = 'test data';
+      const action: any = setFilterData({ filterData });
       const result: any = reducer(initialState, action);
 
-      expect(result.filterText).toEqual(filterText);
+      expect(result.filterData).toEqual(filterData);
     });
   });
 
