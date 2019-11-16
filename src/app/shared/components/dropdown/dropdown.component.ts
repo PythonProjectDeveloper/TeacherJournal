@@ -3,12 +3,10 @@ import { DataPickerService } from 'src/app/common/services/data-picker.service';
 import { FormGroup } from '@angular/forms';
 import { setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
 import { Subject } from 'rxjs';
-import { DEFAULT_PRINT_DATES } from '../../constants/dropdown';
-import { IRequestDates, IDropDown } from '../../common/entities/dropdown';
+import { IRequestDates, IDropDown, IDropDownWidget } from '../../common/entities/dropdown';
 import { chain } from 'lodash';
 import { createDropDownWidgetForm } from '../../common/forms/dropdown';
 import { TranslateService } from '@ngx-translate/core';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dropdown',
@@ -79,7 +77,7 @@ export class DropdownComponent implements OnInit, OnDestroy {
   }
 
   public toggleCheckboxs(flag: boolean): void {
-    const value: any = this.form.value;
+    const value: IDropDownWidget = this.form.value;
     value.dropdowns.forEach(dropdown =>
       dropdown.dates.forEach(date => date.state = flag)
     );
@@ -87,7 +85,7 @@ export class DropdownComponent implements OnInit, OnDestroy {
   }
 
   public toggleCollapses(flag: boolean): void {
-    const value: any = this.form.value;
+    const value: IDropDownWidget = this.form.value;
     value.dropdowns.forEach(dropdown => dropdown.isExpended = flag);
     this.form.patchValue(value);
   }
