@@ -2,17 +2,17 @@ import mongoose, { Schema, Model } from 'mongoose';
 import { TableName } from '../../constants/tables';
 import { IJournalModel, IDayModel, IMarkModel } from '../../entities/journals';
 
-export const MarkSchema: Schema = new Schema({
+export const MarkSchema: Schema<IMarkModel> = new Schema({
   student: { type: Schema.Types.ObjectId, ref: TableName.Student },
   value: { type: Number, default: null },
 });
 
-export const DaySchema: Schema = new Schema({
+export const DaySchema: Schema<IDayModel> = new Schema({
   name: { type: String, required: true },
   marks: [MarkSchema],
 });
 
-export const JournalSchema: Schema = new Schema({
+export const JournalSchema: Schema<IJournalModel> = new Schema({
   subject: { type: Schema.Types.ObjectId, ref: TableName.Subject },
   students: [{ type: Schema.Types.ObjectId, ref: TableName.Student }],
   days: [DaySchema],

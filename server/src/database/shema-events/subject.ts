@@ -1,4 +1,3 @@
-import { Document } from 'mongoose';
 import { SubjectSchema } from '../shemas/subject';
 import { Journal } from '../shemas/journals';
 import { Student } from '../shemas/person';

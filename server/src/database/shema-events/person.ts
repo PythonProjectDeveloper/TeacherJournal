@@ -1,9 +1,7 @@
 
-import { Document } from 'mongoose';
 import { PersonSchema } from '../shemas/person';
 import { Journal, Mark } from '../shemas/journals';
-import { IPerson, IPersonModel } from '../../entities/person';
-import { IDayModel } from '../../entities/journals';
+import { IPersonModel } from '../../entities/person';
 
 export function initPersonEvents(): void {
   PersonSchema.post<IPersonModel>('save', async person => {

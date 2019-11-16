@@ -2,7 +2,7 @@ import mongoose, { Model, Schema } from 'mongoose';
 import { TableName } from '../../constants/tables';
 import { ILogModel } from '../../entities/log';
 
-export const LogSchema: Schema = new Schema({
+export const LogSchema: Schema<ILogModel> = new Schema({
   name: { type: String },
   message: { type: String },
   error: { type: Schema.Types.Mixed },
