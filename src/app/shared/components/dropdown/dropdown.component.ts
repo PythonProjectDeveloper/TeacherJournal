@@ -37,11 +37,16 @@ export class DropdownComponent implements OnInit, OnDestroy {
       this.updateViewDates(dates);
     });
     setDestroyFlag(this.translate.onLangChange, this.destroy$).subscribe(({ translations }) => {
-      const text: string = translations.widgets.dropdown.selectDate;
-
-      this.defaultText = text;
-      this.setViewDatesString(this.selectedDates, text);
+      this.setViewText(translations.widgets.dropdown.selectDate);
     });
+    setDestroyFlag(this.translate.getTranslation(this.translate.currentLang), this.destroy$).subscribe((translations) => {
+      this.setViewText(translations.widgets.dropdown.selectDate);
+    });
+  }
+
+  public setViewText(text: string): void {
+    this.defaultText = text;
+    this.setViewDatesString(this.selectedDates, text);
   }
 
   public updateViewDates(dropdowns: IDropDown[]): void {

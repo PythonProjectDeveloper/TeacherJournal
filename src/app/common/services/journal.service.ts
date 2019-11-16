@@ -18,7 +18,6 @@ export class JournalService {
     return this.httpService.put<IJournal>(url, journal);
   }
 
-  // TODO: change journal id to subject id
   public getJournal(id: string): Observable<IJournal> {
     const url: string = assembleUrl(JOURNALS_API_URL, id);
     return this.httpService.get<IJournal>(url);

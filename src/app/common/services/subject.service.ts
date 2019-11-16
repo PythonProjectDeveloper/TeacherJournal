@@ -29,7 +29,6 @@ export class SubjectService {
     return  this.httpService.delete<ISubject>(url);
   }
 
-  // TODO: change search after adding server side
   public getSubjects(filter: string = ''): Observable<ISubject[]> {
     const url: string = SUBJECTS_API_URL;
     const params: HttpParams = new HttpParams().set('filter', filter);

@@ -29,7 +29,6 @@ export class StudentService {
     return this.httpService.delete<IPerson>(url);
   }
 
-  // TODO: change search after adding server side
   public getStudents(filter: string = ''): Observable<IPerson[]> {
     const url: string = STUDENTS_API_URL;
     const params: HttpParams = new HttpParams().set('filter', filter);
