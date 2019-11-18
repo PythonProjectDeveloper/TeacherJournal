@@ -29,19 +29,26 @@ export function createDropDownForm({
     isExpended: new FormControl(isExpended),
   });
 
-  form.valueChanges.subscribe(val => {
-    const isCollapsed: boolean = getCollapseState(val.dates);
-
-    // if the state changed when clicked
-    if (val.state !== isCollapsed) {
-      val.dates.forEach(date => date.state = val.state);
+  form.controls.state.valueChanges.subscribe(newState => {
+    const formDates: ICollapseState[] = form.controls.dates.value;
+    const isCollapsed: boolean = getCollapseState(formDates);
 
     // if the state changed when the children changed
-    } else {
-      val.state = isCollapsed;
-    }
+    if (newState === isCollapsed) {
+      form.controls.state.patchValue(newState, { emitEvent: false });
 
-    form.patchValue(val, {emitEvent: false, onlySelf: false});
+    // if the state changed when clicked
+    } else {
+      formDates.forEach(date => date.state = newState);
+      form.controls.dates.patchValue(formDates, { emitEvent: false });
+    }
+  });
+
+  form.controls.dates.valueChanges.subscribe(newDates => {
+    const newState: boolean = getCollapseState(newDates);
+
+    form.controls.dates.patchValue(newDates, { emitEvent: false });
+    form.controls.state.patchValue(newState, { emitEvent: false });
   });
 
   return form;
@@ -51,14 +58,6 @@ export function createCollapseForm({ name, state }: ICollapseState = DEFAULT_COL
   const form: FormGroup = new FormGroup({
     name: new FormControl(name, [ Validators.required, Validators.maxLength(20) ]),
     state: new FormControl(state),
-  });
-
-  form.valueChanges.subscribe((val) => {
-    form.patchValue(val, { emitEvent: false, onlySelf: false });
-
-    const grandfatherValue: any = form.parent.parent.value;
-    grandfatherValue.state = getCollapseState(grandfatherValue.dates);
-    form.parent.parent.patchValue(grandfatherValue, {emitEvent: false});
   });
 
   return form;
