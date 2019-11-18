@@ -5,21 +5,17 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { RouterModule } from '@angular/router';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslateLanguageSettings } from '../common/helpers/factories';
-import { DropdownComponent } from './components/dropdown/dropdown.component';
 import {
   MatIconModule,
   MatButtonModule,
   MatCardModule,
   MatFormFieldModule,
   MatInputModule,
-  MatExpansionModule,
-  MatCheckboxModule
 } from '@angular/material';
-import { DropdownCollapseComponent } from './components/dropdown/dropdown-collapse/dropdown-collapse.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +23,6 @@ import { DropdownCollapseComponent } from './components/dropdown/dropdown-collap
     PageNotFoundComponent,
     BreadcrumbComponent,
     ToolbarComponent,
-    DropdownComponent,
-    DropdownCollapseComponent
   ],
   imports: [
     CommonModule,
@@ -40,9 +34,6 @@ import { DropdownCollapseComponent } from './components/dropdown/dropdown-collap
     MatInputModule,
     FormsModule,
     HttpClientModule,
-    MatExpansionModule,
-    ReactiveFormsModule,
-    MatCheckboxModule,
     TranslateModule.forChild(TranslateLanguageSettings())
   ],
   exports: [
@@ -50,7 +41,6 @@ import { DropdownCollapseComponent } from './components/dropdown/dropdown-collap
     PageNotFoundComponent,
     BreadcrumbComponent,
     ToolbarComponent,
-    DropdownComponent,
     TranslateModule
   ]
 })

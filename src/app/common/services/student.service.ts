@@ -5,7 +5,7 @@ import { STUDENTS_API_URL } from '../constants/constants-person';
 import { assembleUrl } from '../helpers/calculations';
 import { HttpService } from './http.service';
 import { IPerson, PERSON } from '../entities/person';
-import { IRequestDates } from 'src/app/shared/common/entities/dropdown';
+import { IRequestDates } from 'src/app/common/entities/dropdown';
 
 @Injectable({
   providedIn: 'root'

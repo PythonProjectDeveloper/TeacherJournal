@@ -15,7 +15,9 @@ import {
   MatSidenavModule,
   MatTabsModule,
   MatButtonToggleModule,
-  MatRadioModule
+  MatRadioModule,
+  MatExpansionModule,
+  MatCheckboxModule
 } from '@angular/material';
 
 import { AppComponent } from './root/app.component';
@@ -59,6 +61,8 @@ import { BannerComponent } from './components/banner/banner.component';
 import { SimpleMessageComponent } from './components/banner/simple-message/simple-message.component';
 import { BannerDirective } from './common/directives/banner.directive';
 import { ExportToolbarComponent } from './components/export/export-toolbar/export-toolbar.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { DropdownCollapseComponent } from './components/dropdown/dropdown-collapse/dropdown-collapse.component';
 
 @NgModule({
   declarations: [
@@ -84,9 +88,13 @@ import { ExportToolbarComponent } from './components/export/export-toolbar/expor
     BannerComponent,
     SimpleMessageComponent,
     BannerDirective,
-    ExportToolbarComponent
+    ExportToolbarComponent,
+    DropdownComponent,
+    DropdownCollapseComponent
   ],
   imports: [
+    MatCheckboxModule,
+    MatExpansionModule,
     ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,

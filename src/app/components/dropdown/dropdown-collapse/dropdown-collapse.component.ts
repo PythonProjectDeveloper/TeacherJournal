@@ -1,7 +1,7 @@
 import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup } from '@angular/forms';
-import { createDropDownForm } from 'src/app/shared/common/forms/dropdown';
-import { IDropDownState } from 'src/app/shared/common/entities/dropdown';
+import { createDropDownForm } from 'src/app/common/forms/dropdown';
+import { IDropDownState } from 'src/app/common/entities/dropdown';
 
 @Component({
   selector: 'app-dropdown-collapse',

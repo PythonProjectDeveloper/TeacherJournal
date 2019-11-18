@@ -9,7 +9,7 @@ import { getStudents } from 'src/app/redux/selectors/students';
 import { getSubjects } from 'src/app/redux/selectors/subjects';
 import { updateFilterData } from 'src/app/redux/actions/students';
 import { loadSubjects } from 'src/app/redux/actions/subjects';
-import { IRequestDates } from 'src/app/shared/common/entities/dropdown';
+import { IRequestDates } from 'src/app/common/entities/dropdown';
 
 enum List {
   Students = 'Students',

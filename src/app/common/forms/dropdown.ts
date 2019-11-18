@@ -8,7 +8,7 @@ import {
   DROPDOWN_WIDGET,
   IDropDownWidget
 } from '../entities/dropdown';
-import { getCollapseState } from '../../helpers/calculations';
+import { getCollapseState } from '../helpers/calculations';
 
 export function createDropDownWidgetForm({ dropdowns }: IDropDownWidget = DROPDOWN_WIDGET): FormGroup {
   return new FormGroup({
