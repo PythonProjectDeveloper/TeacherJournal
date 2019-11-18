@@ -2,7 +2,7 @@
 import { IPersonModel } from '../../entities/person';
 import { Journal, Mark } from '../shema-models/journal';
 import { Schema } from 'mongoose';
-import { filter } from 'lodash';
+import { ObjectId } from 'mongodb';
 
 export function initPersonEvents(shema: Schema): void {
   shema.post<IPersonModel>('save', async person => {
@@ -26,13 +26,10 @@ export function initPersonEvents(shema: Schema): void {
     journals.forEach((journal: any) => {
 
       journal.days.forEach(day => {
-        console.log(day.marks.map(mark => mark.student), person._id)
-        console.log(day.marks.filter(mark => mark.student === person._id))
-        
-        // day.marks = filter(day.marks, mark => mark.student !== person._id);
+        day.marks = day.marks.filter(mark => !new ObjectId(mark.student).equals(new ObjectId(person._id)));
       });
 
-      // journal.save();
+      journal.save();
     });
 
     await Mark.deleteMany({ student: person._id });
