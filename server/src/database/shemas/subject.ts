@@ -1,6 +1,7 @@
-import mongoose, { Model, Schema } from 'mongoose';
+import { Schema } from 'mongoose';
 import { TableName } from '../../constants/tables';
 import { ISubjectModel } from '../../entities/subject';
+import { initSubjectEvents } from '../shema-events/subject';
 
 export const SubjectSchema: Schema<ISubjectModel> = new Schema({
   name: { type: String, required: true },
@@ -9,4 +10,4 @@ export const SubjectSchema: Schema<ISubjectModel> = new Schema({
   description: { type: String },
 }, { versionKey: false });
 
-export const Subject: Model<ISubjectModel, {}> = mongoose.model<ISubjectModel>(TableName.Subject, SubjectSchema);
+initSubjectEvents(SubjectSchema)

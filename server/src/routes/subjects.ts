@@ -1,6 +1,5 @@
 import { Router } from 'express-serve-static-core';
-import { Document } from 'mongoose';
-import { Subject } from '../database/shemas/subject';
+import { Subject } from '../database/shema-models/subject';
 
 export default function routes(router: Router): void {
   router.get('/subjects', (request, response) => {

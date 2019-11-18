@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { Student } from '../database/shemas/person';
-import { Journal } from '../database/shemas/journals';
-import { Subject } from '../database/shemas/subject';
 import { findWithoutId } from '../helpers/queries';
+import { Student } from '../database/shema-models/person';
+import { Subject } from '../database/shema-models/subject';
+import { Journal } from '../database/shema-models/journal';
 
 export default function routes(router: Router): void {
   router.get('/export/students', (request, response) => {

@@ -1,10 +1,11 @@
 
-import { PersonSchema } from '../shemas/person';
-import { Journal, Mark } from '../shemas/journals';
 import { IPersonModel } from '../../entities/person';
+import { Journal, Mark } from '../shema-models/journal';
+import { Schema } from 'mongoose';
+import { filter } from 'lodash';
 
-export function initPersonEvents(): void {
-  PersonSchema.post<IPersonModel>('save', async person => {
+export function initPersonEvents(shema: Schema): void {
+  shema.post<IPersonModel>('save', async person => {
     const journals = await Journal.find();
 
     // add new marks to all journals
@@ -12,25 +13,29 @@ export function initPersonEvents(): void {
       journal.students.push(person);
 
       journal.days.forEach(day => {
-        day.marks.push(new Mark({ studentID: person._id }));
-
-        day.save();
+        day.marks.push(new Mark({ student: person._id }));
       });
+
+      journal.save();
     });
   });
 
-  PersonSchema.post<IPersonModel>('remove', async person => {
+  shema.post<IPersonModel>('findOneAndDelete', async person => {
     const journals = await Journal.find();
 
-    // remove marks from all journals
     journals.forEach((journal: any) => {
-      journal.students.id(person._id).remove();
 
       journal.days.forEach(day => {
-        day.marks.findOneAndRemove({ studentID: person._id });
-
-        day.save();
+        console.log(day.marks.map(mark => mark.student), person._id)
+        console.log(day.marks.filter(mark => mark.student === person._id))
+        
+        // day.marks = filter(day.marks, mark => mark.student !== person._id);
       });
+
+      // journal.save();
     });
+
+    await Mark.deleteMany({ student: person._id });
+
   });
 }

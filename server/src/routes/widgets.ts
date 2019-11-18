@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { Journal } from '../database/shemas/journals';
+import { Journal } from '../database/shema-models/journal';
 
 export default function routes(router: Router): void {
   // [{

@@ -1,10 +1,9 @@
 import { Router } from 'express-serve-static-core';
-import { Document } from 'mongoose';
-import { Student } from '../database/shemas/person';
 import { isString } from 'util';
-import { Journal } from '../database/shemas/journals';
-import { Subject } from '../database/shemas/subject';
 import { find } from 'lodash';
+import { Student } from '../database/shema-models/person';
+import { Subject } from '../database/shema-models/subject';
+import { Journal } from '../database/shema-models/journal';
 
 export default function routes(router: Router): void {
   router.get('/students', async (request, response) => {

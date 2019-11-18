@@ -1,5 +1,5 @@
 import { Router } from 'express-serve-static-core';
-import { Teacher } from '../database/shemas/person';
+import { Teacher } from '../database/shema-models/person';
 
 export default function routes(router: Router): void {
   router.get('/teachers', (request, response) => {

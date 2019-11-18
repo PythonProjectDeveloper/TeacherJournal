@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { Journal } from '../database/shemas/journals';
 import { removeEmptyId } from '../helpers/calculation';
+import { Journal } from '../database/shema-models/journal';
 
 export default function routes(router: Router): void {
   router.get('/journals', (request, response) => {

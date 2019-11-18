@@ -1,7 +1,7 @@
-import mongoose, { Model, Schema } from 'mongoose';
+import { Schema } from 'mongoose';
 import extendSchema from 'mongoose-extend-schema';
-import { TableName } from '../../constants/tables';
 import { IPersonModel, IStudentModel, ITeacherModel } from '../../entities/person';
+import { initPersonEvents } from '../shema-events/person';
 
 export const PersonSchema: Schema<IPersonModel> = new Schema({
   firstName: { type: String, required: true },
@@ -10,9 +10,7 @@ export const PersonSchema: Schema<IPersonModel> = new Schema({
   description: { type: String },
 }, { versionKey: false } );
 
-export const StudentSchema: Schema<IStudentModel> = extendSchema(PersonSchema, {});
-export const TeacherSchema: Schema<ITeacherModel> = extendSchema(PersonSchema, {});
+export const StudentSchema: Schema<IStudentModel> = extendSchema(PersonSchema, {}, { versionKey: false });
+export const TeacherSchema: Schema<ITeacherModel> = extendSchema(PersonSchema, {}, { versionKey: false });
 
-export const Person: Model<IPersonModel, {}> = mongoose.model<IPersonModel>(TableName.Person, PersonSchema);
-export const Student: Model<IStudentModel, {}> = mongoose.model<IStudentModel>(TableName.Student, StudentSchema);
-export const Teacher: Model<ITeacherModel, {}> = mongoose.model<ITeacherModel>(TableName.Teacher, TeacherSchema);
+initPersonEvents(StudentSchema);

@@ -1,10 +1,10 @@
-import { SubjectSchema } from '../shemas/subject';
-import { Journal } from '../shemas/journals';
-import { Student } from '../shemas/person';
 import { ISubjectModel } from '../../entities/subject';
+import { Student } from '../shema-models/person';
+import { Journal } from '../shema-models/journal';
+import { Schema } from 'mongoose';
 
-export function initSubjectEvents(): void {
-  SubjectSchema.post<ISubjectModel>('save', async subject => {
+export function initSubjectEvents(shema: Schema): void {
+  shema.post<ISubjectModel>('save', async subject => {
 
     // add new journal
     const students = await Student.find();
@@ -13,8 +13,8 @@ export function initSubjectEvents(): void {
     journal.save();
   });
 
-  SubjectSchema.post<ISubjectModel>('remove', doc => {
+  shema.post<ISubjectModel>('findOneAndDelete', async doc => {
     // remove journal
-    Journal.findOneAndRemove( { studentID: doc._id });
+    await Journal.findOneAndDelete({ subject: doc._id });
   });
 }

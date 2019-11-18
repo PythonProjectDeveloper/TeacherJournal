@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { Journal } from '../database/shemas/journals';
 import { isNull } from 'util';
 import { mean } from 'lodash';
+import { Journal } from '../database/shema-models/journal';
 
 export default function routes(router: Router): void {
   router.get('/graph/student/:id', (request, response) => {

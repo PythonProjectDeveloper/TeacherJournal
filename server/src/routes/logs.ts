@@ -1,6 +1,5 @@
 import { Router } from 'express';
-import { Document } from 'mongoose';
-import { Log } from '../database/shemas/log';
+import { Log } from '../database/shema-models/log';
 
 export default function routes(router: Router): void {
   router.post('/logs', (request, response) => {
