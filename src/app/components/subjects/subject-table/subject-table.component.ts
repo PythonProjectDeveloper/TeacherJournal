@@ -1,29 +1,28 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { IAverageMarkColor } from 'src/app/common/directives/average-mark-highlight.directive';
 import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { getJournal } from 'src/app/redux/selectors/subjects';
 import { loadJournal, updateJournal } from 'src/app/redux/actions/subjects';
-import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
 import { find, map, isEqual } from 'lodash';
 import { IDay, IJournal } from 'src/app/common/entities/journal';
 import { createJournalForm, createDayForm } from 'src/app/common/forms/journal';
 import { FormGroup, FormArray } from '@angular/forms';
+import { EventDestroyer } from 'src/app/shared/entities/event-destroyer';
 
 @Component({
   selector: 'app-subject-table',
   templateUrl: './subject-table.component.html',
   styleUrls: ['./subject-table.component.scss']
 })
-export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, OnDestroy {
+export class SubjectTableComponent extends EventDestroyer implements ComponentCanDeactivate, OnInit {
   public canDataBeSave = false;
   public journal: IJournal;
   public form: FormGroup;
-  public destroy$: Subject<boolean> = new Subject<boolean>();
   public averageMarkColors: IAverageMarkColor[] = [
     { maxAverageMark: 5, class: 'table-wrapper__row__average-mark-lt-5' },
     { maxAverageMark: 11, class: 'table-wrapper__row__average-mark-lt-11' }
@@ -34,20 +33,22 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
   constructor(
     private store: Store<IGlobalState>,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    super();
+  }
 
   public ngOnInit(): void {
-    selectWithDestroyFlag(this.store, this.destroy$, getJournal).subscribe(journal => {
+    this.selectWithDestroyFlag(this.store, getJournal).subscribe(journal => {
       this.journal = journal;
       this.form = createJournalForm(journal);
 
-      setDestroyFlag(this.form.valueChanges, this.destroy$).subscribe(val => {
+      this.setDestroyFlag(this.form.valueChanges).subscribe(val => {
         this.setSaveButtonVision();
       });
 
       this.canDataBeSave = false;
     });
-    setDestroyFlag(this.route.params, this.destroy$).subscribe(({ id }) => {
+    this.setDestroyFlag(this.route.params).subscribe(({ id }) => {
       this.store.dispatch(loadJournal({ id }));
     });
   }
@@ -88,11 +89,6 @@ export class SubjectTableComponent implements ComponentCanDeactivate, OnInit, On
 
   public getStudentMarks(id: string, days: any): number {
     return days.map(day => parseInt(find(day.marks, { student: id }).value, 10));
-  }
-
-  public ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.complete();
   }
 
   public getMarkControl(dayIdx: string, markIdx: string): FormGroup {

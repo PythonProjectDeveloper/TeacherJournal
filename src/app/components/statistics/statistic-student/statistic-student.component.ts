@@ -1,23 +1,21 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { getStudent } from 'src/app/redux/selectors/students';
 import { loadStudent } from 'src/app/redux/actions/students';
-import { setDestroyFlag, selectWithDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
 import { GraphService } from 'src/app/common/services/graph.service';
 import { StudentGraphDrawer } from 'src/app/common/helpers/draph-drawers';
 import { IPerson } from 'src/app/common/entities/person';
+import { EventDestroyer } from 'src/app/shared/entities/event-destroyer';
 
 @Component({
   selector: 'app-statistic-student',
   templateUrl: './statistic-student.component.html',
   styleUrls: ['./statistic-student.component.scss']
 })
-export class StatisticStudentComponent implements OnInit, OnDestroy {
+export class StatisticStudentComponent extends EventDestroyer implements OnInit {
   public student: IPerson;
-  public destroy$: Subject<boolean> = new Subject<boolean>();
   public graphDrawer = new StudentGraphDrawer();
   public selector = 'graph';
 
@@ -25,10 +23,12 @@ export class StatisticStudentComponent implements OnInit, OnDestroy {
     private store: Store<IGlobalState>,
     private route: ActivatedRoute,
     private graphService: GraphService
-  ) { }
+  ) {
+    super();
+  }
 
   public ngOnInit(): void {
-    selectWithDestroyFlag(this.store, this.destroy$, getStudent).subscribe(student => {
+    this.selectWithDestroyFlag(this.store, getStudent).subscribe(student => {
       this.student = student;
 
       if (student._id) {
@@ -41,12 +41,6 @@ export class StatisticStudentComponent implements OnInit, OnDestroy {
         this.graphService.getStudentGraphData(student._id).subscribe(data => this.graphDrawer.draw(data, `.${this.selector}`));
       }
     });
-    setDestroyFlag(this.route.params, this.destroy$).subscribe(({ id }) => this.store.dispatch(loadStudent({ id })));
+    this.setDestroyFlag(this.route.params).subscribe(({ id }) => this.store.dispatch(loadStudent({ id })));
   }
-
-  public ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.complete();
-  }
-
 }

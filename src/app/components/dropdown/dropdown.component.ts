@@ -1,22 +1,20 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DataPickerService } from 'src/app/common/services/data-picker.service';
 import { FormGroup } from '@angular/forms';
-import { setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
-import { Subject } from 'rxjs';
 import { IRequestDates, IDropDownState, IDropDownWidget } from '../../common/entities/dropdown';
 import { chain } from 'lodash';
 import { createDropDownWidgetForm } from '../../common/forms/dropdown';
 import { TranslateService } from '@ngx-translate/core';
+import { EventDestroyer } from 'src/app/shared/entities/event-destroyer';
 
 @Component({
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
 })
-export class DropdownComponent implements OnInit, OnDestroy {
+export class DropdownComponent extends EventDestroyer implements OnInit {
   public form: FormGroup;
   public viewDates: string;
-  public destroy$: Subject<boolean> = new Subject<boolean>();
   public isInputOpen = false;
   public defaultText: string;
   public selectedDates: IRequestDates[] = [];
@@ -25,19 +23,21 @@ export class DropdownComponent implements OnInit, OnDestroy {
   constructor(
     private dataPickerService: DataPickerService,
     private translate: TranslateService
-  ) { }
+  ) {
+    super();
+  }
 
   public ngOnInit(): void {
-    setDestroyFlag(this.dataPickerService.getSubjectDates(), this.destroy$).subscribe(dates => {
+    this.setDestroyFlag(this.dataPickerService.getSubjectDates()).subscribe(dates => {
       this.form = createDropDownWidgetForm({ dropdowns: dates });
       this.form.valueChanges.subscribe(() => this.updateViewDates(this.form.value.dropdowns));
 
       this.updateViewDates(dates);
     });
-    setDestroyFlag(this.translate.onLangChange, this.destroy$).subscribe(({ translations }) => {
+    this.setDestroyFlag(this.translate.onLangChange).subscribe(({ translations }) => {
       this.setViewText(translations.widgets.dropdown.selectDate);
     });
-    setDestroyFlag(this.translate.getTranslation(this.translate.currentLang), this.destroy$).subscribe((translations) => {
+    this.setDestroyFlag(this.translate.getTranslation(this.translate.currentLang)).subscribe((translations) => {
       this.setViewText(translations.widgets.dropdown.selectDate);
     });
   }
@@ -69,11 +69,6 @@ export class DropdownComponent implements OnInit, OnDestroy {
     const viewDatesString: string[] = subjects.map((date) => `${ date.subject }: [${ date.dates.join(', ') }]`, []);
 
     this.viewDates = viewDatesString.length ? viewDatesString.join(', ') : defaultText;
-  }
-
-  public ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.complete();
   }
 
   public toggleCheckboxs(flag: boolean): void {

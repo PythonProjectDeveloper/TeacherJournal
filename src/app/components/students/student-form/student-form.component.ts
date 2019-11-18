@@ -1,38 +1,39 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { loadStudent, createStudent, updateStudent } from 'src/app/redux/actions/students';
 import { getStudent } from 'src/app/redux/selectors/students';
-import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
 import { BannerService } from 'src/app/common/services/banner.service';
 import { createPersonForm } from 'src/app/common/forms/person';
 import { FormGroup} from '@angular/forms';
 import { IPerson } from 'src/app/common/entities/person';
 import { isEqual } from 'lodash';
+import { EventDestroyer } from 'src/app/shared/entities/event-destroyer';
 
 @Component({
   selector: 'app-student-form',
   templateUrl: './student-form.component.html',
   styleUrls: ['./student-form.component.scss']
 })
-export class StudentFormComponent implements ComponentCanDeactivate, OnInit, OnDestroy {
+export class StudentFormComponent extends EventDestroyer implements ComponentCanDeactivate, OnInit {
   public person: IPerson;
   public form: FormGroup;
   public isEditForm: boolean;
-  public destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private store: Store<IGlobalState>,
     private route: ActivatedRoute,
     private router: Router,
     private bunnerService: BannerService
-  ) { }
+  ) {
+    super();
+  }
 
   public ngOnInit(): void {
-    selectWithDestroyFlag(this.store, this.destroy$, getStudent).subscribe(person => {
+    this.selectWithDestroyFlag(this.store, getStudent).subscribe(person => {
       this.person = person;
       this.form = createPersonForm(person);
 
@@ -40,7 +41,7 @@ export class StudentFormComponent implements ComponentCanDeactivate, OnInit, OnD
         this.router.navigate(['students', 'student', 'edit', person._id]);
       }
     });
-    setDestroyFlag(this.route.params, this.destroy$).subscribe(({ id }) => {
+    this.setDestroyFlag(this.route.params).subscribe(({ id }) => {
       this.store.dispatch(loadStudent({ id }));
 
       this.isEditForm = Boolean(id);
@@ -63,10 +64,4 @@ export class StudentFormComponent implements ComponentCanDeactivate, OnInit, OnD
 
     this.bunnerService.setBannerStatus(true);
   }
-
-  public ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.complete();
-  }
-
 }

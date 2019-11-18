@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
@@ -8,35 +8,36 @@ import { createSubject, updateSubject, loadSubject } from 'src/app/redux/actions
 import { getSubject } from 'src/app/redux/selectors/subjects';
 import { loadTeachers } from 'src/app/redux/actions/teachers';
 import { getTeachers } from 'src/app/redux/selectors/teachers';
-import { selectWithDestroyFlag, setDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
 import { BannerService } from 'src/app/common/services/banner.service';
 import { ISubject } from 'src/app/common/entities/subject';
 import { ITeacher } from 'src/app/common/entities/person';
 import { isEqual } from 'lodash';
 import { createSubjectForm } from 'src/app/common/forms/subject';
 import { FormGroup } from '@angular/forms';
+import { EventDestroyer } from 'src/app/shared/entities/event-destroyer';
 
 @Component({
   selector: 'app-subject-form',
   templateUrl: './subject-form.component.html',
   styleUrls: ['./subject-form.component.scss']
 })
-export class SubjectFormComponent implements ComponentCanDeactivate, OnInit, OnDestroy {
+export class SubjectFormComponent extends EventDestroyer implements ComponentCanDeactivate, OnInit {
   public teachers: ITeacher[];
   public subject: ISubject;
   public form: FormGroup;
   public isEditForm: boolean;
-  public destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private store: Store<IGlobalState>,
     private route: ActivatedRoute,
     private router: Router,
     private bunnerService: BannerService
-  ) { }
+  ) {
+    super();
+  }
 
   public ngOnInit(): void {
-    selectWithDestroyFlag(this.store, this.destroy$, getSubject).subscribe(subject => {
+    this.selectWithDestroyFlag(this.store, getSubject).subscribe(subject => {
       this.subject = subject;
       this.form = createSubjectForm(subject);
 
@@ -44,8 +45,8 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit, OnD
         this.router.navigate(['subjects', 'subject', 'edit', subject._id]);
       }
     });
-    selectWithDestroyFlag(this.store, this.destroy$, getTeachers).subscribe(teachers => this.teachers = teachers);
-    setDestroyFlag(this.route.params, this.destroy$).subscribe(({ id }) => {
+    this.selectWithDestroyFlag(this.store, getTeachers).subscribe(teachers => this.teachers = teachers);
+    this.setDestroyFlag(this.route.params).subscribe(({ id }) => {
       this.store.dispatch(loadSubject({ id }));
       this.store.dispatch(loadTeachers());
 
@@ -68,11 +69,6 @@ export class SubjectFormComponent implements ComponentCanDeactivate, OnInit, OnD
     }
 
     this.bunnerService.setBannerStatus(true);
-  }
-
-  public ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.complete();
   }
 
 }

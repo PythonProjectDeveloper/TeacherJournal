@@ -1,27 +1,27 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { deleteSubject, updateFilterData } from 'src/app/redux/actions/subjects';
 import { getSubjects } from 'src/app/redux/selectors/subjects';
-import { selectWithDestroyFlag } from 'src/app/common/helpers/ngrx-widen';
 import { ISubject } from 'src/app/common/entities/subject';
+import { EventDestroyer } from 'src/app/shared/entities/event-destroyer';
 
 @Component({
   selector: 'app-subject-list',
   templateUrl: './subject-list.component.html',
   styleUrls: ['./subject-list.component.scss']
 })
-export class SubjectListComponent implements OnInit, OnDestroy {
+export class SubjectListComponent extends EventDestroyer implements OnInit {
   public subjects: ISubject[];
-  public destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private store: Store<IGlobalState>
-  ) { }
+  ) {
+    super();
+  }
 
   public ngOnInit(): void {
-    selectWithDestroyFlag(this.store, this.destroy$, getSubjects).subscribe((subjects) => this.subjects = subjects);
+    this.selectWithDestroyFlag(this.store, getSubjects).subscribe((subjects) => this.subjects = subjects);
 
     this.store.dispatch(updateFilterData({ filterData: '' }));
   }
@@ -32,11 +32,6 @@ export class SubjectListComponent implements OnInit, OnDestroy {
 
   public onToolbarValueChanged(filterData: string): void {
     this.store.dispatch(updateFilterData({ filterData }));
-  }
-
-  public ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.complete();
   }
 
 }
