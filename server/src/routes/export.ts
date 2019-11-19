@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { findWithoutId } from '../helpers/queries';
 import { Student } from '../database/shema-models/person';
 import { Subject } from '../database/shema-models/subject';
 import { Journal } from '../database/shema-models/journal';
@@ -7,27 +6,30 @@ import { Journal } from '../database/shema-models/journal';
 export default function routes(router: Router): void {
   router.get('/export/students', (request, response) => {
 
-    findWithoutId(Student)
-      .select('firstName lastName address')
+    Student
+      .find()
+      .select('firstName lastName address -_id')
       .then(data => response.send(data))
       .catch(err => response.send(err));
   });
 
   router.get('/export/subjects', (request, response) => {
 
-    findWithoutId(Subject)
-      .select('name cabinet')
+    Subject
+      .find()
+      .select('name cabinet -_id')
       .then(data => response.send(data))
       .catch(err => response.send(err));
   });
 
   router.get('/export/journals', (request, response) => {
 
-    findWithoutId(Journal)
+    Journal
+      .find()
       .populate('subject students')
+      .select('-_id')
       .then(journals => {
-        const updatedJournals: any[] = journals.reduce((acc, journal: any) => {
-          // acc.push({ subject: journal.subject.name });
+        const updatedJournals = journals.reduce((acc, journal) => {
 
           for (const key of Object.keys(journal.students)) {
             const row: any = {

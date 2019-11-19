@@ -10,4 +10,4 @@ export const SubjectSchema: Schema<ISubjectModel> = new Schema({
   description: { type: String },
 }, { versionKey: false });
 
-initSubjectEvents(SubjectSchema)
+initSubjectEvents(SubjectSchema);

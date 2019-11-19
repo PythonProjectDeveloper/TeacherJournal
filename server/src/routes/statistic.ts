@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { isNull } from 'util';
 import { mean } from 'lodash';
 import { Journal } from '../database/shema-models/journal';
+import { IMarkModel } from '../entities/journals';
 
 export default function routes(router: Router): void {
   router.get('/graph/student/:id', (request, response) => {
@@ -10,14 +11,14 @@ export default function routes(router: Router): void {
       .populate('subject')
       .then(journals => {
 
-        const metrics: any[] = journals.reduce((graphData, journal: any) => {
+        const metrics = journals.reduce((graphData, journal) => {
           const marks: number[] = journal.days.reduce((subjectMarks, day) => {
-            const mark = day.marks.find(dayMark => dayMark.student.toString() === request.params.id);
+            const mark = (day.marks as IMarkModel[]).find(dayMark => dayMark.student.toString() === request.params.id);
 
             if (mark && !isNull(mark.value)) { subjectMarks.push(mark.value); }
 
             return subjectMarks;
-          }, []);
+          }, [] as number[]);
 
           graphData.push({ group: journal.subject.name, value: mean(marks) });
 
@@ -35,7 +36,7 @@ export default function routes(router: Router): void {
       .then((journal: any) => {
 
         // kind of data = { [key: mark value]: quantity }
-        const metrics: any = journal.days.reduce((graphData, day) => {
+        const metrics = journal.days.reduce((graphData, day) => {
 
           day.marks.forEach(mark => {
             if (!mark.value) { return; }

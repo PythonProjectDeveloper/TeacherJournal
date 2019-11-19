@@ -39,7 +39,6 @@ export class SubjectTableComponent extends EventDestroyer implements ComponentCa
 
   public ngOnInit(): void {
     this.selectWithDestroyFlag(this.store, getJournal).subscribe(journal => {
-      console.log(journal)
       this.journal = journal;
       this.form = createJournalForm(journal);
 

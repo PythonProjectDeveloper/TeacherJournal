@@ -16,7 +16,7 @@ export function createJournalForm({ _id, subject, students, days }: IJournal = J
 export function createDayForm({ _id, name, marks }: IDay = DAY): FormGroup {
   return new FormGroup({
     _id: new FormControl(_id, [ Validators.maxLength(24) ]),
-    name: new FormControl(name, [ Validators.maxLength(20), Validators.required ]),
+    name: new FormControl(name, [ Validators.maxLength(20), Validators.pattern(/^(\d+\/){1,2}\d+$/), Validators.required ]),
     marks: new FormArray(map(marks, createMarkForm))
   });
 }
