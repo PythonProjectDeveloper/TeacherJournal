@@ -1,7 +1,7 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IPerson, PERSON } from '../entities/person';
+import { IPersonState, PERSON_STATE } from '../entities/person';
 
-export function createPersonForm({ _id, firstName, lastName, address, description }: IPerson = PERSON): FormGroup {
+export function createPersonForm({ _id, firstName, lastName, address, description }: IPersonState = PERSON_STATE): FormGroup {
   return new FormGroup({
     _id: new FormControl(_id, [ Validators.maxLength(24) ]),
     firstName: new FormControl(firstName, [ Validators.required, Validators.maxLength(50) ]),

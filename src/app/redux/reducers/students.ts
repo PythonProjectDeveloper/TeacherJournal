@@ -1,17 +1,17 @@
 
 import { createReducer, on, ActionReducer, Action } from '@ngrx/store';
 import * as StudentPageActions from '../actions/students';
-import { IStudent, PERSON } from 'src/app/common/entities/person';
+import { IStudentState, PERSON_STATE } from 'src/app/common/entities/person';
 
 export interface StudentPageState {
-  students: IStudent[];
-  student: IStudent;
+  students: IStudentState[];
+  student: IStudentState;
   filterData: string;
 }
 
 export const initialState: StudentPageState = {
   students: [],
-  student: PERSON,
+  student: PERSON_STATE,
   filterData: ''
 };
 

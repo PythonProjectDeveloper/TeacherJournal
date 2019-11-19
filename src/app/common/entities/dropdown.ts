@@ -1,8 +1,8 @@
-export interface IDropDownWidget {
+export interface IDropDownWidgetState {
   dropdowns: IDropDownState[];
 }
 
-export const DROPDOWN_WIDGET: IDropDownWidget = {
+export const DROPDOWN_WIDGET_STATE: IDropDownWidgetState = {
   dropdowns: [],
 };
 
@@ -30,12 +30,12 @@ export const DEFAULT_COLLAPSE_STATE: ICollapseState = {
   state: false,
 };
 
-export interface IRequestDates {
+export interface IRequestDatesState {
   subject: string;
   dates: string[];
 }
 
-export const REQUEST_DATES: IRequestDates = {
+export const REQUEST_DATES_STATE: IRequestDatesState = {
   subject: '',
   dates: [],
 };

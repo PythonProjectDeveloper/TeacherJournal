@@ -4,8 +4,8 @@ import { HttpParams } from '@angular/common/http';
 import { STUDENTS_API_URL } from '../constants/constants-person';
 import { assembleUrl } from '../helpers/calculations';
 import { HttpService } from './http.service';
-import { IPerson, PERSON } from '../entities/person';
-import { IRequestDates } from 'src/app/common/entities/dropdown';
+import { IPersonState, PERSON_STATE } from '../entities/person';
+import { IRequestDatesState } from 'src/app/common/entities/dropdown';
 
 @Injectable({
   providedIn: 'root'
@@ -15,29 +15,29 @@ export class StudentService {
     private httpService: HttpService
   ) { }
 
-  public createStudent(person: IPerson): Observable<IPerson> {
+  public createStudent(person: IPersonState): Observable<IPersonState> {
     const url: string = STUDENTS_API_URL;
-    return this.httpService.post<IPerson>(url, person);
+    return this.httpService.post<IPersonState>(url, person);
   }
 
-  public updateStudent(person: IPerson): Observable<IPerson> {
+  public updateStudent(person: IPersonState): Observable<IPersonState> {
     const url: string = assembleUrl(STUDENTS_API_URL, person._id);
-    return this.httpService.put<IPerson>(url, person);
+    return this.httpService.put<IPersonState>(url, person);
   }
 
-  public deleteStudent(person: IPerson): Observable<any> {
+  public deleteStudent(person: IPersonState): Observable<any> {
     const url: string = assembleUrl(STUDENTS_API_URL, person._id);
-    return this.httpService.delete<IPerson>(url);
+    return this.httpService.delete<IPersonState>(url);
   }
 
-  public getStudents(filter: string | IRequestDates = ''): Observable<IPerson[]> {
+  public getStudents(filter: string | IRequestDatesState = ''): Observable<IPersonState[]> {
     const url: string = STUDENTS_API_URL;
     const params: HttpParams = new HttpParams().set('filter', JSON.stringify(filter));
-    return this.httpService.get<IPerson[]>(url, { params });
+    return this.httpService.get<IPersonState[]>(url, { params });
   }
 
-  public getStudent(id: string): Observable<IPerson> {
+  public getStudent(id: string): Observable<IPersonState> {
     const url: string = assembleUrl(STUDENTS_API_URL, id);
-    return id ? this.httpService.get<IPerson>(url) : of(PERSON);
+    return id ? this.httpService.get<IPersonState>(url) : of(PERSON_STATE);
   }
 }

@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { deleteStudent, updateFilterData } from 'src/app/redux/actions/students';
 import { getStudents } from 'src/app/redux/selectors/students';
-import { IPerson } from 'src/app/common/entities/person';
+import { IPersonState } from 'src/app/common/entities/person';
 import { EventDestroyer } from 'src/app/shared/entities/event-destroyer';
 
 @Component({
@@ -32,7 +32,7 @@ export class StudentsTableComponent extends EventDestroyer implements OnInit {
     this.store.dispatch(updateFilterData({ filterData: '' }));
   }
 
-  public onDelete(student: IPerson): void {
+  public onDelete(student: IPersonState): void {
     this.store.dispatch(deleteStudent(student));
   }
 

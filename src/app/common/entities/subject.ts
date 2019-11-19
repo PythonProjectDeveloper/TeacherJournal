@@ -1,4 +1,4 @@
-export interface ISubject {
+export interface ISubjectState {
   _id: string;
   name: string;
   teacher: string;
@@ -6,7 +6,7 @@ export interface ISubject {
   description: string;
 }
 
-export const SUBJECT: ISubject = {
+export const SUBJECT_STATE: ISubjectState = {
   _id: '',
   name: '',
   teacher: '',

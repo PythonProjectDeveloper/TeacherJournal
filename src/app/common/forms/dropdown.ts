@@ -5,12 +5,12 @@ import {
   DEFAULT_DROPDOWN_STATE,
   ICollapseState,
   DEFAULT_COLLAPSE_STATE,
-  DROPDOWN_WIDGET,
-  IDropDownWidget
+  DROPDOWN_WIDGET_STATE,
+  IDropDownWidgetState
 } from '../entities/dropdown';
 import { getCollapseState } from '../helpers/calculations';
 
-export function createDropDownWidgetForm({ dropdowns }: IDropDownWidget = DROPDOWN_WIDGET): FormGroup {
+export function createDropDownWidgetForm({ dropdowns }: IDropDownWidgetState = DROPDOWN_WIDGET_STATE): FormGroup {
   return new FormGroup({
     dropdowns: new FormArray(map(dropdowns, dropdown => new FormControl(dropdown))),
   });

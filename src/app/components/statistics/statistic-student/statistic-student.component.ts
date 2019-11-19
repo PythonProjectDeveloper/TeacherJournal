@@ -6,7 +6,7 @@ import { getStudent } from 'src/app/redux/selectors/students';
 import { loadStudent } from 'src/app/redux/actions/students';
 import { GraphService } from 'src/app/common/services/graph.service';
 import { StudentGraphDrawer } from 'src/app/common/helpers/draph-drawers';
-import { IPerson } from 'src/app/common/entities/person';
+import { IPersonState } from 'src/app/common/entities/person';
 import { EventDestroyer } from 'src/app/shared/entities/event-destroyer';
 
 @Component({
@@ -15,7 +15,7 @@ import { EventDestroyer } from 'src/app/shared/entities/event-destroyer';
   styleUrls: ['./statistic-student.component.scss']
 })
 export class StatisticStudentComponent extends EventDestroyer implements OnInit {
-  public student: IPerson;
+  public student: IPersonState;
   public graphDrawer = new StudentGraphDrawer();
   public selector = 'graph';
 

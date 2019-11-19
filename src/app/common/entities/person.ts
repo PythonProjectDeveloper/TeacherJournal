@@ -1,4 +1,4 @@
-export interface IPerson {
+export interface IPersonState {
   _id: string;
   firstName: string;
   lastName: string;
@@ -6,13 +6,13 @@ export interface IPerson {
   description: string;
 }
 
-export interface IStudent extends IPerson {
+export interface IStudentState extends IPersonState {
 }
 
-export interface ITeacher extends IPerson {
+export interface ITeacherState extends IPersonState {
 }
 
-export const PERSON: IPerson = {
+export const PERSON_STATE: IPersonState = {
   _id: '',
   firstName: '',
   lastName: '',

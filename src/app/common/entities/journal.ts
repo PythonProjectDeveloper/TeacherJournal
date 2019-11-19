@@ -1,39 +1,39 @@
-import { ISubject, SUBJECT } from './subject';
-import { IStudent } from './person';
+import { ISubjectState, SUBJECT_STATE } from './subject';
+import { IStudentState } from './person';
 
-export interface IJournal {
+export interface IJournalState {
   _id: string;
-  subject: ISubject;
-  students: IStudent[];
-  days: IDay[];
+  subject: ISubjectState;
+  students: IStudentState[];
+  days: IDayState[];
 }
 
-export interface IDay {
-  _id: string;
-  name: string;
-  marks: IMark[];
-}
-
-export interface IMark {
-  _id: string;
-  student: string;
-  value: number | null;
-}
-
-export const JOURNAL: IJournal = {
+export const JOURNAL_STATE: IJournalState = {
   _id: '',
-  subject: SUBJECT,
+  subject: SUBJECT_STATE,
   students: [],
   days: []
 };
 
-export const DAY: IDay = {
+export interface IDayState {
+  _id: string;
+  name: string;
+  marks: IMarkState[];
+}
+
+export const DAY_STATE: IDayState = {
   _id: '',
   name: '',
   marks: []
 };
 
-export const MARK: IMark = {
+export interface IMarkState {
+  _id: string;
+  student: string;
+  value: number | null;
+}
+
+export const MARK_STATE: IMarkState = {
   _id: '',
   student: '',
   value: null

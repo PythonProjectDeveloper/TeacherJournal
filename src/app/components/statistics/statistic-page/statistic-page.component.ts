@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent, MatButtonToggleChange } from '@angular/material';
 import { Observable } from 'rxjs';
-import { ISubject } from 'src/app/common/entities/subject';
-import { IStudent } from 'src/app/common/entities/person';
+import { ISubjectState } from 'src/app/common/entities/subject';
+import { IStudentState } from 'src/app/common/entities/person';
 import { select, Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { getStudents } from 'src/app/redux/selectors/students';
 import { getSubjects } from 'src/app/redux/selectors/subjects';
 import { updateFilterData } from 'src/app/redux/actions/students';
 import { loadSubjects } from 'src/app/redux/actions/subjects';
-import { IRequestDates } from 'src/app/common/entities/dropdown';
+import { IRequestDatesState } from 'src/app/common/entities/dropdown';
 
 enum List {
   Students = 'Students',
@@ -23,10 +23,10 @@ enum List {
 })
 export class StatisticPageComponent implements OnInit {
   public currentList = 'Students';
-  public currentObject: IStudent | ISubject | null = null;
+  public currentObject: IStudentState | ISubjectState | null = null;
   public list = List;
-  public students$: Observable<IStudent[]>;
-  public subjects$: Observable<ISubject[]>;
+  public students$: Observable<IStudentState[]>;
+  public subjects$: Observable<ISubjectState[]>;
 
   constructor(
     private store: Store<IGlobalState>
@@ -49,7 +49,7 @@ export class StatisticPageComponent implements OnInit {
     this.currentObject = event.value;
   }
 
-  public onDropdownValueChanged(filterData: IRequestDates[]): void {
+  public onDropdownValueChanged(filterData: IRequestDatesState[]): void {
     this.store.dispatch(updateFilterData({ filterData }));
   }
 

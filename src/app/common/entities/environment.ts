@@ -1,4 +1,4 @@
-export interface IEnvironment {
+export interface IEnvironmentState {
   production: boolean;
   apiDomainUrl: string;
 }

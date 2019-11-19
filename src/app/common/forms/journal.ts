@@ -1,10 +1,10 @@
 import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { createSubjectForm } from './subject';
-import { IMark, MARK, IDay, DAY, JOURNAL, IJournal } from '../entities/journal';
+import { IMarkState, MARK_STATE, IDayState, DAY_STATE, JOURNAL_STATE, IJournalState } from '../entities/journal';
 import { map } from 'lodash';
 import { createPersonForm } from './person';
 
-export function createJournalForm({ _id, subject, students, days }: IJournal = JOURNAL): FormGroup {
+export function createJournalForm({ _id, subject, students, days }: IJournalState = JOURNAL_STATE): FormGroup {
   return new FormGroup({
     _id: new FormControl(_id, [ Validators.maxLength(24) ]),
     subject: createSubjectForm(subject),
@@ -13,7 +13,7 @@ export function createJournalForm({ _id, subject, students, days }: IJournal = J
   });
 }
 
-export function createDayForm({ _id, name, marks }: IDay = DAY): FormGroup {
+export function createDayForm({ _id, name, marks }: IDayState = DAY_STATE): FormGroup {
   return new FormGroup({
     _id: new FormControl(_id, [ Validators.maxLength(24) ]),
     name: new FormControl(name, [ Validators.maxLength(20), Validators.pattern(/^(\d+\/){1,2}\d+$/), Validators.required ]),
@@ -21,7 +21,7 @@ export function createDayForm({ _id, name, marks }: IDay = DAY): FormGroup {
   });
 }
 
-export function createMarkForm({ _id, student, value }: IMark = MARK): FormGroup {
+export function createMarkForm({ _id, student, value }: IMarkState = MARK_STATE): FormGroup {
   return new FormGroup({
     _id: new FormControl(_id, [ Validators.maxLength(24) ]),
     student: new FormControl(student, [ Validators.maxLength(24) ]),

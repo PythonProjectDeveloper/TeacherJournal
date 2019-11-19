@@ -1,6 +1,6 @@
-import { IEnvironment } from 'src/app/common/entities/environment';
+import { IEnvironmentState } from 'src/app/common/entities/environment';
 
-export const environment: IEnvironment = {
+export const environment: IEnvironmentState = {
   production: true,
   apiDomainUrl: ''
 };

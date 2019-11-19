@@ -9,8 +9,8 @@ import { getSubject } from 'src/app/redux/selectors/subjects';
 import { loadTeachers } from 'src/app/redux/actions/teachers';
 import { getTeachers } from 'src/app/redux/selectors/teachers';
 import { BannerService } from 'src/app/common/services/banner.service';
-import { ISubject } from 'src/app/common/entities/subject';
-import { ITeacher } from 'src/app/common/entities/person';
+import { ISubjectState } from 'src/app/common/entities/subject';
+import { ITeacherState } from 'src/app/common/entities/person';
 import { isEqual } from 'lodash';
 import { createSubjectForm } from 'src/app/common/forms/subject';
 import { FormGroup } from '@angular/forms';
@@ -22,8 +22,8 @@ import { EventDestroyer } from 'src/app/shared/entities/event-destroyer';
   styleUrls: ['./subject-form.component.scss']
 })
 export class SubjectFormComponent extends EventDestroyer implements ComponentCanDeactivate, OnInit {
-  public teachers: ITeacher[];
-  public subject: ISubject;
+  public teachers: ITeacherState[];
+  public subject: ISubjectState;
   public form: FormGroup;
   public isEditForm: boolean;
 

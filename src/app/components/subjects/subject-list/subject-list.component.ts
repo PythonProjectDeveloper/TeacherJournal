@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { deleteSubject, updateFilterData } from 'src/app/redux/actions/subjects';
 import { getSubjects } from 'src/app/redux/selectors/subjects';
-import { ISubject } from 'src/app/common/entities/subject';
+import { ISubjectState } from 'src/app/common/entities/subject';
 import { EventDestroyer } from 'src/app/shared/entities/event-destroyer';
 
 @Component({
@@ -12,7 +12,7 @@ import { EventDestroyer } from 'src/app/shared/entities/event-destroyer';
   styleUrls: ['./subject-list.component.scss']
 })
 export class SubjectListComponent extends EventDestroyer implements OnInit {
-  public subjects: ISubject[];
+  public subjects: ISubjectState[];
 
   constructor(
     private store: Store<IGlobalState>
@@ -26,7 +26,7 @@ export class SubjectListComponent extends EventDestroyer implements OnInit {
     this.store.dispatch(updateFilterData({ filterData: '' }));
   }
 
-  public onDelete(subject: ISubject): void {
+  public onDelete(subject: ISubjectState): void {
     this.store.dispatch(deleteSubject(subject));
   }
 

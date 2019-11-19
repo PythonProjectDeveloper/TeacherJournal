@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DataPickerService } from 'src/app/common/services/data-picker.service';
 import { FormGroup } from '@angular/forms';
-import { IRequestDates, IDropDownState, IDropDownWidget } from '../../common/entities/dropdown';
+import { IRequestDatesState, IDropDownState, IDropDownWidgetState } from '../../common/entities/dropdown';
 import { chain } from 'lodash';
 import { createDropDownWidgetForm } from '../../common/forms/dropdown';
 import { TranslateService } from '@ngx-translate/core';
@@ -17,8 +17,8 @@ export class DropdownComponent extends EventDestroyer implements OnInit {
   public viewDates: string;
   public isInputOpen = false;
   public defaultText: string;
-  public selectedDates: IRequestDates[] = [];
-  @Output() public onChanged = new EventEmitter<IRequestDates[]>();
+  public selectedDates: IRequestDatesState[] = [];
+  @Output() public onChanged = new EventEmitter<IRequestDatesState[]>();
 
   constructor(
     private dataPickerService: DataPickerService,
@@ -55,7 +55,7 @@ export class DropdownComponent extends EventDestroyer implements OnInit {
     this.onChanged.emit(this.selectedDates);
   }
 
-  public getViewDates(dropdowns: IDropDownState[]): IRequestDates[] {
+  public getViewDates(dropdowns: IDropDownState[]): IRequestDatesState[] {
     return chain(dropdowns)
       .map(dropdown => ({
         subject: dropdown.subjectName,
@@ -65,14 +65,14 @@ export class DropdownComponent extends EventDestroyer implements OnInit {
       .value();
   }
 
-  public setViewDatesString(subjects: IRequestDates[], defaultText: string): void {
+  public setViewDatesString(subjects: IRequestDatesState[], defaultText: string): void {
     const viewDatesString: string[] = subjects.map((date) => `${ date.subject }: [${ date.dates.join(', ') }]`, []);
 
     this.viewDates = viewDatesString.length ? viewDatesString.join(', ') : defaultText;
   }
 
   public toggleCheckboxs(flag: boolean): void {
-    const value: IDropDownWidget = this.form.value;
+    const value: IDropDownWidgetState = this.form.value;
     value.dropdowns.forEach(dropdown =>
       dropdown.dates.forEach(date => date.state = flag)
     );
@@ -80,7 +80,7 @@ export class DropdownComponent extends EventDestroyer implements OnInit {
   }
 
   public toggleCollapses(flag: boolean): void {
-    const value: IDropDownWidget = this.form.value;
+    const value: IDropDownWidgetState = this.form.value;
     value.dropdowns.forEach(dropdown => dropdown.isExpended = flag);
     this.form.patchValue(value);
   }

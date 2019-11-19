@@ -9,7 +9,7 @@ import { IGlobalState } from 'src/app/redux/reducers';
 import { getJournal } from 'src/app/redux/selectors/subjects';
 import { loadJournal, updateJournal } from 'src/app/redux/actions/subjects';
 import { find, map, isEqual } from 'lodash';
-import { IDay, IJournal } from 'src/app/common/entities/journal';
+import { IDayState, IJournalState } from 'src/app/common/entities/journal';
 import { createJournalForm, createDayForm } from 'src/app/common/forms/journal';
 import { FormGroup, FormArray } from '@angular/forms';
 import { EventDestroyer } from 'src/app/shared/entities/event-destroyer';
@@ -21,14 +21,14 @@ import { EventDestroyer } from 'src/app/shared/entities/event-destroyer';
 })
 export class SubjectTableComponent extends EventDestroyer implements ComponentCanDeactivate, OnInit {
   public canDataBeSave = false;
-  public journal: IJournal;
+  public journal: IJournalState;
   public form: FormGroup;
   public averageMarkColors: IAverageMarkColor[] = [
     { maxAverageMark: 5, class: 'table-wrapper__row__average-mark-lt-5' },
     { maxAverageMark: 11, class: 'table-wrapper__row__average-mark-lt-11' }
   ];
 
-  get days(): FormArray { return this.form.get('days') as FormArray; }
+  get days(): FormArray { return this.form.controls.days as FormArray; }
 
   constructor(
     private store: Store<IGlobalState>,
@@ -64,7 +64,7 @@ export class SubjectTableComponent extends EventDestroyer implements ComponentCa
   }
 
   public onAddColumn(): void {
-    const newDay: IDay = {
+    const newDay: IDayState = {
       _id: '',
       name: '',
       marks: map(this.journal.students, student => ({ _id: '', student: student._id, value: null }))
@@ -93,7 +93,7 @@ export class SubjectTableComponent extends EventDestroyer implements ComponentCa
 
   public getMarkControl(dayIdx: string, markIdx: string): FormGroup {
     const day: FormGroup = (<FormGroup>this.days.controls[dayIdx]);
-    const marks: FormArray = (<FormArray>day.get('marks'));
+    const marks: FormArray = (<FormArray>day.controls.marks);
     const mark: FormGroup = (<FormGroup>marks.controls[markIdx]);
 
     return mark;

@@ -9,7 +9,7 @@ import { getStudent } from 'src/app/redux/selectors/students';
 import { BannerService } from 'src/app/common/services/banner.service';
 import { createPersonForm } from 'src/app/common/forms/person';
 import { FormGroup} from '@angular/forms';
-import { IPerson } from 'src/app/common/entities/person';
+import { IPersonState } from 'src/app/common/entities/person';
 import { isEqual } from 'lodash';
 import { EventDestroyer } from 'src/app/shared/entities/event-destroyer';
 
@@ -19,7 +19,7 @@ import { EventDestroyer } from 'src/app/shared/entities/event-destroyer';
   styleUrls: ['./student-form.component.scss']
 })
 export class StudentFormComponent extends EventDestroyer implements ComponentCanDeactivate, OnInit {
-  public person: IPerson;
+  public person: IPersonState;
   public form: FormGroup;
   public isEditForm: boolean;
 
