@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
-import { BASE_STUDENT_COLUMNS } from 'src/app/shared/constants/constants-table';
+import { BASE_STUDENT_COLUMNS } from 'src/app/common/constants/constants-table';
 import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { deleteStudent, updateFilterData } from 'src/app/redux/actions/students';
