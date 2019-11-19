@@ -15,7 +15,7 @@ export class BannerService {
 
   public getBunner(): Observable<any> {
     return this.translate.onLangChange.pipe(
-      map(({ translations }) => translations.bannerMessage)
+      map(({ translations }) => translations.BANNER_MESSAGE)
     );
   }
 

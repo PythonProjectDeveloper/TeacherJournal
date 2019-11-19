@@ -1,4 +1,4 @@
-<h2 class="title" translate>pages.Students</h2>
+<h2 class="title" translate>PAGES.STUDENTS</h2>
 
 <app-toolbar (valueChanged)="onToolbarValueChanged($event)"></app-toolbar>
 
@@ -10,22 +10,22 @@
     </ng-container>
   
     <ng-container matColumnDef="firstName">
-      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'fields.firstName' | translate }} </th>
+      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'FIELDS.FIRST_NAME' | translate }} </th>
       <td class="table-wrapper__simple-cell" mat-cell *matCellDef="let element"> {{element.firstName}} </td>
     </ng-container>
   
     <ng-container matColumnDef="lastName">
-      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'fields.lastName' | translate }} </th>
+      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'FIELDS.LAST_NAME' | translate }} </th>
       <td class="table-wrapper__simple-cell" mat-cell *matCellDef="let element"> {{element.lastName}} </td>
     </ng-container>
   
     <ng-container matColumnDef="address">
-      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'fields.address' | translate }} </th>
+      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'FIELDS.ADDRESS' | translate }} </th>
       <td class="table-wrapper__simple-cell" mat-cell *matCellDef="let element"> {{element.address}} </td>
     </ng-container>
   
     <ng-container matColumnDef="description">
-      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'fields.description' | translate }} </th>
+      <th class="table-wrapper__header-cell" mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'FIELDS.DESCRIPTION' | translate }} </th>
       <td class="table-wrapper__simple-cell" mat-cell *matCellDef="let element"> {{element.description| slice:0:250}} </td>
     </ng-container>
   
@@ -50,7 +50,7 @@
 </div>
 
 <app-button 
-  [matTooltip]="'actions.addStudent' | translate"
+  [matTooltip]="'ACTIONS.ADD_STUDENT' | translate"
   routerLink="student/add"
 >
 </app-button>

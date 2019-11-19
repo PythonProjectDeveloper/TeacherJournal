@@ -35,10 +35,10 @@ export class DropdownComponent extends EventDestroyer implements OnInit {
       this.updateViewDates(dates);
     });
     this.setDestroyFlag(this.translate.onLangChange).subscribe(({ translations }) => {
-      this.setViewText(translations.widgets.dropdown.selectDate);
+      this.setViewText(translations.WIDGETS.DROPDOWN.SELECT_DATE_DEFAULT_TEXT);
     });
     this.setDestroyFlag(this.translate.getTranslation(this.translate.currentLang)).subscribe((translations) => {
-      this.setViewText(translations.widgets.dropdown.selectDate);
+      this.setViewText(translations.WIDGETS.DROPDOWN.SELECT_DATE_DEFAULT_TEXT);
     });
   }
 

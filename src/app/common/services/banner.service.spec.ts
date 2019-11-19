@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 
 describe('BannerService', () => {
   let service: BannerService;
-  const localeDictionary: any = { translations: { bannerMessage: 'banner' } };
+  const localeDictionary: any = { translations: { BANNER_MESSAGE: 'banner' } };
   const translateService: any = { onLangChange: of(localeDictionary) };
 
   describe('#getBunner', () => {
@@ -11,7 +11,7 @@ describe('BannerService', () => {
 
     it('should return observable banner', () => {
       service.getBunner().subscribe( banner =>
-        expect(banner).toEqual(localeDictionary.translations.bannerMessage)
+        expect(banner).toEqual(localeDictionary.translations.BANNER_MESSAGE)
       );
     });
   });

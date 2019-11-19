@@ -11,9 +11,9 @@ import { IMAGE_URL, TITLE_TEXT, DESCRIPTION } from '../shared/constants/constant
 
 export const rootPageRoutes: Routes = [
   { path: '', redirectTo: 'students', pathMatch: 'full' },
-  { path: 'students', component: StudentPageComponent, children: studentPageRoutes, data: { breadcrumb: 'Students' } },
-  { path: 'subjects', component: SubjectPageComponent, children: subjectPageRoutes, data: { breadcrumb: 'Subjects' } },
-  { path: 'statistics', component: StatisticPageComponent, children: statisticPageRoutes, data: { breadcrumb: 'Statistics' } },
-  { path: 'export', component: ExportComponent, data: { breadcrumb: 'Export' }  },
+  { path: 'students', component: StudentPageComponent, children: studentPageRoutes, data: { breadcrumb: 'STUDENTS' } },
+  { path: 'subjects', component: SubjectPageComponent, children: subjectPageRoutes, data: { breadcrumb: 'SUBJECTS' } },
+  { path: 'statistics', component: StatisticPageComponent, children: statisticPageRoutes, data: { breadcrumb: 'STATISTICS' } },
+  { path: 'export', component: ExportComponent, data: { breadcrumb: 'EXPORT' }  },
   { path: '**', component: PageNotFoundComponent, data: { imageUrl: IMAGE_URL, titleText: TITLE_TEXT, description: DESCRIPTION } },
 ];

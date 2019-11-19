@@ -1,60 +1,60 @@
 {
-  "title": "Журнал учителя",
-  "pageNotFound" : {
-    "titleText": {
-      "Page not found": "Страница не найдена",
-      "Select a item.": "Выберите чёнить слева"
+  "TITLE": "Журнал учителя",
+  "PAGE_NOT_FOUND" : {
+    "TITLE_TEXT": {
+      "PAGE_NOT_FOUND": "Страница не найдена",
+      "SELECT_ITEM": "Выберите чёнить слева"
     },
-    "description": "Возможно вы ввели некоректный URL. Попробуйте снова или прекратите попытки)"
+    "DESCRIPTION": "Возможно вы ввели некоректный URL. Попробуйте снова или прекратите попытки)"
   },
-  "pages": {
-    "Students": "Студенты",
-    "Subjects": "Предметы",
-    "Statistics": "Статистика",
-    "Export": "Экспорт",
-    "student": "Студент",
-    "subject": "Предмет",
-    "Add student": "Добавить студента",
-    "Edit student": "Изменить студента",
-    "Add subject": "Добавить предмет",
-    "Edit Subject": "Изменить предмет",
-    "Journals": "Журналы",
-    "Journal": "Журнал"
+  "PAGES": {
+    "STUDENTS": "Студенты",
+    "SUBJECTS": "Предметы",
+    "STATISTICS": "Статистика",
+    "EXPORT": "Экспорт",
+    "STUDENT": "Студент",
+    "SUBJECT": "Предмет",
+    "ADD_STUDENT": "Добавить студента",
+    "EDIT_STUDENT": "Изменить студента",
+    "ADD_SUBJECT": "Добавить предмет",
+    "EDIT_SUBJECT": "Изменить предмет",
+    "JOURNALS": "Журналы",
+    "JOURNAL": "Журнал"
   },
-  "fields": {
-    "firstName": "Имя",
-    "lastName": "Фамилия",
-    "address": "Адрес",
-    "description": "Описание",
-    "name": "Имя",
-    "teacher": "Учитель",
-    "cabinet": "Кабинет",
-    "averageMark": "Средняя оценка",
-    "query": "Запрос"
+  "FIELDS": {
+    "FIRST_NAME": "Имя",
+    "LAST_NAME": "Фамилия",
+    "ADDRESS": "Адрес",
+    "DESCRIPTION": "Описание",
+    "NAME": "Имя",
+    "TEACHER": "Учитель",
+    "CABINET": "Кабинет",
+    "AVERAGE_MARK": "Средняя оценка",
+    "QUERY": "Запрос"
   },
-  "actions": {
-    "ok": "Продолжить",
-    "save": "Сохранить",
-    "cancel": "Отмена",
-    "addSubject": "Добавить предмет",
-    "addStudent": "Добавить студента",
-    "search": "Искать",
-    "exportPdf": "Экспортировать как PDF файл",
-    "exportExcel": "Экспортировать как Excel файл",
-    "download": "Скачать",
-    "close": "закрыть"
+  "ACTIONS": {
+    "OK": "Продолжить",
+    "SAVE": "Сохранить",
+    "CANCEL": "Отмена",
+    "ADD_SUBJECT": "Добавить предмет",
+    "ADD_STUDENT": "Добавить студента",
+    "SEARCH": "Искать",
+    "EXPORT_PDF": "Экспортировать как PDF файл",
+    "EXPORT_EXCEL": "Экспортировать как Excel файл",
+    "DOWNLOAD": "Скачать",
+    "CLOSE": "закрыть"
   },
-  "leaveGuard" : {
-    "text": "Вы хотите покинуть страницу без сохранения изменений?"
+  "LEAVE_GUARD" : {
+    "TEXT": "Вы хотите покинуть страницу без сохранения изменений?"
   },
-  "bannerMessage": "Здесь может быть ваша реклама!",
-  "widgets" : {
-    "dropdown" : {
-      "selectDate": "Выберите дату",
-      "expandAll": "РАЗВЕРНУТЬ ВСЕ",
-      "collapseAll": "СВЕРНУТЬ ВСЕ",
-      "checkAll": "ВЫБРАТЬ ВСЕ",
-      "uncheckAll": "ОТМЕНИТЬ ВСЕ"
+  "BANNER_MESSAGE": "Здесь может быть ваша реклама!",
+  "WIDGETS" : {
+    "DROPDOWN" : {
+      "SELECT_DATE_DEFAULT_TEXT": "Выберите дату",
+      "EXPAND_ALL": "РАЗВЕРНУТЬ ВСЕ",
+      "COLLAPSE_ALL": "СВЕРНУТЬ ВСЕ",
+      "CHECK_ALL": "ВЫБРАТЬ ВСЕ",
+      "UNCHECK_ALL": "ОТМЕНИТЬ ВСЕ"
     }
   }
 }

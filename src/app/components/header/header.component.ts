@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
     private translate: TranslateService
   ) {
     translate.onLangChange.subscribe(() => {
-      translate.get('title').subscribe((res: string) => {
+      translate.get('TITLE').subscribe((res: string) => {
         titleService.setTitle(res);
       });
     });

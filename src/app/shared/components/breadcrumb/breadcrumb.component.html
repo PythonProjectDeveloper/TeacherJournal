@@ -3,7 +3,7 @@
     <div class="breadcrumbs__breadcrumb-wrapper" *ngFor="let breadcrumb of breadcrumbs">
       <mat-icon class="breadcrumbs__breadcrumb-arrow">keyboard_arrow_right</mat-icon>
       <button class="breadcrumbs__breadcrumb-link" mat-button [routerLink]="breadcrumb.url" [queryParams]="breadcrumb.params" routerLinkActive="active">
-        {{ 'pages.' + breadcrumb.label | translate }}
+        {{ 'PAGES.' + breadcrumb.label | translate }}
       </button>
     </div>
   </mat-card>

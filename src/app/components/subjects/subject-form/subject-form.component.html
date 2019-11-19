@@ -1,16 +1,16 @@
-<h2 class="title" translate>pages.subject</h2>
+<h2 class="title" translate>PAGES.SUBJECT</h2>
 
 <form (submit)="onSave()" class="form" [formGroup]="form">
   <mat-card>
 
     <mat-card-content class="form__field-container">
       <mat-form-field>
-        <mat-label translate>fields.name</mat-label>
+        <mat-label translate>FIELDS.NAME</mat-label>
         <input formControlName="name" matInput class="form__field" required>
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label translate>fields.teacher</mat-label>
+        <mat-label translate>FIELDS.TEACHER</mat-label>
         <mat-select formControlName="teacher" class="form__field" required>
           <mat-option name="teacher" *ngFor="let teacher of teachers" [value]="teacher._id">
             {{teacher.firstName}}
@@ -20,12 +20,12 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label translate>fields.cabinet</mat-label>
+        <mat-label translate>FIELDS.CABINET</mat-label>
         <input formControlName="cabinet" matInput class="form__field">
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label translate>fields.description</mat-label>
+        <mat-label translate>FIELDS.DESCRIPTION</mat-label>
         <textarea formControlName="description" matInput class="form__field"></textarea>
       </mat-form-field>
     </mat-card-content>
@@ -37,7 +37,7 @@
         mat-stroked-button
         color="primary"
       >
-        {{ 'actions.save' | translate }}
+        {{ 'ACTIONS.SAVE' | translate }}
       </button>
 
       <button
@@ -47,7 +47,7 @@
         color="warn"
         routerLink="/subjects"
       >
-        {{ 'actions.cancel' | translate }}
+        {{ 'ACTIONS.CANCEL' | translate }}
       </button>
     </mat-card-actions>
   </mat-card>

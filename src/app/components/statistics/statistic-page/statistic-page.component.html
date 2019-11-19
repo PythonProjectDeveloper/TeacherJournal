@@ -1,10 +1,10 @@
-<h2 class="title" translate>pages.Statistics</h2>
+<h2 class="title" translate>PAGES.STATISTICS</h2>
 <app-dropdown (onChanged)="onDropdownValueChanged($event)"></app-dropdown>
 <mat-drawer-container class="sidenav-container">
   <mat-drawer class="sidenav-container__sidenav" mode="side" opened>
     <mat-tab-group class="sidenav-container__tab-group" (selectedTabChange)="setCurrentList($event)">
 
-      <mat-tab class="sidenav-container__tab" [label]="'pages.Students' | translate">
+      <mat-tab class="sidenav-container__tab" [label]="'PAGES.STUDENTS' | translate">
         <mat-button-toggle-group class="sidenav-container__tab-content" name="fontStyle" aria-label="Font Style" [vertical]="true">
           <mat-button-toggle
             *ngFor="let student of students$ | asyncSort:'firstName' | async"
@@ -18,7 +18,7 @@
         </mat-button-toggle-group>
       </mat-tab>
 
-      <mat-tab class="sidenav-container__tab" [label]="'pages.Subjects' | translate">
+      <mat-tab class="sidenav-container__tab" [label]="'PAGES.SUBJECTS' | translate">
         <mat-button-toggle-group class="sidenav-container__tab-content" name="fontStyle" aria-label="Font Style" [vertical]="true">
           <mat-button-toggle
             *ngFor="let subject of subjects$ | asyncSort:'name' | async"

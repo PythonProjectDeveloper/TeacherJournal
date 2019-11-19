@@ -5,9 +5,9 @@
   <div class="table-wrapper">
     <table class="mat-elevation-z8 table-wrapper__table">
       <tr class="table-wrapper__row">
-        <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'fields.firstName' | translate }} </th>
-        <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'fields.lastName' | translate }} </th>
-        <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'fields.averageMark' | translate }} </th>
+        <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'FIELDS.FIRST_NAME' | translate }} </th>
+        <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'FIELDS.LAST_NAME' | translate }} </th>
+        <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'FIELDS.AVERAGE_MARK' | translate }} </th>
         <th class="table-wrapper__header-cell table-wrapper__input-wrapper" formArrayName="days" *ngFor="let day of form.controls.days.controls; let dayIndex = index">
           <ng-container [formGroupName]="dayIndex">
             <input
@@ -52,5 +52,5 @@
     </button>
   </div>
 
-  <button type="submit" mat-stroked-button color="primary" *ngIf="canDataBeSave"> {{ 'actions.save' | translate }} </button>
+  <button type="submit" mat-stroked-button color="primary" *ngIf="canDataBeSave"> {{ 'ACTIONS.SAVE' | translate }} </button>
 </form>

@@ -104,8 +104,8 @@ describe('PageNotFoundComponent', () => {
       const description: any = fixture.nativeElement.querySelector('.description');
 
       expect(image.src.endsWith(data.imageUrl)).toEqual(true);
-      expect(h2.innerText).toEqual('pageNotFound.titleText.text');
-      expect(description.innerText).toEqual('pageNotFound.description');
+      expect(h2.innerText).toEqual('PAGE_NOT_FOUND.titleText.text');
+      expect(description.innerText).toEqual('PAGE_NOT_FOUND.description');
     });
   });
 });

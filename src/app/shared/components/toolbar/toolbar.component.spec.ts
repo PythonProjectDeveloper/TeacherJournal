@@ -59,8 +59,8 @@ describe('ToolbarComponent', () => {
       const input: any = fixture.nativeElement.querySelector('.toolbar__input-name');
       const button: any = fixture.nativeElement.querySelector('.toolbar__button');
 
-      expect(input.placeholder).toEqual('fields.query');
-      expect(button.innerText).toEqual('actions.search');
+      expect(input.placeholder).toEqual('FIELDS.QUERY');
+      expect(button.innerText).toEqual('ACTIONS.SEARCH');
     });
   });
 });

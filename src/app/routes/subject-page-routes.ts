@@ -6,7 +6,7 @@ import { ExitAboutGuard } from '../common/guards/exit-about.guard';
 
 export const subjectPageRoutes: Routes = [
   { path: '', component: SubjectListComponent, data: { breadcrumb: null } },
-  { path: 'subject/add', component: SubjectFormComponent, canDeactivate: [ExitAboutGuard], data: { breadcrumb: 'Add subject' }  },
-  { path: 'subject/edit/:id', component: SubjectFormComponent, canDeactivate: [ExitAboutGuard], data: { breadcrumb: 'Edit Subject' }  },
-  { path: 'subject/journal/:id', component: SubjectTableComponent, canDeactivate: [ExitAboutGuard], data: { breadcrumb: 'Journal' }  },
+  { path: 'subject/add', component: SubjectFormComponent, canDeactivate: [ExitAboutGuard], data: { breadcrumb: 'ADD_SUBJECT' }  },
+  { path: 'subject/edit/:id', component: SubjectFormComponent, canDeactivate: [ExitAboutGuard], data: { breadcrumb: 'EDIT_SUBJECT' }  },
+  { path: 'subject/journal/:id', component: SubjectTableComponent, canDeactivate: [ExitAboutGuard], data: { breadcrumb: 'JOURNAL' }  },
 ];
