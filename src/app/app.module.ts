@@ -40,7 +40,6 @@ import { ExitAboutGuard } from './common/guards/exit-about.guard';
 import { RouterModule } from '@angular/router';
 import { AveragePipe } from './common/pipes/average.pipe';
 import { AverageMarkHighlightDirective } from './common/directives/average-mark-highlight.directive';
-import { NumberCheckDirective } from './common/directives/number-check.directive';
 import { FocusHighlightDirective } from './common/directives/focus-highlight.directive';
 import { AsyncSortPipe } from './common/pipes/async-sort.pipe';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -81,7 +80,6 @@ import { DropdownCollapseComponent } from './components/dropdown/dropdown-collap
     SubjectTableComponent,
     AveragePipe,
     AverageMarkHighlightDirective,
-    NumberCheckDirective,
     FocusHighlightDirective,
     AsyncSortPipe,
     LeaveGuardModalWindowComponent,

@@ -12,7 +12,7 @@ export const JOURNAL_STATE: IJournalState = {
   _id: '',
   subject: SUBJECT_STATE,
   students: [],
-  days: []
+  days: [],
 };
 
 export interface IDayState {
@@ -24,7 +24,7 @@ export interface IDayState {
 export const DAY_STATE: IDayState = {
   _id: '',
   name: '',
-  marks: []
+  marks: [],
 };
 
 export interface IMarkState {
@@ -36,5 +36,5 @@ export interface IMarkState {
 export const MARK_STATE: IMarkState = {
   _id: '',
   student: '',
-  value: null
+  value: null,
 };

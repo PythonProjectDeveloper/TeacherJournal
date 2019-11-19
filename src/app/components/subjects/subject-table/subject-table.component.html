@@ -8,7 +8,7 @@
         <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'FIELDS.FIRST_NAME' | translate }} </th>
         <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'FIELDS.LAST_NAME' | translate }} </th>
         <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'FIELDS.AVERAGE_MARK' | translate }} </th>
-        <th class="table-wrapper__header-cell table-wrapper__input-wrapper" formArrayName="days" *ngFor="let day of form.controls.days.controls; let dayIndex = index">
+        <th class="table-wrapper__header-cell table-wrapper__input-wrapper" formArrayName="days" *ngFor="let day of days.controls; let dayIndex = index">
           <ng-container [formGroupName]="dayIndex">
             <input
               class="table-wrapper__header-cell-input"
@@ -26,21 +26,18 @@
       <tr
         *ngFor="let student of journal.students; let studentIndex = index"
         class="table-wrapper__row"
-        [appAverageMarkHighlight]="getStudentMarks(student._id, form.value.days) | average | number:'1.1-1'"
+        [appAverageMarkHighlight]="getAverageMark(studentIndex) | number:'1.1-1'"
         [averageMarkColors]="averageMarkColors"
       >
         <td class="table-wrapper__simple-cell"> {{ student.firstName }} </td>
         <td class="table-wrapper__simple-cell"> {{ student.lastName }} </td>
-        <td class="table-wrapper__simple-cell"> {{ getStudentMarks(student._id, form.value.days) | average | number:'1.1-1' }} </td>
-        <td class="table-wrapper__simple-cell table-wrapper__input-wrapper" formArrayName="days" *ngFor="let day of form.controls.days.controls; let dayIndex = index">
+        <td class="table-wrapper__simple-cell"> {{ getAverageMark(studentIndex) | number:'1.1-1' }} </td>
+        <td class="table-wrapper__simple-cell table-wrapper__input-wrapper" formArrayName="days" *ngFor="let day of days.controls; let dayIndex = index">
           <ng-container [formGroup]="getMarkControl(dayIndex, studentIndex)">
             <input
               class="table-wrapper__simple-cell-input"
               type="text"
               formControlName="value"
-              appNumberCheck
-              [maxNumber]="10"
-              [minNumber]="0"
               appFocusHighlight="table-wrapper__simple-cell-input__focus"
             >
           </ng-container>

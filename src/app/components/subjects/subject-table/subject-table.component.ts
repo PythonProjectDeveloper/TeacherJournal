@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import { IGlobalState } from 'src/app/redux/reducers';
 import { getJournal } from 'src/app/redux/selectors/subjects';
 import { loadJournal, updateJournal } from 'src/app/redux/actions/subjects';
-import { find, map, isEqual } from 'lodash';
+import { map, isEqual } from 'lodash';
 import { IDayState, IJournalState } from 'src/app/common/entities/journal';
 import { createJournalForm, createDayForm } from 'src/app/common/forms/journal';
 import { FormGroup, FormArray } from '@angular/forms';
@@ -29,6 +29,7 @@ export class SubjectTableComponent extends EventDestroyer implements ComponentCa
   ];
 
   get days(): FormArray { return this.form.controls.days as FormArray; }
+  get averageMarks(): FormArray { return this.form.controls.averageMarks as FormArray; }
 
   constructor(
     private store: Store<IGlobalState>,
@@ -84,11 +85,10 @@ export class SubjectTableComponent extends EventDestroyer implements ComponentCa
   }
 
   public isJournalChanged(): boolean {
-    return !isEqual(this.form.value, this.journal);
-  }
+    const formData: any = this.form.value;
+    delete formData.averageMarks;
 
-  public getStudentMarks(id: string, days: any): number {
-    return days.map(day => parseInt(find(day.marks, { student: id }).value, 10));
+    return !isEqual(formData, this.journal);
   }
 
   public getMarkControl(dayIdx: string, markIdx: string): FormGroup {
@@ -97,5 +97,12 @@ export class SubjectTableComponent extends EventDestroyer implements ComponentCa
     const mark: FormGroup = (<FormGroup>marks.controls[markIdx]);
 
     return mark;
+  }
+
+  public getAverageMark(studentIndex: string): number {
+    const mark: FormGroup = (<FormGroup>this.averageMarks.controls[studentIndex]);
+    const value: number = mark.controls.value.value;
+
+    return value;
   }
 }

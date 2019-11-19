@@ -33,12 +33,8 @@ export function createDropDownForm({
     const formDates: ICollapseState[] = form.controls.dates.value;
     const isCollapsed: boolean = getCollapseState(formDates);
 
-    // if the state changed when the children changed
-    if (newState === isCollapsed) {
-      form.controls.state.patchValue(newState, { emitEvent: false });
-
     // if the state changed when clicked
-    } else {
+    if (newState !== isCollapsed) {
       formDates.forEach(date => date.state = newState);
       form.controls.dates.patchValue(formDates, { emitEvent: false });
     }
@@ -47,7 +43,6 @@ export function createDropDownForm({
   form.controls.dates.valueChanges.subscribe(newDates => {
     const newState: boolean = getCollapseState(newDates);
 
-    form.controls.dates.patchValue(newDates, { emitEvent: false });
     form.controls.state.patchValue(newState, { emitEvent: false });
   });
 
