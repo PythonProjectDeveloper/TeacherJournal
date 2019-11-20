@@ -38,7 +38,6 @@ import { SubjectTableComponent } from './components/subjects/subject-table/subje
 import { AppRoutingModule } from './app-routing.module';
 import { ExitAboutGuard } from './common/guards/exit-about.guard';
 import { RouterModule } from '@angular/router';
-import { AveragePipe } from './common/pipes/average.pipe';
 import { AverageMarkHighlightDirective } from './common/directives/average-mark-highlight.directive';
 import { FocusHighlightDirective } from './common/directives/focus-highlight.directive';
 import { AsyncSortPipe } from './common/pipes/async-sort.pipe';
@@ -78,7 +77,6 @@ import { DropdownCollapseComponent } from './components/dropdown/dropdown-collap
     StatisticSubjectComponent,
     SubjectListComponent,
     SubjectTableComponent,
-    AveragePipe,
     AverageMarkHighlightDirective,
     FocusHighlightDirective,
     AsyncSortPipe,
