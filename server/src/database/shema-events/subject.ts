@@ -1,6 +1,6 @@
 import { ISubjectModel } from '../../entities/subject';
 import { Student } from '../shema-models/person';
-import { Journal } from '../shema-models/journal';
+import { Journal, AverageMark } from '../shema-models/journal';
 import { Schema } from 'mongoose';
 
 export function initSubjectEvents(shema: Schema): void {
@@ -8,7 +8,8 @@ export function initSubjectEvents(shema: Schema): void {
 
     // add new journal
     const students = await Student.find();
-    const journal = new Journal({ subject, students });
+    const averageMarks = students.map(student => new AverageMark({ student: student._id}));
+    const journal = new Journal({ subject, students, averageMarks });
 
     journal.save();
   });

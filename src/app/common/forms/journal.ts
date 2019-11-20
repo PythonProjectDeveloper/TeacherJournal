@@ -1,6 +1,5 @@
 import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { createSubjectForm } from './subject';
-import { IMarkState, MARK_STATE, IDayState, DAY_STATE, JOURNAL_STATE, IJournalState } from '../entities/journal';
 import { map } from 'lodash';
 import { createPersonForm } from './person';
 import { getAverageMarks } from '../helpers/calculations';
@@ -12,15 +11,25 @@ import {
   MIN_MARK,
   RADIX,
 } from '../constants/constants-forms';
+import {
+  IMarkState,
+  MARK_STATE,
+  IDayState,
+  DAY_STATE,
+  JOURNAL_STATE,
+  IJournalState,
+  AVERAGE_MARK_STATE,
+  IAverageMarkState,
+} from '../entities/journal';
 
-export function createJournalForm({ _id, subject, students, days }: IJournalState = JOURNAL_STATE): FormGroup {
+export function createJournalForm({ _id, subject, students, days, averageMarks }: IJournalState = JOURNAL_STATE): FormGroup {
 
   const form: FormGroup = new FormGroup({
     _id: new FormControl(_id, [ Validators.maxLength(ID_LENGTH) ]),
     subject: createSubjectForm(subject),
     students: new FormArray(map(students, createPersonForm)),
     days: new FormArray(map(days, createDayForm)),
-    averageMarks: new FormArray(map(getAverageMarks(days), createMarkForm)),
+    averageMarks: new FormArray(map(averageMarks, createAverageMarkForm)),
   });
 
   form.valueChanges.subscribe(newValue => {
@@ -58,4 +67,13 @@ export function createMarkForm({ _id, student, value }: IMarkState = MARK_STATE)
   });
 
   return form;
+}
+
+export function createAverageMarkForm({ _id, student, value, markQuantity }: IAverageMarkState = AVERAGE_MARK_STATE): FormGroup {
+  return new FormGroup({
+    _id: new FormControl(_id, [ Validators.maxLength(ID_LENGTH) ]),
+    student: new FormControl(student, [ Validators.maxLength(ID_LENGTH) ]),
+    value: new FormControl(value, [ Validators.min(MIN_MARK), Validators.max(MAX_MARK) ]),
+    markQuantity: new FormControl(markQuantity),
+  });
 }

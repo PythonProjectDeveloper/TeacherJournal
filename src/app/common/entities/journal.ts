@@ -6,6 +6,7 @@ export interface IJournalState {
   subject: ISubjectState;
   students: IStudentState[];
   days: IDayState[];
+  averageMarks: IAverageMarkState[];
 }
 
 export const JOURNAL_STATE: IJournalState = {
@@ -13,6 +14,7 @@ export const JOURNAL_STATE: IJournalState = {
   subject: SUBJECT_STATE,
   students: [],
   days: [],
+  averageMarks: [],
 };
 
 export interface IDayState {
@@ -37,4 +39,18 @@ export const MARK_STATE: IMarkState = {
   _id: '',
   student: '',
   value: null,
+};
+
+export interface IAverageMarkState {
+  _id: string;
+  student: string;
+  value: number;
+  markQuantity: number;
+}
+
+export const AVERAGE_MARK_STATE: IAverageMarkState = {
+  _id: '',
+  student: '',
+  value: 0,
+  markQuantity: 0,
 };

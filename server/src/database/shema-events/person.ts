@@ -1,6 +1,6 @@
 
 import { IPersonModel } from '../../entities/person';
-import { Journal, Mark } from '../shema-models/journal';
+import { Journal, Mark, AverageMark } from '../shema-models/journal';
 import { Schema } from 'mongoose';
 import { ObjectId } from 'mongodb';
 
@@ -16,6 +16,8 @@ export function initPersonEvents(shema: Schema): void {
         day.marks.push(new Mark({ student: person._id }));
       });
 
+      journal.averageMarks.push(new AverageMark({ student: person._id }));
+
       journal.save();
     });
   });
@@ -29,10 +31,12 @@ export function initPersonEvents(shema: Schema): void {
         day.marks = day.marks.filter(mark => !new ObjectId(mark.student).equals(new ObjectId(person._id)));
       });
 
+      journal.averageMarks = journal.averageMarks.filter(mark => !new ObjectId(mark.student).equals(new ObjectId(person._id)));
+
       journal.save();
     });
 
     await Mark.deleteMany({ student: person._id });
-
+    await AverageMark.deleteMany({ student: person._id });
   });
 }

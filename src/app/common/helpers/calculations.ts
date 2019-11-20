@@ -1,6 +1,6 @@
 import { ICollapseState } from '../entities/dropdown';
 import { each, isNull, join } from 'lodash';
-import { IDayState, IMarkState } from '../entities/journal';
+import { IDayState, IMarkState, IAverageMarkState } from '../entities/journal';
 import { isUndefined } from 'util';
 
 export function assembleUrl(...args: string[]): string {
@@ -16,8 +16,8 @@ export function getCollapseState(dates: ICollapseState[]): boolean | null {
   return null;
 }
 
-export function getAverageMarks(days: IDayState[]): IMarkState[] {
-  const averageMarks: any = [];
+export function getAverageMarks(days: IDayState[]): IAverageMarkState[] {
+  const averageMarks: IAverageMarkState[] = [];
   each(days, day => {
     each(day.marks, (mark, idx) => {
       if (isUndefined(averageMarks[idx])) {

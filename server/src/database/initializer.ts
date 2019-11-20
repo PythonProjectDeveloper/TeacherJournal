@@ -2,10 +2,10 @@ import mockData from '../../mock.server.data.json';
 import { config } from '../environments';
 import mongoose, { Model, Document } from 'mongoose';
 import { error } from '../constants/term-color';
-import { getRandomMark } from '../helpers/calculation';
+import { getRandomMark, getAverageMarks } from '../helpers/calculation';
 import { Teacher, Student } from './shema-models/person';
 import { Subject } from './shema-models/subject';
-import { Journal, Mark, Day } from './shema-models/journal';
+import { Journal, Mark, Day, AverageMark } from './shema-models/journal';
 
 const INITIALIZATION_ERROR_MESSAGE = 'error of database initialization';
 
@@ -46,6 +46,10 @@ export async function initJournalDatabaseCollection(model: Model<Document, {}>, 
       }))
     }));
 
+    const averageMarks = getAverageMarks(days);
+
+    initDatabaseCollection(AverageMark, averageMarks);
+
     days.forEach(day => {
       initDatabaseCollection(Mark, day.marks);
     });
@@ -55,6 +59,7 @@ export async function initJournalDatabaseCollection(model: Model<Document, {}>, 
     return {
       subject: subjects[idx]._id,
       students: students.map(doc => doc._id),
+      averageMarks,
       days
     };
   });

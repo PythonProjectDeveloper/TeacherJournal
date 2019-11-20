@@ -10,5 +10,6 @@ export const TableName: ITableName = {
   Journal: 'Journal',
   Day: 'Day',
   Mark: 'Mark',
+  AverageMark: 'AverageMark',
   Log: 'Log'
 };

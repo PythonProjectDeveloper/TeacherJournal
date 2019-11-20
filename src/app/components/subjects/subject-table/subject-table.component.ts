@@ -84,10 +84,7 @@ export class SubjectTableComponent extends EventDestroyer implements ComponentCa
   }
 
   public isJournalChanged(): boolean {
-    const formData: any = this.form.value;
-    delete formData.averageMarks;
-
-    return !isEqual(formData, this.journal);
+    return !isEqual(this.form.value, this.journal);
   }
 
   public getMarkControl(dayIdx: string, markIdx: string): FormGroup {
@@ -101,7 +98,8 @@ export class SubjectTableComponent extends EventDestroyer implements ComponentCa
   public getAverageMark(studentIndex: string): number {
     const mark: FormGroup = (<FormGroup>this.averageMarks.controls[studentIndex]);
     const value: number = mark.controls.value.value;
+    const markQuantity: number = mark.controls.markQuantity.value;
 
-    return value;
+    return markQuantity ? value : null;
   }
 }
