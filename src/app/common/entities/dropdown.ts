@@ -39,3 +39,5 @@ export const REQUEST_DATES_STATE: IRequestDatesState = {
   subject: '',
   dates: [],
 };
+
+export type IDropDownControllerCollback = (newValue: IDropDownState) => void;

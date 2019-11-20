@@ -1,7 +1,9 @@
 import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup } from '@angular/forms';
 import { createDropDownForm } from 'src/app/common/forms/dropdown';
-import { IDropDownState } from 'src/app/common/entities/dropdown';
+import { IDropDownState, IDropDownControllerCollback } from 'src/app/common/entities/dropdown';
+
+
 
 @Component({
   selector: 'app-dropdown-collapse',
@@ -18,14 +20,14 @@ import { IDropDownState } from 'src/app/common/entities/dropdown';
 export class DropdownCollapseComponent implements ControlValueAccessor {
   public form: FormGroup;
 
-  public onChange: any = () => { };
-  public onTouched: any = () => { };
+  public onChange: IDropDownControllerCollback = () => { };
+  public onTouched: IDropDownControllerCollback = () => { };
 
-  public registerOnChange(fn: any): void {
+  public registerOnChange(fn: IDropDownControllerCollback): void {
     this.onChange = fn;
   }
 
-  public registerOnTouched(fn: any): void {
+  public registerOnTouched(fn: IDropDownControllerCollback): void {
     this.onTouched = fn;
   }
 
