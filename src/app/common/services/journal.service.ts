@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { assembleUrl } from '../helpers/calculations';
-import { JOURNALS_API_URL } from '../constants/constants-journal';
 import { HttpService } from './http.service';
 import { IJournalState } from '../entities/journal';
+import { JOURNALS_API_URL } from '../constants/constants-urls';
 
 @Injectable({
   providedIn: 'root'

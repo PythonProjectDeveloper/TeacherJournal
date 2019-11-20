@@ -18,7 +18,3 @@ export enum Extantions {
   EXCEL = '.xlsx',
   PDF = '.pdf'
 }
-
-export const STUDENTS_EXPORT_API_URL: string = 'export/students';
-export const SUBJECTS_EXPORT_API_URL: string = 'export/subjects';
-export const JOURNALS_EXPORT_API_URL: string = 'export/journals';

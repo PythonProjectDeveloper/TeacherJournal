@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
-import { STUDENTS_API_URL } from '../constants/constants-person';
 import { assembleUrl } from '../helpers/calculations';
 import { HttpService } from './http.service';
 import { IPersonState, PERSON_STATE } from '../entities/person';
 import { IRequestDatesState } from 'src/app/common/entities/dropdown';
+import { STUDENTS_API_URL } from '../constants/constants-urls';
 
 @Injectable({
   providedIn: 'root'

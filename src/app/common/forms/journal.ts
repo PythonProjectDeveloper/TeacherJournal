@@ -3,9 +3,15 @@ import { createSubjectForm } from './subject';
 import { IMarkState, MARK_STATE, IDayState, DAY_STATE, JOURNAL_STATE, IJournalState } from '../entities/journal';
 import { map } from 'lodash';
 import { createPersonForm } from './person';
-import { MIN_MARK, MAX_MARK } from '../constants/constants-journal';
 import { getAverageMarks } from '../helpers/calculations';
-import { ID_LENGTH, DATE_LENGTH, DATE_REGEX } from '../constants/constants-forms';
+import {
+  ID_LENGTH,
+  DATE_LENGTH,
+  DATE_REGEX,
+  MAX_MARK,
+  MIN_MARK,
+  RADIX,
+} from '../constants/constants-forms';
 
 export function createJournalForm({ _id, subject, students, days }: IJournalState = JOURNAL_STATE): FormGroup {
 
@@ -40,12 +46,12 @@ export function createMarkForm({ _id, student, value }: IMarkState = MARK_STATE)
   });
 
   form.controls.value.valueChanges.subscribe(newValue => {
-    let processedValue: number = parseInt(newValue, 10);
+    let processedValue: number = parseInt(newValue, RADIX);
 
     if (Number.isNaN(processedValue)) {
       processedValue = null;
     } else if (MIN_MARK > processedValue || processedValue > MAX_MARK) {
-      processedValue = parseInt(newValue.slice(0, -1), 10);
+      processedValue = parseInt(newValue.slice(0, -1), RADIX);
     }
 
     form.controls.value.setValue(processedValue, { emitEvent: false });

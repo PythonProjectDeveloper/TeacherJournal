@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { assembleUrl } from '../helpers/calculations';
-import { SUBJECTS_API_URL } from '../constants/constants-subject';
 import { HttpService } from './http.service';
 import { HttpParams } from '@angular/common/http';
 import { ISubjectState, SUBJECT_STATE } from '../entities/subject';
+import { SUBJECTS_API_URL } from '../constants/constants-urls';
 
 @Injectable({
   providedIn: 'root'

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { TEACHERS_API_URL } from '../constants/constants-person';
 import { HttpService } from './http.service';
 import { IPersonState } from '../entities/person';
+import { TEACHERS_API_URL } from '../constants/constants-urls';
 
 @Injectable({
   providedIn: 'root'

@@ -6,10 +6,12 @@ import { HttpService } from './http.service';
 import {
   ExportType,
   TableType,
-  SUBJECTS_EXPORT_API_URL,
-  STUDENTS_EXPORT_API_URL,
-  JOURNALS_EXPORT_API_URL
 } from '../constants/constants-export';
+import {
+  STUDENTS_EXPORT_API_URL,
+  SUBJECTS_EXPORT_API_URL,
+  JOURNALS_EXPORT_API_URL,
+} from '../constants/constants-urls';
 
 @Injectable({
   providedIn: 'root'

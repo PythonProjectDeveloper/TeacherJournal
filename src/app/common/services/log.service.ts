@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { LOGS_API_URL } from '../constants/constants-log';
 import { ILog } from '../entities/log';
+import { LOGS_API_URL } from '../constants/constants-urls';
 
 @Injectable({
   providedIn: 'root'

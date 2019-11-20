@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { STUDENT_GRAPH_API_URL, SUBJECT_GRAPH_API_URL } from '../constants/constants-statistic';
 import { HttpService } from './http.service';
 import { assembleUrl } from '../helpers/calculations';
+import {
+  STUDENT_GRAPH_API_URL,
+  SUBJECT_GRAPH_API_URL,
+} from '../constants/constants-urls';
 
 @Injectable({
   providedIn: 'root'
