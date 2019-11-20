@@ -9,6 +9,7 @@ import {
   IDropDownWidgetState
 } from '../entities/dropdown';
 import { getCollapseState } from '../helpers/calculations';
+import { SHORT_TEXT_LENGTH, DATE_LENGTH } from '../constants/constants-forms';
 
 export function createDropDownWidgetForm({ dropdowns }: IDropDownWidgetState = DROPDOWN_WIDGET_STATE): FormGroup {
   return new FormGroup({
@@ -23,7 +24,7 @@ export function createDropDownForm({
     isExpended = false,
   }: IDropDownState = DEFAULT_DROPDOWN_STATE): FormGroup {
   const form: FormGroup = new FormGroup({
-    subjectName: new FormControl(subjectName, [ Validators.required, Validators.maxLength(50) ]),
+    subjectName: new FormControl(subjectName, [ Validators.required, Validators.maxLength(SHORT_TEXT_LENGTH) ]),
     dates: new FormArray(map(dates, createCollapseForm)),
     state: new FormControl(getCollapseState(dates)),
     isExpended: new FormControl(isExpended),
@@ -51,7 +52,7 @@ export function createDropDownForm({
 
 export function createCollapseForm({ name, state }: ICollapseState = DEFAULT_COLLAPSE_STATE): FormGroup {
   const form: FormGroup = new FormGroup({
-    name: new FormControl(name, [ Validators.required, Validators.maxLength(20) ]),
+    name: new FormControl(name, [ Validators.required, Validators.maxLength(DATE_LENGTH) ]),
     state: new FormControl(state),
   });
 
