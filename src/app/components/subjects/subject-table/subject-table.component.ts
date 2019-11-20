@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as _ from 'lodash';
 import { ComponentCanDeactivate } from 'src/app/common/guards/exit-about.guard';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';

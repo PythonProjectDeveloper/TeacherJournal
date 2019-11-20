@@ -1,11 +1,10 @@
-import * as _ from 'lodash';
 import { ICollapseState } from '../entities/dropdown';
-import { each, isNull } from 'lodash';
+import { each, isNull, join } from 'lodash';
 import { IDayState, IMarkState } from '../entities/journal';
 import { isUndefined } from 'util';
 
 export function assembleUrl(...args: string[]): string {
-  return _.join(args, '/');
+  return join(args, '/');
 }
 
 export function getCollapseState(dates: ICollapseState[]): boolean | null {

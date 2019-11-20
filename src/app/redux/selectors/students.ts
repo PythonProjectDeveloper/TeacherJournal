@@ -1,5 +1,4 @@
 import { StudentPageState } from '../reducers/students';
-import * as _ from 'lodash';
 import { IGlobalState } from '../reducers';
 import { createSelector } from '@ngrx/store';
 

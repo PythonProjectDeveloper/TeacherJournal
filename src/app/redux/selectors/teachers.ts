@@ -1,5 +1,4 @@
 import { TeacherPageState } from '../reducers/teachers';
-import * as _ from 'lodash';
 import { IGlobalState } from '../reducers';
 import { createSelector } from '@ngrx/store';
 

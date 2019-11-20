@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET, RoutesRecognized, ActivatedRouteSnapshot } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { isNullOrUndefined } from 'util';
-import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
+import { map } from 'lodash';
 
 interface Breadcrumb {
   label: string;
@@ -30,7 +30,7 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
     for (const child of children) {
       const snapshot: ActivatedRouteSnapshot = child.snapshot;
       const label: string = snapshot.data.breadcrumb;
-      const url: string = _.map(snapshot.url, 'path').join('/');
+      const url: string = map(snapshot.url, 'path').join('/');
 
       if (isNullOrUndefined(label)) {
         return this.createBreadcrumbs(child, breadcrumbs);
