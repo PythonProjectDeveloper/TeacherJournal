@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import { ICollapseState } from '../entities/dropdown';
 import { each, isNull } from 'lodash';
 import { IDayState, IMarkState } from '../entities/journal';
+import { isUndefined } from 'util';
 
 export function assembleUrl(...args: string[]): string {
   return _.join(args, '/');
@@ -20,17 +21,18 @@ export function getAverageMarks(days: IDayState[]): IMarkState[] {
   const averageMarks: any = [];
   each(days, day => {
     each(day.marks, (mark, idx) => {
-      if (isNull(mark.value)) { return; }
-
-      if (averageMarks[idx]) {
-        averageMarks[idx].value += mark.value;
-        averageMarks[idx].markQuantity += 1;
-      } else {
+      if (isUndefined(averageMarks[idx])) {
         averageMarks[idx] = {
           ...mark,
-          markQuantity: 1,
+          value: 0,
+          markQuantity: 0,
         };
       }
+
+      if (isNull(mark.value)) { return; }
+
+      averageMarks[idx].value += mark.value;
+      averageMarks[idx].markQuantity += 1;
     });
   });
 
