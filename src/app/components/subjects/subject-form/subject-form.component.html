@@ -1,0 +1,54 @@
+<h2 class="title" translate>PAGES.SUBJECT</h2>
+
+<form (submit)="onSave()" class="form" [formGroup]="form">
+  <mat-card>
+
+    <mat-card-content class="form__field-container">
+      <mat-form-field>
+        <mat-label translate>FIELDS.NAME</mat-label>
+        <input formControlName="name" matInput class="form__field" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label translate>FIELDS.TEACHER</mat-label>
+        <mat-select formControlName="teacher" class="form__field" required>
+          <mat-option name="teacher" *ngFor="let teacher of teachers" [value]="teacher._id">
+            {{teacher.firstName}}
+            {{teacher.lastName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label translate>FIELDS.CABINET</mat-label>
+        <input formControlName="cabinet" matInput class="form__field">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label translate>FIELDS.DESCRIPTION</mat-label>
+        <textarea formControlName="description" matInput class="form__field"></textarea>
+      </mat-form-field>
+    </mat-card-content>
+    
+    <mat-card-actions class="form__actions">
+      <button
+        type="submit"
+        class="form__action-button"
+        mat-stroked-button
+        color="primary"
+      >
+        {{ 'ACTIONS.SAVE' | translate }}
+      </button>
+
+      <button
+        type="button"
+        class="form__action-button"
+        mat-stroked-button
+        color="warn"
+        routerLink="/subjects"
+      >
+        {{ 'ACTIONS.CANCEL' | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

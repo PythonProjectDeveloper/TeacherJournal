@@ -1,0 +1,24 @@
+<mat-card class="type-export">
+  <mat-card-header>
+    <mat-card-title class="title"> {{ 'ACTIONS.DOWNLOAD' | translate }} {{ type }}</mat-card-title>
+  </mat-card-header>  
+
+  <mat-card-content>
+    <mat-radio-group class="type-export__mat-radio-group" [(ngModel)]="table">
+      <mat-radio-button class="type-export__radio-button" [value]="tables.STUDENTS">
+        {{ 'PAGES.STUDENTS' | translate }}
+      </mat-radio-button>
+      <mat-radio-button class="type-export__radio-button" [value]="tables.SUBJECTS">
+        {{ 'PAGES.SUBJECTS' | translate }}
+      </mat-radio-button>
+      <mat-radio-button class="type-export__radio-button" [value]="tables.JOURNALS">
+        {{ 'PAGES.JOURNALS' | translate }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-card-content>
+
+  <mat-card-actions class="type-export__actions">
+    <button class="type-export__action-button" mat-button color="primary" (click)="onSave()"> {{ 'ACTIONS.DOWNLOAD' | translate }} </button>
+    <button class="type-export__action-button" mat-button color="warn" (click)="onCancel()"> {{ 'ACTIONS.CANCEL' | translate }} </button>
+  </mat-card-actions>
+</mat-card>

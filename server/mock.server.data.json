@@ -1,0 +1,271 @@
+{
+  "students": [
+    {
+      "firstName": "Lora",
+      "lastName": "Gates",
+      "address": "513 Herzl Street, Oneida, Iowa, 9564",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    },
+    {
+      "firstName": "Trisha",
+      "lastName": "Kerr",
+      "address": "152 Melrose Street, Wheaton, Guam, 1244",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    },
+    {
+      "firstName": "Teri",
+      "lastName": "Henry",
+      "address": "529 Irvington Place, Bradenville, Wisconsin, 2433",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    },
+    {
+      "firstName": "Alberta",
+      "lastName": "Doyle",
+      "address": "908 Hunterfly Place, Emory, Delaware, 7044",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    },
+    {
+      "firstName": "Deirdre",
+      "lastName": "Taylor",
+      "address": "213 Logan Street, Rosine, Washington, 1110",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    },
+    {
+      "firstName": "Estes",
+      "lastName": "Jimenez",
+      "address": "790 Poly Place, Moquino, Utah, 5868",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    },
+    {
+      "firstName": "Selma",
+      "lastName": "Webster",
+      "address": "716 Hendrickson Place, Nord, Oregon, 6270",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    },
+    {
+      "firstName": "Sonja",
+      "lastName": "Jones",
+      "address": "401 Tabor Court, Bartley, Colorado, 9904",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    },
+    {
+      "firstName": "Yesenia",
+      "lastName": "Mejia",
+      "address": "154 Wolf Place, Cataract, Oklahoma, 4309",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    },
+    {
+      "firstName": "Leticia",
+      "lastName": "Gilbert",
+      "address": "622 Chase Court, Gilmore, Virginia, 2594",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    }
+  ],
+  "teachers": [
+    {
+      "firstName": "Ivy",
+      "lastName": "Wood",
+      "address": "798 Fleet Place, Curtice, Maryland, 3011",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    },
+    {
+      "firstName": "Burton",
+      "lastName": "Dixon",
+      "address": "905 Stewart Street, Wawona, Alabama, 6782",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    },
+    {
+      "firstName": "White",
+      "lastName": "Vaughan",
+      "address": "329 Fountain Avenue, Buxton, Wyoming, 4423",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    },
+    {
+      "firstName": "Whitehead",
+      "lastName": "Pollard",
+      "address": "801 Gatling Place, Churchill, Rhode Island, 1210",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    },
+    {
+      "firstName": "James",
+      "lastName": "Buck",
+      "address": "626 Tiffany Place, Venice, Michigan, 8495",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    }
+  ],
+  "subjects": [
+    {
+      "name": "physics",
+      "teacher": "",
+      "cabinet": "546C",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    },
+    {
+      "name": "chemistry",
+      "teacher": "",
+      "cabinet": "525C",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    },
+    {
+      "name": "biology",
+      "teacher": "",
+      "cabinet": "372C",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    },
+    {
+      "name": "literature",
+      "teacher": "",
+      "cabinet": "496C",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+    }
+  ],
+  "journals": [
+    {
+      "subject": {
+        "name": "physics",
+        "teacher": "5d92dfd2e4f9cacee865ea68",
+        "cabinet": "546C",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+      },
+      "students": [],
+      "days": [
+        {
+          "name": "04/02",
+          "marks": []
+        },
+        {
+          "name": "05/02",
+          "marks": []
+        },
+        {
+          "name": "06/02",
+          "marks": []
+        },
+        {
+          "name": "07/02",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "subject": {
+        "name": "chemistry",
+        "teacher": "5d92dfd294d167df5a5db881",
+        "cabinet": "525C",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+      },
+      "students": [],
+      "days": [
+        {
+          "name": "04/02",
+          "marks": []
+        },
+        {
+          "name": "05/02",
+          "marks": []
+        },
+        {
+          "name": "06/02",
+          "marks": []
+        },
+        {
+          "name": "07/02",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "subject": {
+        "name": "biology",
+        "teacher": "5d92dfd23f0464ece618445d",
+        "cabinet": "372C",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+      },
+      "students": [],
+      "days": [
+        {
+          "name": "04/02",
+          "marks": []
+        },
+        {
+          "name": "05/02",
+          "marks": []
+        },
+        {
+          "name": "06/02",
+          "marks": []
+        },
+        {
+          "name": "07/02",
+          "marks": []
+        }
+      ]
+    },
+    {
+      "subject": {
+        "name": "literature",
+        "teacher": "5d92dfd29eddc4ad6a48d0f8",
+        "cabinet": "496C",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quam mauris, posuere et dolor eu, pretium tincidunt mi. Sed mattis nulla ligula metus."
+      },
+      "students": [],
+      "days": [
+        {
+          "name": "04/02",
+          "marks": []
+        },
+        {
+          "name": "05/02",
+          "marks": []
+        },
+        {
+          "name": "06/02",
+          "marks": []
+        },
+        {
+          "name": "07/02",
+          "marks": []
+        }
+      ]
+    }
+  ],
+  "subjectDates": [
+    {
+      "subjectName": "physics",
+      "dates": [
+        { "name": "04/02", "state": false },
+        { "name": "05/02", "state": false },
+        { "name": "06/02", "state": false },
+        { "name": "07/02", "state": false }
+      ]
+    },
+    {
+      "subjectName": "chemistry",
+      "dates": [
+        { "name": "04/02", "state": false },
+        { "name": "05/02", "state": false },
+        { "name": "06/02", "state": false },
+        { "name": "07/02", "state": false }
+      ]
+    },
+    {
+      "subjectName": "biology",
+      "dates": [
+        { "name": "04/02", "state": false },
+        { "name": "05/02", "state": false },
+        { "name": "06/02", "state": false },
+        { "name": "07/02", "state": false }
+      ]
+    },
+    {
+      "subjectName": "literature",
+      "dates": [
+        { "name": "04/02", "state": false },
+        { "name": "05/02", "state": false },
+        { "name": "06/02", "state": false },
+        { "name": "07/02", "state": false }
+      ]
+    }
+  ],
+  "logs": []
+}

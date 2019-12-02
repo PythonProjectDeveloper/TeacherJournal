@@ -1,0 +1,53 @@
+
+<form (submit)="onSave()" class="form" [formGroup]="form">
+  <h2 class="title"> {{ journal.subject.name | titlecase }} </h2>
+
+  <div class="table-wrapper">
+    <table class="mat-elevation-z8 table-wrapper__table">
+      <tr class="table-wrapper__row">
+        <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'FIELDS.FIRST_NAME' | translate }} </th>
+        <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'FIELDS.LAST_NAME' | translate }} </th>
+        <th class="table-wrapper__header-cell table-wrapper__static-cell"> {{ 'FIELDS.AVERAGE_MARK' | translate }} </th>
+        <th class="table-wrapper__header-cell table-wrapper__input-wrapper" formArrayName="days" *ngFor="let day of days.controls; let dayIndex = index">
+          <ng-container [formGroupName]="dayIndex">
+            <input
+              class="table-wrapper__header-cell-input"
+              type="text"
+              formControlName="name"
+              appFocusHighlight="table-wrapper__header-cell-input__focus"
+            >
+          </ng-container>
+          
+          <button class="table-wrapper__remove-button" mat-icon-button (click)="onRemoveColumn(dayIndex)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </th>
+      </tr>
+      <tr
+        *ngFor="let student of journal.students; let studentIndex = index"
+        class="table-wrapper__row"
+        [appAverageMarkHighlight]="getAverageMark(studentIndex) | number:'1.1-1'"
+        [averageMarkColors]="averageMarkColors"
+      >
+        <td class="table-wrapper__simple-cell"> {{ student.firstName }} </td>
+        <td class="table-wrapper__simple-cell"> {{ student.lastName }} </td>
+        <td class="table-wrapper__simple-cell"> {{ getAverageMark(studentIndex) | number:'1.1-1' }} </td>
+        <td class="table-wrapper__simple-cell table-wrapper__input-wrapper" formArrayName="days" *ngFor="let day of days.controls; let dayIndex = index">
+          <ng-container [formGroup]="getMarkControl(dayIndex, studentIndex)">
+            <input
+              class="table-wrapper__simple-cell-input"
+              type="text"
+              formControlName="value"
+              appFocusHighlight="table-wrapper__simple-cell-input__focus"
+            >
+          </ng-container>
+        </td>
+      </tr>
+    </table>
+    <button type="button" class="add-button" mat-mini-fab color="primary" (click)="onAddColumn()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <button type="submit" mat-stroked-button color="primary" *ngIf="canDataBeSave"> {{ 'ACTIONS.SAVE' | translate }} </button>
+</form>

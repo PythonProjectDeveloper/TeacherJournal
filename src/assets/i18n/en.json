@@ -1,0 +1,60 @@
+{
+  "TITLE": "Teacher journal",
+  "PAGE_NOT_FOUND" : {
+    "TITLE_TEXT": {
+      "PAGE_NOT_FOUND": "Page not found",
+      "SELECT_ITEM": "Select a item"
+    },
+    "DESCRIPTION": "Maybe you entered the URL incorrectly. Try again or give it up)"
+  },
+  "PAGES": {
+    "STUDENTS": "Students",
+    "SUBJECTS": "Subjects",
+    "STATISTICS": "Statistics",
+    "EXPORT": "Export",
+    "STUDENT": "Student",
+    "SUBJECT": "Subject",
+    "ADD_STUDENT": "Add student",
+    "EDIT_STUDENT": "Edit student",
+    "ADD_SUBJECT": "Add subject",
+    "EDIT_SUBJECT": "Edit Subject",
+    "JOURNALS": "Journals",
+    "JOURNAL": "Journal"
+  },
+  "FIELDS": {
+    "FIRST_NAME": "First Name",
+    "LAST_NAME": "Last Name",
+    "ADDRESS": "Address",
+    "DESCRIPTION": "Description",
+    "NAME": "Name",
+    "TEACHER": "Teacher",
+    "CABINET": "Cabinet",
+    "AVERAGE_MARK": "Average Mark",
+    "QUERY": "Query"
+  },
+  "ACTIONS": {
+    "OK": "Ok",
+    "SAVE": "Save",
+    "CANCEL": "Cancel",
+    "ADD_SUBJECT": "Add subject",
+    "ADD_STUDENT": "Add student",
+    "SEARCH": "Search",
+    "EXPORT_PDF": "Export as PDF file",
+    "EXPORT_EXCEL": "Export as Excel file",
+    "DOWNLOAD": "Download",
+    "CLOSE": "Close"
+  },
+  "LEAVE_GUARD" : {
+    "TEXT": "Do you want to leave the page without saving data?"
+  },
+  "BANNER_MESSAGE": "Here can be your advertising!",
+  "WIDGETS" : {
+    "DROPDOWN" : {
+      "SELECT_DATE_DEFAULT_TEXT": "Select a date",
+      "EXPAND_ALL": "EXPAND ALL",
+      "COLLAPSE_ALL": "COLLAPSE ALL",
+      "CHECK_ALL": "CHECK ALL",
+      "UNCHECK_ALL": "UNCHECK ALL"
+    }
+  }
+}

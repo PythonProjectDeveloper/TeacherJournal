@@ -1,9 +1,12 @@
+import { IEnvironmentState } from 'src/app/common/entities/environment';
+
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
-  production: false
+export const environment: IEnvironmentState = {
+  production: false,
+  apiDomainUrl: 'http://localhost:3000'
 };
 
 /*
